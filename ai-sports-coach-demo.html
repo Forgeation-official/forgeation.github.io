@@ -72,6 +72,14 @@ h1{font-size:clamp(2.5rem,6vw,5rem);line-height:1.03;margin:12px 0 14px}
   color:#fff;border:1px solid #ffffff44;border-radius:999px;
   padding:8px 13px;background:#ffffff10;cursor:pointer;font-weight:700;
 }
+.head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.home-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;text-decoration:none;border:1px solid #ffffff66;border-radius:999px;
+  padding:8px 13px;background:linear-gradient(135deg,#1267d8,#4fdcff33);
+  font-weight:800;white-space:nowrap;
+}
+.home-link:hover{background:#ffffff22}
 .body{padding:22px;background:#f7faff;flex:1}
 .card{
   background:#fff;border:1px solid var(--line);
@@ -118,6 +126,8 @@ h1{font-size:clamp(2.5rem,6vw,5rem);line-height:1.03;margin:12px 0 14px}
   .hero{min-height:430px}
   .app{min-height:640px}
   .grid{grid-template-columns:1fr}
+  .head{align-items:flex-start}
+  .head-actions{width:100%;justify-content:flex-start}
 }
 </style>
 </head>
@@ -146,7 +156,10 @@ h1{font-size:clamp(2.5rem,6vw,5rem);line-height:1.03;margin:12px 0 14px}
             <span class="small">コーチングモード稼働中</span>
           </div>
         </div>
-        <button class="reset" id="reset">最初から</button>
+        <div class="head-actions">
+          <a class="home-link" href="index.html" aria-label="Forgeationホームページへ戻る">← ホームページへ戻る</a>
+          <button class="reset" id="reset">最初から</button>
+        </div>
       </div>
 
       <div class="body">
