@@ -34,6 +34,13 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{fon
   background-position:center center;
   background-color:#071a3a;
 }
+/* 4枚目：Forgeationの空 */
+.slide-4{
+  background-image:url("forgeation-sky.webp");
+  background-size:cover;
+  background-position:center center;
+  background-color:#0a57d5;
+}
 .hero-content{position:relative;z-index:2;width:min(1240px,92vw);min-height:78vh;margin:auto;display:flex;align-items:center}.hero-copy{width:min(720px,100%);padding:88px 0 110px;text-shadow:0 3px 18px #0006}.eyebrow{margin-bottom:16px;color:#9fe9ff;font-weight:800;letter-spacing:.18em}.hero h1{margin:0;font-size:clamp(2.35rem,6vw,5.2rem);line-height:1.1}.hero p{font-size:clamp(1rem,2vw,1.3rem);line-height:1.9}.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:999px;font-weight:800}.button-primary{color:#fff;background:linear-gradient(90deg,var(--blue),var(--cyan))}.button-secondary{color:#fff;border:1px solid #ffffff99;background:#ffffff1f}
 .slider-controls{position:absolute;z-index:4;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:10px}.dot{width:10px;height:10px;border:0;border-radius:50%;background:#ffffff73}.dot.is-active{width:30px;border-radius:999px;background:#fff}.pause{margin-left:8px;padding:7px 11px;color:#fff;border:1px solid #ffffff66;border-radius:999px;background:#0004}
 section{padding:88px 0}.container{width:min(1180px,92vw);margin:auto}.section-head{max-width:850px;margin-bottom:34px}.section-kicker{color:var(--blue);font-weight:900;letter-spacing:.16em;text-transform:uppercase}.section-head h2{margin:10px 0;color:var(--navy);font-size:clamp(2rem,4vw,3.3rem)}.section-head p{line-height:1.9;color:#4b5b73}.notice{padding:18px 22px;border:1px solid #ffd58a;border-radius:16px;background:#fff8e8;color:#6d4a00;font-weight:700}
@@ -45,11 +52,33 @@ section{padding:88px 0}.container{width:min(1180px,92vw);margin:auto}.section-he
 .characters{background:linear-gradient(180deg,#edf6ff,#fff)}.character-card{min-height:280px;color:#fff;background:linear-gradient(145deg,#071a3a,#0b3f8a)}.character-card:nth-child(2){background:linear-gradient(145deg,#05265a,#0a75e6)}.character-card:nth-child(3){background:linear-gradient(145deg,#280800,#9b2200)}.character-card h3,.character-card p{color:#fff}.tag{display:inline-block;padding:7px 12px;border-radius:999px;background:#ffffff24;font-weight:800}
 .phoenix{color:#fff;background:radial-gradient(circle at 20% 20%,#ff6a2438,transparent 30%),linear-gradient(145deg,#100200,#5b0c00 55%,#b51f00)}.phoenix h2,.phoenix p{color:#fff}.phoenix-box{padding:clamp(30px,6vw,64px);border:1px solid #ffffff2e;border-radius:30px;background:#ffffff14}
 .contact-panel{display:grid;grid-template-columns:1.1fr .9fr;gap:28px}.contact-box{padding:34px;border-radius:var(--radius);background:#fff;border:1px solid var(--line);box-shadow:0 14px 42px #071a3a1a}.contact-list{display:grid;gap:12px;margin:24px 0}.contact-list div{padding:14px 16px;border-radius:12px;background:#f0f6ff;font-weight:700}.chat-box{background:linear-gradient(145deg,#071a3a,#0d4da5);color:#fff}.chat-box h3,.chat-box p{color:#fff}.chat-options{display:grid;gap:10px;margin-top:22px}.chat-options button{padding:13px 15px;text-align:left;color:#fff;border:1px solid #ffffff33;border-radius:12px;background:#ffffff14}.chat-reply{margin-top:16px;padding:16px;border-radius:12px;background:#ffffff1f;line-height:1.7}
+
+/* サッカーアカデミー画像ギャラリー */
+.soccer-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
+.soccer-gallery figure{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 14px 38px #0a2a5617}
+.soccer-gallery img{width:100%;aspect-ratio:16/10;object-fit:contain;background:#071a3a;cursor:zoom-in}
+.soccer-gallery figcaption{padding:14px 16px;color:var(--navy);font-weight:800;text-align:center}
+/* AIコーチ・AI受付社員への導線 */
+.ai-coach-section{color:#fff;background:linear-gradient(145deg,#031329,#0a57d5)}
+.ai-reception-section{color:#fff;background:linear-gradient(145deg,#241000,#b94b00)}
+.ai-coach-box,.ai-reception-box{display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;padding:clamp(28px,5vw,54px);border:1px solid #ffffff2f;border-radius:30px;background:#ffffff14}
+.ai-coach-box h2,.ai-coach-box p,.ai-reception-box h2,.ai-reception-box p{color:#fff}
+.ai-coach-box h2,.ai-reception-box h2{margin:10px 0;font-size:clamp(2rem,4vw,3.2rem)}
+.ai-coach-box p,.ai-reception-box p{line-height:1.9}
+.ai-button,.ai-reception-button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;margin-top:16px;padding:0 24px;border-radius:999px;color:#071a3a;background:#fff;font-weight:900}
+.ai-coach-icon,.ai-reception-icon{font-size:clamp(3.4rem,8vw,7rem)}
+/* 画像拡大表示 */
+.lightbox{position:fixed;inset:0;z-index:10000;display:none;place-items:center;padding:24px;background:#000d}
+.lightbox.open{display:grid}.lightbox img{max-width:min(1100px,94vw);max-height:88vh;object-fit:contain;border-radius:16px;background:#071a3a}
+.lightbox button{position:absolute;top:18px;right:22px;width:48px;height:48px;color:#fff;border:1px solid #ffffff66;border-radius:50%;background:#0008;font-size:30px;cursor:pointer}
+
 footer{padding:34px 0;color:#ffffffcc;background:var(--navy)}.footer-inner{width:min(1180px,92vw);margin:auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
-@media(max-width:1080px){.academy-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:980px){.nav-links{position:absolute;top:72px;left:0;right:0;display:none;padding:20px 4vw;flex-direction:column;background:var(--navy)}.nav-links.is-open{display:flex}.menu-button{display:inline-flex;padding:9px 13px;color:#fff;border:1px solid #ffffff4d;border-radius:10px;background:transparent}.feature-grid,.vision-grid,.character-grid,.contact-panel{grid-template-columns:1fr}}
+@media(max-width:1080px){.academy-grid{grid-template-columns:repeat(2,1fr)}.soccer-gallery{grid-template-columns:repeat(2,1fr)}}@media(max-width:980px){.nav-links{position:absolute;top:72px;left:0;right:0;display:none;padding:20px 4vw;flex-direction:column;background:var(--navy)}.nav-links.is-open{display:flex}.menu-button{display:inline-flex;padding:9px 13px;color:#fff;border:1px solid #ffffff4d;border-radius:10px;background:transparent}.feature-grid,.vision-grid,.character-grid,.contact-panel,.ai-coach-box,.ai-reception-box{grid-template-columns:1fr}}
 @media(max-width:640px){
 .hero,.hero-content{min-height:82vh}
 .slide-1,.slide-2,.slide-3{background-size:contain;background-position:center center}
+.slide-4{background-size:cover;background-position:center center}
+.soccer-gallery{grid-template-columns:1fr}
 .academy-grid{grid-template-columns:1fr}
 section{padding:68px 0}
 .future-visual>img{width:100%;height:auto;object-fit:contain;object-position:center top}
@@ -58,13 +87,14 @@ section{padding:68px 0}
 </head>
 <body>
 <div class="opening" id="opening"><div class="opening-inner"><div class="opening-logo">F</div><h1>Forgeation</h1><h2>開校宣言</h2><p>共に学び、共に成長し、<br>共に未来を切り拓く学校へ。</p><p><strong>Design the Future. Forge the Future.</strong></p></div><button class="opening-skip" id="openingSkip">サイトへ進む</button></div>
-<header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
+<header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#ai-coach">AIコーチ</a><a href="#ai-reception">AI受付</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
 <main id="home">
 <section class="hero">
 <article class="slide slide-1 is-active"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SCHOOL</div><h1>AIと人の力で、<br>未来を切り拓く。</h1><p>会社は、働く場所ではなく、共に学び、共に成長する学校である。</p><div class="actions"><a class="button button-primary" href="#about">Forgeationを知る</a><a class="button button-secondary" href="#academy">5つのアカデミー</a></div></div></div></article>
 <article class="slide slide-2"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">AI SUPPORT PARTNER</div><h1>ジッピーと共に、<br>無限の可能性を。</h1><p>AIは、人に代わるためではなく、人の可能性を解き放つために存在する。</p></div></div></article>
 <article class="slide slide-3"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">PROJECT PHOENIX</div><h1>挑戦が未来を創る。<br>炎は道を照らす。</h1><p>フォージは、挑戦する心を燃やし、未来への道を切り拓く存在。</p></div></div></article>
-<div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
+<article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
+<div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
 <section id="about"><div class="container"><div class="notice">🚧 本サイトはVersion 2です。詳細ページは順次公開します。</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
@@ -78,7 +108,20 @@ section{padding:68px 0}
 <article class="card visual-card"><img src="academy-nursing.webp" alt="看護アカデミー"><div class="card-body"><h3>看護・医療</h3><p>やさしさ、科学、テクノロジーで、未来の命を支える。</p></div></article>
 <article class="card visual-card"><img src="academy-construction.webp" alt="建設アカデミー"><div class="card-body"><h3>建設・建築</h3><p>AI設計、シミュレーション、安全管理で、未来の街を創る。</p></div></article>
 <article class="card visual-card"><img src="academy-education.webp" alt="教育アカデミー"><div class="card-body"><h3>教育・未来創造</h3><p>学びを進化させ、未来を創る人を育てる。</p></div></article></div>
-<div class="section-head" style="margin-top:60px"><div class="section-kicker">Special Course</div><h2>サッカーアカデミー構想</h2><p>世界で活躍する選手を育てる。AIと人の力で、日本のスポーツを進化させる。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="academy-soccer.webp" alt="サッカーアカデミー"><div class="card-body"><h3>Forgeation Soccer Academy</h3><p>データ分析、フィードバック、個別最適化、コーチングで、選手の成長を支えます。</p></div></article><article class="card card-pad" style="grid-column:span 2"><div class="icon">⚽</div><h3>長期ビジョン</h3><p>Forgeationは、スポーツ・教育・AIを通じて社会に貢献し、将来的にはJリーグクラブをはじめとするスポーツ界を支えるスポンサー・パートナー企業となることを目指します。</p></article></div></div></section>
+<div class="section-head" style="margin-top:60px"><div class="section-kicker">Special Course</div><h2>サッカーアカデミー構想</h2><p>世界で活躍する選手を育てる。AIと人の力で、日本のスポーツを進化させる。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="academy-soccer.webp" alt="サッカーアカデミー"><div class="card-body"><h3>Forgeation Soccer Academy</h3><p>データ分析、フィードバック、個別最適化、コーチングで、選手の成長を支えます。</p></div></article><article class="card card-pad" style="grid-column:span 2"><div class="icon">⚽</div><h3>長期ビジョン</h3><p>Forgeationは、スポーツ・教育・AIを通じて社会に貢献し、将来的にはJリーグクラブをはじめとするスポーツ界を支えるスポンサー・パートナー企業となることを目指します。</p></article></div>
+<div class="section-head" style="margin-top:60px"><div class="section-kicker">Soccer Academy Gallery</div><h2>サッカーアカデミー課</h2><p>画像をタップすると、大きく表示できます。</p></div>
+<div class="soccer-gallery">
+<figure><img src="soccer-academy-overview.webp" alt="サッカーアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="soccer-visualization.webp" alt="選手データの見える化"><figcaption>見える化</figcaption></figure>
+<figure><img src="soccer-feedback.webp" alt="選手へのフィードバック"><figcaption>フィードバック</figcaption></figure>
+<figure><img src="soccer-training.webp" alt="個別トレーニング提案"><figcaption>トレーニング提案</figcaption></figure>
+<figure><img src="soccer-coaching.webp" alt="AIと人によるコーチング"><figcaption>コーチング</figcaption></figure>
+<figure><img src="soccer-growth-program.webp" alt="総合育成プログラム"><figcaption>総合育成プログラム</figcaption></figure>
+</div></div></section>
+
+<section class="ai-coach-section" id="ai-coach"><div class="container"><div class="ai-coach-box"><div><div class="section-kicker" style="color:#9fe9ff">AI SPORTS COACH</div><h2>AIスポーツコーチを体験する。</h2><p>練習テーマを選ぶと、AIスポーツコーチが、その日のメニュー・意識するポイント・練習後のコメントを提案します。</p><a class="ai-button" href="ai-sports-coach-demo.html">🏃 AIスポーツコーチを体験する</a></div><div class="ai-coach-icon">⚽🤖</div></div></div></section>
+
+<section class="ai-reception-section" id="ai-reception"><div class="container"><div class="ai-reception-box"><div><div class="section-kicker" style="color:#fff3b0">AI RECEPTIONIST</div><h2>AI受付社員を体験する。</h2><p>来訪目的を選ぶと、ForgeationのAI受付社員がご案内します。受付対応、担当部署のご案内、よくあるご質問への対応をデモで体験できます。</p><a class="ai-reception-button" href="ai-reception-demo.html">🏢 AI受付社員デモを体験する</a></div><div class="ai-reception-icon">👩‍💼🤖</div></div></div></section>
 
 <section class="characters" id="characters"><div class="container"><div class="section-head"><div class="section-kicker">Our Partners</div><h2>苦楽を共にする仲間たち</h2><p>Forgeationの挑戦を支える、3人のパートナー。</p></div><div class="grid character-grid"><article class="card character-card card-pad"><span class="tag">AIサポートパートナー</span><h3>ジッピー</h3><p>AIの力で、学びと成長を支える頼れるパートナー。</p></article><article class="card character-card card-pad"><span class="tag">創設者 / 未来を切り拓くリーダー</span><h3>AIノグ</h3><p>未来を見据え、人と共に歩み、未来を切り拓く。</p></article><article class="card character-card card-pad"><span class="tag">未来を切り拓くパートナー</span><h3>フォージ</h3><p>挑戦する心を燃やし、未来への道を切り拓く存在。</p></article></div></div></section>
 
@@ -87,6 +130,7 @@ section{padding:68px 0}
 <section id="contact"><div class="container"><div class="section-head"><div class="section-kicker">Contact</div><h2>お問い合わせ</h2><p>共に挑戦したい方、連携・取材・支援をご検討の方からのご連絡をお待ちしています。</p></div><div class="contact-panel"><div class="contact-box chat-box"><h3>🤖 ジッピー相談窓口</h3><p>まずは相談内容を選んでください。現在は案内とメール作成を行う簡易版です。</p><div class="chat-options"><button data-topic="創業メンバー・仲間として参加したい">🤝 創業メンバー・仲間として参加したい</button><button data-topic="アカデミーについて相談したい">🏫 アカデミーについて相談したい</button><button data-topic="連携・パートナーシップを提案したい">🌍 連携・パートナーシップを提案したい</button><button data-topic="メディア・取材について問い合わせたい">📰 メディア・取材について問い合わせたい</button></div><div class="chat-reply" id="chatReply">こんにちは。ジッピーです。ご相談内容を選んでください。</div></div><div class="contact-box"><h3>Forgeationへ連絡する</h3><div class="contact-list"><div>🤝 共に挑戦する仲間・創業メンバー</div><div>🌍 国内外の連携・パートナーシップ</div><div>💡 企画・技術・教育に関するご提案</div><div>📰 メディア・取材</div></div><a class="button button-primary" id="mailButton" href="mailto:eru12121221@gmail.com?subject=Forgeationへのお問い合わせ">メールで問い合わせる</a></div></div></div></section>
 </main>
 <footer><div class="footer-inner"><strong>Forgeation — Design the Future. Forge the Future.</strong><span>© 2026 Forgeation. All Rights Reserved.</span></div></footer>
+<div class="lightbox" id="lightbox"><button id="lightboxClose" aria-label="閉じる">×</button><img id="lightboxImage" alt="拡大画像"></div>
 <script>
 const opening=document.getElementById('opening'),openingSkip=document.getElementById('openingSkip');
 function closeOpening(){opening.classList.add('is-hidden');sessionStorage.setItem('forgeationOpeningSeen','yes')}
@@ -113,6 +157,13 @@ const subject=encodeURIComponent('Forgeation相談：'+topic);
 const body=encodeURIComponent('【相談内容】\n'+topic+'\n\n【お名前】\n\n【ご連絡先】\n\n【詳しい内容】\n');
 mailButton.href='mailto:eru12121221@gmail.com?subject='+subject+'&body='+body;
 }));
+
+const lightbox=document.getElementById('lightbox'),lightboxImage=document.getElementById('lightboxImage'),lightboxClose=document.getElementById('lightboxClose');
+document.querySelectorAll('.soccer-gallery img').forEach(img=>img.addEventListener('click',()=>{lightboxImage.src=img.src;lightboxImage.alt=img.alt;lightbox.classList.add('open')}));
+lightboxClose.addEventListener('click',()=>lightbox.classList.remove('open'));
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('open')});
+
 </script>
 </body>
 </html>
