@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Forgeation AI受付社員デモ</title>
+<style>
+:root{
+  --navy:#07162f;
+  --blue:#0d63d8;
+  --cyan:#49d9ff;
+  --gold:#f4c95d;
+  --paper:#f5f8fd;
+  --ink:#14233d;
+  --line:rgba(13,99,216,.16);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top right, rgba(73,217,255,.18), transparent 25%),
+    linear-gradient(180deg,#eef5ff,#f9fbff 55%,#fff);
+}
+button{font:inherit}
+.wrap{
+  min-height:100vh;
+  width:min(1180px,94vw);
+  margin:auto;
+  padding:28px 0;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:24px;
+  align-items:stretch;
+}
+.brand-panel,
+.chat-panel{
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 24px 70px rgba(7,22,47,.14);
+}
+.brand-panel{
+  position:relative;
+  min-height:700px;
+  color:#fff;
+  padding:42px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(145deg,rgba(7,22,47,.96),rgba(10,48,106,.9)),
+    radial-gradient(circle at 75% 18%,rgba(73,217,255,.32),transparent 27%);
+}
+.brand-panel:after{
+  content:"";
+  position:absolute;
+  inset:auto -90px -90px auto;
+  width:330px;height:330px;border-radius:50%;
+  border:1px solid #ffffff22;
+  box-shadow:0 0 0 55px #ffffff0a,0 0 0 110px #ffffff08;
+}
+.logo{
+  width:64px;height:64px;
+  display:grid;place-items:center;
+  border-radius:18px;
+  font-size:39px;font-weight:900;font-style:italic;
+  background:linear-gradient(145deg,var(--cyan),var(--blue) 62%,var(--gold));
+}
+.kicker{
+  margin-top:28px;
+  color:var(--gold);
+  font-size:.8rem;
+  font-weight:900;
+  letter-spacing:.18em;
+}
+.brand-panel h1{
+  margin:10px 0 14px;
+  font-size:clamp(2.5rem,6vw,5.2rem);
+  line-height:1.03;
+}
+.brand-panel p{
+  max-width:540px;
+  line-height:1.9;
+  color:#e8f2ff;
+}
+.employee-card{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:16px;
+  align-items:center;
+  padding:18px;
+  border:1px solid #ffffff2c;
+  border-radius:22px;
+  background:#ffffff10;
+  backdrop-filter:blur(12px);
+}
+.avatar{
+  width:64px;height:64px;border-radius:50%;
+  display:grid;place-items:center;
+  font-size:30px;
+  background:linear-gradient(145deg,#fff,#d7ecff);
+  color:var(--navy);
+}
+.employee-card strong{display:block;font-size:1.1rem}
+.employee-card span{display:block;margin-top:4px;color:#bfe9ff;font-size:.9rem}
+
+.chat-panel{
+  min-height:700px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+}
+.chat-head{
+  padding:20px 24px;
+  color:#fff;
+  background:var(--navy);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.chat-head-left{display:flex;align-items:center;gap:12px}
+.status-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#51e58b;
+  box-shadow:0 0 0 6px rgba(81,229,139,.13);
+}
+.chat-head small{display:block;color:#b7d8ff}
+.reset{
+  color:#fff;
+  border:1px solid #ffffff42;
+  border-radius:999px;
+  padding:9px 14px;
+  background:#ffffff10;
+  cursor:pointer;
+}
+.chat-body{
+  flex:1;
+  padding:22px;
+  overflow:auto;
+  background:
+    linear-gradient(rgba(245,248,253,.96),rgba(245,248,253,.96)),
+    radial-gradient(circle,#0d63d815 1px,transparent 1px);
+  background-size:auto,18px 18px;
+}
+.message{
+  max-width:86%;
+  margin:0 0 15px;
+  padding:14px 16px;
+  border-radius:18px;
+  line-height:1.7;
+  animation:pop .25s ease;
+}
+.bot{
+  margin-right:auto;
+  color:var(--ink);
+  background:#fff;
+  border:1px solid var(--line);
+  border-bottom-left-radius:6px;
+  box-shadow:0 8px 22px rgba(7,22,47,.07);
+}
+.user{
+  margin-left:auto;
+  color:#fff;
+  background:linear-gradient(135deg,var(--blue),#0b4ca4);
+  border-bottom-right-radius:6px;
+}
+.typing{
+  display:inline-flex;gap:5px;align-items:center
+}
+.typing i{
+  width:7px;height:7px;border-radius:50%;background:#7d8ba1;
+  animation:bounce 1s infinite;
+}
+.typing i:nth-child(2){animation-delay:.15s}
+.typing i:nth-child(3){animation-delay:.3s}
+.quick-actions{
+  padding:18px 22px 22px;
+  border-top:1px solid #e9eef7;
+  background:#fff;
+}
+.quick-actions p{
+  margin:0 0 12px;
+  color:#718098;
+  font-size:.88rem;
+}
+.choices{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.choice{
+  min-height:50px;
+  padding:10px 13px;
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:15px;
+  color:var(--navy);
+  background:#f8fbff;
+  cursor:pointer;
+  font-weight:800;
+  transition:.2s ease;
+}
+.choice:hover{
+  transform:translateY(-2px);
+  border-color:#0d63d866;
+  background:#edf6ff;
+}
+.choice span{display:block;font-size:.76rem;font-weight:600;color:#6f7d93;margin-top:3px}
+.notice{
+  margin-top:14px;
+  font-size:.78rem;
+  color:#8491a5;
+  line-height:1.5;
+}
+@keyframes pop{from{transform:translateY(5px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;padding:14px 0}
+  .brand-panel{min-height:420px;padding:28px}
+  .chat-panel{min-height:680px}
+}
+
+.home-button{
+  display:inline-block;
+  padding:14px 28px;
+  background:linear-gradient(135deg,#0d63d8,#49d9ff);
+  color:#fff;
+  text-decoration:none;
+  border-radius:999px;
+  font-weight:800;
+  box-shadow:0 10px 20px rgba(13,99,216,.25);
+  transition:.2s ease;
+}
+.home-button:hover{
+  transform:translateY(-2px);
+}
+
+@media(max-width:540px){
+  .choices{grid-template-columns:1fr}
+  .brand-panel h1{font-size:3rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="brand-panel">
+    <div>
+      <div class="logo">F</div>
+      <div class="kicker">FORGEATION AI EMPLOYEE</div>
+      <h1>未来への<br>受付窓口。</h1>
+      <p>
+        ForgeationのAI受付社員が、ご相談内容に応じて
+        最適なアカデミーや担当窓口をご案内します。
+      </p>
+    </div>
+
+    <div class="employee-card">
+      <div class="avatar">🤖</div>
+      <div>
+        <strong>AI受付社員 フォージ</strong>
+        <span>社員番号 AI-002／総合受付課</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="chat-panel">
+    <div class="chat-head">
+      <div class="chat-head-left">
+        <div class="status-dot"></div>
+        <div>
+          <strong>Forgeation 総合受付</strong>
+          <small>AI社員が対応中</small>
+        </div>
+      </div>
+      <button class="reset" id="resetBtn">最初から</button>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="quick-actions">
+      <p>ご用件を選択してください</p>
+      <div class="choices" id="choices">
+        <button class="choice" data-key="ai">AIアカデミー<span>AI・生成AI・データ活用</span></button>
+        <button class="choice" data-key="sports">スポーツアカデミー<span>トレーニング・分析・育成</span></button>
+        <button class="choice" data-key="medical">看護・医療アカデミー<span>看護教育・医療DX</span></button>
+        <button class="choice" data-key="construction">建築アカデミー<span>住まい・設計・未来建築</span></button>
+        <button class="choice" data-key="business">企業向け相談<span>DX・AI導入・人材育成</span></button>
+        <button class="choice" data-key="contact">その他・お問い合わせ<span>担当窓口へご案内</span></button>
+      </div>
+      <div class="notice">※これは動作確認用デモです。送信・予約・外部連携は行いません。</div>
+    </div>
+  </section>
+</div>
+
+<div style="text-align:center;padding:20px 0 30px;background:#fff;">
+  <a href="index.html" class="home-button">🏠 ホームページに戻る</a>
+</div>
+
+<script>
+const chatBody = document.getElementById("chatBody");
+const choices = document.getElementById("choices");
+const resetBtn = document.getElementById("resetBtn");
+
+const replies = {
+  ai: {
+    user: "AIアカデミーについて知りたいです。",
+    bot: "AIアカデミーですね。AI基礎、生成AI、機械学習、データ活用、AI倫理まで段階的に学べます。初心者向け案内と、企業向け研修のどちらをご希望ですか？",
+    follow: ["初心者向け案内", "企業向け研修"]
+  },
+  sports: {
+    user: "スポーツアカデミーについて知りたいです。",
+    bot: "スポーツアカデミーでは、動作の見える化、トレーニング提案、フィードバック、コーチングをAIで支援します。競技者向けと指導者向け、どちらをご希望ですか？",
+    follow: ["競技者向け", "指導者向け"]
+  },
+  medical: {
+    user: "看護・医療アカデミーについて知りたいです。",
+    bot: "看護・医療アカデミーでは、看護基礎、シミュレーション教育、地域・在宅看護、医療DX、AI看護支援を扱います。学習相談と施設向け相談、どちらをご希望ですか？",
+    follow: ["学習相談", "施設向け相談"]
+  },
+  construction: {
+    user: "建築アカデミーについて知りたいです。",
+    bot: "建築アカデミーでは、住まいづくり、設計、施工、未来建築、AI活用を学べます。個人向け案内と事業者向け案内、どちらをご希望ですか？",
+    follow: ["個人向け案内", "事業者向け案内"]
+  },
+  business: {
+    user: "企業向けの相談をしたいです。",
+    bot: "企業向け相談では、AI導入、業務DX、人材育成、Web制作、教育プログラム設計を扱います。まずは相談内容を整理する簡易ヒアリングへ進みます。",
+    follow: ["ヒアリングを開始", "担当者案内を見る"]
+  },
+  contact: {
+    user: "その他の問い合わせです。",
+    bot: "承知しました。ご用件に近い窓口へご案内します。取材・協業、採用、一般問い合わせから選択してください。",
+    follow: ["取材・協業", "採用", "一般問い合わせ"]
+  }
+};
+
+function addMessage(text, type){
+  const div = document.createElement("div");
+  div.className = `message ${type}`;
+  div.textContent = text;
+  chatBody.appendChild(div);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function addTyping(){
+  const div = document.createElement("div");
+  div.className = "message bot";
+  div.id = "typing";
+  div.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+  chatBody.appendChild(div);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function showFollow(options){
+  choices.innerHTML = "";
+  options.forEach(option=>{
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.textContent = option;
+    btn.addEventListener("click", ()=>{
+      addMessage(option, "user");
+      choices.innerHTML = "";
+      addTyping();
+      setTimeout(()=>{
+        document.getElementById("typing")?.remove();
+        addMessage("ありがとうございます。このデモでは、ここから担当ページへの遷移、予約フォーム表示、メール連携などへ発展できます。", "bot");
+        showRestartChoice();
+      },700);
+    });
+    choices.appendChild(btn);
+  });
+}
+
+function showRestartChoice(){
+  choices.innerHTML = "";
+  const btn = document.createElement("button");
+  btn.className = "choice";
+  btn.textContent = "別の相談をする";
+  btn.addEventListener("click", resetDemo);
+  choices.appendChild(btn);
+}
+
+function handleChoice(key){
+  const item = replies[key];
+  addMessage(item.user, "user");
+  choices.innerHTML = "";
+  addTyping();
+  setTimeout(()=>{
+    document.getElementById("typing")?.remove();
+    addMessage(item.bot, "bot");
+    showFollow(item.follow);
+  },700);
+}
+
+function resetDemo(){
+  chatBody.innerHTML = "";
+  choices.innerHTML = `
+    <button class="choice" data-key="ai">AIアカデミー<span>AI・生成AI・データ活用</span></button>
+    <button class="choice" data-key="sports">スポーツアカデミー<span>トレーニング・分析・育成</span></button>
+    <button class="choice" data-key="medical">看護・医療アカデミー<span>看護教育・医療DX</span></button>
+    <button class="choice" data-key="construction">建築アカデミー<span>住まい・設計・未来建築</span></button>
+    <button class="choice" data-key="business">企業向け相談<span>DX・AI導入・人材育成</span></button>
+    <button class="choice" data-key="contact">その他・お問い合わせ<span>担当窓口へご案内</span></button>
+  `;
+  bindChoices();
+  addMessage("ようこそ、Forgeationへ。AI受付社員のフォージです。今日はどのようなご相談でしょうか？", "bot");
+}
+
+function bindChoices(){
+  choices.querySelectorAll("[data-key]").forEach(btn=>{
+    btn.addEventListener("click",()=>handleChoice(btn.dataset.key));
+  });
+}
+
+resetBtn.addEventListener("click", resetDemo);
+resetDemo();
+</script>
+</body>
+</html>
