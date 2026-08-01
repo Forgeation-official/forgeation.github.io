@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Forgeation AI建設社員デモ</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:#eef5ff;color:#1b2d42}
+.wrap{max-width:1100px;margin:auto;padding:28px}
+.card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 28px rgba(0,0,0,.08)}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#eef7ff;color:#0d63d8;font-weight:700}
+h1{color:#0d63d8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+button{padding:15px;border:none;border-radius:12px;background:#0d63d8;color:#fff;font-weight:700;cursor:pointer}
+#out{margin-top:22px;padding:18px;border:1px solid #cfe0ff;border-radius:12px;background:#f8fbff;white-space:pre-wrap;line-height:1.8}
+.home{display:inline-block;margin-top:24px;padding:14px 24px;background:#49d9ff;color:#002;text-decoration:none;border-radius:999px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<div class="badge">Forgeation 建設アカデミー</div>
+<h1>🏗️ AI建設社員 デモ</h1>
+<p>建設・建築アカデミーをサポートするAI社員です。知りたい内容を選択してください。</p>
+
+<div class="grid">
+<button onclick="show('plan')">住宅プラン相談</button>
+<button onclick="show('design')">設計・CAD</button>
+<button onclick="show('safety')">安全管理</button>
+<button onclick="show('dx')">建設DX</button>
+<button onclick="show('law')">建築法規</button>
+<button onclick="show('estimate')">工事・見積相談</button>
+</div>
+
+<div id="out">こんにちは。AI建設社員です。メニューを選択してください。</div>
+
+<a class="home" href="index.html">🏠 ホームページに戻る</a>
+</div>
+</div>
+
+<script>
+const msg={
+plan:"住宅プラン相談：間取りや住まいづくりの考え方を案内します。",
+design:"設計・CAD：設計の流れやCAD活用、3D設計の概要を紹介します。",
+safety:"安全管理：現場で重要な安全対策やリスク管理を学べます。",
+dx:"建設DX：AI・ドローン・BIMなど最新技術の活用を紹介します。",
+law:"建築法規：建築基準法など基礎知識を学ぶ入口です。",
+estimate:"工事・見積相談：工事の流れや見積作成の考え方を案内します。"
+};
+function show(k){document.getElementById('out').textContent=msg[k];}
+</script>
+</body>
+</html>

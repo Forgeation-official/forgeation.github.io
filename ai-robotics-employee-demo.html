@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Forgeation AIロボティクス社員デモ</title>
+<style>
+:root{
+  --navy:#07162f;
+  --blue:#0d63d8;
+  --cyan:#49d9ff;
+  --paper:#f4f8ff;
+  --ink:#14233d;
+  --line:rgba(13,99,216,.16);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top right,rgba(73,217,255,.17),transparent 28%),
+    linear-gradient(180deg,#edf5ff,#fff);
+}
+.wrap{
+  width:min(1120px,94vw);
+  margin:auto;
+  padding:28px 0;
+}
+.panel{
+  overflow:hidden;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 20px 55px rgba(7,22,47,.12);
+}
+.hero{
+  padding:36px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(73,217,255,.28),transparent 26%),
+    linear-gradient(145deg,#07162f,#0a3f8e 65%,#0d63d8);
+}
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  background:#ffffff1f;
+  color:#bfefff;
+  font-weight:800;
+}
+.hero h1{
+  margin:16px 0 10px;
+  font-size:clamp(2.2rem,6vw,4.8rem);
+}
+.hero p{
+  max-width:720px;
+  margin:0;
+  line-height:1.9;
+  color:#eaf4ff;
+}
+.content{padding:28px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+button{
+  min-height:64px;
+  padding:14px 16px;
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:15px;
+  color:var(--navy);
+  background:#f8fbff;
+  font-weight:850;
+  cursor:pointer;
+  transition:.2s ease;
+}
+button:hover{
+  transform:translateY(-2px);
+  background:#edf6ff;
+  border-color:#0d63d866;
+}
+button span{
+  display:block;
+  margin-top:4px;
+  color:#6d7b90;
+  font-size:.78rem;
+  font-weight:600;
+}
+#out{
+  margin-top:22px;
+  padding:20px;
+  min-height:150px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#f7fbff;
+  white-space:pre-wrap;
+  line-height:1.8;
+}
+.home{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:24px;
+  padding:14px 24px;
+  border-radius:999px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  box-shadow:0 10px 20px rgba(13,99,216,.22);
+}
+.notice{
+  margin-top:14px;
+  color:#7b889d;
+  font-size:.8rem;
+  line-height:1.6;
+}
+@media(max-width:680px){
+  .hero{padding:28px}
+  .content{padding:20px}
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="panel">
+    <section class="hero">
+      <div class="badge">Forgeation AI・ロボティクスアカデミー</div>
+      <h1>🤖 AIロボティクス社員</h1>
+      <p>
+        ロボット、ドローン、IoT、プログラミング、AI制御を通じて、
+        技術を社会で役立てる方法をご案内します。
+      </p>
+    </section>
+
+    <section class="content">
+      <div class="grid">
+        <button onclick="showTopic('robot')">
+          ロボット開発
+          <span>設計・センサー・制御の基礎</span>
+        </button>
+        <button onclick="showTopic('drone')">
+          ドローン活用
+          <span>空撮・点検・災害支援</span>
+        </button>
+        <button onclick="showTopic('iot')">
+          IoT・センサー
+          <span>機器とデータをつなぐ</span>
+        </button>
+        <button onclick="showTopic('programming')">
+          プログラミング
+          <span>ロボットを動かす考え方</span>
+        </button>
+        <button onclick="showTopic('ai')">
+          AI制御
+          <span>認識・判断・自動化</span>
+        </button>
+        <button onclick="showTopic('social')">
+          社会実装
+          <span>教育・医療・建設への応用</span>
+        </button>
+      </div>
+
+      <div id="out">
+こんにちは。ForgeationのAIロボティクス社員です。
+知りたい分野を選択してください。
+      </div>
+
+      <a class="home" href="index.html">🏠 ホームページに戻る</a>
+      <div class="notice">
+        ※これは動作確認用デモです。実機制御、飛行操作、外部機器との接続は行いません。
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const topics={
+  robot:`【ロボット開発】
+ロボットは、機械・電子回路・センサー・プログラムを組み合わせて作ります。
+
+学習例
+・ロボットの構造
+・モーターとセンサー
+・自動走行
+・課題発見と改善`,
+  drone:`【ドローン活用】
+ドローンは、空から情報を集める技術として幅広く活用されています。
+
+活用例
+・空撮
+・建物や設備の点検
+・農業支援
+・災害時の情報収集`,
+  iot:`【IoT・センサー】
+IoTは、機器をインターネットにつなぎ、データを集めて活用する仕組みです。
+
+学習例
+・温度や距離の測定
+・機器の遠隔確認
+・データの見える化
+・異常の早期発見`,
+  programming:`【プログラミング】
+ロボットに「何を、どの順番で行うか」を伝えるためにプログラムを使います。
+
+学習例
+・順次処理
+・条件分岐
+・繰り返し
+・センサーの値による動作変更`,
+  ai:`【AI制御】
+AIを使うことで、ロボットが画像や音を認識し、状況に応じて判断できるようになります。
+
+活用例
+・画像認識
+・音声認識
+・障害物回避
+・作業の自動化`,
+  social:`【社会実装】
+技術は、実際の社会課題を解決してこそ価値を持ちます。
+
+応用例
+・教育支援ロボット
+・看護や介護の支援
+・建設現場の安全管理
+・災害対応ドローン`
+};
+function showTopic(key){
+  document.getElementById("out").textContent=topics[key];
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Forgeation AI学習支援社員デモ</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:#eef6ff;color:#123}
+.wrap{max-width:1100px;margin:auto;padding:24px}
+.card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+h1{color:#0d63d8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+button{padding:15px;border:none;border-radius:12px;background:#0d63d8;color:#fff;font-weight:bold;cursor:pointer}
+#out{margin-top:22px;padding:18px;border:1px solid #cfe0ff;border-radius:12px;background:#f8fbff;white-space:pre-wrap;line-height:1.8}
+.home{display:inline-block;margin-top:24px;padding:14px 24px;background:#49d9ff;color:#003;text-decoration:none;border-radius:999px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>📚 AI学習支援社員 デモ</h1>
+<p>ForgeationのAI学習支援社員です。学びたい内容を選んでください。</p>
+
+<div class="grid">
+<button onclick="show('AIパスポート')">AIパスポート</button>
+<button onclick="show('算数・数学')">算数・数学</button>
+<button onclick="show('国語')">国語</button>
+<button onclick="show('英語')">英語</button>
+<button onclick="show('SST')">SST</button>
+<button onclick="show('学習計画')">学習計画</button>
+</div>
+
+<div id="out">こんにちは。学習したい内容を選択してください。</div>
+
+<a class="home" href="index.html">🏠 ホームページに戻る</a>
+</div>
+</div>
+
+<script>
+const data={
+"AIパスポート":"AIパスポート学習モードです。重要用語の解説・確認問題・模擬問題を提供できます。",
+"算数・数学":"算数・数学モードです。基礎から応用まで、一問ずつ解説付きで学習できます。",
+"国語":"国語モードです。漢字・読解・作文をサポートします。",
+"英語":"英語モードです。単語・文法・英会話を学習できます。",
+"SST":"SSTモードです。日常生活やコミュニケーションを一緒に練習します。",
+"学習計画":"目標に合わせて学習計画を作成し、進捗管理をサポートします。"
+};
+function show(k){document.getElementById("out").textContent=data[k];}
+</script>
+</body>
+</html>
