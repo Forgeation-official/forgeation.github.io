@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Forgeation スポーツアカデミー課 AI社員コーチデモ">
+<title>Forgeation AIスポーツアカデミー社員コーチ</title>
+<style>
+:root{
+  --navy:#071a3a;
+  --blue:#0a57d5;
+  --cyan:#22c8ff;
+  --green:#32d583;
+  --gold:#f4c85a;
+  --paper:#f4f8ff;
+  --ink:#10203a;
+  --line:rgba(10,87,213,.16);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at top right,rgba(34,200,255,.18),transparent 28%),
+    linear-gradient(180deg,#edf5ff,#fff);
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.wrap{
+  width:min(1180px,94vw);
+  margin:auto;
+  padding:28px 0;
+}
+.layout{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:24px;
+}
+.brand-panel,.work-panel{
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 24px 70px rgba(7,26,58,.14);
+}
+.brand-panel{
+  position:relative;
+  min-height:760px;
+  padding:40px;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    radial-gradient(circle at 80% 18%,rgba(50,213,131,.22),transparent 27%),
+    linear-gradient(145deg,#031329,#0a57d5 65%,#083a91);
+}
+.brand-panel:after{
+  content:"";
+  position:absolute;
+  right:-110px;
+  bottom:-110px;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  border:1px solid #ffffff24;
+  box-shadow:0 0 0 60px #ffffff0a,0 0 0 120px #ffffff08;
+}
+.logo{
+  width:66px;height:66px;
+  display:grid;place-items:center;
+  border-radius:19px;
+  font-size:40px;
+  font-weight:900;
+  font-style:italic;
+  background:linear-gradient(145deg,var(--cyan),var(--blue) 62%,var(--green));
+}
+.kicker{
+  margin-top:28px;
+  color:#9fe9ff;
+  font-size:.82rem;
+  font-weight:900;
+  letter-spacing:.18em;
+}
+.brand-panel h1{
+  margin:12px 0 18px;
+  font-size:clamp(2.5rem,6vw,4.9rem);
+  line-height:1.05;
+}
+.brand-panel p{
+  max-width:560px;
+  color:#e8f3ff;
+  line-height:1.9;
+}
+.employee-card{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:16px;
+  align-items:center;
+  padding:18px;
+  border:1px solid #ffffff2c;
+  border-radius:22px;
+  background:#ffffff12;
+  backdrop-filter:blur(12px);
+}
+.avatar{
+  width:68px;height:68px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  font-size:32px;
+  color:var(--navy);
+  background:linear-gradient(145deg,#fff,#d8f4ff);
+}
+.employee-card strong{display:block;font-size:1.08rem}
+.employee-card span{display:block;margin-top:4px;color:#bfeaff;font-size:.9rem}
+
+.work-panel{
+  min-height:760px;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+}
+.work-head{
+  padding:20px 24px;
+  color:#fff;
+  background:var(--navy);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+.work-head-left{display:flex;align-items:center;gap:12px}
+.status{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:#51e58b;
+  box-shadow:0 0 0 6px rgba(81,229,139,.13);
+}
+.work-head small{display:block;color:#b7d8ff}
+.head-actions{display:flex;gap:8px}
+.home-mini,.reset{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:9px 13px;
+  border:1px solid #ffffff42;
+  border-radius:999px;
+  color:#fff;
+  background:#ffffff10;
+  font-weight:800;
+  cursor:pointer;
+}
+.dashboard{
+  flex:1;
+  padding:22px;
+  overflow:auto;
+  background:
+    linear-gradient(rgba(246,249,255,.96),rgba(246,249,255,.96)),
+    radial-gradient(circle,#0a57d515 1px,transparent 1px);
+  background-size:auto,18px 18px;
+}
+.intro{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(7,26,58,.06);
+  line-height:1.75;
+}
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:16px;
+}
+.menu-btn{
+  min-height:88px;
+  padding:16px;
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:17px;
+  color:var(--navy);
+  background:#f8fbff;
+  cursor:pointer;
+  transition:.2s ease;
+  font-weight:900;
+}
+.menu-btn:hover{
+  transform:translateY(-2px);
+  border-color:#0a57d866;
+  background:#eef6ff;
+}
+.menu-btn .icon{font-size:1.8rem;display:block;margin-bottom:8px}
+.menu-btn small{display:block;margin-top:5px;color:#6d7a90;font-weight:650}
+.result{
+  margin-top:18px;
+  min-height:210px;
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(7,26,58,.06);
+  white-space:pre-wrap;
+  line-height:1.85;
+}
+.result h3{margin-top:0;color:var(--navy)}
+.note{
+  padding:15px 22px 22px;
+  color:#7d8ba1;
+  font-size:.8rem;
+  line-height:1.6;
+  border-top:1px solid #e8eef7;
+}
+.footer-return{text-align:center;padding:4px 0 34px}
+.home-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 28px;
+  border-radius:999px;
+  color:#fff;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  box-shadow:0 10px 20px rgba(10,87,213,.24);
+}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .brand-panel{min-height:440px;padding:28px}
+  .work-panel{min-height:720px}
+}
+@media(max-width:560px){
+  .menu-grid{grid-template-columns:1fr}
+  .brand-panel h1{font-size:3rem}
+  .work-head{align-items:flex-start}
+  .head-actions{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="layout">
+    <section class="brand-panel">
+      <div>
+        <div class="logo">F</div>
+        <div class="kicker">SPORTS ACADEMY AI EMPLOYEE</div>
+        <h1>成長を、<br>見える力へ。</h1>
+        <p>
+          Forgeationスポーツアカデミー課のAI社員コーチが、
+          選手データの分析、個別課題の整理、トレーニング提案、
+          フィードバックとコーチング方針を支援します。
+        </p>
+      </div>
+
+      <div class="employee-card">
+        <div class="avatar">🏃‍♂️</div>
+        <div>
+          <strong>AIスポーツアカデミー社員コーチ</strong>
+          <span>社員番号 AI-008／スポーツアカデミー課</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-panel">
+      <div class="work-head">
+        <div class="work-head-left">
+          <div class="status"></div>
+          <div>
+            <strong>Forgeation スポーツアカデミー課</strong>
+            <small>AI社員コーチが対応中</small>
+          </div>
+        </div>
+        <div class="head-actions">
+          <a class="home-mini" href="index.html">🏠 戻る</a>
+          <button class="reset" id="resetBtn">最初から</button>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="intro">
+          こんにちは。スポーツアカデミー課専属のAI社員コーチです。<br>
+          選手の成長を「見る・分析する・伸ばす・支える」の流れでサポートします。
+        </div>
+
+        <div class="menu-grid">
+          <button class="menu-btn" data-key="visualize">
+            <span class="icon">📊</span>
+            選手データの見える化
+            <small>現在地と成長推移を整理</small>
+          </button>
+
+          <button class="menu-btn" data-key="analysis">
+            <span class="icon">🔍</span>
+            成長課題の分析
+            <small>強みと改善点を整理</small>
+          </button>
+
+          <button class="menu-btn" data-key="training">
+            <span class="icon">🏋️</span>
+            個別トレーニング提案
+            <small>目的別の練習案を作成</small>
+          </button>
+
+          <button class="menu-btn" data-key="feedback">
+            <span class="icon">🗣️</span>
+            フィードバック作成
+            <small>選手へ伝わる言葉を提案</small>
+          </button>
+
+          <button class="menu-btn" data-key="coaching">
+            <span class="icon">🎯</span>
+            コーチング方針
+            <small>関わり方と育成方針を整理</small>
+          </button>
+
+          <button class="menu-btn" data-key="academy">
+            <span class="icon">🏫</span>
+            アカデミー案内
+            <small>学びと成長の流れを紹介</small>
+          </button>
+        </div>
+
+        <div class="result" id="result">
+          メニューを選択してください。
+        </div>
+      </div>
+
+      <div class="note">
+        ※これは動作確認用デモです。実際の診断、医療判断、競技成績の保証、外部データ連携は行いません。
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="footer-return">
+  <a class="home-button" href="index.html">🏠 Forgeationホームページに戻る</a>
+</div>
+
+<script>
+const result=document.getElementById("result");
+const resetBtn=document.getElementById("resetBtn");
+
+const content={
+  visualize:`【選手データの見える化】
+
+確認する項目例
+・体力
+・技術
+・判断
+・継続力
+・コミュニケーション
+・目標達成度
+
+数値だけで評価するのではなく、前回からの変化や努力の過程も含めて整理します。`,
+
+  analysis:`【成長課題の分析】
+
+分析の流れ
+1. 強みを確認する
+2. 現在の課題を1〜2点に絞る
+3. 課題の原因を考える
+4. 次の行動目標に変換する
+
+例：
+「判断が遅い」
+→ 周囲を見る回数を増やす
+→ ボールを受ける前に2回確認する`,
+
+  training:`【個別トレーニング提案】
+
+テーマ例：判断力を高める
+
+・ウォーミングアップ 10分
+・周囲確認を入れたパス練習 15分
+・人数制限付きミニゲーム 20分
+・振り返り 5分
+
+意識するポイント：
+ボールを受ける前に、味方・相手・空いている場所を確認する。`,
+
+  feedback:`【フィードバック例】
+
+良かった点：
+今日は周囲を見る回数が増え、次のプレーを早く選べていました。
+
+次の課題：
+ボールを受けた後だけでなく、受ける前の準備をさらに意識しましょう。
+
+次回の目標：
+練習中に「見る→考える→動く」を3回以上成功させる。`,
+
+  coaching:`【コーチング方針】
+
+・結果だけでなく、挑戦した行動を評価する
+・一度に多くを伝えず、課題を絞る
+・選手自身に考える時間を与える
+・できたことを言葉で具体的に伝える
+・次の一歩が分かる目標を設定する
+
+AIは答えを決めるのではなく、コーチと選手の対話を支えます。`,
+
+  academy:`【スポーツアカデミー課の学び】
+
+見る：
+データと映像で現在地を知る
+
+分析する：
+強みと課題を整理する
+
+伸ばす：
+個別トレーニングへつなげる
+
+支える：
+フィードバックと対話で成長を継続する
+
+スポーツ科学と人のコーチングを組み合わせ、選手一人ひとりの可能性を最大化します。`
+};
+
+document.querySelectorAll("[data-key]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    result.textContent=content[btn.dataset.key];
+    result.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+});
+
+resetBtn.addEventListener("click",()=>{
+  result.textContent="メニューを選択してください。";
+});
+</script>
+</body>
+</html>
