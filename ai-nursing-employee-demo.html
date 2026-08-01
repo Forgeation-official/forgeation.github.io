@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Forgeation AI看護社員デモ</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:#eef7ff;color:#16314d}
+.wrap{max-width:1100px;margin:auto;padding:28px}
+.card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 28px rgba(0,0,0,.08)}
+h1{color:#0d63d8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+button{padding:15px;border:none;border-radius:12px;background:#0d63d8;color:#fff;font-weight:700;cursor:pointer}
+#out{margin-top:22px;padding:18px;border-radius:12px;border:1px solid #cfe0ff;background:#f8fbff;white-space:pre-wrap;line-height:1.8}
+.home{display:inline-block;margin-top:24px;padding:14px 24px;background:#49d9ff;color:#002;text-decoration:none;border-radius:999px;font-weight:700}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#eaf4ff;color:#0d63d8;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<div class="badge">Forgeation 看護・医療アカデミー</div>
+<h1>🩺 AI看護社員 デモ</h1>
+<p>看護・医療アカデミーを案内するAI社員です。学びたい内容を選択してください。</p>
+
+<div class="grid">
+<button onclick="show('basic')">看護基礎</button>
+<button onclick="show('vital')">バイタルサイン</button>
+<button onclick="show('sim')">シミュレーション</button>
+<button onclick="show('homecare')">地域・在宅看護</button>
+<button onclick="show('dx')">医療DX</button>
+<button onclick="show('exam')">国家試験学習</button>
+</div>
+
+<div id="out">こんにちは。AI看護社員です。メニューを選択してください。</div>
+
+<a class="home" href="index.html">🏠 ホームページに戻る</a>
+</div>
+</div>
+
+<script>
+const msg={
+basic:"看護基礎：看護の役割、感染対策、安全管理など基礎を学習できます。",
+vital:"バイタルサイン：体温・脈拍・呼吸・血圧・SpO2などの基本を学習できます。",
+sim:"シミュレーション：患者対応を想定したケース学習を体験できます。",
+homecare:"地域・在宅看護：退院支援や在宅ケアの考え方を学べます。",
+dx:"医療DX：電子カルテやAI活用など医療DXの基礎を紹介します。",
+exam:"国家試験学習：重要ポイントの確認や問題演習につなげられます。"
+};
+function show(k){document.getElementById('out').textContent=msg[k];}
+</script>
+</body>
+</html>
