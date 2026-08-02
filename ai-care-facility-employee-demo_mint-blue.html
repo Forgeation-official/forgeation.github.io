@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Forgeation AI介護施設社員デモ">
+<title>AI介護施設社員デモ｜Forgeation</title>
+<style>
+:root{--navy:#071a3a;--mint:#57d6d0;--mint-dark:#159ca2;--mint-light:#dffaf8;--blue:#0a57d5;--paper:#f5ffff;--ink:#12323a;--line:#cfeeee}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",Meiryo,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,#dffaf8,transparent 32%),linear-gradient(145deg,#fbffff,#eaf8fb)}
+button,a{font:inherit}.wrap{width:min(1180px,94vw);min-height:100vh;margin:auto;padding:28px 0;display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:stretch}.brand,.panel{border:1px solid #ffffffaa;border-radius:28px;box-shadow:0 20px 60px #0b5f6b22}.brand{padding:clamp(28px,5vw,56px);color:#fff;background:radial-gradient(circle at 20% 15%,#86eee855,transparent 30%),linear-gradient(155deg,#083f4a,#159ca2 58%,#57d6d0);display:flex;flex-direction:column;justify-content:space-between}.logo{width:72px;height:72px;display:grid;place-items:center;border-radius:20px;background:#fff;color:var(--mint-dark);font-weight:900;font-style:italic;font-size:44px}.kicker{margin-top:26px;color:#d9fffd;font-weight:900;letter-spacing:.16em}.brand h1{margin:10px 0;font-size:clamp(2.5rem,6vw,5rem);line-height:1.04}.brand p{line-height:1.9;color:#f2ffff}.employee{display:flex;align-items:center;gap:14px;margin-top:34px;padding:16px;border:1px solid #ffffff3d;border-radius:18px;background:#ffffff17}.employee .avatar{font-size:2.5rem}.employee span{display:block;color:#ddfffd;font-size:.86rem;margin-top:4px}.panel{padding:24px;background:#fffffff0;backdrop-filter:blur(12px)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}.status{display:flex;align-items:center;gap:10px}.dot{width:11px;height:11px;border-radius:50%;background:#37d6cf;box-shadow:0 0 0 5px #37d6cf22}.reset,.home{border:0;border-radius:999px;font-weight:800;cursor:pointer}.reset{padding:10px 15px;color:var(--mint-dark);background:#e2f9f8}.intro{margin:20px 0;padding:18px;border-radius:16px;background:#eefbfb;line-height:1.8}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice{padding:18px;text-align:left;border:1px solid var(--line);border-radius:17px;background:#fff;cursor:pointer;transition:.2s}.choice:hover{transform:translateY(-3px);border-color:#66d9d4;box-shadow:0 10px 25px #159ca218}.choice strong{display:block;color:var(--mint-dark);font-size:1.05rem}.choice span{display:block;margin-top:7px;color:#607168;font-size:.88rem;line-height:1.55}.reply{min-height:155px;margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:18px;background:#fbffff;line-height:1.85;white-space:pre-line}.notice{margin-top:14px;color:#718178;font-size:.78rem;line-height:1.6}.home{display:inline-flex;margin-top:18px;padding:13px 19px;color:#fff;background:linear-gradient(90deg,var(--mint-dark),var(--mint));text-decoration:none}.home:hover{filter:brightness(1.06)}
+@media(max-width:860px){.wrap{grid-template-columns:1fr}.brand{min-height:500px}.choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="brand">
+<div><div class="logo">F</div><div class="kicker">CARE & WELFARE ACADEMY AI EMPLOYEE</div><h1>やさしい介護を、<br>現場と事務から。</h1><p>介護スタッフ、事務職、施設運営、ご家族をつなぎ、記録・連携・企画・業務整理を支えるForgeationのAI介護施設社員デモです。</p></div>
+<div class="employee"><div class="avatar">🏡🤖</div><div><strong>AI介護施設社員 ケアフォージ</strong><span>社員番号 AI-CARE-001／介護・福祉アカデミー課</span></div></div>
+</section>
+<section class="panel">
+<div class="head"><div class="status"><span class="dot"></span><div><strong>Forgeation 介護・福祉アカデミー課</strong><small style="display:block;color:#6c7d72">AI社員が対応中</small></div></div><button class="reset" id="reset">最初から</button></div>
+<div class="intro">こんにちは。AI介護施設社員です。現場のケアだけでなく、介護事務や施設運営も含めて、必要な支援メニューを選んでください。</div>
+<div class="choices">
+<button class="choice" data-key="record"><strong>📝 介護記録支援</strong><span>申し送り・経過記録・家族連絡の文章を整理</span></button>
+<button class="choice" data-key="office"><strong>💼 介護事務支援</strong><span>書類、帳票、請求前確認、行政提出資料を整理</span></button>
+<button class="choice" data-key="shift"><strong>📅 シフト・業務整理</strong><span>役割分担、業務一覧、引き継ぎ漏れを見える化</span></button>
+<button class="choice" data-key="recreation"><strong>🎈 レクリエーション企画</strong><span>状態・季節・人数に合わせた活動を提案</span></button>
+<button class="choice" data-key="family"><strong>👪 ご家族への連絡</strong><span>丁寧で分かりやすい報告文や案内文を作成</span></button>
+<button class="choice" data-key="dx"><strong>💻 介護DX・ICT相談</strong><span>記録、情報共有、スケジュール管理の改善案</span></button>
+<button class="choice" data-key="home"><strong>🏠 在宅介護・地域連携</strong><span>関係職種・地域資源・家族支援を整理</span></button>
+<button class="choice" data-key="management"><strong>📊 施設運営支援</strong><span>稼働状況、課題、改善案を分かりやすく整理</span></button>
+</div>
+<div class="reply" id="reply">メニューを選択してください。</div>
+<p class="notice">※このデモは学習・業務整理支援用です。医療判断、介護認定、個別ケア方針、請求確定などの専門判断は、必ず有資格者・担当者・管理者が確認してください。</p>
+<a class="home" href="index.html">🏠 ホームページに戻る</a>
+</section>
+</main>
+<script>
+const messages={
+record:'【介護記録支援】\n①事実 ②利用者さまの様子 ③職員の対応 ④結果 ⑤次の申し送り、の順に整理します。\n主観や断定を避け、誰が読んでも分かる記録文の下書きを支援します。',
+office:'【介護事務支援】\n必要書類、提出期限、確認担当、保存場所を一覧化します。\n請求や制度に関する最終確認は、最新の通知・自治体・管理者の確認を前提とします。',
+shift:'【シフト・業務整理】\n時間帯ごとの業務、担当者、優先度、引き継ぎ事項を整理します。\n欠員や急な変更があった場合も、利用者さまの安全を最優先に再配置案をまとめます。',
+recreation:'【レクリエーション企画】\n季節、人数、身体状況、認知機能、所要時間をもとに、無理なく楽しめる活動案を作ります。\n目的・準備物・安全確認・振り返りまでセットで整理します。',
+family:'【ご家族への連絡】\n利用者さまの様子を、安心につながる丁寧な文章に整えます。\n事実と今後の対応を分け、個人情報に配慮した連絡文の下書きを作ります。',
+dx:'【介護DX・ICT相談】\n紙記録、申し送り、シフト、家族連絡など、負担の大きい業務を確認します。\nいきなり全面導入せず、小さく試して改善する手順を提案します。',
+home:'【在宅介護・地域連携】\nご本人、ご家族、ケアマネジャー、医療職、介護サービス、地域資源の役割を整理します。\n連携の抜けや重複を見える化し、切れ目のない支援につなげます。',
+management:'【施設運営支援】\n利用状況、職員負担、事故・ヒヤリハット、家族対応、業務時間などを整理します。\n現場の声を大切にしながら、改善テーマと優先順位を提案します。'
+};
+const reply=document.getElementById('reply');
+document.querySelectorAll('[data-key]').forEach(btn=>btn.addEventListener('click',()=>{reply.textContent=messages[btn.dataset.key];reply.scrollIntoView({behavior:'smooth',block:'nearest'})}));
+document.getElementById('reset').addEventListener('click',()=>reply.textContent='メニューを選択してください。');
+</script>
+</body>
+</html>
