@@ -152,7 +152,12 @@ section{padding:88px 0}.container{width:min(1180px,92vw);margin:auto}.section-he
 }
 .coming-soon-modal.open{display:grid}
 .coming-soon-card{
-  width:min(720px,94vw);padding:clamp(30px,6vw,58px);text-align:center;color:#fff;
+  position:relative;
+  width:min(720px,94vw);
+  max-height:90vh;
+  overflow-y:auto;
+  padding:clamp(30px,6vw,58px);
+  text-align:center;color:#fff;
   border:1px solid #ffffff35;border-radius:30px;
   background:
     radial-gradient(circle at 25% 15%,rgba(34,200,255,.28),transparent 32%),
@@ -171,8 +176,37 @@ section{padding:88px 0}.container{width:min(1180px,92vw);margin:auto}.section-he
   border-radius:999px;background:#ffffff18;font-weight:800;cursor:pointer
 }
 .collection-preview{margin:24px auto 0;max-width:620px;overflow:hidden;border:1px solid #ffffff35;border-radius:20px;background:#06152f;box-shadow:0 18px 42px #0006}
-.collection-preview img{width:100%;height:auto;cursor:zoom-in}
+.collection-preview img{
+  width:100%;
+  max-height:58vh;
+  height:auto;
+  object-fit:contain;
+  cursor:zoom-in
+}
 .collection-preview figcaption{padding:12px 16px;color:#e8f8ff;font-weight:800}
+.coming-soon-top-close{
+  position:sticky;
+  top:0;
+  float:right;
+  z-index:3;
+  width:44px;
+  height:44px;
+  margin:-10px -10px 6px 8px;
+  color:#fff;
+  border:1px solid #ffffff70;
+  border-radius:50%;
+  background:#001a44cc;
+  font-size:26px;
+  font-weight:900;
+  cursor:pointer
+}
+.coming-soon-actions{
+  position:sticky;
+  bottom:-1px;
+  margin:20px -12px -18px;
+  padding:14px 12px 4px;
+  background:linear-gradient(180deg,transparent,#0a57d5 38%);
+}
 
 
 /* 画像拡大表示 */
@@ -521,6 +555,7 @@ section{padding:68px 0}
 
 <div class="coming-soon-modal" id="collectionComingSoon" aria-hidden="true">
   <div class="coming-soon-card" role="dialog" aria-modal="true" aria-labelledby="comingSoonTitle">
+    <button class="coming-soon-top-close" id="collectionComingSoonTopClose" type="button" aria-label="閉じる">×</button>
     <div class="coming-soon-door">🚪✨</div>
     <div class="section-kicker" style="color:#9fe9ff">NOGU'S COLLECTION</div>
     <h2 id="comingSoonTitle">乞うご期待。</h2>
@@ -530,7 +565,9 @@ section{padding:68px 0}
       <figcaption>🚴 心を整える時間</figcaption>
     </figure>
     <span class="coming-soon-label">COMING SOON</span><br>
-    <button class="coming-soon-close" id="collectionComingSoonClose" type="button">扉を閉じる</button>
+    <div class="coming-soon-actions">
+      <button class="coming-soon-close" id="collectionComingSoonClose" type="button">← ホームページへ戻る</button>
+    </div>
   </div>
 </div>
 <div class="lightbox" id="lightbox"><button id="lightboxClose" aria-label="閉じる">×</button><img id="lightboxImage" alt="拡大画像"></div>
@@ -570,6 +607,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.r
 const collectionDoorButton=document.getElementById('collectionDoorButton');
 const collectionComingSoon=document.getElementById('collectionComingSoon');
 const collectionComingSoonClose=document.getElementById('collectionComingSoonClose');
+const collectionComingSoonTopClose=document.getElementById('collectionComingSoonTopClose');
 function openCollectionComingSoon(){
   collectionComingSoon.classList.add('open');
   collectionComingSoon.setAttribute('aria-hidden','false');
@@ -580,6 +618,7 @@ function closeCollectionComingSoon(){
 }
 collectionDoorButton?.addEventListener('click',openCollectionComingSoon);
 collectionComingSoonClose?.addEventListener('click',closeCollectionComingSoon);
+collectionComingSoonTopClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoon?.addEventListener('click',e=>{if(e.target===collectionComingSoon)closeCollectionComingSoon()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCollectionComingSoon()});
 
