@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.6.1｜ヒント・1階ボタン位置最終修正版</title>
+<title>Forgeation School Ver3.7.1｜ヒント文言最終修正版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -705,6 +705,171 @@ section{padding:68px 0}
   .future-grid{grid-template-columns:1fr}
 }
 
+
+/* ===== Ver3.7 Fドローン・IoT・Pythonリセット ===== */
+.future-labs{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.python-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.python-reset{
+  min-height:46px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:12px;
+  color:#fff;
+  background:#ffffff12;
+  font-weight:900;
+  cursor:pointer;
+}
+.iot-panel{
+  display:grid;
+  gap:12px;
+}
+.iot-sensor{
+  padding:14px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:15px;
+  background:#ffffff0c;
+}
+.iot-sensor-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-weight:900;
+}
+.iot-value{
+  color:#9fe9ff;
+  font-size:1.05rem;
+}
+.iot-meter{
+  height:9px;
+  margin-top:10px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#ffffff1a;
+}
+.iot-meter span{
+  display:block;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#52d8ff,#9b5cff);
+  transition:width .35s ease;
+}
+.iot-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+.iot-controls button{
+  flex:1 1 120px;
+  min-height:42px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:12px;
+  color:#fff;
+  background:#ffffff10;
+  font-weight:900;
+  cursor:pointer;
+}
+.iot-log{
+  min-height:84px;
+  padding:13px;
+  border-radius:14px;
+  color:#07162f;
+  background:#fff;
+  line-height:1.65;
+  font-weight:800;
+}
+.lesson-switcher{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0 0 12px;
+}
+.lesson-switcher button{
+  min-height:38px;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;
+  color:#fff;
+  background:#ffffff10;
+  font-weight:850;
+  cursor:pointer;
+}
+.lesson-switcher button.active{
+  color:#07162f;
+  background:linear-gradient(90deg,#9fe9ff,#fff);
+}
+@media(max-width:1100px){
+  .future-labs{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .future-labs{grid-template-columns:1fr}
+}
+
+
+/* ===== Ver3.7.1 校舎マップ右側ヒント最終修正 ===== */
+.school-map-clean-hint{
+  position:absolute;
+  z-index:7;
+  left:84.0%;
+  top:74.7%;
+  width:13.4%;
+  min-height:8.6%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  padding:10px 11px;
+  border:1px solid rgba(255,255,255,.78);
+  border-radius:10px;
+  color:#12233f;
+  background:rgba(255,250,229,.98);
+  box-shadow:0 4px 12px rgba(0,0,0,.22);
+  font-size:clamp(.48rem,.72vw,.72rem);
+  font-weight:800;
+  line-height:1.45;
+  pointer-events:none;
+}
+.school-map-clean-hint .hint-symbol{
+  flex:0 0 auto;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#fff;
+  background:#07162f;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.82rem;
+  font-weight:900;
+}
+.school-map-clean-hint strong{
+  display:block;
+  margin-bottom:2px;
+  color:#0c2344;
+}
+@media(max-width:700px){
+  .school-map-clean-hint{
+    left:84.2%;
+    top:74.8%;
+    width:14.5%;
+    padding:7px;
+    gap:5px;
+    font-size:.42rem;
+  }
+  .school-map-clean-hint .hint-symbol{
+    width:17px;
+    height:17px;
+    font-size:.65rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -738,7 +903,7 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.6.1です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.7.1です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -1138,6 +1303,12 @@ section{padding:68px 0}
       data-features="企業理念|アカデミー紹介|長期ビジョン"
       data-href="#about"
       aria-label="学校案内コーナーの詳細を表示">i</button>
+
+<span class="school-map-clean-hint" aria-hidden="true">
+  <span class="hint-symbol">i</span>
+  <span><strong>ヒント</strong>黒い「i」をクリックすると、各部屋の詳細を確認できます。</span>
+</span>
+
 </figure>
       <div class="school-map-copy">
         <div>
@@ -1173,7 +1344,7 @@ section{padding:68px 0}
       </article>
       <article class="future-card">
         <div class="future-icon">🤖</div>
-        <h3>ロボティクス・ドローン</h3>
+        <h3>Fドローン・ロボティクス</h3>
         <p>ロボット制御、IoT、センサー、ドローンの基本操作を体験します。</p>
         <a href="#drone-lab">操縦体験へ</a>
       </article>
@@ -1201,12 +1372,19 @@ section{padding:68px 0}
         <p>教育、看護、介護、建設、スポーツの課題をAIで解決する授業です。</p>
         <a href="#future">未来研究へ</a>
       </article>
-    </div>
+    
+      <article class="future-card">
+        <div class="future-icon">📡</div>
+        <h3>IoT・センサー</h3>
+        <p>温度、明るさ、人の動きを読み取り、教室や施設を見守る仕組みを学びます。</p>
+        <a href="#iot-lab">IoTを体験</a>
+      </article>
+</div>
 
     <div class="future-labs">
       <article class="future-lab" id="drone-lab">
-        <h3>🚁 ドローン操縦体験</h3>
-        <p>矢印ボタンでドローンを安全に動かしてみよう。</p>
+        <h3>🚁 Fドローン操縦体験</h3>
+        <p>矢印ボタンでFドローンを安全に操縦してみよう。</p>
         <div class="drone-stage" id="droneStage">
           <div class="drone-object" id="droneObject">🚁</div>
         </div>
@@ -1223,17 +1401,72 @@ section{padding:68px 0}
         </div>
       </article>
 
-      <article class="future-lab" id="python-lab">
-        <h3>🐍 Python 1分授業</h3>
-        <p>コードを読んで、「実行する」を押してみよう。</p>
-        <code class="python-code">name = "Forgeation"
+      
+<article class="future-lab" id="python-lab">
+  <h3>🐍 Python 1分授業</h3>
+  <p>授業を選び、「実行する」を押してみよう。リセットで最初からやり直せます。</p>
+
+  <div class="lesson-switcher" aria-label="Python授業を選ぶ">
+    <button type="button" class="active" data-python-lesson="1">Lesson 1</button>
+    <button type="button" data-python-lesson="2">Lesson 2</button>
+    <button type="button" data-python-lesson="3">Lesson 3</button>
+    <button type="button" data-python-lesson="4">Lesson 4</button>
+  </div>
+
+  <code class="python-code" id="pythonCode">name = "Forgeation"
 lesson = "未来授業"
 
 print(name + "へようこそ！")
 print(lesson + "を始めよう！")</code>
-        <button class="python-run" type="button" id="pythonRun">▶ 実行する</button>
-        <div class="python-output" id="pythonOutput">ここに実行結果が表示されます。</div>
-      </article>
+
+  <div class="python-actions">
+    <button class="python-run" type="button" id="pythonRun">▶ 実行する</button>
+    <button class="python-reset" type="button" id="pythonReset">↻ 初期化</button>
+  </div>
+
+  <div class="python-output" id="pythonOutput">ここに実行結果が表示されます。</div>
+</article>
+
+<article class="future-lab" id="iot-lab">
+  <h3>📡 IoT・センサー体験</h3>
+  <p>温度・明るさ・人の動きをセンサーで読み取り、教室の状態を確認します。</p>
+
+  <div class="iot-panel">
+    <div class="iot-sensor">
+      <div class="iot-sensor-head">
+        <span>🌡️ 温度センサー</span>
+        <span class="iot-value" id="iotTemp">24℃</span>
+      </div>
+      <div class="iot-meter"><span id="iotTempBar" style="width:60%"></span></div>
+    </div>
+
+    <div class="iot-sensor">
+      <div class="iot-sensor-head">
+        <span>💡 光センサー</span>
+        <span class="iot-value" id="iotLight">70%</span>
+      </div>
+      <div class="iot-meter"><span id="iotLightBar" style="width:70%"></span></div>
+    </div>
+
+    <div class="iot-sensor">
+      <div class="iot-sensor-head">
+        <span>🚶 人感センサー</span>
+        <span class="iot-value" id="iotMotion">待機中</span>
+      </div>
+      <div class="iot-meter"><span id="iotMotionBar" style="width:10%"></span></div>
+    </div>
+  </div>
+
+  <div class="iot-controls">
+    <button type="button" id="iotScan">📡 センサーを更新</button>
+    <button type="button" id="iotAuto">⏱️ 1分ごとに自動更新</button>
+    <button type="button" id="iotStop">⏹ 自動更新を停止</button>
+  </div>
+
+  <div class="iot-log" id="iotLog">センサーは待機中です。</div>
+</article>
+
+
     </div>
   </div>
 </section>
@@ -1531,8 +1764,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* ===== 未来授業ラボ Ver3.6 ===== */
+/* ===== 未来授業ラボ Ver3.7 ===== */
 document.addEventListener("DOMContentLoaded", () => {
+  /* Fドローン */
   const drone = document.getElementById("droneObject");
   let droneX = 50;
   let droneY = 48;
@@ -1544,20 +1778,129 @@ document.addEventListener("DOMContentLoaded", () => {
     if (direction === "down") droneY = Math.min(82, droneY + step);
     if (direction === "left") droneX = Math.max(10, droneX - step);
     if (direction === "right") droneX = Math.min(90, droneX + step);
-    if (direction === "reset") { droneX = 50; droneY = 48; }
+    if (direction === "reset") {
+      droneX = 50;
+      droneY = 48;
+    }
     drone.style.left = droneX + "%";
     drone.style.top = droneY + "%";
-    drone.style.transform = `translate(-50%,-50%) rotate(${direction === "left" ? -8 : direction === "right" ? 8 : 0}deg)`;
+    drone.style.transform =
+      `translate(-50%,-50%) rotate(${direction === "left" ? -8 : direction === "right" ? 8 : 0}deg)`;
   };
 
   document.querySelectorAll("[data-drone]").forEach(button => {
     button.addEventListener("click", () => moveDrone(button.dataset.drone));
   });
 
-  const pythonRun = document.getElementById("pythonRun");
+  /* Python授業 */
+  const pythonLessons = {
+    1: {
+      code: `name = "Forgeation"
+lesson = "未来授業"
+
+print(name + "へようこそ！")
+print(lesson + "を始めよう！")`,
+      output: "Forgeationへようこそ！<br>未来授業を始めよう！"
+    },
+    2: {
+      code: `score = 80
+
+if score >= 70:
+    print("合格です！")
+else:
+    print("もう一度挑戦しよう！")`,
+      output: "合格です！"
+    },
+    3: {
+      code: `subjects = ["AI", "Python", "Drone"]
+
+for subject in subjects:
+    print(subject)`,
+      output: "AI<br>Python<br>Drone"
+    },
+    4: {
+      code: `def greet(name):
+    return name + "さん、こんにちは！"
+
+print(greet("ノグ"))`,
+      output: "ノグさん、こんにちは！"
+    }
+  };
+
+  const pythonCode = document.getElementById("pythonCode");
   const pythonOutput = document.getElementById("pythonOutput");
+  const pythonRun = document.getElementById("pythonRun");
+  const pythonReset = document.getElementById("pythonReset");
+  let currentLesson = 1;
+
+  const loadPythonLesson = lessonNumber => {
+    currentLesson = lessonNumber;
+    if (pythonCode) pythonCode.textContent = pythonLessons[lessonNumber].code;
+    if (pythonOutput) pythonOutput.textContent = "ここに実行結果が表示されます。";
+    document.querySelectorAll("[data-python-lesson]").forEach(button => {
+      button.classList.toggle("active", Number(button.dataset.pythonLesson) === lessonNumber);
+    });
+  };
+
+  document.querySelectorAll("[data-python-lesson]").forEach(button => {
+    button.addEventListener("click", () => {
+      loadPythonLesson(Number(button.dataset.pythonLesson));
+    });
+  });
+
   pythonRun?.addEventListener("click", () => {
-    pythonOutput.innerHTML = "Forgeationへようこそ！<br>未来授業を始めよう！";
+    pythonOutput.innerHTML = pythonLessons[currentLesson].output;
+  });
+
+  pythonReset?.addEventListener("click", () => {
+    loadPythonLesson(1);
+  });
+
+  /* IoT・センサー */
+  const iotTemp = document.getElementById("iotTemp");
+  const iotTempBar = document.getElementById("iotTempBar");
+  const iotLight = document.getElementById("iotLight");
+  const iotLightBar = document.getElementById("iotLightBar");
+  const iotMotion = document.getElementById("iotMotion");
+  const iotMotionBar = document.getElementById("iotMotionBar");
+  const iotLog = document.getElementById("iotLog");
+  const iotScan = document.getElementById("iotScan");
+  const iotAuto = document.getElementById("iotAuto");
+  const iotStop = document.getElementById("iotStop");
+  let iotTimer = null;
+
+  const updateSensors = () => {
+    const temp = Math.floor(20 + Math.random() * 10);
+    const light = Math.floor(35 + Math.random() * 61);
+    const motionDetected = Math.random() > 0.55;
+
+    iotTemp.textContent = `${temp}℃`;
+    iotTempBar.style.width = `${Math.min(100, temp * 3)}%`;
+
+    iotLight.textContent = `${light}%`;
+    iotLightBar.style.width = `${light}%`;
+
+    iotMotion.textContent = motionDetected ? "人を検知" : "異常なし";
+    iotMotionBar.style.width = motionDetected ? "95%" : "20%";
+
+    const now = new Date().toLocaleTimeString("ja-JP", {hour:"2-digit", minute:"2-digit"});
+    iotLog.textContent =
+      `${now} 更新：温度 ${temp}℃／明るさ ${light}%／人感 ${motionDetected ? "検知あり" : "異常なし"}`;
+  };
+
+  iotScan?.addEventListener("click", updateSensors);
+
+  iotAuto?.addEventListener("click", () => {
+    if (iotTimer) clearInterval(iotTimer);
+    updateSensors();
+    iotTimer = setInterval(updateSensors, 60000);
+    iotLog.textContent = "1分ごとの自動更新を開始しました。";
+  });
+
+  iotStop?.addEventListener("click", () => {
+    if (iotTimer) clearInterval(iotTimer);
+    iotTimer = null;
+    iotLog.textContent = "自動更新を停止しました。";
   });
 });
 
