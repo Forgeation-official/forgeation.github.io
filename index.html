@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation｜未来を切り拓く学校</title>
+<title>Forgeation School Ver3.2｜未来を切り拓く学校</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -67,6 +67,76 @@ section{padding:88px 0}.container{width:min(1180px,92vw);margin:auto}.section-he
 .ai-coach-box p,.ai-reception-box p{line-height:1.9}
 .ai-button,.ai-reception-button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;margin-top:16px;padding:0 24px;border-radius:999px;color:#071a3a;background:#fff;font-weight:900}
 .ai-coach-icon,.ai-reception-icon{font-size:clamp(3.4rem,8vw,7rem)}
+
+
+/* Forgeation School 校舎入口 */
+.school-map-section{
+  color:#fff;
+  background:
+    radial-gradient(circle at 14% 20%,rgba(34,200,255,.22),transparent 30%),
+    radial-gradient(circle at 88% 78%,rgba(244,200,90,.18),transparent 24%),
+    linear-gradient(145deg,#020611,#071a3a 58%,#0a2a62);
+}
+.school-map-section .section-head h2,
+.school-map-section .section-head p{color:#fff}
+.school-map-shell{
+  padding:clamp(18px,3vw,32px);
+  border:1px solid #ffffff2f;
+  border-radius:30px;
+  background:#ffffff10;
+  box-shadow:0 24px 70px #0005;
+}
+.school-map-visual{
+  margin:0;
+  overflow:hidden;
+  border:1px solid #ffffff35;
+  border-radius:24px;
+  background:#06152f;
+}
+.school-map-visual img{width:100%;height:auto;cursor:zoom-in}
+.school-map-copy{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:center;
+  margin-top:24px;
+}
+.school-map-copy h3{
+  margin:0 0 8px;
+  color:#fff;
+  font-size:clamp(1.6rem,3vw,2.5rem);
+}
+.school-map-copy p{margin:0;color:#dcecff;line-height:1.85}
+.school-map-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:12px;
+}
+.school-map-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:0 22px;
+  border:0;
+  border-radius:999px;
+  font-weight:900;
+  cursor:pointer;
+}
+.school-map-button.primary{
+  color:#071a3a;
+  background:linear-gradient(90deg,#9fe9ff,#fff);
+}
+.school-map-button.secondary{
+  color:#fff;
+  border:1px solid #ffffff77;
+  background:#ffffff14;
+}
+@media(max-width:820px){
+  .school-map-copy{grid-template-columns:1fr}
+  .school-map-actions{justify-content:flex-start}
+}
 
 /* AI社員一覧 */
 .ai-employees-section{
@@ -271,11 +341,86 @@ section{padding:68px 0}
 .bakery-badge{display:inline-block;padding:8px 14px;border-radius:999px;background:#ffe7b5;font-weight:800}
 @media(max-width:900px){.bakery-card{grid-template-columns:1fr}}
 
+
+/* Forgeation NEWS テロップ */
+.forgeation-news{
+  position:relative;
+  z-index:95;
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  color:#fff;
+  background:linear-gradient(90deg,#071a3a,#0a57d5 48%,#22c8ff);
+  border-top:1px solid #ffffff35;
+  border-bottom:1px solid #ffffff35;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);
+}
+.forgeation-news-label{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  color:#071a3a;
+  background:linear-gradient(90deg,#fff,#9fe9ff);
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.forgeation-news-viewport{
+  overflow:hidden;
+  margin-left:170px;
+}
+.forgeation-news-track{
+  display:inline-block;
+  min-width:max-content;
+  padding:13px 0 13px 100%;
+  font-weight:900;
+  animation:forgeationNewsTicker 42s linear infinite;
+}
+.forgeation-news:hover .forgeation-news-track,
+.forgeation-news:focus-within .forgeation-news-track{
+  animation-play-state:paused;
+}
+@keyframes forgeationNewsTicker{
+  from{transform:translateX(0)}
+  to{transform:translateX(-100%)}
+}
+@media(max-width:640px){
+  .forgeation-news-label{
+    position:relative;
+    justify-content:center;
+    min-height:42px;
+  }
+  .forgeation-news-viewport{margin-left:0}
+  .forgeation-news-track{padding:11px 0 11px 100%;font-size:.9rem}
+}
+
 </style>
 </head>
 <body>
 <div class="opening" id="opening"><div class="opening-inner"><div class="opening-logo">F</div><h1>Forgeation</h1><h2>開校宣言</h2><p>共に学び、共に成長し、<br>共に未来を切り拓く学校へ。</p><p><strong>Design the Future. Forge the Future.</strong></p></div><button class="opening-skip" id="openingSkip">サイトへ進む</button></div>
-<header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#sports-academy-detail">スポーツ</a><a href="#nursing-academy-detail">看護・医療</a><a href="#care-academy-detail">介護・福祉</a><a href="#robotics-academy-detail">AI・ロボティクス</a><a href="#ai-academy-detail">AI</a><a href="#construction-academy-detail">建設</a><a href="#education-academy-detail">教育</a><a href="#soccer-product">AIサッカー商品</a><a href="#ai-coach">AIコーチ</a><a href="#ai-reception">AI受付</a><a href="#ai-employees">AI社員</a><a href="#president-door">社長の扉</a><a href="#bakery">Bakery</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
+<header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#sports-academy-detail">スポーツ</a><a href="#nursing-academy-detail">看護・医療</a><a href="#care-academy-detail">介護・福祉</a><a href="#robotics-academy-detail">AI・ロボティクス</a><a href="#ai-academy-detail">AI</a><a href="#construction-academy-detail">建設</a><a href="#education-academy-detail">教育</a><a href="#soccer-product">AIサッカー商品</a><a href="#ai-coach">AIコーチ</a><a href="#forgeation-school">School</a><a href="#ai-employees">AI社員</a><a href="#president-door">社長の扉</a><a href="#bakery">Bakery</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
+
+<div class="forgeation-news" aria-label="Forgeationからのお知らせ">
+  <div class="forgeation-news-label">📢 Forgeation NEWS</div>
+  <div class="forgeation-news-viewport">
+    <div class="forgeation-news-track">
+      🚧 F Soccer β版・F Reception β版は、正式版に向けて鋭意開発中！
+      &nbsp;&nbsp;｜&nbsp;&nbsp;
+      🧠 AIアカデミー課アプリを鋭意開発中！
+      &nbsp;&nbsp;｜&nbsp;&nbsp;
+      🏫 Forgeation Schoolは、毎日進化しています。
+      &nbsp;&nbsp;｜&nbsp;&nbsp;
+      🤖 新しいAI社員・新しい教室を順次公開予定！
+      &nbsp;&nbsp;｜&nbsp;&nbsp;
+      ✨ 未来を切り拓く学校へ。乞うご期待！
+    </div>
+  </div>
+</div>
+
 <main id="home">
 <section class="hero">
 <article class="slide slide-1 is-active"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SCHOOL</div><h1>AIと人の力で、<br>未来を切り拓く。</h1><p>会社は、働く場所ではなく、共に学び、共に成長する学校である。</p><div class="actions"><a class="button button-primary" href="#about">Forgeationを知る</a><a class="button button-secondary" href="#academy">6つのアカデミー</a></div></div></div></article>
@@ -284,7 +429,7 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🚧 本サイトはVersion 3です。詳細ページは順次公開します。📱 F Soccer β版・F Reception β版を公開しました。</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.2です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -352,7 +497,12 @@ section{padding:68px 0}
 <figure><img src="ai-robotics-data-analysis.webp" data-candidates="ai-robotics-data-analysis.webp|robotics-data-analysis.webp|academy-robotics.webp" alt="データ分析・AI活用"><figcaption>データ分析・AI活用</figcaption></figure>
 </div></div></section>
 
-<section id="ai-academy-detail" data-academy="ai"><div class="container"><div class="section-head"><div class="section-kicker">AI Academy Gallery</div><h2>AIアカデミー課</h2><p>AI基礎から機械学習・深層学習、生成AI、倫理・安全、開発・実装まで段階的に学びます。画像をタップすると、大きく表示できます。</p></div>
+<section id="ai-academy-detail" data-academy="ai"><div class="container">
+<div class="notice" style="margin:0 0 28px;border-color:#b9a8ff;background:#f4f0ff;color:#3a2674">
+  🧠 <strong>AIアカデミー課アプリは現在、鋭意開発中です。</strong>
+  AI基礎・機械学習・深層学習・生成AI・AI開発・倫理と安全を、ジッピー先生と段階的に学べるアプリを目指しています。✨ 乞うご期待！
+</div>
+<div class="section-head"><div class="section-kicker">AI Academy Gallery</div><h2>AIアカデミー課</h2><p>AI基礎から機械学習・深層学習、生成AI、倫理・安全、開発・実装まで段階的に学びます。画像をタップすると、大きく表示できます。</p></div>
 <div class="academy-detail-gallery">
 <figure><img src="ai-academy-overview.webp" alt="AIアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
 <figure><img src="ai-academy-basics.webp" data-candidates="ai-academy-basics.webp|ai-basics.webp|ai-academy-ai-basics.webp|ai-academy-overview.webp" alt="AI基礎"><figcaption>AI基礎</figcaption></figure>
@@ -422,7 +572,32 @@ section{padding:68px 0}
 
 <section class="ai-coach-section" id="ai-coach"><div class="container"><div class="ai-coach-box"><div><div class="section-kicker" style="color:#9fe9ff">AI SPORTS COACH</div><h2>AIスポーツコーチを体験する。</h2><p>Web体験版では気軽にAIコーチを試せます。F Soccer β版では、プロフィール・練習メニュー・試合前後の振り返りなど、アプリらしい画面を体験できます。</p><div class="product-actions"><a class="ai-button" href="./ai-sports-coach-demo.html">🌐 Web体験版を開く</a></div></div><div class="ai-coach-icon">⚽🤖</div></div></div></section>
 
-<section class="ai-reception-section" id="ai-reception"><div class="container"><div class="ai-reception-box"><div><div class="section-kicker" style="color:#fff3b0">AI RECEPTIONIST</div><h2>AI受付社員を体験する。</h2><p>Web体験版では、来訪目的に合わせた簡易案内を体験できます。F Reception β版では、Forgeationの顔となるAI受付社員ジッピーのアプリ画面を体験できます。</p><div class="product-actions"><a class="ai-reception-button" href="./ai-reception-demo.html">🌐 Web体験版を開く</a><a class="product-button app" href="./F_Reception_beta_Ver1.html">📱 F Reception β版を開く</a></div></div><div class="ai-reception-icon">😊🤖</div></div></div></section>
+
+<section class="school-map-section" id="forgeation-school">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker" style="color:#9fe9ff">WELCOME TO FORGEATION SCHOOL</div>
+      <h2>Forgeation Schoolへようこそ。</h2>
+      <p>未来を学び、共に成長し、共に未来を切り拓く学校へ。校舎マップから、各フロア・教室・AI社員を探検できます。</p>
+    </div>
+    <div class="school-map-shell">
+      <figure class="school-map-visual">
+        <img class="school-map-image" src="forgeation-school-campus-map.webp" alt="Forgeation School 校舎マップ">
+      </figure>
+      <div class="school-map-copy">
+        <div>
+          <h3>まずは、1階フロントへ。</h3>
+          <p>AI受付社員ジッピーが来訪者をお迎えし、ご用件に合わせて最適な教室・AI社員・相談窓口をご案内します。</p>
+        </div>
+        <div class="school-map-actions">
+          <a class="school-map-button primary visitor-track" data-page="school-front" href="./forgeation-school-front_来訪者受付_全体対応版.html">🚪 1階フロントへ入る</a>
+          <button class="school-map-button secondary" id="schoolMapZoom" type="button">🔍 校舎マップを拡大</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <section class="ai-employees-section" id="ai-employees">
@@ -437,11 +612,8 @@ section{padding:68px 0}
       <article class="ai-employee-card">
         <div class="ai-employee-icon">🏢</div>
         <h3>AI受付社員</h3>
-        <p>来訪目的に合わせて、担当アカデミーや相談窓口をご案内します。</p>
-        <div class="product-actions">
-          <a class="ai-employee-link" href="./ai-reception-demo.html">Web版</a>
-          <a class="ai-employee-link" href="./F_Reception_beta_Ver1.html">アプリ版</a>
-        </div>
+        <p>Forgeation Schoolの1階フロントで、ジッピーが来訪目的に合わせて教室や相談窓口をご案内します。</p>
+        <a class="ai-employee-link visitor-track" data-page="school-front" href="./forgeation-school-front_来訪者受付_全体対応版.html">1階フロントへ</a>
       </article>
 
       <article class="ai-employee-card">
@@ -606,7 +778,7 @@ mailButton.href='mailto:eru12121221@gmail.com?subject='+subject+'&body='+body;
 }));
 
 const lightbox=document.getElementById('lightbox'),lightboxImage=document.getElementById('lightboxImage'),lightboxClose=document.getElementById('lightboxClose');
-document.querySelectorAll('.soccer-gallery img,.academy-detail-gallery img,.soccer-product-flyer,.collection-preview img,.bakery-visuals img').forEach(img=>img.addEventListener('click',()=>{lightboxImage.src=img.src;lightboxImage.alt=img.alt;lightbox.classList.add('open')}));
+document.querySelectorAll('.soccer-gallery img,.academy-detail-gallery img,.soccer-product-flyer,.collection-preview img,.bakery-visuals img,.school-map-image').forEach(img=>img.addEventListener('click',()=>{lightboxImage.src=img.src;lightboxImage.alt=img.alt;lightbox.classList.add('open')}));
 lightboxClose.addEventListener('click',()=>lightbox.classList.remove('open'));
 lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('open')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('open')});
@@ -672,6 +844,43 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCollectionComin
     img.addEventListener("error", tryNext);
   });
 })();
+
+
+const schoolMapZoom=document.getElementById('schoolMapZoom');
+const schoolMapImage=document.querySelector('.school-map-image');
+if(schoolMapZoom && schoolMapImage){
+  schoolMapZoom.addEventListener('click',()=>{
+    lightboxImage.src=schoolMapImage.src;
+    lightboxImage.alt=schoolMapImage.alt;
+    lightbox.classList.add('open');
+  });
+}
+
+/* Forgeation全体 来訪者記録 */
+const FORGEATION_API_BASE="https://forgeation-api.eru12121221.workers.dev";
+function getForgeationVisitorId(){
+  let visitorId=localStorage.getItem("forgeation_visitor_id");
+  if(!visitorId){
+    visitorId=(crypto.randomUUID?.() ||
+      "visitor-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+    localStorage.setItem("forgeation_visitor_id",visitorId);
+  }
+  return visitorId;
+}
+function recordForgeationVisit(page){
+  return fetch(FORGEATION_API_BASE+"/visit",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({visitorId:getForgeationVisitorId(),page})
+  }).catch(error=>console.warn("来訪記録に失敗しました。",error));
+}
+recordForgeationVisit("forgeation-home");
+document.querySelectorAll(".visitor-track").forEach(link=>{
+  link.addEventListener("click",()=>{
+    recordForgeationVisit(link.dataset.page || "unknown");
+  });
+});
+
 </script>
 
 </body>
