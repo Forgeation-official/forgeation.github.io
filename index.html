@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.3.1｜触れる校舎マップ修正版</title>
+<title>Forgeation School Ver3.4｜全アカデミーβ版・YouTube統合版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -552,6 +552,25 @@ section{padding:68px 0}
   .school-map-hotspot{border-width:1px;box-shadow:0 3px 9px #000b}
 }
 
+
+/* ===== Ver3.4 アカデミー Web・β版／YouTube 導線 ===== */
+.academy-experience-actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 6px}
+.academy-experience-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;text-decoration:none;font-weight:900;transition:transform .16s ease,box-shadow .16s ease}
+.academy-experience-actions a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(7,22,47,.18)}
+.academy-web-button{color:#07162f;background:linear-gradient(90deg,#9fe9ff,#fff);border:1px solid #78dfff}
+.academy-beta-button{color:#fff;background:linear-gradient(90deg,#6047db,#9b5cff);border:1px solid #bcaaff}
+.youtube-button-restored{color:#fff!important;background:#f00!important;border:1px solid #ff6a6a!important}
+.beta-showcase{padding:76px 0;color:#fff;background:radial-gradient(circle at 15% 0%,rgba(82,216,255,.16),transparent 28%),radial-gradient(circle at 85% 20%,rgba(155,92,255,.16),transparent 30%),linear-gradient(145deg,#07162f,#102c5f)}
+.beta-showcase .section-head p{color:#dbeaff}
+.beta-showcase-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.beta-showcase-card{display:flex;min-height:210px;flex-direction:column;padding:22px;border:1px solid rgba(255,255,255,.20);border-radius:22px;color:#fff;background:rgba(255,255,255,.08);box-shadow:0 16px 35px rgba(0,0,0,.18)}
+.beta-showcase-card .beta-icon{font-size:2.2rem}
+.beta-showcase-card h3{margin:13px 0 8px;font-size:1.18rem}
+.beta-showcase-card p{margin:0 0 18px;color:#dbeaff;line-height:1.7}
+.beta-showcase-card a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:auto;border-radius:999px;color:#07162f;background:linear-gradient(90deg,#9fe9ff,#fff);font-weight:900;text-decoration:none}
+@media(max-width:980px){.beta-showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.beta-showcase-grid{grid-template-columns:1fr}.academy-experience-actions{display:grid}}
+
 </style>
 </head>
 <body>
@@ -583,7 +602,7 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.3.1です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.4です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -664,7 +683,12 @@ section{padding:68px 0}
 <figure><img src="ai-academy-ethics-safety-implementation.webp" data-candidates="ai-academy-ethics-safety-implementation.webp|ai-ethics-safety-implementation.webp|ai-ethics-safety.webp|ai-academy-overview.webp" alt="倫理・安全・実装"><figcaption>倫理・安全・実装</figcaption></figure>
 <figure><img src="ai-academy-development.webp" alt="AI開発"><figcaption>AI開発</figcaption></figure>
 <figure><img src="ai-academy-generative-ai.webp" alt="生成AI"><figcaption>生成AI</figcaption></figure>
-</div></div></section>
+</div>
+<div class="academy-experience-actions" aria-label="AIアカデミー課の体験版">
+  <a class="academy-web-button" href="./ai-academy-web.html">🌐 AIアカデミー課 Web版を開く</a>
+  <a class="academy-beta-button" href="./F_AI_Academy_beta_Ver2.html">📱 AIアカデミー課 β版を開く</a>
+</div>
+</div></section>
 
 <section id="construction-academy-detail" data-academy="construction"><div class="container"><div class="section-head"><div class="section-kicker">Construction Academy Gallery</div><h2>建設アカデミー課</h2><p>AI設計、シミュレーション、VR・AR、安全管理、サステナブル建設で、未来の街と暮らしを創ります。画像をタップすると、大きく表示できます。</p></div>
 <div class="academy-detail-gallery">
@@ -717,7 +741,7 @@ section{padding:68px 0}
           
           <a class="product-button app" href="./F_Soccer_beta_Ver2.html">📱 F Soccer β版を開く</a>
           <a class="product-button contact" href="#contact">📩 導入を相談する</a>
-        </div>
+        <a class="button youtube-button-restored" href="https://www.youtube.com/@Forgeation" target="_blank" rel="noopener">▶ Forgeation YouTubeを見る</a></div>
         <div class="product-note">AIサッカーアカデミーコーチは、Forgeationの製品化を目指す開発プロジェクトです。</div>
       </div>
     </div>
@@ -726,6 +750,27 @@ section{padding:68px 0}
 
 <section class="ai-coach-section" id="ai-coach"><div class="container"><div class="ai-coach-box"><div><div class="section-kicker" style="color:#9fe9ff">AI SPORTS COACH</div><h2>AIスポーツコーチを体験する。</h2><p>Web体験版では気軽にAIコーチを試せます。F Soccer β版では、プロフィール・練習メニュー・試合前後の振り返りなど、アプリらしい画面を体験できます。</p><div class="product-actions"><a class="ai-button" href="./ai-sports-coach-demo.html">🌐 Web体験版を開く</a></div></div><div class="ai-coach-icon">⚽🤖</div></div></div></section>
 
+
+
+<section class="beta-showcase" id="academy-beta-showcase">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">FORGEATION ACADEMY BETA LAB</div>
+      <h2>各アカデミー課のβ版を体験する。</h2>
+      <p>Forgeation Schoolの各教室で開発している体験版です。学ぶだけではなく、実際に触れて未来の授業を体験できます。</p>
+    </div>
+    <div class="beta-showcase-grid">
+      <article class="beta-showcase-card"><div class="beta-icon">🧠</div><h3>AIアカデミー課</h3><p>AI基礎・生成AI・クイズ・プロンプト実習・ジッピー先生との会話。</p><a href="./F_AI_Academy_beta_Ver2.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">🤖</div><h3>AI・ロボティクス課</h3><p>ロボット、ドローン、IoT、AI制御と社会実装を体験します。</p><a href="./F_Robotics_beta.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">⚽</div><h3>スポーツアカデミー課</h3><p>選手データ、育成課題、トレーニングと振り返りを体験します。</p><a href="./F_Sports_beta.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">🩺</div><h3>看護・医療アカデミー課</h3><p>看護基礎、医療DX、地域・在宅医療の未来を体験します。</p><a href="./F_Nurse_beta_Ver1.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">🏗️</div><h3>建設アカデミー課</h3><p>設計、CAD、安全管理、建設DXと未来の空間づくりを体験します。</p><a href="./F_Construction_beta.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">📚</div><h3>教育アカデミー課</h3><p>教材、学校DX、個別学習、SSTなど未来の教育を体験します。</p><a href="./F_Education_beta.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">🏡</div><h3>介護・福祉アカデミー課</h3><p>介護記録、見守り、レクリエーション、施設運営を体験します。</p><a href="./F_Care_beta_Ver1.html">β版を体験する</a></article>
+      <article class="beta-showcase-card"><div class="beta-icon">⚽📱</div><h3>AI Soccer Academy Coach</h3><p>専属AIコーチの練習提案、振り返り、目標設定を体験します。</p><a href="./F_Soccer_beta_Ver2.html">β版を体験する</a></article>
+    </div>
+  </div>
+</section>
 
 <section class="school-map-section" id="forgeation-school">
   <div class="container">
@@ -739,7 +784,7 @@ section{padding:68px 0}
       <figure class="school-map-visual">
         <img class="school-map-image" src="forgeation-school-campus-map.webp" data-visual-search="disable" draggable="false" alt="Forgeation School 校舎マップ">
         <button class="school-map-hotspot" type="button"
-      style="left:24.6%;top:35.3%"
+      style="left:74.7%;top:72.7%"
       data-floor="5F"
       data-title="職員室"
       data-description="Forgeationを支える仲間と先生たちの部屋です。採用情報やチーム紹介をご覧いただけます。"
@@ -880,7 +925,7 @@ section{padding:68px 0}
       data-title="AIアカデミー課"
       data-description="AI基礎から生成AI、開発、倫理・安全まで段階的に学ぶForgeationの中心教室です。"
       data-features="AI基礎|生成AI・開発|倫理・安全"
-      data-href="#ai-academy-detail"
+      data-href="./ai-academy-web.html"
       aria-label="AIアカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:35.2%;top:72.7%"
@@ -888,7 +933,7 @@ section{padding:68px 0}
       data-title="AI・ロボティクス課"
       data-description="AI、ロボット、ドローン、データ分析、社会実装を学びます。"
       data-features="AI基礎|ロボット開発|社会実装"
-      data-href="#robotics-academy-detail"
+      data-href="./F_Robotics_beta.html"
       aria-label="AI・ロボティクス課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:49.5%;top:72.7%"
@@ -896,7 +941,7 @@ section{padding:68px 0}
       data-title="スポーツアカデミー課"
       data-description="データとAIを使い、選手とコーチの成長を支える教室です。"
       data-features="トレーニング|分析|コーチング"
-      data-href="#sports-academy-detail"
+      data-href="./F_Sports_beta.html"
       aria-label="スポーツアカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:63.7%;top:72.7%"
@@ -904,7 +949,7 @@ section{padding:68px 0}
       data-title="看護・医療アカデミー課"
       data-description="看護基礎、医療DX、在宅・地域医療、看護研究を学びます。"
       data-features="看護基礎|医療DX|地域・在宅"
-      data-href="#nursing-academy-detail"
+      data-href="./F_Nurse_beta_Ver1.html"
       aria-label="看護・医療アカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:77.4%;top:72.7%"
@@ -912,7 +957,7 @@ section{padding:68px 0}
       data-title="建設アカデミー課"
       data-description="建築、設計、CAD、安全管理、未来の空間づくりを学びます。"
       data-features="設計・CAD|安全管理|建設DX"
-      data-href="#construction-academy-detail"
+      data-href="./F_Construction_beta.html"
       aria-label="建設アカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:90.8%;top:72.7%"
@@ -920,8 +965,16 @@ section{padding:68px 0}
       data-title="教育アカデミー課"
       data-description="教育、教材、学校DX、学習支援、SSTを学ぶ教室です。"
       data-features="教材開発|学校DX|学習支援"
-      data-href="#education-academy-detail"
+      data-href="./F_Education_beta.html"
       aria-label="教育アカデミー課の詳細を表示">i</button>
+<button class="school-map-hotspot" type="button"
+ style="left:85.5%;top:72.7%"
+ data-floor="2F"
+ data-title="介護・福祉アカデミー課"
+ data-description="介護記録、見守り、レクリエーション、施設運営、家族支援を学ぶ教室です。"
+ data-features="介護記録|見守り・レクリエーション|施設運営"
+ data-href="./F_Care_beta_Ver1.html"
+ aria-label="介護・福祉アカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:25.0%;top:86.0%"
       data-floor="1F"
@@ -1299,11 +1352,11 @@ document.addEventListener("DOMContentLoaded", () => {
     closeBtn?.focus();
   };
 
-  const closeRoom = () => {
+  const closeRoom = (restoreFocus = true) => {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    lastTrigger?.focus();
+    if (restoreFocus) lastTrigger?.focus({preventScroll:true});
   };
 
   document.querySelectorAll(".school-map-hotspot").forEach(button => {
@@ -1327,8 +1380,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  enter.addEventListener("click", () => {
-    document.body.style.overflow = "";
+  enter.addEventListener("click", event => {
+    const href = enter.getAttribute("href") || "";
+    closeRoom(false);
+    if (href.startsWith("#")) {
+      event.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        history.replaceState(null, "", href);
+        target.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    }
   });
 });
 
