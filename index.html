@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.6｜未来授業・AI図書館・介護導線修正版</title>
+<title>Forgeation School Ver3.6.1｜ヒント・1階ボタン位置最終修正版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -704,26 +704,6 @@ section{padding:68px 0}
 @media(max-width:620px){
   .future-grid{grid-template-columns:1fr}
 }
-.hint-icon-cover{
-  position:absolute;
-  z-index:8;
-  left:87.4%;
-  top:80.7%;
-  width:clamp(20px,1.7vw,29px);
-  aspect-ratio:1;
-  display:grid;
-  place-items:center;
-  transform:translate(-50%,-50%);
-  border:1.5px solid rgba(255,255,255,.92);
-  border-radius:50%;
-  color:#fff;
-  background:rgba(4,16,35,.96);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(.68rem,1vw,.9rem);
-  font-weight:900;
-  box-shadow:0 3px 9px rgba(0,0,0,.72);
-  pointer-events:none;
-}
 
 </style>
 </head>
@@ -758,7 +738,7 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.6です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.6.1です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -1119,7 +1099,7 @@ section{padding:68px 0}
  data-href="./F_Care_beta_Ver1.html"
  aria-label="介護・福祉アカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
-      style="left:29.2%;top:86.1%"
+      style="left:30.2%;top:86.0%"
       data-floor="1F"
       data-title="AI受付社員ジッピー"
       data-description="Forgeation Schoolの顔として、皆さまをお迎えします。"
@@ -1127,7 +1107,7 @@ section{padding:68px 0}
       data-href="./forgeation-school-front_来訪者受付_全体対応版.html"
       aria-label="AI受付社員ジッピーの詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
-      style="left:42.0%;top:86.1%"
+      style="left:42.8%;top:86.0%"
       data-floor="1F"
       data-title="来訪者受付"
       data-description="来訪目的を選び、校内マップや各教室へ進むための総合受付です。"
@@ -1135,7 +1115,7 @@ section{padding:68px 0}
       data-href="./forgeation-school-front_来訪者受付_全体対応版.html"
       aria-label="来訪者受付の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
-      style="left:54.8%;top:86.1%"
+      style="left:55.4%;top:86.0%"
       data-floor="1F"
       data-title="校内マップ"
       data-description="校舎全体のフロアと教室を確認できます。"
@@ -1143,7 +1123,7 @@ section{padding:68px 0}
       data-href="#forgeation-school"
       aria-label="校内マップの詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
-      style="left:67.8%;top:86.1%"
+      style="left:67.2%;top:86.0%"
       data-floor="1F"
       data-title="未来掲示板"
       data-description="新しいAI社員、アプリ、教室、イベントなどの最新情報を発信します。"
@@ -1151,15 +1131,13 @@ section{padding:68px 0}
       data-href="#home"
       aria-label="未来掲示板の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
-      style="left:80.6%;top:86.1%"
+      style="left:76.6%;top:86.0%"
       data-floor="1F"
       data-title="学校案内コーナー"
       data-description="Forgeationの理念、各アカデミー、AI社員について知ることができます。"
       data-features="企業理念|アカデミー紹介|長期ビジョン"
       data-href="#about"
       aria-label="学校案内コーナーの詳細を表示">i</button>
-      
-<span class="hint-icon-cover" aria-hidden="true">i</span>
 </figure>
       <div class="school-map-copy">
         <div>
