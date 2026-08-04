@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.5.2｜スポーツ404・校舎ボタン位置修正版</title>
+<title>Forgeation School Ver3.6｜未来授業・AI図書館・介護導線修正版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -571,13 +571,167 @@ section{padding:68px 0}
 @media(max-width:980px){.beta-showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.beta-showcase-grid{grid-template-columns:1fr}.academy-experience-actions{display:grid}}
 
+
+/* ===== Ver3.6 未来授業ラボ ===== */
+.future-lessons{
+  padding:78px 0;
+  color:#fff;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(82,216,255,.18),transparent 28%),
+    radial-gradient(circle at 85% 15%,rgba(155,92,255,.19),transparent 30%),
+    linear-gradient(145deg,#07162f,#102c5f);
+}
+.future-lessons .section-head,
+.future-lessons .section-head h2,
+.future-lessons .section-head p,
+.future-lessons .section-kicker{
+  color:#fff !important;
+}
+.future-lessons .section-kicker{
+  color:#9fe9ff !important;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.future-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.future-card{
+  padding:23px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:22px;
+  background:rgba(255,255,255,.08);
+  box-shadow:0 16px 35px rgba(0,0,0,.18);
+}
+.future-card .future-icon{font-size:2.4rem}
+.future-card h3{margin:14px 0 8px;color:#fff}
+.future-card p{margin:0;color:#dbeaff;line-height:1.75}
+.future-card a{
+  display:inline-flex;
+  margin-top:18px;
+  min-height:42px;
+  align-items:center;
+  justify-content:center;
+  padding:0 16px;
+  border-radius:999px;
+  color:#07162f;
+  background:linear-gradient(90deg,#9fe9ff,#fff);
+  font-weight:900;
+  text-decoration:none;
+}
+.future-labs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-top:26px;
+}
+.future-lab{
+  padding:24px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:24px;
+  background:rgba(3,15,38,.64);
+}
+.future-lab h3{margin-top:0;color:#fff}
+.future-lab p{color:#dbeaff;line-height:1.7}
+.drone-stage{
+  position:relative;
+  height:220px;
+  overflow:hidden;
+  border-radius:18px;
+  background:
+    linear-gradient(#7fc9ff,#dff4ff 68%,#6bc36b 69%,#34884a);
+  border:1px solid rgba(255,255,255,.35);
+}
+.drone-object{
+  position:absolute;
+  left:50%;
+  top:48%;
+  transform:translate(-50%,-50%);
+  font-size:3rem;
+  transition:left .18s ease,top .18s ease,transform .18s ease;
+  filter:drop-shadow(0 7px 8px rgba(0,0,0,.35));
+}
+.drone-controls{
+  display:grid;
+  grid-template-columns:repeat(3,52px);
+  justify-content:center;
+  gap:7px;
+  margin-top:14px;
+}
+.drone-controls button,
+.python-run{
+  min-height:46px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:12px;
+  color:#fff;
+  background:#ffffff12;
+  font-weight:900;
+  cursor:pointer;
+}
+.drone-controls .empty{visibility:hidden}
+.python-code{
+  display:block;
+  width:100%;
+  min-height:145px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:16px;
+  color:#b9f6ff;
+  background:#050d20;
+  font-family:Consolas,monospace;
+  line-height:1.65;
+  white-space:pre-wrap;
+}
+.python-run{
+  width:100%;
+  margin-top:12px;
+  background:linear-gradient(90deg,#6047db,#9b5cff);
+}
+.python-output{
+  margin-top:12px;
+  min-height:48px;
+  padding:13px;
+  border-radius:14px;
+  color:#07162f;
+  background:#fff;
+  font-weight:800;
+}
+@media(max-width:900px){
+  .future-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .future-labs{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .future-grid{grid-template-columns:1fr}
+}
+.hint-icon-cover{
+  position:absolute;
+  z-index:8;
+  left:87.4%;
+  top:80.7%;
+  width:clamp(20px,1.7vw,29px);
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  border:1.5px solid rgba(255,255,255,.92);
+  border-radius:50%;
+  color:#fff;
+  background:rgba(4,16,35,.96);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(.68rem,1vw,.9rem);
+  font-weight:900;
+  box-shadow:0 3px 9px rgba(0,0,0,.72);
+  pointer-events:none;
+}
+
 </style>
 </head>
 <body>
 <!-- Ver3.5: AI社員一覧は校舎マップ3Fへ役割移管。旧一覧位置へ各アカデミー課β版展示を配置。 -->
 
 <div class="opening" id="opening"><div class="opening-inner"><div class="opening-logo">F</div><h1>Forgeation</h1><h2>開校宣言</h2><p>共に学び、共に成長し、<br>共に未来を切り拓く学校へ。</p><p><strong>Design the Future. Forge the Future.</strong></p></div><button class="opening-skip" id="openingSkip">サイトへ進む</button></div>
-<header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#sports-academy-detail">スポーツ</a><a href="#nursing-academy-detail">看護・医療</a><a href="#care-academy-detail">介護・福祉</a><a href="#robotics-academy-detail">AI・ロボティクス</a><a href="#ai-academy-detail">AI</a><a href="#construction-academy-detail">建設</a><a href="#education-academy-detail">教育</a><a href="#soccer-product">AIサッカー商品</a><a href="#ai-coach">AIコーチ</a><a href="#forgeation-school">School</a><a href="#academy-beta-showcase">β版展示</a><a href="#president-door">社長の扉</a><a href="#bakery">Bakery</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
+<header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#sports-academy-detail">スポーツ</a><a href="#nursing-academy-detail">看護・医療</a><a href="#care-academy-detail">介護・福祉</a><a href="#robotics-academy-detail">AI・ロボティクス</a><a href="#ai-academy-detail">AI</a><a href="#construction-academy-detail">建設</a><a href="#education-academy-detail">教育</a><a href="#soccer-product">AIサッカー商品</a><a href="#ai-coach">AIコーチ</a><a href="#forgeation-school">School</a><a href="#future-lessons">未来授業</a><a href="#president-door">社長の扉</a><a href="#bakery">Bakery</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
 
 <div class="forgeation-news" aria-label="Forgeationからのお知らせ">
   <div class="forgeation-news-label">📢 Forgeation NEWS</div>
@@ -604,7 +758,7 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.5.2です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.6です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -686,10 +840,7 @@ section{padding:68px 0}
 <figure><img src="ai-academy-development.webp" alt="AI開発"><figcaption>AI開発</figcaption></figure>
 <figure><img src="ai-academy-generative-ai.webp" alt="生成AI"><figcaption>生成AI</figcaption></figure>
 </div>
-<div class="academy-experience-actions" aria-label="AIアカデミー課の体験版">
-  <a class="academy-web-button" href="./ai-academy-web.html">🌐 AIアカデミー課 Web版を開く</a>
-  <a class="academy-beta-button" href="./F_AI_Academy_beta_Ver2.html">📱 AIアカデミー課 β版を開く</a>
-</div>
+
 </div></section>
 
 <section id="construction-academy-detail" data-academy="construction"><div class="container"><div class="section-head"><div class="section-kicker">Construction Academy Gallery</div><h2>建設アカデミー課</h2><p>AI設計、シミュレーション、VR・AR、安全管理、サステナブル建設で、未来の街と暮らしを創ります。画像をタップすると、大きく表示できます。</p></div>
@@ -778,10 +929,10 @@ section{padding:68px 0}
 <button class="school-map-hotspot" type="button"
       style="left:38.0%;top:35.6%"
       data-floor="5F"
-      data-title="AI図書館"
-      data-description="AI、教育、経営、スポーツ、医療など、未来を切り拓く知識を集める図書館です。"
-      data-features="AI学習資料|未来の参考図書|安全・倫理の学び"
-      data-href="#ai-academy-detail"
+      data-title="AI図書館" data-status="coming-soon"
+      data-description="AI・教育・経営・スポーツ・医療など、未来を切り拓く知識を集める図書館です。現在、開館準備中です。近日公開予定、乞うご期待！"
+      data-features="未来の参考図書|AI学習資料|近日公開予定"
+      data-href="#"
       aria-label="AI図書館の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:51.8%;top:35.6%"
@@ -909,7 +1060,7 @@ section{padding:68px 0}
       data-title="AI介護施設社員"
       data-description="介護記録、事務書類、シフト、家族連絡、レクリエーション、施設運営を支援します。"
       data-features="介護記録|家族連絡・シフト|施設運営"
-      data-href="./ai-care-facility-employee-demo_mint-blue.html"
+      data-href="./F_Care_beta_Ver1.html"
       aria-label="AI介護施設社員の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button"
       style="left:21.5%;top:72.7%"
@@ -1007,7 +1158,9 @@ section{padding:68px 0}
       data-features="企業理念|アカデミー紹介|長期ビジョン"
       data-href="#about"
       aria-label="学校案内コーナーの詳細を表示">i</button>
-      </figure>
+      
+<span class="hint-icon-cover" aria-hidden="true">i</span>
+</figure>
       <div class="school-map-copy">
         <div>
           <h3>まずは、1階フロントへ。</h3>
@@ -1024,25 +1177,89 @@ section{padding:68px 0}
 
 
 
-<section class="beta-showcase" id="academy-beta-showcase">
+
+<section class="future-lessons" id="future-lessons">
   <div class="container">
     <div class="section-head">
-      <div class="section-kicker">FORGEATION ACADEMY BETA LAB</div>
-      <h2>Forgeationの未来授業を体験する。</h2>
-      <p>各アカデミー課のβ版を一堂にお披露目します。校舎マップから各教室へ入ることも、この展示フロアから直接体験することもできます。</p>
+      <div class="section-kicker">FORGEATION FUTURE LESSONS</div>
+      <h2>未来授業を体験する。</h2>
+      <p>各アカデミー課のカリキュラム、ドローン操縦、Python入門、AI活用など、未来を切り拓く授業を少しずつ公開します。</p>
     </div>
-    <div class="beta-showcase-grid">
-      <article class="beta-showcase-card"><div class="beta-icon">🧠</div><h3>AIアカデミー課</h3><p>AI基礎・生成AI・クイズ・プロンプト実習・ジッピー先生との会話。</p><a href="./F_AI_Academy_beta_Ver2.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">🤖</div><h3>AI・ロボティクス課</h3><p>ロボット、ドローン、IoT、AI制御と社会実装を体験します。</p><a href="./F_Robotics_beta.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">⚽</div><h3>スポーツアカデミー課</h3><p>選手データ、育成課題、トレーニングと振り返りを体験します。</p><a href="./ai-sports-academy-employee-demo.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">🩺</div><h3>看護・医療アカデミー課</h3><p>看護基礎、医療DX、地域・在宅医療の未来を体験します。</p><a href="./F_Nurse_beta_Ver1.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">🏗️</div><h3>建設アカデミー課</h3><p>設計、CAD、安全管理、建設DXと未来の空間づくりを体験します。</p><a href="./F_Construction_beta.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">📚</div><h3>教育アカデミー課</h3><p>教材、学校DX、個別学習、SSTなど未来の教育を体験します。</p><a href="./F_Education_beta.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">🏡</div><h3>介護・福祉アカデミー課</h3><p>介護記録、見守り、レクリエーション、施設運営を体験します。</p><a href="./F_Care_beta_Ver1.html">β版を体験する</a></article>
-      <article class="beta-showcase-card"><div class="beta-icon">⚽📱</div><h3>AI Soccer Academy Coach</h3><p>専属AIコーチの練習提案、振り返り、目標設定を体験します。</p><a href="./F_Soccer_beta_Ver2.html">β版を体験する</a></article>
+
+    <div class="future-grid">
+      <article class="future-card">
+        <div class="future-icon">🧠</div>
+        <h3>AIカリキュラム</h3>
+        <p>AI基礎、生成AI、機械学習、開発、倫理・安全を段階的に学びます。</p>
+        <a href="#ai-academy-detail">カリキュラムを見る</a>
+      </article>
+      <article class="future-card">
+        <div class="future-icon">🤖</div>
+        <h3>ロボティクス・ドローン</h3>
+        <p>ロボット制御、IoT、センサー、ドローンの基本操作を体験します。</p>
+        <a href="#drone-lab">操縦体験へ</a>
+      </article>
+      <article class="future-card">
+        <div class="future-icon">🐍</div>
+        <h3>Python入門</h3>
+        <p>はじめてのプログラミングを、短いコードと実行結果から学びます。</p>
+        <a href="#python-lab">Pythonを体験</a>
+      </article>
+      <article class="future-card">
+        <div class="future-icon">📊</div>
+        <h3>データ分析</h3>
+        <p>スポーツや学習のデータを見える化し、次の行動につなげます。</p>
+        <a href="#sports-academy-detail">分析授業を見る</a>
+      </article>
+      <article class="future-card">
+        <div class="future-icon">🛡️</div>
+        <h3>AI倫理・安全</h3>
+        <p>個人情報、著作権、誤情報、AIの安全な使い方を学びます。</p>
+        <a href="#ai-academy-detail">安全授業を見る</a>
+      </article>
+      <article class="future-card">
+        <div class="future-icon">🚀</div>
+        <h3>未来プロジェクト</h3>
+        <p>教育、看護、介護、建設、スポーツの課題をAIで解決する授業です。</p>
+        <a href="#future">未来研究へ</a>
+      </article>
+    </div>
+
+    <div class="future-labs">
+      <article class="future-lab" id="drone-lab">
+        <h3>🚁 ドローン操縦体験</h3>
+        <p>矢印ボタンでドローンを安全に動かしてみよう。</p>
+        <div class="drone-stage" id="droneStage">
+          <div class="drone-object" id="droneObject">🚁</div>
+        </div>
+        <div class="drone-controls" aria-label="ドローン操作">
+          <button class="empty" tabindex="-1">・</button>
+          <button type="button" data-drone="up">↑</button>
+          <button class="empty" tabindex="-1">・</button>
+          <button type="button" data-drone="left">←</button>
+          <button type="button" data-drone="reset">●</button>
+          <button type="button" data-drone="right">→</button>
+          <button class="empty" tabindex="-1">・</button>
+          <button type="button" data-drone="down">↓</button>
+          <button class="empty" tabindex="-1">・</button>
+        </div>
+      </article>
+
+      <article class="future-lab" id="python-lab">
+        <h3>🐍 Python 1分授業</h3>
+        <p>コードを読んで、「実行する」を押してみよう。</p>
+        <code class="python-code">name = "Forgeation"
+lesson = "未来授業"
+
+print(name + "へようこそ！")
+print(lesson + "を始めよう！")</code>
+        <button class="python-run" type="button" id="pythonRun">▶ 実行する</button>
+        <div class="python-output" id="pythonOutput">ここに実行結果が表示されます。</div>
+      </article>
     </div>
   </div>
 </section>
+
 
 
 
@@ -1280,8 +1497,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(item => `<li>✓ ${item}</li>`)
       .join("");
 
-    enter.href = trigger.dataset.href || "#forgeation-school";
-    enter.textContent = `🚪 ${trigger.dataset.title}へ入る`;
+    const comingSoon = trigger.dataset.status === "coming-soon";
+    enter.href = comingSoon ? "#" : (trigger.dataset.href || "#forgeation-school");
+    enter.textContent = comingSoon ? "🚧 近日公開予定・乞うご期待！" : `🚪 ${trigger.dataset.title}へ入る`;
+    enter.style.pointerEvents = comingSoon ? "none" : "";
+    enter.style.opacity = comingSoon ? ".72" : "";
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
@@ -1328,6 +1548,38 @@ document.addEventListener("DOMContentLoaded", () => {
         target.scrollIntoView({behavior:"smooth", block:"start"});
       }
     }
+  });
+});
+
+
+
+/* ===== 未来授業ラボ Ver3.6 ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  const drone = document.getElementById("droneObject");
+  let droneX = 50;
+  let droneY = 48;
+
+  const moveDrone = (direction) => {
+    if (!drone) return;
+    const step = 8;
+    if (direction === "up") droneY = Math.max(12, droneY - step);
+    if (direction === "down") droneY = Math.min(82, droneY + step);
+    if (direction === "left") droneX = Math.max(10, droneX - step);
+    if (direction === "right") droneX = Math.min(90, droneX + step);
+    if (direction === "reset") { droneX = 50; droneY = 48; }
+    drone.style.left = droneX + "%";
+    drone.style.top = droneY + "%";
+    drone.style.transform = `translate(-50%,-50%) rotate(${direction === "left" ? -8 : direction === "right" ? 8 : 0}deg)`;
+  };
+
+  document.querySelectorAll("[data-drone]").forEach(button => {
+    button.addEventListener("click", () => moveDrone(button.dataset.drone));
+  });
+
+  const pythonRun = document.getElementById("pythonRun");
+  const pythonOutput = document.getElementById("pythonOutput");
+  pythonRun?.addEventListener("click", () => {
+    pythonOutput.innerHTML = "Forgeationへようこそ！<br>未来授業を始めよう！";
   });
 });
 
