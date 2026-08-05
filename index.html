@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.17｜F Challenge正式接続版</title>
+<title>Forgeation School Ver3.18｜操作不具合修正・8アカデミー版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
 a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{font:inherit}
 .opening{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 50% 40%,rgba(25,127,255,.28),transparent 34%),linear-gradient(145deg,#020611,#071a3a 55%,#0a2a62);transition:.9s}
-.opening.is-hidden{opacity:0;visibility:hidden}.opening-inner{text-align:center}.opening-logo{margin:auto;width:96px;height:96px;display:grid;place-items:center;border-radius:28px;font-size:64px;font-weight:900;font-style:italic;background:linear-gradient(145deg,#24d6ff,#0a57d5 60%,#ff6a24)}
+.opening.is-hidden{opacity:0;visibility:hidden;pointer-events:none}.opening-inner{text-align:center}.opening-logo{margin:auto;width:96px;height:96px;display:grid;place-items:center;border-radius:28px;font-size:64px;font-weight:900;font-style:italic;background:linear-gradient(145deg,#24d6ff,#0a57d5 60%,#ff6a24)}
 .opening h1{font-size:clamp(2.4rem,7vw,5.6rem);margin:18px 0 0}.opening h2{color:var(--gold);letter-spacing:.2em}.opening p{line-height:1.8}.opening-skip{position:absolute;right:24px;bottom:22px;padding:10px 16px;color:#fff;border:1px solid #ffffff66;border-radius:999px;background:#ffffff14}
 .site-header{position:sticky;top:0;z-index:100;background:#071a3af0;color:#fff}.nav{width:min(1240px,92vw);min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:13px;font-weight:800}.brand-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;font-size:29px;font-style:italic;background:linear-gradient(145deg,var(--cyan),var(--blue) 65%,var(--orange))}.brand small{display:block;color:#a8dfff;font-size:.68rem;letter-spacing:.16em}.nav-links{display:flex;gap:18px;font-size:.9rem;font-weight:700}.nav-links a:hover{color:var(--cyan)}.menu-button{display:none}
 .hero{position:relative;min-height:78vh;overflow:hidden;background:linear-gradient(145deg,#020611,#071a3a 55%,#0a2a62);color:#fff}.slide{position:absolute;inset:0;opacity:0;transform:scale(1.03);transition:opacity .9s,transform 1.4s;background-size:cover;background-position:center;background-repeat:no-repeat}.slide.is-active{opacity:1;transform:scale(1)}.slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#020918dc,#02091842 58%,#02091880)}
@@ -1234,11 +1234,11 @@ section{padding:68px 0}
 }
 
 
-/* ===== Ver3.17 校舎マップのヒント重複・位置ずれ解消 ===== */
+/* ===== Ver3.18 校舎マップのヒント重複・位置ずれ解消 ===== */
 .school-map-clean-hint{display:none!important}
 
 
-/* ===== Ver3.17 F Challenge実行ボタン・Fシリーズ7種 ===== */
+/* ===== Ver3.18 F Challenge実行ボタン・Fシリーズ7種 ===== */
 .f-series-play-button{
   display:flex;
   align-items:center;
@@ -1268,9 +1268,10 @@ section{padding:68px 0}
 </style>
 </head>
 <body>
-<!-- Ver3.17: 商品紹介・F Challengeの両方をChallenge搭載版へ正式接続 -->
-<!-- Ver3.17: 別ページから戻った際、元のスクロール位置へ復帰 -->
-<!-- Ver3.17: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
+<!-- Ver3.18: ストレージ拒否による全操作停止を修正・8アカデミーへ整理 -->
+<!-- Ver3.18: 商品紹介・F Challengeの両方をChallenge搭載版へ正式接続 -->
+<!-- Ver3.18: 別ページから戻った際、元のスクロール位置へ復帰 -->
+<!-- Ver3.18: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
 <!-- Ver3.13: Ver3.12原本へForgeation F Series正式予告を追加 -->
 <!-- Ver3.11: Ver3.10原本へPC版ヒント位置修正を差分追加 -->
 <!-- Ver3.10: Ver3.9原本へFロゴ・全Stage選択・スマホStage大型化を差分追加 -->
@@ -1299,7 +1300,7 @@ section{padding:68px 0}
 
 <main id="home">
 <section class="hero">
-<article class="slide slide-1 is-active"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SCHOOL</div><h1>AIと人の力で、<br>未来を切り拓く。</h1><p>会社は、働く場所ではなく、共に学び、共に成長する学校である。</p><div class="actions"><a class="button button-primary" href="#about">Forgeationを知る</a><a class="button button-secondary" href="#academy">6つのアカデミー</a></div></div></div></article>
+<article class="slide slide-1 is-active"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SCHOOL</div><h1>AIと人の力で、<br>未来を切り拓く。</h1><p>会社は、働く場所ではなく、共に学び、共に成長する学校である。</p><div class="actions"><a class="button button-primary" href="#about">Forgeationを知る</a><a class="button button-secondary" href="#academy">8つのアカデミー</a></div></div></div></article>
 <article class="slide slide-2"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">AI SUPPORT PARTNER</div><h1>ジッピーと共に、<br>無限の可能性を。</h1><p>AIは、人に代わるためではなく、人の可能性を解き放つために存在する。</p></div></div></article>
 <article class="slide slide-3"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">PROJECT PHOENIX</div><h1>挑戦が未来を創る。<br>炎は道を照らす。</h1><p>フォージは、挑戦する心を燃やし、未来への道を切り拓く存在。</p></div></div></article>
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
@@ -1311,9 +1312,12 @@ section{padding:68px 0}
 
 <section id="vision"><div class="container"><div class="section-head"><div class="section-kicker">Vision</div><h2>ノグの夢を、未来の現実へ。</h2><p>年商10億円はゴールではありません。未来への挑戦を続けるための力です。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="vision-10billion.webp" alt="年商10億円の長期ビジョン"><div class="card-body"><h3>年商10億円の未来</h3><p>利益を、次の挑戦と学びへ循環させる企業を目指します。</p></div></article><article class="card visual-card"><img src="school-main-visual.webp" alt="3人の開校宣言"><div class="card-body"><h3>3人で始める開校宣言</h3><p>ノグ、ジッピー、フォージ。力をひとつに、未来を切り拓きます。</p></div></article><article class="card visual-card"><img src="opening-declaration.webp" alt="Forgeation開校宣言"><div class="card-body"><h3>開校宣言</h3><p>未来は、誰かが創るものではない。共に創るものです。</p></div></article></div></div></section>
 
-<section id="academy"><div class="container"><div class="section-head"><div class="section-kicker">Six Academies</div><h2>6つのアカデミー</h2><p>AIを核に、教育・スポーツ・看護医療・介護福祉・建築設計・ロボティクスへ展開します。</p></div><div class="grid academy-grid">
+<section id="academy"><div class="container"><div class="section-head"><div class="section-kicker">Eight Academies</div><h2>8つのアカデミー</h2><p>AIを核に、AI・ロボティクス・スポーツ・サッカー・看護医療・介護福祉・建築設計・教育へ展開します。</p></div><div class="grid academy-grid">
+<article class="card visual-card"><img src="ai-academy-overview.webp" alt="AIアカデミー"><div class="card-body"><h3>AIアカデミー</h3><p>Python、生成AI、機械学習、倫理・安全を学び、AIを正しく使い創る力を育てる。</p></div></article>
+
 <article class="card visual-card"><img src="academy-robotics.webp" alt="AI・ロボティクスアカデミー"><div class="card-body"><h3>AI・ロボティクス</h3><p>AI、ロボット、ドローン、IoTを学び、未来を動かす技術を創る。</p></div></article>
 <article class="card visual-card"><img src="academy-sports.webp" alt="スポーツアカデミー"><div class="card-body"><h3>スポーツ</h3><p>科学とテクノロジーで、一人ひとりの可能性を最大化する。</p></div></article>
+<article class="card visual-card"><img src="soccer-academy-overview.webp" alt="サッカーアカデミー"><div class="card-body"><h3>サッカーアカデミー</h3><p>AIコーチ、データ分析、個別練習、F Challengeで選手の成長を支える。</p></div></article>
 <article class="card visual-card"><img src="academy-nursing.webp" alt="看護アカデミー"><div class="card-body"><h3>看護・医療</h3><p>やさしさ、科学、テクノロジーで、未来の命を支える。</p></div></article>
 <article class="card visual-card"><img src="care-academy-overview.webp" alt="介護・福祉アカデミー"><div class="card-body"><h3>介護・福祉</h3><p>現場・事務・地域をつなぎ、誰もが安心して暮らせる未来を支える。</p></div></article>
 <article class="card visual-card"><img src="academy-construction.webp" alt="建設アカデミー"><div class="card-body"><h3>建設・建築</h3><p>AI設計、シミュレーション、安全管理で、未来の街を創る。</p></div></article>
@@ -2169,9 +2173,20 @@ print(lesson + "を始めよう！")</code>
 <div class="lightbox" id="lightbox"><button id="lightboxClose" aria-label="閉じる">×</button><img id="lightboxImage" alt="拡大画像"></div>
 <script>
 const opening=document.getElementById('opening'),openingSkip=document.getElementById('openingSkip');
-function closeOpening(){opening.classList.add('is-hidden');sessionStorage.setItem('forgeationOpeningSeen','yes')}
-if(sessionStorage.getItem('forgeationOpeningSeen')==='yes'){opening.classList.add('is-hidden')}else{setTimeout(closeOpening,5200)}
-openingSkip.addEventListener('click',closeOpening);
+const safeSessionStorage={
+  get(key){try{return window.sessionStorage.getItem(key)}catch(_){return null}},
+  set(key,value){try{window.sessionStorage.setItem(key,value)}catch(_){}}
+};
+function closeOpening(){
+  opening?.classList.add('is-hidden');
+  safeSessionStorage.set('forgeationOpeningSeen','yes');
+}
+if(safeSessionStorage.get('forgeationOpeningSeen')==='yes'){
+  opening?.classList.add('is-hidden');
+}else{
+  setTimeout(closeOpening,2200);
+}
+openingSkip?.addEventListener('click',closeOpening);
 
 const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dot')],pauseButton=document.getElementById('pauseButton');
 let slideIndex=0,isPaused=false,timer;
@@ -2264,7 +2279,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCollectionComin
 
 
 const schoolMapZoom=document.getElementById('schoolMapZoom');
-const schoolMapImage=document.querySelector('.school-map-image');
+const schoolMapImage=document.querySelector('.school-map-
+image');
 if(schoolMapZoom && schoolMapImage){
   schoolMapZoom.addEventListener('click',()=>{
     lightboxImage.src=schoolMapImage.src;
@@ -2276,11 +2292,12 @@ if(schoolMapZoom && schoolMapImage){
 /* Forgeation全体 来訪者記録 */
 const FORGEATION_API_BASE="https://forgeation-api.eru12121221.workers.dev";
 function getForgeationVisitorId(){
-  let visitorId=localStorage.getItem("forgeation_visitor_id");
+  let visitorId=null;
+  try{visitorId=window.localStorage.getItem("forgeation_visitor_id")}catch(_){}
   if(!visitorId){
     visitorId=(crypto.randomUUID?.() ||
       "visitor-"+Date.now()+"-"+Math.random().toString(36).slice(2));
-    localStorage.setItem("forgeation_visitor_id",visitorId);
+    try{window.localStorage.setItem("forgeation_visitor_id",visitorId)}catch(_){}
   }
   return visitorId;
 }
@@ -2289,8 +2306,7 @@ function recordForgeationVisit(page){
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({visitorId:getForgeationVisitorId(),page})
-  }).catch(error=>console.warn("来訪記録に失敗
-しました。",error));
+  }).catch(error=>console.warn("来訪記録に失敗しました。",error));
 }
 recordForgeationVisit("forgeation-home");
 document.querySelectorAll(".visitor-track").forEach(link=>{
@@ -2596,15 +2612,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <script>
-/* ===== Ver3.17 元の閲覧位置へ復帰 ===== */
+/* ===== Ver3.18 元の閲覧位置へ復帰 ===== */
 (() => {
   const STORAGE_KEY = "forgeation-home-scroll-y";
   const PATH_KEY = "forgeation-home-path";
   const currentPath = location.pathname;
 
   function saveScrollPosition() {
-    sessionStorage.setItem(STORAGE_KEY, String(Math.max(0, window.scrollY)));
-    sessionStorage.setItem(PATH_KEY, currentPath);
+    try{window.sessionStorage.setItem(STORAGE_KEY, String(Math.max(0, window.scrollY)))}catch(_){}
+    try{window.sessionStorage.setItem(PATH_KEY, currentPath)}catch(_){}
   }
 
   document.addEventListener("click", (event) => {
@@ -2626,8 +2642,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("pagehide", saveScrollPosition);
 
   function restoreScrollPosition() {
-    const savedPath = sessionStorage.getItem(PATH_KEY);
-    const savedY = Number(sessionStorage.getItem(STORAGE_KEY));
+    let savedPath=null; try{savedPath=window.sessionStorage.getItem(PATH_KEY)}catch(_){}
+    let savedY=0; try{savedY=Number(window.sessionStorage.getItem(STORAGE_KEY))}catch(_){}
 
     if (savedPath !== currentPath || !Number.isFinite(savedY) || savedY <= 0) return;
 
