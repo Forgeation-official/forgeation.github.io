@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.15｜F Challenge実装・Fシリーズ完成版</title>
+<title>Forgeation School Ver3.16｜元の閲覧位置に戻る対応版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -1234,11 +1234,11 @@ section{padding:68px 0}
 }
 
 
-/* ===== Ver3.15 校舎マップのヒント重複・位置ずれ解消 ===== */
+/* ===== Ver3.16 校舎マップのヒント重複・位置ずれ解消 ===== */
 .school-map-clean-hint{display:none!important}
 
 
-/* ===== Ver3.15 F Challenge実行ボタン・Fシリーズ7種 ===== */
+/* ===== Ver3.16 F Challenge実行ボタン・Fシリーズ7種 ===== */
 .f-series-play-button{
   display:flex;
   align-items:center;
@@ -1268,7 +1268,8 @@ section{padding:68px 0}
 </style>
 </head>
 <body>
-<!-- Ver3.15: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
+<!-- Ver3.16: 別ページから戻った際、元のスクロール位置へ復帰 -->
+<!-- Ver3.16: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
 <!-- Ver3.13: Ver3.12原本へForgeation F Series正式予告を追加 -->
 <!-- Ver3.11: Ver3.10原本へPC版ヒント位置修正を差分追加 -->
 <!-- Ver3.10: Ver3.9原本へFロゴ・全Stage選択・スマホStage大型化を差分追加 -->
@@ -2290,10 +2291,10 @@ function recordForgeationVisit(page){
   }).catch(error=>console.warn("来訪記録に失敗しました。",error));
 }
 recordForgeationVisit("forgeation-home");
-document.querySelectorAll(".visitor-track").forEach(link=>{
+document.querySelectorAll(".vis
+itor-track").forEach(link=>{
   link.addEventListener("click",()=>{
-    recordForge
-ationVisit(link.dataset.page || "unknown");
+    recordForgeationVisit(link.dataset.page || "unknown");
   });
 });
 
@@ -2591,6 +2592,56 @@ document.addEventListener("DOMContentLoaded", () => {
   </article>
 </div>
 
+
+
+<script>
+/* ===== Ver3.16 元の閲覧位置へ復帰 ===== */
+(() => {
+  const STORAGE_KEY = "forgeation-home-scroll-y";
+  const PATH_KEY = "forgeation-home-path";
+  const currentPath = location.pathname;
+
+  function saveScrollPosition() {
+    sessionStorage.setItem(STORAGE_KEY, String(Math.max(0, window.scrollY)));
+    sessionStorage.setItem(PATH_KEY, currentPath);
+  }
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+
+    const rawHref = link.getAttribute("href");
+    if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("javascript:")) return;
+
+    try {
+      const destination = new URL(link.href, location.href);
+      if (destination.origin === location.origin &&
+          destination.pathname !== location.pathname) {
+        saveScrollPosition();
+      }
+    } catch (_) {}
+  }, true);
+
+  window.addEventListener("pagehide", saveScrollPosition);
+
+  function restoreScrollPosition() {
+    const savedPath = sessionStorage.getItem(PATH_KEY);
+    const savedY = Number(sessionStorage.getItem(STORAGE_KEY));
+
+    if (savedPath !== currentPath || !Number.isFinite(savedY) || savedY <= 0) return;
+
+    const restore = () => window.scrollTo({ top: savedY, left: 0, behavior: "auto" });
+    requestAnimationFrame(() => {
+      restore();
+      setTimeout(restore, 80);
+      setTimeout(restore, 300);
+    });
+  }
+
+  window.addEventListener("pageshow", restoreScrollPosition);
+  window.addEventListener("load", restoreScrollPosition);
+})();
+</script>
 
 </body>
 </html>
