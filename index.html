@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.16｜元の閲覧位置に戻る対応版</title>
+<title>Forgeation School Ver3.17｜F Challenge正式接続版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -1234,11 +1234,11 @@ section{padding:68px 0}
 }
 
 
-/* ===== Ver3.16 校舎マップのヒント重複・位置ずれ解消 ===== */
+/* ===== Ver3.17 校舎マップのヒント重複・位置ずれ解消 ===== */
 .school-map-clean-hint{display:none!important}
 
 
-/* ===== Ver3.16 F Challenge実行ボタン・Fシリーズ7種 ===== */
+/* ===== Ver3.17 F Challenge実行ボタン・Fシリーズ7種 ===== */
 .f-series-play-button{
   display:flex;
   align-items:center;
@@ -1268,8 +1268,9 @@ section{padding:68px 0}
 </style>
 </head>
 <body>
-<!-- Ver3.16: 別ページから戻った際、元のスクロール位置へ復帰 -->
-<!-- Ver3.16: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
+<!-- Ver3.17: 商品紹介・F Challengeの両方をChallenge搭載版へ正式接続 -->
+<!-- Ver3.17: 別ページから戻った際、元のスクロール位置へ復帰 -->
+<!-- Ver3.17: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
 <!-- Ver3.13: Ver3.12原本へForgeation F Series正式予告を追加 -->
 <!-- Ver3.11: Ver3.10原本へPC版ヒント位置修正を差分追加 -->
 <!-- Ver3.10: Ver3.9原本へFロゴ・全Stage選択・スマホStage大型化を差分追加 -->
@@ -1438,7 +1439,7 @@ section{padding:68px 0}
         </div>
         <div class="product-actions">
           
-          <a class="product-button app" href="./F_Soccer_beta_Ver2.html">📱 F Soccer β版を開く</a>
+          <a class="product-button app" href="./F_Soccer_beta_Ver3_Challenge搭載版.html">📱 F Soccer β版を開く</a>
           <a class="product-button contact" href="#contact">📩 導入を相談する</a>
         <a class="button youtube-button-restored" href="https://www.youtube.com/@Forgeation" target="_blank" rel="noopener">▶ Forgeation YouTubeを見る</a></div>
         <div class="product-note">AIサッカーアカデミーコーチは、Forgeationの製品化を目指す開発プロジェクトです。</div>
@@ -1974,7 +1975,7 @@ print(lesson + "を始めよう！")</code>
             <li>経験値・レベルアップ・成長記録</li>
           </ul>
           <a class="f-series-play-button"
-             href="F_Soccer_beta_Ver3_Challenge搭載版.html"
+             href="./F_Soccer_beta_Ver3_Challenge搭載版.html"
              aria-label="F Challengeを今すぐ遊ぶ">⚽ 今すぐF Challengeで遊ぶ</a>
         </div>
       </details>
@@ -2288,11 +2289,11 @@ function recordForgeationVisit(page){
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({visitorId:getForgeationVisitorId(),page})
-  }).catch(error=>console.warn("来訪記録に失敗しました。",error));
+  }).catch(error=>console.warn("来訪記録に失敗
+しました。",error));
 }
 recordForgeationVisit("forgeation-home");
-document.querySelectorAll(".vis
-itor-track").forEach(link=>{
+document.querySelectorAll(".visitor-track").forEach(link=>{
   link.addEventListener("click",()=>{
     recordForgeationVisit(link.dataset.page || "unknown");
   });
@@ -2595,7 +2596,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <script>
-/* ===== Ver3.16 元の閲覧位置へ復帰 ===== */
+/* ===== Ver3.17 元の閲覧位置へ復帰 ===== */
 (() => {
   const STORAGE_KEY = "forgeation-home-scroll-y";
   const PATH_KEY = "forgeation-home-path";
