@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.20｜開校画面解除・安定版</title>
+<title>Forgeation School Ver3.21｜開校宣言復活・操作安定版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -1234,11 +1234,11 @@ section{padding:68px 0}
 }
 
 
-/* ===== Ver3.20 校舎マップのヒント重複・位置ずれ解消 ===== */
+/* ===== Ver3.21 校舎マップのヒント重複・位置ずれ解消 ===== */
 .school-map-clean-hint{display:none!important}
 
 
-/* ===== Ver3.20 F Challenge実行ボタン・Fシリーズ7種 ===== */
+/* ===== Ver3.21 F Challenge実行ボタン・Fシリーズ7種 ===== */
 .f-series-play-button{
   display:flex;
   align-items:center;
@@ -1266,7 +1266,7 @@ section{padding:68px 0}
 }
 
 
-/* ===== Ver3.20 校舎マップ「i」確実操作 ===== */
+/* ===== Ver3.21 校舎マップ「i」確実操作 ===== */
 .school-map-visual{position:relative!important;isolation:isolate}
 .school-map-image{position:relative!important;z-index:1!important;pointer-events:none!important}
 .school-map-hotspot{
@@ -1280,23 +1280,36 @@ section{padding:68px 0}
 .opening.is-hidden{pointer-events:none!important;display:none!important}
 
 
-/* ===== Ver3.20 開校オーバーレイ完全解除 ===== */
-.opening{display:none!important;pointer-events:none!important}
 
 </style>
 </head>
 <body>
-<!-- Ver3.20: 開校画面がサイト操作を遮る不具合を解消するため、オーバーレイを完全解除 -->
-<!-- Ver3.20: 校舎マップiボタンをインラインイベントで確実動作・F DroneをAIアカデミー課へ明記 -->
-<!-- Ver3.20: ストレージ拒否による全操作停止を修正・8アカデミーへ整理 -->
-<!-- Ver3.20: 商品紹介・F Challengeの両方をChallenge搭載版へ正式接続 -->
-<!-- Ver3.20: 別ページから戻った際、元のスクロール位置へ復帰 -->
-<!-- Ver3.20: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
+<!-- Ver3.21: 開校宣言を復活・サイトへ進むを確実操作・Version表記修正・F PythonをAIアカデミー課へ明記 -->
+<!-- Ver3.21: 開校画面がサイト操作を遮る不具合を解消するため、オーバーレイを完全解除 -->
+<!-- Ver3.21: 校舎マップiボタンをインラインイベントで確実動作・F DroneをAIアカデミー課へ明記 -->
+<!-- Ver3.21: ストレージ拒否による全操作停止を修正・8アカデミーへ整理 -->
+<!-- Ver3.21: 商品紹介・F Challengeの両方をChallenge搭載版へ正式接続 -->
+<!-- Ver3.21: 別ページから戻った際、元のスクロール位置へ復帰 -->
+<!-- Ver3.21: ヒント位置修正・F Droneロゴ削除・F Python/F Teacher追加・F Challenge実行導線 -->
 <!-- Ver3.13: Ver3.12原本へForgeation F Series正式予告を追加 -->
 <!-- Ver3.11: Ver3.10原本へPC版ヒント位置修正を差分追加 -->
 <!-- Ver3.10: Ver3.9原本へFロゴ・全Stage選択・スマホStage大型化を差分追加 -->
 <!-- Ver3.7.3: IoT・センサー紹介カードと体験パネルを削除。FドローンとPythonを主役に再配置。 -->
 <!-- Ver3.5: AI社員一覧は校舎マップ3Fへ役割移管。旧一覧位置へ各アカデミー課β版展示を配置。 -->
+
+
+<div class="opening" id="opening" role="dialog" aria-label="Forgeation開校宣言">
+  <div class="opening-inner">
+    <div class="opening-logo">F</div>
+    <h1>Forgeation</h1>
+    <h2>開校宣言</h2>
+    <p>共に学び、共に成長し、<br>共に未来を切り拓く学校へ。</p>
+    <p><strong>Design the Future. Forge the Future.</strong></p>
+  </div>
+  <button class="opening-skip" id="openingSkip"
+          type="button"
+          onclick="closeForgeationOpening(); return false;">サイトへ進む</button>
+</div>
 
 <header class="site-header"><nav class="nav"><a class="brand" href="#home"><span class="brand-mark">F</span><span>Forgeation<small>FUTURE MANAGEMENT</small></span></a><button class="menu-button" id="menuButton">MENU</button><div class="nav-links" id="navLinks"><a href="#about">企業理念</a><a href="#future">未来図</a><a href="#academy">アカデミー</a><a href="#sports-academy-detail">スポーツ</a><a href="#nursing-academy-detail">看護・医療</a><a href="#care-academy-detail">介護・福祉</a><a href="#robotics-academy-detail">AI・ロボティクス</a><a href="#ai-academy-detail">AI</a><a href="#construction-academy-detail">建設</a><a href="#education-academy-detail">教育</a><a href="#soccer-product">AIサッカー商品</a><a href="#ai-coach">AIコーチ</a><a href="#forgeation-school">School</a><a href="#future-lessons">未来授業</a><a href="#president-door">社長の扉</a><a href="#bakery">Bakery</a><a href="#characters">仲間たち</a><a href="#vision">長期ビジョン</a><a href="#contact">お問い合わせ</a></div></nav></header>
 
@@ -1325,7 +1338,7 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.11です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.21です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -2104,10 +2117,10 @@ print(lesson + "を始めよう！")</code>
           </div>
           <div class="f-series-badges">
             <span class="f-series-badge">APP PREVIEW</span>
-            <span class="f-series-badge">AI ACADEMY</span>
+            <span class="f-series-badge">AIアカデミー課</span>
           </div>
           <h3>F Python</h3>
-          <p>コードを実行しながら、PythonとAIの基礎をゲーム感覚で学ぶ。</p>
+          <p>AIアカデミー課の体験コンテンツ。コードを実行しながら、PythonとAIの基礎をゲーム感覚で学ぶ。</p>
           <div class="f-series-more">内容を見る</div>
         </summary>
         <div class="f-series-detail">
@@ -2221,7 +2234,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.r
 const collectionDoorButton=document.getElementById('collectionDoorButton');
 const collectionComingSoon=document.getElementById('collectionComingSoon');
 const collectionComingSoonClose=document.getElementById('collectionComingSoonClose');
-const collectionComingSoonTopClose=document.getElementById('collectionComingSoonTopClose');
+const collectionComingSoonTopClose=document.
+getElementById('collectionComingSoonTopClose');
 function openCollectionComingSoon(){
   collectionComingSoon.classList.add('open');
   collectionComingSoon.setAttribute('aria-hidden','false');
@@ -2233,8 +2247,7 @@ function closeCollectionComingSoon(){
 collectionDoorButton?.addEventListener('click',openCollectionComingSoon);
 collectionComingSoonClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoonTopClose?.addEventListener('click',closeCollectionComingSoon);
-collectionComingSoon?.addEventList
-ener('click',e=>{if(e.target===collectionComingSoon)closeCollectionComingSoon()});
+collectionComingSoon?.addEventListener('click',e=>{if(e.target===collectionComingSoon)closeCollectionComingSoon()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCollectionComingSoon()});
 
 </script>
@@ -2532,7 +2545,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <script>
-/* ===== Ver3.20 校舎マップ確実操作（インライン＋グローバル関数） ===== */
+/* ===== Ver3.21 校舎マップ確実操作（インライン＋グローバル関数） ===== */
 (() => {
   let lastSchoolRoomTrigger = null;
 
@@ -2647,7 +2660,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-/* ===== Ver3.20 元の閲覧位置へ復帰 ===== */
+/* ===== Ver3.21 元の閲覧位置へ復帰 ===== */
 (() => {
   const STORAGE_KEY = "forgeation-home-scroll-y";
   const PATH_KEY = "forgeation-home-path";
@@ -2693,6 +2706,30 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("pageshow", restoreScrollPosition);
   window.addEventListener("load", restoreScrollPosition);
 })();
+</script>
+
+
+<script>
+/* ===== Ver3.21 開校宣言：確実に閉じる ===== */
+window.closeForgeationOpening = function () {
+  const opening = document.getElementById("opening");
+  if (!opening) return false;
+  opening.classList.add("is-hidden");
+  opening.style.pointerEvents = "none";
+  setTimeout(() => {
+    opening.style.display = "none";
+  }, 920);
+  return false;
+};
+
+// ボタン以外でもEnter・Escapeで進める
+document.addEventListener("keydown", (event) => {
+  if ((event.key === "Enter" || event.key === "Escape") &&
+      document.getElementById("opening") &&
+      !document.getElementById("opening").classList.contains("is-hidden")) {
+    window.closeForgeationOpening();
+  }
+});
 </script>
 
 </body>
