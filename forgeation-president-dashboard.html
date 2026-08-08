@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forgeation 社長ダッシュボード</title>
+<style>
+:root{--bg:#061426;--panel:#0c2038;--panel2:#102a48;--line:#24415f;--text:#f7fbff;--muted:#9fb5ca;--accent:#65c7ff;--good:#67e8a5;--gold:#ffd66b}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:radial-gradient(circle at top,#12375c 0,#071827 38%,#04101c 100%);color:var(--text)}
+.wrap{max-width:1180px;margin:auto;padding:24px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px}.brand small{letter-spacing:.22em;color:var(--accent);font-weight:800}.brand h1{margin:7px 0 4px;font-size:clamp(27px,5vw,44px)}.brand p{margin:0;color:var(--muted)}
+.badge{border:1px solid #2e5678;background:#0b2238;border-radius:999px;padding:9px 13px;color:#ccecff;font-weight:700;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:linear-gradient(145deg,rgba(18,45,74,.96),rgba(8,26,45,.96));border:1px solid var(--line);border-radius:18px;padding:18px;min-height:138px;box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.icon{font-size:27px}.label{color:#b9cde0;font-weight:750;margin-top:10px}.value{font-size:32px;font-weight:900;margin-top:7px}.sub{font-size:12px;color:#7f9ab3;margin-top:6px}
+.live .value{color:var(--good)}.wide{grid-column:span 2}.section{margin-top:22px}.section h2{font-size:19px;margin:0 0 12px}
+.chart{height:240px;display:flex;align-items:flex-end;gap:12px;padding:20px 12px 10px;border-top:1px solid var(--line);margin-top:12px}.bar{flex:1;min-width:20px;background:linear-gradient(#70d8ff,#2e78ff);border-radius:8px 8px 3px 3px;position:relative}.bar span{position:absolute;bottom:-27px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);white-space:nowrap}
+.notice{margin-top:35px;color:#a9bfd3;font-size:13px;line-height:1.7}.footer{text-align:center;color:#718aa2;padding:26px 0 8px;font-size:12px}
+@media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}.wide{grid-column:span 2}.head{display:block}.badge{display:inline-block;margin-top:14px}}
+@media(max-width:480px){.wrap{padding:15px}.grid{grid-template-columns:1fr}.wide{grid-column:span 1}.card{min-height:120px}.value{font-size:29px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <div class="brand"><small>FORGEATION / FUTURE MANAGEMENT</small><h1>社長ダッシュボード</h1><p>Forgeationの「今」を、一画面で。</p></div>
+    <div class="badge">📡 Cloudflare 実測連携</div>
+  </header>
+
+  <section class="grid">
+    <article class="card"><div class="icon">👥</div><div class="label">今日の訪問者</div><div class="value">—</div><div class="sub">D1来訪者集計と接続予定</div></article>
+    <article class="card"><div class="icon">👥</div><div class="label">累計訪問者</div><div class="value">—</div><div class="sub">D1来訪者集計と接続予定</div></article>
+    <article class="card"><div class="icon">⚽</div><div class="label">F Soccer 利用者</div><div class="value">—</div><div class="sub">利用者DBと接続予定</div></article>
+    <article class="card live"><div class="icon">💬</div><div class="label">AIコーチ会話数</div><div class="value">73回</div><div class="sub">Cloudflare /chat・直近24時間の実測値</div></article>
+    <article class="card"><div class="icon">🏆</div><div class="label">F Challenge 挑戦数</div><div class="value">—</div><div class="sub">/progress・DB連携後に確定</div></article>
+    <article class="card"><div class="icon">✅</div><div class="label">PK 成功数</div><div class="value">—</div><div class="sub">F Challenge結果DBと接続予定</div></article>
+    <article class="card"><div class="icon">⭐</div><div class="label">獲得 XP 合計</div><div class="value">—</div><div class="sub">F Challenge結果DBと接続予定</div></article>
+    <article class="card"><div class="icon">🔁</div><div class="label">リピーター</div><div class="value">—</div><div class="sub">来訪者ID集計後に表示</div></article>
+  </section>
+
+  <section class="section">
+    <h2>📈 社長目線：利用推移</h2>
+    <article class="card wide">
+      <div class="label">AIコーチ会話リクエスト / 参考推移</div>
+      <div class="chart">
+        <div class="bar" style="height:22%"><span>深夜</span></div><div class="bar" style="height:8%"><span>4時</span></div>
+        <div class="bar" style="height:20%"><span>8時</span></div><div class="bar" style="height:38%"><span>12時</span></div>
+        <div class="bar" style="height:30%"><span>16時</span></div><div class="bar" style="height:10%"><span>20時</span></div>
+        <div class="bar" style="height:70%"><span>現在</span></div>
+      </div>
+      <div class="notice">※ 73回は、Cloudflareで確認できた <b>Path = /chat</b> の直近24時間の実測値。その他の項目は、値を作らず「—」で待機させています。D1・F Soccerの保存データがつながった項目から実数表示へ切り替えます。</div>
+    </article>
+  </section>
+  <div class="footer">Forgeation President Dashboard / Management Only</div>
+</main>
+</body>
+</html>
