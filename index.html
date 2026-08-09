@@ -1281,6 +1281,16 @@ section{padding:68px 0}
 
 
 
+
+/* ===== F Soccer 料金3プラン導線 ===== */
+.f-soccer-pricing-mini{margin-top:26px;padding:22px;border:1px solid #ffffff35;border-radius:22px;background:#ffffff0d}
+.f-soccer-pricing-mini h3{margin:0 0 14px;color:#fff}
+.f-soccer-plan-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.f-soccer-plan-mini{padding:14px;border-radius:14px;background:#fff;color:#12314f;text-align:center}
+.f-soccer-plan-mini b{display:block;font-size:14px}.f-soccer-plan-mini strong{display:block;margin-top:5px;font-size:22px;color:#0a57b5}
+.f-soccer-pricing-button{display:inline-block;margin-top:15px;padding:13px 18px;border-radius:12px;background:linear-gradient(90deg,#e64b98,#266ee2);color:#fff!important;text-decoration:none;font-weight:900}
+@media(max-width:650px){.f-soccer-plan-row{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -1479,6 +1489,16 @@ section{padding:68px 0}
           <a class="product-button app" href="./F_Soccer_beta_Ver3_Challenge搭載版.html">📱 F Soccer β版を開く</a>
           <a class="product-button contact" href="#contact">📩 導入を相談する</a>
         <a class="button youtube-button-restored" href="https://www.youtube.com/@Forgeation" target="_blank" rel="noopener">▶ Forgeation YouTubeを見る</a></div>
+
+        <div class="f-soccer-pricing-mini">
+          <h3>⚽ F Soccer 料金プラン</h3>
+          <div class="f-soccer-plan-row">
+            <div class="f-soccer-plan-mini"><b>個人プラン</b><strong>月額 980円（税込）〜</strong></div>
+            <div class="f-soccer-plan-mini"><b>プレミアムプラン</b><strong>月額 2,980円（税込）〜</strong></div>
+            <div class="f-soccer-plan-mini"><b>チームプラン</b><strong>月額 9,800円（税込）〜</strong></div>
+          </div>
+          <a class="f-soccer-pricing-button" href="./f-soccer-plans.html">料金プラン・お申込みを見る →</a>
+        </div>
         <div class="product-note">AIサッカーアカデミーコーチは、Forgeationの製品化を目指す開発プロジェクトです。</div>
       </div>
     </div>
@@ -2217,7 +2237,8 @@ pauseButton.addEventListener('click',()=>{isPaused=!isPaused;pauseButton.textCon
 startSlider();
 
 const menuButton=document.getElementById('menuButton'),navLinks=document.getElementById('navLinks');
-menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(open))});
+menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('is-open');menuButton.setAttribute('aria-expan
+ded',String(open))});
 navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false')}));
 
 const chatReply=document.getElementById('chatReply'),mailButton=document.getElementById('mailButton');
@@ -2232,8 +2253,7 @@ mailButton.href='mailto:eru12121221@gmail.com?subject='+subject+'&body='+body;
 const lightbox=document.getElementById('lightbox'),lightboxImage=document.getElementById('lightboxImage'),lightboxClose=document.getElementById('lightboxClose');
 document.querySelectorAll('.soccer-gallery img,.academy-detail-gallery img,.soccer-product-flyer,.collection-preview img,.bakery-visuals img,.school-map-image').forEach(img=>img.addEventListener('click',()=>{lightboxImage.src=img.src;lightboxImage.alt=img.alt;lightbox.classList.add('open')}));
 lightboxClose.addEventListener('click',()=>lightbox.classList.remove('open'));
-lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classLi
-st.remove('open')});
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('open')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('open')});
 
 const collectionDoorButton=document.getElementById('collectionDoorButton');
