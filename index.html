@@ -1939,7 +1939,10 @@ print(lesson + "を始めよう！")</code>
           <div class="collection-item">📝 社長ブログ</div>
           <div class="collection-item">🎬 Success Story</div>
         </div>
-        <button class="door-open-button" id="collectionDoorButton" type="button">🚪 扉を開ける</button>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <a class="door-open-button visitor-track" data-page="forgeation-news-history" href="./forgeation-news-history.html">📺 FORGEATION NEWS / HISTORY</a>
+          <button class="door-open-button" id="collectionDoorButton" type="button">🚪 扉を開ける</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2199,7 +2202,6 @@ print(lesson + "を始めよう！")</code>
     </figure>
     <span class="coming-soon-label">COMING SOON</span><br>
     <div class="coming-soon-actions">
-      <a href="./forgeation-president-dashboard.html" style="display:inline-block;text-decoration:none;padding:12px 18px;border-radius:999px;background:linear-gradient(135deg,#65c7ff,#4f7cff);color:#fff;font-weight:800;margin:6px;">📊 社長ダッシュボード</a>
       <button class="coming-soon-close" id="collectionComingSoonClose" type="button">← ホームページへ戻る</button>
     </div>
   </div>
@@ -2230,8 +2232,8 @@ mailButton.href='mailto:eru12121221@gmail.com?subject='+subject+'&body='+body;
 const lightbox=document.getElementById('lightbox'),lightboxImage=document.getElementById('lightboxImage'),lightboxClose=document.getElementById('lightboxClose');
 document.querySelectorAll('.soccer-gallery img,.academy-detail-gallery img,.soccer-product-flyer,.collection-preview img,.bakery-visuals img,.school-map-image').forEach(img=>img.addEventListener('click',()=>{lightboxImage.src=img.src;lightboxImage.alt=img.alt;lightbox.classList.add('open')}));
 lightboxClose.addEventListener('click',()=>lightbox.classList.remove('open'));
-lightbox.addEventListener('click',e=>{if(e.target===lightbox)lig
-htbox.classList.remove('open')});
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classLi
+st.remove('open')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('open')});
 
 const collectionDoorButton=document.getElementById('collectionDoorButton');
