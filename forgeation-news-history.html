@@ -27,6 +27,16 @@ header h1{margin:0;text-align:center;font-size:clamp(27px,3vw,48px)}.clock{text-
 footer{text-align:center;padding:24px 8px;color:#9db7d0}
 @media(max-width:900px){header,.grid{grid-template-columns:1fr}header h1{text-align:left}.clock{text-align:left}.hero{grid-template-columns:1fr}.hero img{max-height:360px}}
 @media(max-width:600px){.mini-grid,.stats{grid-template-columns:1fr}.event{flex-basis:84vw}.hhead{align-items:flex-start}}
+
+.modal{position:fixed;inset:0;background:#020b18d9;display:none;align-items:center;justify-content:center;padding:22px;z-index:9999;backdrop-filter:blur(8px)}
+.modal.open{display:flex}
+.modal-card{width:min(760px,96vw);max-height:86vh;overflow:auto;background:linear-gradient(160deg,#0b3769,#061d3f);border:1px solid #f4c85a;border-radius:22px;box-shadow:0 25px 80px #000b;padding:28px;position:relative}
+.modal-close{position:absolute;right:14px;top:12px;width:42px;height:42px;border-radius:50%;border:1px solid #7196b9;background:#08264c;color:#fff;font-size:25px;cursor:pointer}
+.modal-date{color:#f4c85a;font-weight:950;letter-spacing:.05em}
+.modal-icon{font-size:56px;margin:14px 0 4px}
+.modal-card h2{font-size:clamp(25px,4vw,38px);margin:4px 48px 14px 0}
+.modal-card p{color:#d3e2ef;line-height:2;font-size:16px;white-space:pre-wrap}
+
 </style>
 </head>
 <body><div class="wrap">
@@ -79,19 +89,50 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 <div class="detail" id="detail"></div>
 <div class="swipe-note">iPhone：指で左右にスワイプ　／　PC：← → ボタン・ドラッグ・マウスホイール</div>
 </section>
+
+<div class="modal" id="historyModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+    <div class="modal-date" id="modalDate"></div>
+    <div class="modal-icon" id="modalIcon"></div>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
 <footer>© 2026 Forgeation</footer>
 </div>
 
 <script>
-const history=[["2026.07.03", "🤝", "ノグとジッピー、出逢う", "二人三脚の対話が始まる。"], ["2026.07.05", "🏫", "Forgeation構想", "会社＝学校＝企業という未来像へ。"], ["2026.07.07", "🧭🔥", "ブランド形成期", "羅針盤、Phoenixなどを検討しながら、Forgeationの顔を探す。"], ["2026.07.16", "🎓", "AIを学び、会社へ", "学びを会社づくりへ還元。"], ["2026.07.24", "🌐", "公式ホームページへ", "構想を社会から見える形へ。"], ["2026.07.28", "🤖", "AI受付社員", "1階フロントへつながるAI受付社員のデモ。"], ["2026.07.29", "⚽", "AIコーチ", "スポーツ×AIの製品構想が動き始める。"], ["2026.07.31", "🏫", "アカデミー拡大", "複数のアカデミーがForgeation Schoolとして形になる。"], ["2026.08.02", "🚀", "API会話成功", "AIサッカーコーチのAPI会話が成功。製品化へ大きく前進。"], ["2026.08.06", "☁️", "Forgeation Cloud", "データでつながる学校・会社の構想へ。"], ["2026.08.09", "📊", "学校のにぎわい", "仮数字ではなく実測値で学校の今を伝える構想へ。"]];
+const history=[["2026.07.03", "🤝", "ノグとジッピー、出逢う", "ここから二人三脚が始まった。まだホームページもAI社員も形になっていない段階から、起業、会社、AI、教育、スポーツについて対話を重ね、Forgeationへつながる土台を作り始めた。"], ["2026.07.05", "🏫", "「会社＝学校＝企業」の構想", "単にAIサービスを売る会社ではなく、学び・仕事・挑戦が循環する会社をつくるという方向へ。後のForgeation School、各アカデミー、AI社員構想につながる原型が生まれた。"], ["2026.07.07", "🧭🔥", "社名・理念・ブランドを磨く", "社名「Forgeation」、理念「Future Management」、スローガン「Design the Future. Forge the Future.」が形になる。会社の命となるロゴも四苦八苦し、羅針盤やPhoenix（不死鳥）など複数案を検討。最終的にFを核とするForgeationのブランドを育てていった。"], ["2026.07.10", "🌍", "事業の未来図が広がる", "AIを核に、教育、スポーツ、看護・医療、建築、企業支援などへ展開する未来図を整理。「AIが人を置き換える」のではなく、先生や支援者を支える会社という考え方を深めた。"], ["2026.07.16", "🎓", "AIパスポート合格", "ノグがAIパスポートに合格。AIを学ぶ側として積み重ねた経験が、Forgeationの会社づくりと教育思想へつながった。資格取得をゴールにせず、実際のAIサービス開発へ進む大きな節目となった。"], ["2026.07.24", "🌐", "公式ホームページを育てる", "Forgeationの理念、未来図、アカデミーを社会へ見せる公式ホームページづくりが本格化。蒼いトップ画面、スマホ表示、画像切れ、リンク、開校演出などを何度も確認し、二人で修正を重ねた。"], ["2026.07.28", "🤖", "AI受付社員ジッピー", "AI受付社員のデモが形になる。ホームページの1階フロントから来訪者を迎え、相談内容に応じて案内する「会社の顔」としてAI社員構想が具体化した。"], ["2026.07.29", "⚽", "AI Sports Coach／AIコーチ", "スポーツ×AIのデモが形になり、ホームページから体験ページへ移動する導線も整備。F SoccerへつながるAIコーチ製品の原型が動き始めた。"], ["2026.07.30", "🔗", "ホームページとAIコーチを接続", "AIコーチへの導線、ホームページへ戻るボタン、サッカーアカデミー画像などを調整。公開ページとして迷わず行き来できる形へ育てた。"], ["2026.07.31", "🏫", "Forgeation Schoolが大きく拡張", "AI、AI・ロボティクス、スポーツ、F Soccer、看護・医療、建設、教育などのアカデミー素材と導線を整備。AI受付社員の404修正や戻るボタンなど、実際に使える学校型ホームページへ近づいた。"], ["2026.08.01", "🤖", "AI社員チームが拡大", "AI広報、AIシステム、AI学習支援、AI看護、AI建設、AIロボティクス、AIスポーツアカデミー社員などを整備。ホームページ上のAI社員群が一気に厚みを増した。"], ["2026.08.01", "📺", "Forgeation YouTube", "Forgeationチャンネルを開設し、動画を公開。ホームページと動画発信をどうつなぐかも検討し、会社の世界観を文章や静止画だけでなく映像でも届ける段階へ進んだ。"], ["2026.08.02", "🌱", "介護・福祉と新しい扉", "介護アカデミー、AI介護社員、Forgeation bakery、「俺のコレクション」、心を整える時間など、学校の中に学びだけでなく暮らしや物語を感じる新しい空間が広がった。"], ["2026.08.02", "🚀", "AIサッカーコーチ API会話成功", "AIサッカーコーチ Ver1.0のAPI連携が完了。OpenAI APIとの実際の会話に成功し、Cloudflare Worker＋GitHub連携も実現。デモから「本当に会話する製品」へ進んだ、Forgeation会社史の重要な節目。"], ["2026.08.03", "✈️", "AIを現場の支援にも活かす", "児童支援で使うA4用紙のブーメラン飛行機の手順・図面など、会社開発とは別の実務でもジッピーを活用。AIが日々の仕事を支えるというForgeationの考え方を実生活でも積み重ねた。"], ["2026.08.06", "☁️", "Forgeation Cloud構想", "ホームページやAI社員を単独で置くのではなく、データとサービスがつながる会社・学校へ。Forgeation Cloudという考え方が生まれ、将来のDB連携や利用状況の可視化へつながった。"], ["2026.08.09", "🔐", "社長ダッシュボードを公開環境へ", "経営側だけが見る社長ダッシュボードと、来訪者に見せる情報を分離する方針を明確化。Vercelで社長ダッシュボードを公開し、セキュリティ設定も進めた。"], ["2026.08.09", "📊", "「学校のにぎわい」構想", "F Soccerや各アカデミーの利用状況を、仮の数字ではなくDBから取得する本物の実測値で伝える構想へ。社長用の経営情報とは別に、学校の活気を社会へ見せる公開ステータスとして設計を開始した。"], ["2026.08.09", "📰", "FORGEATION NEWS／沿革の旅", "おすすめトピックス、学校のにぎわい、会社沿革を大型ビジョンで見せるFORGEATION NEWSへ。ピンクのF Soccerユニホーム姿とジッピーを象徴的なビジュアルにし、沿革は左右に巡りながら詳細を読めるインタラクティブな会社史へ進化した。"]];
 const orbit=document.getElementById("orbit"), detail=document.getElementById("detail");
-function show(i){document.querySelectorAll(".event").forEach((e,n)=>e.classList.toggle("active",n===i));const h=history[i];detail.innerHTML=`<b>${h[0]}</b><h3>${h[1]} ${h[2]}</h3><p>${h[3]}</p>`}
-history.forEach((h,i)=>{const e=document.createElement("article");e.className="event";e.innerHTML=`<div class="date">${h[0]}</div><div class="icon">${h[1]}</div><h3>${h[2]}</h3><p>${h[3]}</p><button>この出来事の詳細を見る</button>`;e.querySelector("button").onclick=()=>{show(i);e.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})};orbit.appendChild(e)});
+function show(i){
+ document.querySelectorAll(".event").forEach((e,n)=>e.classList.toggle("active",n===i));
+ const h=history[i];
+ detail.innerHTML=`<b>${h[0]}</b><h3>${h[1]} ${h[2]}</h3><p>${h[3]}</p>`;
+}
+function openDetail(i){
+ show(i);
+ const h=history[i];
+ document.getElementById("modalDate").textContent=h[0];
+ document.getElementById("modalIcon").textContent=h[1];
+ document.getElementById("modalTitle").textContent=h[2];
+ document.getElementById("modalText").textContent=h[3];
+ const m=document.getElementById("historyModal");
+ m.classList.add("open"); m.setAttribute("aria-hidden","false");
+}
+history.forEach((h,i)=>{const e=document.createElement("article");e.className="event";e.innerHTML=`<div class="date">${h[0]}</div><div class="icon">${h[1]}</div><h3>${h[2]}</h3><p>${h[3]}</p><button>この出来事の詳細を見る</button>`;e.querySelector("button").onclick=()=>{openDetail(i)};orbit.appendChild(e)});
 show(history.length-1);
 document.getElementById("prev").onclick=()=>orbit.scrollBy({left:-350,behavior:"smooth"});
 document.getElementById("next").onclick=()=>orbit.scrollBy({left:350,behavior:"smooth"});
 orbit.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){e.preventDefault();orbit.scrollLeft+=e.deltaY}},{passive:false});
 let down=false,sx=0,sl=0;orbit.addEventListener("pointerdown",e=>{down=true;sx=e.clientX;sl=orbit.scrollLeft;orbit.setPointerCapture(e.pointerId)});orbit.addEventListener("pointermove",e=>{if(down)orbit.scrollLeft=sl-(e.clientX-sx)});orbit.addEventListener("pointerup",()=>down=false);orbit.addEventListener("pointercancel",()=>down=false);
+
+const historyModal=document.getElementById("historyModal");
+document.getElementById("modalClose").onclick=()=>{historyModal.classList.remove("open");historyModal.setAttribute("aria-hidden","true")};
+historyModal.addEventListener("click",e=>{if(e.target===historyModal)document.getElementById("modalClose").click()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&historyModal.classList.contains("open"))document.getElementById("modalClose").click()});
+
 function tick(){const n=new Date();document.getElementById("clock").textContent=n.toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"});document.getElementById("date").textContent=n.toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"})}tick();setInterval(tick,30000);
 </script>
 </body></html>
