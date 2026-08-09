@@ -19,9 +19,9 @@ header h1{margin:0;text-align:center;font-size:clamp(27px,3vw,48px)}.clock{text-
 .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.mini{min-height:165px;padding:17px;border:1px solid #c7ddf0;border-radius:15px;background:#fff;color:#153451}.mini h3{margin:11px 0 8px;font-size:18px}.mini p{margin:0;color:#536f89;font-size:13px;line-height:1.7}.tag{display:inline-block;padding:5px 8px;border-radius:6px;background:#24a760;color:#fff;font-size:10px;font-weight:900}.tag.med{background:#b251bc}.tag.pending{background:#edf3f9;color:#375b7d}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px}.stat{min-height:115px;padding:15px;border:1px solid #d5e5f2;border-radius:13px;background:#fff;color:#173551}.stat b{font-size:14px}.num{font-size:36px;font-weight:1000;margin:9px 0;color:#0b5caf}.note{font-size:11px;color:#7890a5}.truth{padding:0 15px 16px;color:#607b95;font-size:12px}
 .history{margin-top:18px;overflow:hidden;border:1px solid #2d67a2;border-radius:20px;background:linear-gradient(180deg,#061d3f,#082d59)}
-.hhead{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px 5px}.hhead h2{margin:0;color:#67adff}.hhead h2 span{color:var(--gold);font-size:.65em}.navbuttons{display:flex;gap:8px}.navbuttons button{width:46px;height:40px;border:1px solid #5a87b3;border-radius:10px;background:#0a315f;color:#fff;font-size:24px;cursor:pointer}
-.orbit{display:flex;gap:14px;overflow-x:auto;padding:22px max(calc(50% - 160px),20px) 30px;scroll-snap-type:x mandatory;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.event{flex:0 0 320px;min-height:285px;scroll-snap-align:center;padding:18px;border:1px solid #3d75aa;border-radius:16px;background:linear-gradient(160deg,#0d396b,#08264c);position:relative;transition:.2s}.event.active{border-color:var(--gold);transform:scale(1.035);box-shadow:0 0 0 2px #f4c85a33}.event .date{color:#9bcaff;font-weight:900}.event .icon{font-size:44px;margin:14px 0 6px}.event h3{font-size:21px;margin:5px 0 10px}.event p{color:#b8cfe3;line-height:1.7;font-size:13px}.event button{position:absolute;left:15px;right:15px;bottom:15px;padding:9px;border:1px solid var(--gold);border-radius:999px;background:transparent;color:var(--gold);font-weight:900;cursor:pointer}
+.hhead{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px 5px}.hhead h2{margin:0;color:#67adff}.hhead h2 span{color:var(--gold);font-size:.65em}.navbuttons{display:flex;gap:8px}.navbuttons button{width:58px;height:48px;border:1px solid #5a87b3;border-radius:10px;background:#0a315f;color:#fff;font-size:24px;cursor:pointer}
+.orbit{display:flex;gap:18px;overflow-x:auto;padding:26px max(calc(50% - 170px),22px) 34px;scroll-snap-type:x mandatory;scroll-padding-inline:50%;touch-action:pan-x;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin;cursor:grab;user-select:none;position:relative}
+.event{flex:0 0 340px;min-height:300px;scroll-snap-align:center;scroll-snap-stop:always;padding:20px;border:1px solid #3d75aa;border-radius:16px;background:linear-gradient(160deg,#0d396b,#08264c);position:relative;transition:.2s}.event.active{border-color:var(--gold);transform:scale(1.035);box-shadow:0 0 0 2px #f4c85a33}.event .date{color:#9bcaff;font-weight:900}.event .icon{font-size:44px;margin:14px 0 6px}.event h3{font-size:21px;margin:5px 0 10px}.event p{color:#b8cfe3;line-height:1.7;font-size:13px}.event button{position:absolute;left:15px;right:15px;bottom:15px;padding:9px;border:1px solid var(--gold);border-radius:999px;background:transparent;color:var(--gold);font-weight:900;cursor:pointer}
 .detail{margin:0 18px 20px;padding:18px;border:1px solid #2a5e8c;border-radius:15px;background:#03162e}.detail b{color:var(--gold)}.detail p{color:#b8cee1;line-height:1.8}
 .swipe-note{text-align:center;color:#9dbbd8;padding:0 10px 18px;font-size:13px}
 footer{text-align:center;padding:24px 8px;color:#9db7d0}
@@ -36,6 +36,36 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 .modal-icon{font-size:56px;margin:14px 0 4px}
 .modal-card h2{font-size:clamp(25px,4vw,38px);margin:4px 48px 14px 0}
 .modal-card p{color:#d3e2ef;line-height:2;font-size:16px;white-space:pre-wrap}
+
+
+.history{position:relative}
+.history:before,.history:after{
+  content:"";position:absolute;top:76px;bottom:116px;width:54px;z-index:5;pointer-events:none
+}
+.history:before{left:0;background:linear-gradient(90deg,#061d3f,transparent)}
+.history:after{right:0;background:linear-gradient(270deg,#061d3f,transparent)}
+.orbit.dragging{cursor:grabbing;scroll-snap-type:none}
+.swipe-guide{
+  display:flex;justify-content:center;align-items:center;gap:14px;
+  color:#b9d1e7;font-weight:800;font-size:13px;padding:0 12px 8px
+}
+.swipe-guide .pulse{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:125px;padding:8px 14px;border:1px solid #4779a9;border-radius:999px;
+  background:#082a52;box-shadow:0 0 0 0 rgba(100,180,255,.35);
+  animation:pulseSwipe 2s infinite
+}
+@keyframes pulseSwipe{
+  0%{box-shadow:0 0 0 0 rgba(100,180,255,.35)}
+  70%{box-shadow:0 0 0 12px rgba(100,180,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(100,180,255,0)}
+}
+@media(max-width:600px){
+  .event{flex-basis:86vw;min-height:310px}
+  .orbit{padding-left:7vw;padding-right:7vw;gap:14px}
+  .history:before,.history:after{width:24px}
+  .navbuttons button{width:52px;height:46px}
+}
 
 </style>
 </head>
@@ -85,7 +115,7 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 
 <section class="history">
 <div class="hhead"><h2>FORGEATION HISTORY <span>沿革の旅</span></h2><div class="navbuttons"><button id="prev">←</button><button id="next">→</button></div></div>
-<div class="orbit" id="orbit"></div>
+<div class="orbit" id="orbit"></div><div class="swipe-guide"><span>◀</span><span class="pulse">左右にスワイプ</span><span>▶</span></div>
 <div class="detail" id="detail"></div>
 <div class="swipe-note">iPhone：指で左右にスワイプ　／　PC：← → ボタン・ドラッグ・マウスホイール</div>
 </section>
@@ -123,10 +153,80 @@ function openDetail(i){
 }
 history.forEach((h,i)=>{const e=document.createElement("article");e.className="event";e.innerHTML=`<div class="date">${h[0]}</div><div class="icon">${h[1]}</div><h3>${h[2]}</h3><p>${h[3]}</p><button>この出来事の詳細を見る</button>`;e.querySelector("button").onclick=()=>{openDetail(i)};orbit.appendChild(e)});
 show(history.length-1);
-document.getElementById("prev").onclick=()=>orbit.scrollBy({left:-350,behavior:"smooth"});
-document.getElementById("next").onclick=()=>orbit.scrollBy({left:350,behavior:"smooth"});
-orbit.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){e.preventDefault();orbit.scrollLeft+=e.deltaY}},{passive:false});
-let down=false,sx=0,sl=0;orbit.addEventListener("pointerdown",e=>{down=true;sx=e.clientX;sl=orbit.scrollLeft;orbit.setPointerCapture(e.pointerId)});orbit.addEventListener("pointermove",e=>{if(down)orbit.scrollLeft=sl-(e.clientX-sx)});orbit.addEventListener("pointerup",()=>down=false);orbit.addEventListener("pointercancel",()=>down=false);
+let currentIndex=history.length-1;
+
+function cardWidth(){
+  const first=orbit.querySelector(".event");
+  if(!first) return 360;
+  const gap=parseFloat(getComputedStyle(orbit).gap||18);
+  return first.getBoundingClientRect().width+gap;
+}
+function goToIndex(i, smooth=true){
+  currentIndex=Math.max(0,Math.min(history.length-1,i));
+  const cards=orbit.querySelectorAll(".event");
+  cards[currentIndex]?.scrollIntoView({
+    behavior:smooth?"smooth":"auto",
+    inline:"center",
+    block:"nearest"
+  });
+  show(currentIndex);
+}
+document.getElementById("prev").onclick=()=>goToIndex(currentIndex-1);
+document.getElementById("next").onclick=()=>goToIndex(currentIndex+1);
+
+orbit.addEventListener("wheel",e=>{
+  if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+    e.preventDefault();
+    orbit.scrollLeft+=e.deltaY;
+  }
+},{passive:false});
+
+let down=false,startX=0,startScroll=0,moved=false;
+orbit.addEventListener("pointerdown",e=>{
+  if(e.target.closest("button")) return;
+  down=true;moved=false;startX=e.clientX;startScroll=orbit.scrollLeft;
+  orbit.classList.add("dragging");
+  orbit.setPointerCapture(e.pointerId);
+});
+orbit.addEventListener("pointermove",e=>{
+  if(!down) return;
+  const dx=e.clientX-startX;
+  if(Math.abs(dx)>4) moved=true;
+  orbit.scrollLeft=startScroll-dx;
+});
+function finishDrag(e){
+  if(!down) return;
+  down=false;
+  orbit.classList.remove("dragging");
+  const delta=orbit.scrollLeft-startScroll;
+  if(Math.abs(delta)>45){
+    goToIndex(currentIndex+(delta>0?1:-1));
+  }else{
+    goToIndex(currentIndex);
+  }
+}
+orbit.addEventListener("pointerup",finishDrag);
+orbit.addEventListener("pointercancel",finishDrag);
+
+let scrollTimer;
+orbit.addEventListener("scroll",()=>{
+  clearTimeout(scrollTimer);
+  scrollTimer=setTimeout(()=>{
+    const cards=[...orbit.querySelectorAll(".event")];
+    const center=orbit.scrollLeft+orbit.clientWidth/2;
+    let best=0,bestDist=Infinity;
+    cards.forEach((card,i)=>{
+      const cardCenter=card.offsetLeft+card.offsetWidth/2;
+      const d=Math.abs(cardCenter-center);
+      if(d<bestDist){bestDist=d;best=i;}
+    });
+    currentIndex=best;
+    show(currentIndex);
+  },110);
+});
+
+window.addEventListener("load",()=>setTimeout(()=>goToIndex(history.length-1,false),80));
+window.addEventListener("resize",()=>goToIndex(currentIndex,false));
 
 const historyModal=document.getElementById("historyModal");
 document.getElementById("modalClose").onclick=()=>{historyModal.classList.remove("open");historyModal.setAttribute("aria-hidden","true")};
