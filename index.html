@@ -2223,7 +2223,8 @@ onclick="const m=document.getElementById('collectionComingSoon');if(m){m.classLi
     </figure>
     <span class="coming-soon-label">COMING SOON</span><br>
     <div class="coming-soon-actions">
-      <button class="coming-soon-close" id="collectionComingSoonClose" type="button">← ホームページへ戻る</button>
+      <button class="coming-soon-close" id="collectionComingSoonClose" type="button"
+onclick="const m=document.getElementById('collectionComingSoon');if(m){m.classList.remove('open');m.setAttribute('aria-hidden','true');}">← ホームページへ戻る</button>
     </div>
   </div>
 </div>
@@ -2234,11 +2235,11 @@ let slideIndex=0,isPaused=false,timer;
 function showSlide(index){slides.forEach((s,i)=>s.classList.toggle('is-active',i===index));dots.forEach((d,i)=>d.classList.toggle('is-active',i===index));slideIndex=index}
 function startSlider(){clearInterval(timer);timer=setInterval(()=>{if(!isPaused)showSlide((slideIndex+1)%slides.length)},6500)}
 dots.forEach((d,i)=>d.addEventListener('click',()=>{showSlide(i);startSlider()}));
-pauseButton.addEventListener('click',()=>{isPaused=!isPaused;pauseButton.textContent=isPaused?'再生':'一時停止'});
+pauseButton.addEventListener('click',()=>{isPaused=!isPaused;pauseButton.textContent=isP
+aused?'再生':'一時停止'});
 startSlider();
 
-const menuButton=document.getElementById('menuButton'),navLinks=document.getElementById('
-navLinks');
+const menuButton=document.getElementById('menuButton'),navLinks=document.getElementById('navLinks');
 menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(open))});
 navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false')}));
 
@@ -2270,7 +2271,7 @@ function closeCollectionComingSoon(){
   collectionComingSoon.setAttribute('aria-hidden','true');
 }
 collectionDoorButton?.addEventListener('click',openCollectionComingSoon);
-collectionComingSoonClose?.addEventListener('click',()=>{ window.location.href='./index.html'; });
+collectionComingSoonClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoonTopClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoon?.addEventListener('click',e=>{if(e.target===collectionComingSoon)closeCollectionComingSoon()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCollectionComingSoon()});
