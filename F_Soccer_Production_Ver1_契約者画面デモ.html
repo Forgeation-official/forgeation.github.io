@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>F Soccer β Ver3｜Forgeation Cloud接続版</title>
+<title>F Soccer Production Ver1 Demo</title>
 <style>
 :root{
   --navy:#06162f;
@@ -538,10 +538,71 @@ body{
 .coach-face{font-size:52px;text-align:center}.parent-lock{font-size:42px;text-align:center}
 @media(max-width:520px){.metric-grid{grid-template-columns:1fr}.feature-title{font-size:19px}}
 
+
+/* ===== F Soccer Production Ver1 契約者専用デモ ===== */
+.production-gate{
+  position:fixed; inset:0; z-index:90000; display:flex; align-items:center; justify-content:center;
+  padding:22px; background:
+  radial-gradient(circle at 50% 15%,rgba(58,184,255,.28),transparent 34%),
+  linear-gradient(160deg,#061426,#082b53 55%,#07172b);
+  color:#fff;
+}
+.production-gate.is-hidden{display:none}
+.production-card{
+  width:min(560px,94vw); border:1px solid rgba(140,210,255,.34); border-radius:28px;
+  padding:28px; background:rgba(5,24,47,.92); box-shadow:0 24px 70px rgba(0,0,0,.42);
+  text-align:center; backdrop-filter:blur(12px)
+}
+.production-mark{
+  width:86px;height:86px;margin:0 auto 18px;border-radius:24px;display:grid;place-items:center;
+  font-size:52px;font-weight:1000;font-style:italic;background:linear-gradient(145deg,#22c8ff,#1767e8 65%,#ff7b27);
+  box-shadow:0 0 28px rgba(34,200,255,.3)
+}
+.production-card h1{margin:6px 0 6px;font-size:28px}
+.production-card .sub{color:#a9ddff;font-size:13px;letter-spacing:.08em}
+.contract-box{
+  margin:20px 0;padding:16px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff22;text-align:left
+}
+.contract-row{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px solid #ffffff13}
+.contract-row:last-child{border-bottom:0}
+.contract-row span:first-child{color:#9fc5e8}.contract-row strong{color:#fff}
+.demo-badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#fff1c7;color:#705400;font-size:11px;font-weight:950}
+.production-enter{
+  width:100%;border:0;border-radius:15px;padding:16px;font-size:17px;font-weight:950;color:#fff;
+  background:linear-gradient(90deg,#e84c98,#2879ed);cursor:pointer
+}
+.production-enter:active{transform:scale(.985)}
+.member-strip{
+  margin:10px 0 14px;padding:12px 14px;border-radius:15px;border:1px solid rgba(99,187,255,.25);
+  background:linear-gradient(90deg,rgba(22,103,232,.14),rgba(232,76,152,.10));
+  display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center
+}
+.member-main{font-size:13px;color:#cfe9ff}.member-main b{display:block;color:#fff;font-size:15px}
+.member-status{font-size:11px;font-weight:950;padding:6px 9px;border-radius:999px;background:#173f65;color:#9fe9ff}
+.production-note{font-size:11px;color:#8fb4d4;margin-top:8px;line-height:1.6}
+
 </style>
 </head>
 <body>
-<!-- F Soccer β Ver3 Forgeation Cloud接続版 / 6機能タップ画面搭載 -->
+
+<div class="production-gate" id="productionGate">
+  <div class="production-card">
+    <div class="production-mark">F</div>
+    <div class="sub">F SOCCER MEMBER ACCESS</div>
+    <h1>契約者専用 F Soccer</h1>
+    <p>決済・会員登録が完了した利用者が、ここから正式版へ移行するイメージです。</p>
+    <div class="contract-box">
+      <div class="contract-row"><span>User ID</span><strong>DEMO-0001</strong></div>
+      <div class="contract-row"><span>プラン</span><strong>個人プラン ¥980/月</strong></div>
+      <div class="contract-row"><span>契約状態</span><strong><span class="demo-badge">テスト表示</span></strong></div>
+      <div class="contract-row"><span>データ</span><strong>DB接続後に本人専用で保存</strong></div>
+    </div>
+    <button class="production-enter" id="enterProduction" type="button">正式版 F Soccer を開く</button>
+    <div class="production-note">※ 現在は決済・認証未接続のデモです。実際のお金や個人情報は扱いません。</div>
+  </div>
+</div>
+
+<!-- F Soccer Production Ver1 契約者画面デモ / β版UI継承 / 6機能タップ画面搭載 -->
 <main class="app">
   <header class="topbar">
     <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
@@ -554,6 +615,16 @@ body{
     </div>
     <button class="settings" id="resetButton" type="button" aria-label="最初から">↻</button>
   </header>
+
+  <section class="member-strip" aria-label="契約者情報">
+    <div class="member-main">
+      <b>F Soccer Member</b>
+      User ID：DEMO-0001 ／ 個人プラン（月額980円）※デモ表示
+    </div>
+    <div class="member-status">契約者専用</div>
+  </section>
+  <div class="production-note">本画面は契約後の正式版イメージです。実際のUser ID・契約状態・利用履歴はDB接続後に本人の情報だけを表示します。</div>
+
 
   <section class="coach-message">
     <div class="coach-avatar">⚽</div>
@@ -1185,6 +1256,18 @@ document.addEventListener("keydown",e=>{
     if(open)closeFeature(open);
   }
 });
+
+
+/* ===== Production member gate ===== */
+document.getElementById("enterProduction")?.addEventListener("click",()=>{
+  document.getElementById("productionGate")?.classList.add("is-hidden");
+  try{ sessionStorage.setItem("fSoccerProductionDemoEntered","1"); }catch(e){}
+});
+try{
+  if(sessionStorage.getItem("fSoccerProductionDemoEntered")==="1"){
+    document.getElementById("productionGate")?.classList.add("is-hidden");
+  }
+}catch(e){}
 
 </script>
 
