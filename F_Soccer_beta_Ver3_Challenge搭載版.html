@@ -541,7 +541,7 @@ body{
 </style>
 </head>
 <body>
-<!-- F Soccer β Ver3 Forgeation Cloud接続版 / 6機能タップ画面搭載 -->
+<!-- F Soccer β Ver3 / 6機能タップ画面搭載 / API復旧修正版（API会話成功版の接続先へ復元） -->
 <main class="app">
   <header class="topbar">
     <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
@@ -769,7 +769,7 @@ const safeLocalStorage={
     try{window.localStorage.setItem(key,value)}catch(_){}
   }
 };
-const API_URL = "https://forgeation-api.eru1212121.workers.dev/chat";
+const API_URL = "https://forgeation-api.eru12121221.workers.dev";
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
