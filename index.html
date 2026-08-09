@@ -2270,7 +2270,7 @@ function closeCollectionComingSoon(){
   collectionComingSoon.setAttribute('aria-hidden','true');
 }
 collectionDoorButton?.addEventListener('click',openCollectionComingSoon);
-collectionComingSoonClose?.addEventListener('click',closeCollectionComingSoon);
+collectionComingSoonClose?.addEventListener('click',()=>{ window.location.href='./index.html'; });
 collectionComingSoonTopClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoon?.addEventListener('click',e=>{if(e.target===collectionComingSoon)closeCollectionComingSoon()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCollectionComingSoon()});
