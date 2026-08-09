@@ -1176,5 +1176,102 @@ loadServerProgress();
 
 </script>
 
+
+<style id="button-fix-v1">
+.challenge-tabs,.challenge-actions{position:relative;z-index:50;pointer-events:auto!important}
+.challenge-tab,.challenge-actions button{position:relative;z-index:51;pointer-events:auto!important;cursor:pointer}
+.pk-reference,.pk-reference img,.challenge-media,.challenge-media img,.challenge-media video{pointer-events:none!important}
+</style>
+<script id="button-fix-v1-script">
+(function(){
+  function activateChallenge(id, btn){
+    document.querySelectorAll('.challenge-tab').forEach(function(t){t.classList.toggle('active',t===btn);});
+    document.querySelectorAll('[data-chall
+enge-panel]').forEach(function(p){p.classList.toggle('active',p.getAttribute('data-challenge-panel')===id);});
+  }
+  document.addEventListener('click',function(e){
+    var tab=e.target.closest && e.target.closest('.challenge-tab');
+    if(tab){ e.preventDefault(); e.stopPropagation(); activateChallenge(tab.getAttribute('data-challenge'),tab); return; }
+    var pk=e.target.closest && e.target.closest('[data-pk]');
+    if(pk){
+      e.preventDefault(); e.stopPropagation();
+      var shot=pk.getAttribute('data-pk');
+      var scene=document.getElementById('pkSceneImage');
+      if(scene && window.pkSceneImages && window.pkSceneImages[shot]) scene.src=window.pkSceneImages[shot];
+      // const で定義された既存変数にも同一scriptグローバル環境からアクセス可能な場合に対応
+      try{ if(scene && typeof pkSceneImages!=='undefined' && pkSceneImages[shot]) scene.src=pkSceneImages[shot]; }catch(_e){}
+      document.querySelectorAll('[data-pk]').forEach(function(b){b.classList.toggle('pk-selected',b===pk);});
+      var result=document.getElementById('pkResult');
+      if(result) result.textContent=shot+'へ蹴るコースを選択しました。';
+      return;
+    }
+  },true);
+})();
+</script>
+
+
+<style id="all-button-fix-v2">
+.menu-grid,.menu-item,.icon-circle,.menu-label,
+.challenge-tabs,.challenge-tab,.challenge-actions,.challenge-actions button,
+#profileEditButton,#profileSaveButton,#resetButton,#sendButton{
+  position:relative;
+  z-index:60;
+  pointer-events:auto!important;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+</style>
+<script id="all-button-fix-v2-script">
+(function(){
+  function ready(fn){
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, {once:true});
+    else fn();
+  }
+  ready(function(){
+    // 上段6メニューを確実に反応させる（既存処理の二重発火は止める）
+    document.querySelectorAll('.menu-item[data-prompt]').forEach(function(btn){
+      btn.addEventListener('click', function(ev){
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        var prompt = btn.getAttribute('data-prompt') || '';
+        try{
+          if(typeof sendToCoach === 'function'){
+            var msg = (typeof buildMenuMessage === 'function') ? buildMenuMessage(prompt) : prompt;
+            sendToCoach(msg, btn);
+            return;
+          }
+        }catch(err){ console.error(err); }
+        var input = document.getElementById('messageInput');
+        var form = document.getElementById('chatForm');
+        if(input) input.value = prompt;
+        if(form){
+          if(typeof form.requestSubmit === 'function') form.requestSubmit();
+          else form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
+        }
+      }, true);
+    });
+
+    // Challengeタブの切替を確実化
+    document.querySelectorAll('.challenge-tab[data-challenge]').forEach(function(btn){
+      btn.addEventListener('click', function(ev){
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        var id = btn.getAttribute('data-challenge');
+        document.querySelectorAll('.challenge-tab').forEach(function(t){ t.classList.toggle('active', t===btn); });
+        document.querySelectorAll('[data-challenge-panel]').forEach(function(p){
+          p.classList.toggle('active', p.getAttribute('data-challenge-panel')===id);
+        });
+      }, true);
+    });
+
+    // PK 左・中央・右は既存の画像切替処理を優先しつつ、クリック阻害を防ぐ
+    document.querySelectorAll('[data-pk]').forEach(function(btn){
+      btn.style.pointerEvents='auto';
+      btn.style.cursor='pointer';
+      btn.style.touchAction='manipulation';
+    });
+  });
+})();
+</script>
 </body>
 </html>
