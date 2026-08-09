@@ -37,9 +37,18 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 .modal-card h2{font-size:clamp(25px,4vw,38px);margin:4px 48px 14px 0}
 .modal-card p{color:#d3e2ef;line-height:2;font-size:16px;white-space:pre-wrap}
 
+
+.page-back{position:fixed;top:18px;right:18px;z-index:9000;display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border:1px solid #76cfff;border-radius:999px;background:#061d3fe8;color:#fff;text-decoration:none;font-weight:900;box-shadow:0 8px 24px #0006;backdrop-filter:blur(8px)}
+.page-back:hover{background:#0b3769}
+@media(max-width:600px){.page-back{top:10px;right:10px;padding:8px 12px;font-size:12px}}
+
+/* 象徴の旅：主要マイルストーンをビジュアルで俯瞰 */
+.visual-history{margin-top:22px;padding:20px;border:1px solid rgba(89,200,255,.28);border-radius:24px;background:linear-gradient(180deg,rgba(8,54,112,.78),rgba(4,25,63,.92));overflow:hidden}
+.visual-history-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:14px}.visual-history-head h2{margin:0;color:#70d7ff;font-size:clamp(22px,3vw,34px)}.visual-history-head span{color:#ffd66b;font-size:.55em}.visual-history-head p{margin:0;color:#c9eaff;font-weight:800}
+.visual-orbit{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}.visual-card{flex:0 0 250px;scroll-snap-align:start;border:1px solid rgba(113,205,255,.38);border-radius:18px;padding:16px;background:linear-gradient(180deg,rgba(16,100,198,.82),rgba(6,43,100,.92));box-shadow:inset 0 0 24px rgba(0,145,255,.08)}.visual-card.featured{border-color:#ffd66b;box-shadow:0 0 18px rgba(255,214,107,.18)}.visual-date{font-weight:900;color:#a9e7ff;font-size:13px}.visual-art{min-height:58px;display:flex;align-items:center}.visual-emoji{font-size:38px}.f-history-logo{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:34px;font-weight:1000;font-style:italic;color:white;background:linear-gradient(145deg,#19a8ff,#164cff 55%,#ff547d);box-shadow:0 8px 24px rgba(0,110,255,.35)}.visual-card h3{margin:6px 0 8px;font-size:19px}.visual-card p{margin:0 0 14px;color:#d9edff;font-size:13px;line-height:1.65}.visual-card button{border:1px solid #ffd66b;border-radius:999px;background:transparent;color:#ffe39a;padding:8px 13px;font-weight:900;cursor:pointer}
 </style>
 </head>
-<body><div class="wrap">
+<body><a class="page-back" href="./index.html" aria-label="Forgeation公式ホームページへ戻る">← ホームページへ戻る</a><div class="wrap">
 <header>
 <div class="brand"><div class="logo">F</div><div>Forgeation<small>FUTURE MANAGEMENT</small></div></div>
 <h1>FORGEATION NEWS</h1>
@@ -83,6 +92,11 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 </section>
 </div>
 
+<section class="visual-history" aria-label="Forgeation主要沿革">
+  <div class="visual-history-head"><h2>FORGEATION HISTORY <span>象徴の旅</span></h2><p>主要な節目を左右にスワイプ ↔</p></div>
+  <div class="visual-orbit" id="visualOrbit"></div>
+</section>
+
 <section class="history">
 <div class="hhead"><h2>FORGEATION HISTORY <span>沿革の旅</span></h2><div class="navbuttons"><button id="prev">←</button><button id="next">→</button></div></div>
 <div class="orbit" id="orbit"></div>
@@ -105,6 +119,20 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 
 <script>
 const history=[["2026.07.03", "🤝", "ノグとジッピー、出逢う", "ここから二人三脚が始まった。まだホームページもAI社員も形になっていない段階から、起業、会社、AI、教育、スポーツについて対話を重ね、Forgeationへつながる土台を作り始めた。"], ["2026.07.05", "🏫", "「会社＝学校＝企業」の構想", "単にAIサービスを売る会社ではなく、学び・仕事・挑戦が循環する会社をつくるという方向へ。後のForgeation School、各アカデミー、AI社員構想につながる原型が生まれた。"], ["2026.07.07", "🧭🔥", "社名・理念・ブランドを磨く", "社名「Forgeation」、理念「Future Management」、スローガン「Design the Future. Forge the Future.」が形になる。会社の命となるロゴも四苦八苦し、羅針盤やPhoenix（不死鳥）など複数案を検討。最終的にFを核とするForgeationのブランドを育てていった。"], ["2026.07.10", "🌍", "事業の未来図が広がる", "AIを核に、教育、スポーツ、看護・医療、建築、企業支援などへ展開する未来図を整理。「AIが人を置き換える」のではなく、先生や支援者を支える会社という考え方を深めた。"], ["2026.07.16", "🎓", "AIパスポート合格", "ノグがAIパスポートに合格。AIを学ぶ側として積み重ねた経験が、Forgeationの会社づくりと教育思想へつながった。資格取得をゴールにせず、実際のAIサービス開発へ進む大きな節目となった。"], ["2026.07.24", "🌐", "公式ホームページを育てる", "Forgeationの理念、未来図、アカデミーを社会へ見せる公式ホームページづくりが本格化。蒼いトップ画面、スマホ表示、画像切れ、リンク、開校演出などを何度も確認し、二人で修正を重ねた。"], ["2026.07.28", "🤖", "AI受付社員ジッピー", "AI受付社員のデモが形になる。ホームページの1階フロントから来訪者を迎え、相談内容に応じて案内する「会社の顔」としてAI社員構想が具体化した。"], ["2026.07.29", "⚽", "AI Sports Coach／AIコーチ", "スポーツ×AIのデモが形になり、ホームページから体験ページへ移動する導線も整備。F SoccerへつながるAIコーチ製品の原型が動き始めた。"], ["2026.07.30", "🔗", "ホームページとAIコーチを接続", "AIコーチへの導線、ホームページへ戻るボタン、サッカーアカデミー画像などを調整。公開ページとして迷わず行き来できる形へ育てた。"], ["2026.07.31", "🏫", "Forgeation Schoolが大きく拡張", "AI、AI・ロボティクス、スポーツ、F Soccer、看護・医療、建設、教育などのアカデミー素材と導線を整備。AI受付社員の404修正や戻るボタンなど、実際に使える学校型ホームページへ近づいた。"], ["2026.08.01", "🤖", "AI社員チームが拡大", "AI広報、AIシステム、AI学習支援、AI看護、AI建設、AIロボティクス、AIスポーツアカデミー社員などを整備。ホームページ上のAI社員群が一気に厚みを増した。"], ["2026.08.01", "📺", "Forgeation YouTube", "Forgeationチャンネルを開設し、動画を公開。ホームページと動画発信をどうつなぐかも検討し、会社の世界観を文章や静止画だけでなく映像でも届ける段階へ進んだ。"], ["2026.08.02", "🌱", "介護・福祉と新しい扉", "介護アカデミー、AI介護社員、Forgeation bakery、「俺のコレクション」、心を整える時間など、学校の中に学びだけでなく暮らしや物語を感じる新しい空間が広がった。"], ["2026.08.02", "🚀", "AIサッカーコーチ API会話成功", "AIサッカーコーチ Ver1.0のAPI連携が完了。OpenAI APIとの実際の会話に成功し、Cloudflare Worker＋GitHub連携も実現。デモから「本当に会話する製品」へ進んだ、Forgeation会社史の重要な節目。"], ["2026.08.03", "✈️", "AIを現場の支援にも活かす", "児童支援で使うA4用紙のブーメラン飛行機の手順・図面など、会社開発とは別の実務でもジッピーを活用。AIが日々の仕事を支えるというForgeationの考え方を実生活でも積み重ねた。"], ["2026.08.06", "☁️", "Forgeation Cloud構想", "ホームページやAI社員を単独で置くのではなく、データとサービスがつながる会社・学校へ。Forgeation Cloudという考え方が生まれ、将来のDB連携や利用状況の可視化へつながった。"], ["2026.08.09", "🔐", "社長ダッシュボードを公開環境へ", "経営側だけが見る社長ダッシュボードと、来訪者に見せる情報を分離する方針を明確化。Vercelで社長ダッシュボードを公開し、セキュリティ設定も進めた。"], ["2026.08.09", "📊", "「学校のにぎわい」構想", "F Soccerや各アカデミーの利用状況を、仮の数字ではなくDBから取得する本物の実測値で伝える構想へ。社長用の経営情報とは別に、学校の活気を社会へ見せる公開ステータスとして設計を開始した。"], ["2026.08.09", "📰", "FORGEATION NEWS／沿革の旅", "FORGEATION NEWSを公開。おすすめトピックス、学校のにぎわい、会社沿革を一つの場所から見られる情報ページが誕生した。沿革は左右に巡りながら、各出来事の詳細まで読めるインタラクティブな会社史へ進化した。"]];
+const visualMilestones = [
+ {idx:0,art:"logo"},{idx:4,art:"🎓"},{idx:5,art:"🌐"},{idx:6,art:"🤖"},{idx:7,art:"⚽"},{idx:13,art:"🚀"},{idx:15,art:"☁️"},{idx:16,art:"🔐"},{idx:17,art:"📊"},{idx:18,art:"📰"}
+];
+const visualOrbit=document.getElementById("visualOrbit");
+visualMilestones.forEach((m,n)=>{
+ const h=history[m.idx], card=document.createElement("article");
+ card.className="visual-card"+(n===visualMilestones.length-1?" featured":"");
+ const art=m.art==="logo"?'<div class="f-history-logo">F</div>':`<div class="visual-emoji">${m.art}</div>`;
+ card.innerHTML=`<div class="visual-date">${h[0]}</div><div class="visual-art">${art}</div><h3>${h[2]}</h3><p>${h[3]}</p><button type="button">詳細を読む</button>`;
+ card.querySelector("button").addEventListener("click",()=>openDetail(m.idx));
+ visualOrbit.appendChild(card);
+});
+visualOrbit.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){e.preventDefault();visualOrbit.scrollLeft+=e.deltaY;}},{passive:false});
+
 const orbit=document.getElementById("orbit"), detail=document.getElementById("detail");
 function show(i){
  document.querySelectorAll(".event").forEach((e,n)=>e.classList.toggle("active",n===i));
@@ -121,7 +149,7 @@ function openDetail(i){
  const m=document.getElementById("historyModal");
  m.classList.add("open"); m.setAttribute("aria-hidden","false");
 }
-history.forEach((h,i)=>{const e=document.createElement("article");e.className="event";e.innerHTML=`<div class="date">${h[0]}</div><div class="icon">${h[1]}</div><h3>${h[2]}</h3><p>${h[3]}</p><button>この出来事の詳細を見る</button>`;e.querySelector("button").onclick=()=>{openDetail(i)};orbit.appendChild(e)});
+history.forEach((h,i)=>{const e=document.createElement("article");e.className="event";e.innerHTML=`<div class="date">${h[0]}</div><div class="icon">${h[1]}</div><h3>${h[2]}</h3><p>${h[3]}</p><button type="button" class="event-detail-btn">この出来事の詳細を見る</button>`;const btn=e.querySelector(".event-detail-btn"); btn.addEventListener("pointerdown",ev=>ev.stopPropagation()); btn.addEventListener("click",ev=>{ev.preventDefault();ev.stopPropagation();openDetail(i)});orbit.appendChild(e)});
 let currentIndex=history.length-1;
 
 function cardStep(){
