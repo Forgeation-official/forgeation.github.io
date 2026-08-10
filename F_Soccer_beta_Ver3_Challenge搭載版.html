@@ -618,7 +618,7 @@ body{
 </style>
 </head>
 <body>
-<!-- F Soccer β Ver3 / Challenge搭載 / XP可視化修正版 / API会話接続維持 -->
+<!-- F Soccer β Ver3 / 全Challenge維持 / XP連動 / パス・戦術 次問題対応 / API会話接続維持 -->
 <main class="app">
   <header class="topbar">
     <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
@@ -710,8 +710,7 @@ body{
 
     <div class="challenge-panel active" data-challenge-panel="pk">
       <h3 class="challenge-title">PKチャレンジ</h3>
-      <div class="challenge-visual pk-scene" id="pkScene" data-shot="">
-        <div class="pk-goal"></div><div class="pk-keeper" aria-hidden="true"></div>
+<div class="pk-keeper" aria-hidden="true"></div>
         <div class="pk-target left"></div><div class="pk-target center"></div><div class="pk-target right"></div>
         <div class="ball pk-ball"></div>
       </div>
@@ -726,8 +725,7 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="dribble">
       <h3 class="challenge-title">ドリブルマスター</h3>
-      <div class="challenge-visual dribble-scene">
-        <div class="field-line half"></div><div class="field-line circle"></div>
+<div class="field-line circle"></div>
         <div class="player blue"></div><div class="ball"></div>
         <div class="cone c1"></div><div class="cone c2"></div><div class="cone c3"></div><div class="route"></div>
       </div>
@@ -743,34 +741,24 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="pass">
       <h3 class="challenge-title">パスチャレンジ</h3>
-      <div class="challenge-visual pass-scene" id="passScene" data-passview="縦">
-        <div class="field-line half"></div><div class="field-line circle"></div>
-        <div class="player blue p1"></div><div class="player blue p2"></div><div class="player blue p3"></div>
-        <div class="player pink opp1"></div><div class="player pink opp2"></div>
-        <div class="ball"></div><div class="route pass-line"></div>
-      </div>
-      <p class="challenge-caption">味方と相手の位置を見て、通すパスを選びます。</p>
-      <div class="challenge-actions">
+      <div class="challenge-result" id="passQuestion">前を向いてボールを持ち、FWが相手DFの背後へ走り出した。どうする？</div>
+      <div class="challenge-actions" style="margin-top:9px">
         <button type="button" data-pass="安全">安全なパス</button>
         <button type="button" data-pass="縦">縦パス</button>
         <button type="button" data-pass="サイド">サイドチェンジ</button>
       </div>
-      <div class="challenge-result" id="passResult">状況を読み、最適なパスを選ぼう。</div>
+      <div class="challenge-result" id="passResult">最適なパスを選ぼう。正解すると次の問題へ進みます。</div>
     </div>
 
     <div class="challenge-panel" data-challenge-panel="quiz">
       <h3 class="challenge-title">戦術クイズ</h3>
-      <div class="challenge-visual tactic-scene">
-        <div class="field-line half"></div><div class="field-line circle"></div><div class="zone right"></div>
-        <div class="player blue p1"></div><div class="player blue p2"></div><div class="player pink opp1"></div><div class="route"></div>
-      </div>
-      <p class="challenge-caption">空いているスペースと味方の位置を見て判断します。</p>
       <div class="challenge-result" id="quizQuestion">味方が右サイドでフリー。自分は中央で前を向いている。どうする？</div>
-      <div class="quiz-options" style="margin-top:9px">
+      <div class="quiz-options" id="quizOptions" style="margin-top:9px">
         <button type="button" data-quiz="A">A：すぐ右へ展開する</button>
         <button type="button" data-quiz="B">B：その場で止まる</button>
         <button type="button" data-quiz="C">C：後ろだけを見る</button>
       </div>
+      <div class="challenge-result" id="quizResult" style="margin-top:9px">正解すると次の問題へ進みます。</div>
     </div>
 
     <div class="challenge-panel" data-challenge-panel="drone">
@@ -1191,36 +1179,73 @@ document.querySelectorAll("[data-dribble]").forEach(button => {
   });
 });
 
-/* パス */
+/* パス：正解後に次の問題へ */
+const passChallenges = [
+  {q:"前を向いてボールを持ち、FWが相手DFの背後へ走り出した。どうする？", correct:"縦", ok:"GOOD！ タイミングよく縦パスを通して一気に前進しよう。"},
+  {q:"相手が中央を固めていて、逆サイドの味方がフリー。どうする？", correct:"サイド", ok:"GOOD！ サイドチェンジで相手を横に広げよう。"},
+  {q:"自陣で強いプレッシャーを受け、前方のパスコースが消えている。どうする？", correct:"安全", ok:"GOOD！ 無理をせず安全に繋いで立て直そう。"},
+  {q:"中盤で前を向けた。FWが足元で受けたがっていて、その先にもスペースがある。どうする？", correct:"縦", ok:"GOOD！ 縦につけて次の攻撃へ繋げよう。"},
+  {q:"右サイドに相手が集まり、左サイドの味方が大きく空いている。どうする？", correct:"サイド", ok:"GOOD！ 大きく展開して空いたスペースを使おう。"}
+];
+let passIndex = 0;
+let passLocked = false;
+function renderPassChallenge(){
+  const item=passChallenges[passIndex];
+  document.getElementById("passQuestion").textContent=`問題 ${passIndex+1} / ${passChallenges.length}：${item.q}`;
+  document.getElementById("passResult").textContent="最適なパスを選ぼう。";
+  passLocked=false;
+}
 document.querySelectorAll("[data-pass]").forEach(button => {
   button.addEventListener("click", () => {
-    const choice = button.dataset.pass;
-    const result = document.getElementById("passResult");
-    if (choice === "縦") {
-      result.textContent = "GOOD！ 前を向けているので、縦パスで一気に前進できる場面です。";
-      addCoachXp(10, "正しいパス判断");
-    } else if (choice === "サイド") {
-      result.textContent = "良い判断！ 相手が中央へ寄っているなら、サイドチェンジも有効です。";
-      addCoachXp(7, "視野を広く使った判断");
-    } else {
-      result.textContent = "安全な選択です。ただし前進できる場面では、縦方向も確認しよう。";
+    if(passLocked) return;
+    const item=passChallenges[passIndex];
+    const choice=button.dataset.pass;
+    const result=document.getElementById("passResult");
+    if(choice===item.correct){
+      passLocked=true;
+      result.textContent=`正解！ ${item.ok}　→ 次の問題へ`;
+      addCoachXp(10,"正しいパス判断");
+      setTimeout(()=>{ passIndex=(passIndex+1)%passChallenges.length; renderPassChallenge(); },900);
+    }else{
+      result.textContent="惜しい！ 味方・相手・空いているスペースをもう一度見てみよう。";
     }
   });
 });
+renderPassChallenge();
 
-/* 戦術クイズ */
+/* 戦術クイズ：正解後に次の問題へ */
+const tacticChallenges = [
+  {q:"味方が右サイドでフリー。自分は中央で前を向いている。どうする？", options:["A：すぐ右へ展開する","B：その場で止まる","C：後ろだけを見る"], correct:"A", ok:"フリーの味方へ早く展開すると、相手守備が整う前に攻撃できます。"},
+  {q:"相手DFラインの背後に大きなスペース。FWが走り出した。どうする？", options:["A：横へ戻す","B：背後へスルーパスを狙う","C：止まって待つ"], correct:"B", ok:"背後のスペースを使う判断が有効です。"},
+  {q:"自陣でボールを奪った直後、相手がまだ戻り切っていない。どうする？", options:["A：素早く前進する","B：必ずGKまで戻す","C：その場で止まる"], correct:"A", ok:"相手が整う前の素早い攻撃は大きなチャンスになります。"},
+  {q:"中央が混雑し、両サイドに幅を取る味方がいる。どうする？", options:["A：中央へ無理に突っ込む","B：幅を使って相手を広げる","C：ボールを止め続ける"], correct:"B", ok:"幅を使えば中央にも新しいスペースが生まれます。"},
+  {q:"味方がボールを持ち、あなたの前に相手DFがいる。サポートで大切なのは？", options:["A：相手の陰に隠れる","B：パスコースを作る位置へ動く","C：動かず見ている"], correct:"B", ok:"ボール保持者から見える場所へ動き、パスコースを作ることが大切です。"}
+];
+let tacticIndex=0;
+let tacticLocked=false;
+function renderTacticChallenge(){
+  const item=tacticChallenges[tacticIndex];
+  document.getElementById("quizQuestion").textContent=`問題 ${tacticIndex+1} / ${tacticChallenges.length}：${item.q}`;
+  document.querySelectorAll("[data-quiz]").forEach((btn,i)=>btn.textContent=item.options[i]);
+  document.getElementById("quizResult").textContent="正しい判断を選ぼう。";
+  tacticLocked=false;
+}
 document.querySelectorAll("[data-quiz]").forEach(button => {
   button.addEventListener("click", () => {
-    const answer = button.dataset.quiz;
-    const box = document.getElementById("quizQuestion");
-    if (answer === "A") {
-      box.textContent = "正解！ フリーの味方へ早く展開すると、相手守備が整う前に攻撃できます。";
-      addCoachXp(12, "戦術クイズ正解");
-    } else {
-      box.textContent = "もう一度考えよう。味方がフリーなら、相手が戻る前にボールを届けるのが有効です。";
+    if(tacticLocked) return;
+    const item=tacticChallenges[tacticIndex];
+    const result=document.getElementById("quizResult");
+    if(button.dataset.quiz===item.correct){
+      tacticLocked=true;
+      result.textContent=`正解！ ${item.ok}　→ 次の問題へ`;
+      addCoachXp(12,"戦術クイズ正解");
+      setTimeout(()=>{ tacticIndex=(tacticIndex+1)%tacticChallenges.length; renderTacticChallenge(); },900);
+    }else{
+      result.textContent="惜しい！ 空いている場所と味方の動きをもう一度見てみよう。";
     }
   });
 });
+renderTacticChallenge();
 
 /* Fドローン */
 let miniDroneX = 14;
