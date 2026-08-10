@@ -654,28 +654,33 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="pass">
       <h3 class="challenge-title">パスチャレンジ</h3>
-      <div class="challenge-actions">
+      <div class="challenge-result" id="passQuestion">第1問を読み込んでいます…</div>
+      <div class="challenge-actions" style="margin-top:9px">
         <button type="button" data-pass="安全">安全なパス</button>
         <button type="button" data-pass="縦">縦パス</button>
         <button type="button" data-pass="サイド">サイドチェンジ</button>
       </div>
-      <div class="challenge-result" id="passResult">状況を読み、最適なパスを選ぼう。</div>
+      <div class="challenge-result" id="passResult">状況を読んで、最適なパスを選ぼう。</div>
+      <button class="challenge-primary" id="passNext" type="button" style="width:100%;display:none">次の問題へ ▶</button>
     </div>
 
     <div class="challenge-panel" data-challenge-panel="quiz">
       <h3 class="challenge-title">戦術クイズ</h3>
-      <div class="challenge-result" id="quizQuestion">味方が右サイドでフリー。自分は中央で前を向いている。どうする？</div>
-      <div class="quiz-options" style="margin-top:9px">
-        <button type="button" data-quiz="A">A：すぐ右へ展開する</button>
-        <button type="button" data-quiz="B">B：その場で止まる</button>
-        <button type="button" data-quiz="C">C：後ろだけを見る</button>
+      <div class="challenge-result" id="quizQuestion">第1問を読み込んでいます…</div>
+      <div class="quiz-options" id="quizOptions" style="margin-top:9px">
+        <button type="button" data-quiz="A">A</button>
+        <button type="button" data-quiz="B">B</button>
+        <button type="button" data-quiz="C">C</button>
       </div>
+      <div class="challenge-result" id="quizResult">正しいプレーを選ぼう。</div>
+      <button class="challenge-primary" id="quizNext" type="button" style="width:100%;display:none">次の問題へ ▶</button>
     </div>
 
     <div class="challenge-panel" data-challenge-panel="drone">
       <h3 class="challenge-title">Fドローン練習場</h3>
-      <div class="drone-mini-field">
-        <div class="drone-target">PASS</div>
+      <div class="challenge-result" id="droneMission">MISSION 1 / 4：右サイドの空きスペースを探せ。</div>
+      <div class="drone-mini-field" style="margin-top:10px">
+        <div class="drone-target" id="miniDroneTarget">RIGHT</div>
         <div class="drone-mini" id="miniDrone">🚁</div>
       </div>
       <div class="drone-pad">
@@ -689,7 +694,8 @@ body{
         <button type="button" data-mini-drone="down">↓</button>
         <button class="empty" type="button">・</button>
       </div>
-      <div class="challenge-result" id="droneResult">ドローンを右上のPASS地点へ移動しよう。</div>
+      <div class="challenge-result" id="droneResult">上空からピッチを見て、指定されたエリアへドローンを移動しよう。</div>
+      <button class="challenge-primary" id="droneNext" type="button" style="width:100%;display:none">次のミッションへ ▶</button>
     </div>
   </section>
 
@@ -1078,49 +1084,222 @@ document.querySelectorAll("[data-dribble]").forEach(button => {
   });
 });
 
-/* パス */
+/* パス：状況問題を読んで3択。正解後に次の問題へ */
+const passQuestions = [
+  {
+    q:"中央で前を向いてボールを持った。FWが相手DFの間へ走り込み、縦のコースが開いている。どうする？",
+    answer:"縦",
+    ok:"正解！ FWの動きに合わせて縦パス。相手守備が整う前に前進できます。",
+    hint:"FWの動きと、前方向に空いたコースをもう一度見てみよう。"
+  },
+  {
+    q:"相手が中央に人数を集めている。反対サイドの味方が大きくフリーになっている。どうする？",
+    answer:"サイド",
+    ok:"正解！ サイドチェンジで相手を横に動かし、広いスペースを使えます。",
+    hint:"相手が中央に寄っている時は、反対側の広い場所も確認しよう。"
+  },
+  {
+    q:"自陣でボールを持ったが、前方を2人の相手に囲まれている。すぐ近くにフリーの味方がいる。どうする？",
+    answer:"安全",
+    ok:"正解！ 無理に前へ出さず、フリーの味方を使ってボールを失わない判断です。",
+    hint:"囲まれている時は、まずボールを失わない選択も大切です。"
+  },
+  {
+    q:"中盤で受けた瞬間、前方の味方が相手DFの背後へ抜け出した。パスコースも見えている。どうする？",
+    answer:"縦",
+    ok:"正解！ タイミングを逃さず縦へ。抜け出した味方を生かすパスです。",
+    hint:"前の味方が背後へ動いた瞬間がチャンス。前方向を見よう。"
+  },
+  {
+    q:"右サイドで攻撃しているが、相手が右側へ大きく寄ってきた。左サイドには味方が待っている。どうする？",
+    answer:"サイド",
+    ok:"正解！ 反対サイドへ展開して、相手のいないスペースから攻撃できます。",
+    hint:"ボールのある側に相手が集まったら、逆側のスペースを探そう。"
+  }
+];
+let passIndex = 0;
+let passAnswered = false;
+
+function showPassQuestion() {
+  const item = passQuestions[passIndex];
+  document.getElementById("passQuestion").textContent = `第${passIndex + 1}問 / ${passQuestions.length}　${item.q}`;
+  document.getElementById("passResult").textContent = "3つの中から最適なパスを選ぼう。";
+  document.getElementById("passNext").style.display = "none";
+  passAnswered = false;
+}
+
 document.querySelectorAll("[data-pass]").forEach(button => {
   button.addEventListener("click", () => {
+    if (passAnswered) return;
+    const item = passQuestions[passIndex];
     const choice = button.dataset.pass;
     const result = document.getElementById("passResult");
-    if (choice === "縦") {
-      result.textContent = "GOOD！ 前を向けているので、縦パスで一気に前進できる場面です。";
-      addCoachXp(10, "正しいパス判断");
-    } else if (choice === "サイド") {
-      result.textContent = "良い判断！ 相手が中央へ寄っているなら、サイドチェンジも有効です。";
-      addCoachXp(7, "視野を広く使った判断");
+    if (choice === item.answer) {
+      passAnswered = true;
+      result.textContent = item.ok;
+      addCoachXp(10, `パスチャレンジ 第${passIndex + 1}問正解`);
+      document.getElementById("passNext").style.display = "block";
     } else {
-      result.textContent = "安全な選択です。ただし前進できる場面では、縦方向も確認しよう。";
+      result.textContent = `惜しい！ ${item.hint}`;
     }
   });
 });
 
-/* 戦術クイズ */
+document.getElementById("passNext").addEventListener("click", () => {
+  passIndex = (passIndex + 1) % passQuestions.length;
+  showPassQuestion();
+});
+
+/* 戦術クイズ：5問を順番に出題 */
+const tacticQuestions = [
+  {
+    q:"味方が右サイドでフリー。自分は中央で前を向いている。どうする？",
+    options:{A:"すぐ右へ展開する",B:"その場で止まる",C:"後ろだけを見る"},
+    answer:"A",
+    ok:"正解！ フリーの味方へ早く展開すると、相手守備が整う前に攻撃できます。",
+    hint:"フリーの味方を早く使えるか考えてみよう。"
+  },
+  {
+    q:"3対2のカウンター。中央の自分に相手DFが寄り、左の味方がフリーになった。どうする？",
+    options:{A:"自分だけでドリブルを続ける",B:"左の味方へパスする",C:"攻撃を止めて後ろへ戻す"},
+    answer:"B",
+    ok:"正解！ 相手を引きつけてフリーの味方を使えば、数的優位を生かせます。",
+    hint:"相手DFが自分に寄ったことで、どこが空いたか見よう。"
+  },
+  {
+    q:"左サイドで味方と2対1を作れた。相手DFはボールを持つ自分へ近づいている。どうする？",
+    options:{A:"味方とのワンツーを狙う",B:"その場でボールを止め続ける",C:"タッチラインの外へ蹴る"},
+    answer:"A",
+    ok:"正解！ 2対1では味方を使うことで相手DFを突破しやすくなります。",
+    hint:"2人対1人という人数の有利を使おう。"
+  },
+  {
+    q:"相手にボールを奪われた直後。自分のすぐ近くにボール保持者がいる。最初に何をする？",
+    options:{A:"ゆっくり前線へ歩く",B:"すぐプレッシャーをかける",C:"相手ゴールだけを見る"},
+    answer:"B",
+    ok:"正解！ 奪われた直後に素早く寄せれば、相手の速い攻撃を遅らせられます。",
+    hint:"ボールを奪われた直後の守備への切り替えを考えよう。"
+  },
+  {
+    q:"ゴール前で味方FWが相手DFを引きつけた。ペナルティエリア手前の中央にスペースができた。どうする？",
+    options:{A:"空いた中央へ走り込む",B:"自陣へ戻る",C:"プレーを止める"},
+    answer:"A",
+    ok:"正解！ 味方が作ったスペースへ入ることで、シュートやラストパスのチャンスが生まれます。",
+    hint:"味方の動きによって新しく空いた場所を探そう。"
+  }
+];
+let tacticIndex = 0;
+let tacticAnswered = false;
+
+function showTacticQuestion() {
+  const item = tacticQuestions[tacticIndex];
+  document.getElementById("quizQuestion").textContent = `第${tacticIndex + 1}問 / ${tacticQuestions.length}　${item.q}`;
+  document.querySelectorAll("[data-quiz]").forEach(button => {
+    const key = button.dataset.quiz;
+    button.textContent = `${key}：${item.options[key]}`;
+  });
+  document.getElementById("quizResult").textContent = "正しいプレーを選ぼう。";
+  document.getElementById("quizNext").style.display = "none";
+  tacticAnswered = false;
+}
+
 document.querySelectorAll("[data-quiz]").forEach(button => {
   button.addEventListener("click", () => {
+    if (tacticAnswered) return;
+    const item = tacticQuestions[tacticIndex];
     const answer = button.dataset.quiz;
-    const box = document.getElementById("quizQuestion");
-    if (answer === "A") {
-      box.textContent = "正解！ フリーの味方へ早く展開すると、相手守備が整う前に攻撃できます。";
-      addCoachXp(12, "戦術クイズ正解");
+    const result = document.getElementById("quizResult");
+    if (answer === item.answer) {
+      tacticAnswered = true;
+      result.textContent = item.ok;
+      addCoachXp(12, `戦術クイズ 第${tacticIndex + 1}問正解`);
+      document.getElementById("quizNext").style.display = "block";
     } else {
-      box.textContent = "もう一度考えよう。味方がフリーなら、相手が戻る前にボールを届けるのが有効です。";
+      result.textContent = `惜しい！ ${item.hint}`;
     }
   });
 });
 
-/* Fドローン */
+document.getElementById("quizNext").addEventListener("click", () => {
+  tacticIndex = (tacticIndex + 1) % tacticQuestions.length;
+  showTacticQuestion();
+});
+
+showPassQuestion();
+showTacticQuestion();
+
+/* Fドローン：上空からサッカーを見る4ミッション */
+const droneMissions = [
+  {
+    title: "右サイドの空きスペースを探せ",
+    label: "RIGHT",
+    x: 84, y: 24,
+    clear: "MISSION CLEAR！ 右サイドの空きスペースとパスコースを発見しました。"
+  },
+  {
+    title: "左サイドのフリー選手を見つけろ",
+    label: "FREE",
+    x: 24, y: 34,
+    clear: "MISSION CLEAR！ 左サイドでフリーになっている味方を発見しました。"
+  },
+  {
+    title: "中央のパスコースを確認せよ",
+    label: "PASS",
+    x: 54, y: 44,
+    clear: "MISSION CLEAR！ 中央を通せるパスコースを上空から確認しました。"
+  },
+  {
+    title: "ゴール前の危険エリアを見つけろ",
+    label: "DANGER",
+    x: 74, y: 64,
+    clear: "MISSION CLEAR！ ゴール前の危険エリアを発見。守備の準備が必要です。"
+  }
+];
+
+let droneMissionIndex = 0;
+let droneMissionCleared = false;
 let miniDroneX = 14;
 let miniDroneY = 74;
 const miniDrone = document.getElementById("miniDrone");
+const miniDroneTarget = document.getElementById("miniDroneTarget");
+const droneMissionBox = document.getElementById("droneMission");
+const droneResultBox = document.getElementById("droneResult");
+const droneNextButton = document.getElementById("droneNext");
+
+function resetMiniDronePosition() {
+  miniDroneX = 14;
+  miniDroneY = 74;
+}
+
+function showDroneMission() {
+  const mission = droneMissions[droneMissionIndex];
+  droneMissionCleared = false;
+  resetMiniDronePosition();
+  droneMissionBox.textContent = `MISSION ${droneMissionIndex + 1} / ${droneMissions.length}：${mission.title}`;
+  droneResultBox.textContent = "上空からピッチを見て、指定されたエリアへドローンを移動しよう。";
+  droneNextButton.style.display = "none";
+  miniDroneTarget.textContent = mission.label;
+  miniDroneTarget.style.right = "auto";
+  miniDroneTarget.style.left = mission.x + "%";
+  miniDroneTarget.style.top = mission.y + "%";
+  miniDroneTarget.style.transform = "translate(-50%,-50%)";
+  renderMiniDrone();
+}
 
 function renderMiniDrone() {
   miniDrone.style.left = miniDroneX + "%";
   miniDrone.style.top = miniDroneY + "%";
-  const reached = miniDroneX >= 76 && miniDroneY <= 30;
-  if (reached) {
-    document.getElementById("droneResult").textContent =
-      "MISSION CLEAR！ 上空から右サイドのパスコースを発見しました。";
+
+  const mission = droneMissions[droneMissionIndex];
+  const reached = Math.abs(miniDroneX - mission.x) <= 10 && Math.abs(miniDroneY - mission.y) <= 10;
+  if (reached && !droneMissionCleared) {
+    droneMissionCleared = true;
+    droneResultBox.textContent = mission.clear;
+    addCoachXp(20, `Fドローン MISSION ${droneMissionIndex + 1}`);
+    droneNextButton.style.display = "block";
+    droneNextButton.textContent = droneMissionIndex === droneMissions.length - 1
+      ? "もう一度 MISSION 1 から ▶"
+      : "次のミッションへ ▶";
   }
 }
 
@@ -1131,15 +1310,17 @@ document.querySelectorAll("[data-mini-drone]").forEach(button => {
     if (dir === "down") miniDroneY = Math.min(88, miniDroneY + 10);
     if (dir === "left") miniDroneX = Math.max(8, miniDroneX - 10);
     if (dir === "right") miniDroneX = Math.min(92, miniDroneX + 10);
-    if (dir === "reset") { miniDroneX = 14; miniDroneY = 74; }
+    if (dir === "reset") resetMiniDronePosition();
     renderMiniDrone();
-
-    if (miniDroneX >= 76 && miniDroneY <= 30) {
-      addCoachXp(20, "Fドローンミッション");
-    }
   });
 });
 
+droneNextButton.addEventListener("click", () => {
+  droneMissionIndex = (droneMissionIndex + 1) % droneMissions.length;
+  showDroneMission();
+});
+
+showDroneMission();
 renderCoachLevel();
 
 
