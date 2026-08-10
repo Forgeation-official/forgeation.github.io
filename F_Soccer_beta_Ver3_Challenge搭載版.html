@@ -538,10 +538,87 @@ body{
 .coach-face{font-size:52px;text-align:center}.parent-lock{font-size:42px;text-align:center}
 @media(max-width:520px){.metric-grid{grid-template-columns:1fr}.feature-title{font-size:19px}}
 
+
+/* ===== F Soccer Challenge ビジュアル統合（やり直し版） ===== */
+.challenge-visual{
+  position:relative; width:100%; aspect-ratio:16/9; margin:10px 0 12px;
+  overflow:hidden; border-radius:16px; border:1px solid rgba(125,205,255,.35);
+  background:linear-gradient(180deg,#0d8b4c,#08743f);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),0 12px 26px rgba(0,0,0,.18);
+}
+.challenge-visual .field-line{position:absolute;border-color:rgba(255,255,255,.78);pointer-events:none}
+.challenge-visual .half{left:50%;top:0;bottom:0;border-left:2px solid rgba(255,255,255,.78)}
+.challenge-visual .circle{width:24%;aspect-ratio:1;left:50%;top:50%;transform:translate(-50%,-50%);border:2px solid rgba(255,255,255,.78);border-radius:50%}
+.challenge-visual .ball{
+  position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;
+  box-shadow:inset -3px -3px 0 #c9d2df,0 3px 8px rgba(0,0,0,.28);
+}
+.challenge-visual .player{
+  position:absolute;width:32px;height:32px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.88);box-shadow:0 5px 12px rgba(0,0,0,.28);
+}
+.challenge-visual .player.blue{background:#138bff}.challenge-visual .player.pink{background:#ff4f9b}
+.challenge-visual .player.yellow{background:#ffd44f}
+.challenge-visual .route{
+  position:absolute;height:0;border-top:4px dashed #ffe45e;transform-origin:left center;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.3));
+}
+.challenge-caption{font-size:12px;color:#b8d7f2;margin:-3px 0 9px;line-height:1.55}
+
+/* PK */
+.pk-scene{background:linear-gradient(180deg,#123b68 0 37%,#11844b 37% 100%)}
+.pk-goal{
+  position:absolute;left:50%;top:13%;width:62%;height:38%;transform:translateX(-50%);
+  border:5px solid #fff;border-bottom-width:7px;border-radius:4px 4px 0 0;
+  background:
+    linear-gradient(90deg,transparent 23%,rgba(255,255,255,.24) 24% 25%,transparent 26% 49%,rgba(255,255,255,.24) 50% 51%,transparent 52% 75%,rgba(255,255,255,.24) 76% 77%,transparent 78%),
+    linear-gradient(0deg,transparent 30%,rgba(255,255,255,.22) 31% 33%,transparent 34% 64%,rgba(255,255,255,.22) 65% 67%,transparent 68%);
+}
+.pk-keeper{
+  position:absolute;left:50%;top:37%;transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;background:#ffcf4a;border:4px solid white;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);transition:.25s ease;
+}
+.pk-ball{left:50%;bottom:12%;transform:translateX(-50%);width:22px!important;height:22px!important}
+.pk-target{
+  position:absolute;top:24%;width:48px;height:48px;border-radius:50%;
+  border:4px solid #7df0ff;background:rgba(20,205,255,.16);box-shadow:0 0 18px rgba(61,218,255,.7);
+  opacity:.22;transition:.2s ease;
+}
+.pk-target.left{left:22%}.pk-target.center{left:50%;transform:translateX(-50%)}.pk-target.right{right:22%}
+.pk-scene[data-shot="左"] .pk-target.left,
+.pk-scene[data-shot="中央"] .pk-target.center,
+.pk-scene[data-shot="右"] .pk-target.right{opacity:1;background:rgba(255,227,80,.28);border-color:#ffe45e}
+.pk-scene[data-shot="左"] .pk-keeper{left:64%;transform:translate(-50%,-50%) rotate(15deg)}
+.pk-scene[data-shot="中央"] .pk-keeper{left:38%;transform:translate(-50%,-50%)}
+.pk-scene[data-shot="右"] .pk-keeper{left:36%;transform:translate(-50%,-50%) rotate(-15deg)}
+
+/* dribble */
+.dribble-scene .cone{position:absolute;width:18px;height:18px;background:#ff784f;clip-path:polygon(50% 0,100% 100%,0 100%);filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+.dribble-scene .c1{left:38%;top:63%}.dribble-scene .c2{left:52%;top:48%}.dribble-scene .c3{left:66%;top:33%}
+.dribble-scene .player{left:22%;top:67%}.dribble-scene .ball{left:30%;top:72%}
+.dribble-scene .route{left:31%;top:72%;width:47%;transform:rotate(-31deg)}
+
+/* pass */
+.pass-scene .p1{left:16%;top:63%}.pass-scene .p2{left:66%;top:24%}.pass-scene .p3{left:69%;top:69%}
+.pass-scene .opp1{left:43%;top:43%}.pass-scene .opp2{left:51%;top:65%}
+.pass-scene .ball{left:25%;top:66%}
+.pass-scene .pass-line{left:28%;top:66%;width:46%;transform:rotate(-38deg);transition:.2s}
+.pass-scene[data-passview="縦"] .pass-line{width:46%;transform:rotate(-38deg)}
+.pass-scene[data-passview="サイド"] .pass-line{width:49%;transform:rotate(5deg)}
+.pass-scene[data-passview="安全"] .pass-line{width:44%;transform:rotate(6deg)}
+
+/* tactics */
+.tactic-scene{background:linear-gradient(90deg,#0d8248,#0b7441)}
+.tactic-scene .zone{position:absolute;border:2px dashed rgba(255,255,255,.35);background:rgba(74,196,255,.08)}
+.tactic-scene .zone.right{right:4%;top:7%;width:31%;height:86%}
+.tactic-scene .p1{left:44%;top:47%}.tactic-scene .p2{right:14%;top:25%}.tactic-scene .opp1{left:59%;top:46%}
+.tactic-scene .route{left:49%;top:51%;width:37%;transform:rotate(-31deg)}
+
 </style>
 </head>
 <body>
-<!-- F Soccer β Ver3 / 6機能タップ画面搭載 / API復旧修正版（API会話成功版の接続先へ復元） -->
+<!-- F Soccer β Ver3 / Challenge搭載 / XP可視化修正版 / API会話接続維持 -->
 <main class="app">
   <header class="topbar">
     <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
@@ -633,6 +710,12 @@ body{
 
     <div class="challenge-panel active" data-challenge-panel="pk">
       <h3 class="challenge-title">PKチャレンジ</h3>
+      <div class="challenge-visual pk-scene" id="pkScene" data-shot="">
+        <div class="pk-goal"></div><div class="pk-keeper" aria-hidden="true"></div>
+        <div class="pk-target left"></div><div class="pk-target center"></div><div class="pk-target right"></div>
+        <div class="ball pk-ball"></div>
+      </div>
+      <p class="challenge-caption">蹴るコースを選ぶと、狙う場所が画面で切り替わります。</p>
       <div class="challenge-actions">
         <button type="button" data-pk="左">左へ蹴る</button>
         <button type="button" data-pk="中央">中央へ蹴る</button>
@@ -643,6 +726,12 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="dribble">
       <h3 class="challenge-title">ドリブルマスター</h3>
+      <div class="challenge-visual dribble-scene">
+        <div class="field-line half"></div><div class="field-line circle"></div>
+        <div class="player blue"></div><div class="ball"></div>
+        <div class="cone c1"></div><div class="cone c2"></div><div class="cone c3"></div><div class="route"></div>
+      </div>
+      <p class="challenge-caption">コーンの間を抜ける進行方向を判断するドリブル練習です。</p>
       <button class="challenge-primary" id="dribbleStart" type="button" style="width:100%">10秒チャレンジ開始</button>
       <div class="challenge-result" id="dribbleResult">スタート後、表示される方向と同じボタンを素早く押そう。</div>
       <div class="challenge-actions" style="margin-top:9px">
@@ -654,6 +743,13 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="pass">
       <h3 class="challenge-title">パスチャレンジ</h3>
+      <div class="challenge-visual pass-scene" id="passScene" data-passview="縦">
+        <div class="field-line half"></div><div class="field-line circle"></div>
+        <div class="player blue p1"></div><div class="player blue p2"></div><div class="player blue p3"></div>
+        <div class="player pink opp1"></div><div class="player pink opp2"></div>
+        <div class="ball"></div><div class="route pass-line"></div>
+      </div>
+      <p class="challenge-caption">味方と相手の位置を見て、通すパスを選びます。</p>
       <div class="challenge-actions">
         <button type="button" data-pass="安全">安全なパス</button>
         <button type="button" data-pass="縦">縦パス</button>
@@ -664,6 +760,11 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="quiz">
       <h3 class="challenge-title">戦術クイズ</h3>
+      <div class="challenge-visual tactic-scene">
+        <div class="field-line half"></div><div class="field-line circle"></div><div class="zone right"></div>
+        <div class="player blue p1"></div><div class="player blue p2"></div><div class="player pink opp1"></div><div class="route"></div>
+      </div>
+      <p class="challenge-caption">空いているスペースと味方の位置を見て判断します。</p>
       <div class="challenge-result" id="quizQuestion">味方が右サイドでフリー。自分は中央で前を向いている。どうする？</div>
       <div class="quiz-options" style="margin-top:9px">
         <button type="button" data-quiz="A">A：すぐ右へ展開する</button>
@@ -991,27 +1092,39 @@ const challengePanels = [...document.querySelectorAll("[data-challenge-panel]")]
 let coachXp = Number(safeLocalStorage.get("fSoccerCoachXpV3","0"));
 
 function coachLevelInfo(xp) {
-  if (xp >= 1000) return {name:"Lv.100 世界トップコーチ 🌍", next:1000};
-  if (xp >= 500) return {name:"Lv.50 プロアカデミーコーチ", next:1000};
-  if (xp >= 300) return {name:"Lv.30 全国コーチ", next:500};
-  if (xp >= 100) return {name:"Lv.10 地区コーチ", next:300};
-  return {name:"Lv.1 新人コーチ", next:100};
+  if (xp >= 1000) {
+    // Lv.100到達後もXPバーが止まらないよう、100XPごとの進捗として表示する。
+    const start = Math.floor(xp / 100) * 100;
+    return {name:"Lv.100 世界トップコーチ 🌍", start, next:start + 100};
+  }
+  if (xp >= 500) return {name:"Lv.50 プロアカデミーコーチ", start:500, next:1000};
+  if (xp >= 300) return {name:"Lv.30 全国コーチ", start:300, next:500};
+  if (xp >= 100) return {name:"Lv.10 地区コーチ", start:100, next:300};
+  return {name:"Lv.1 新人コーチ", start:0, next:100};
 }
 
 function renderCoachLevel() {
   const info = coachLevelInfo(coachXp);
-  document.getElementById("coachLevelName").textContent = info.name;
-  document.getElementById("coachXpText").textContent =
-    info.next === 1000 && coachXp >= 1000 ? `${coachXp} XP` : `${coachXp} / ${info.next} XP`;
-  document.getElementById("coachXpBar").style.width =
-    `${Math.min(100, (coachXp / info.next) * 100)}%`;
+  const levelName = document.getElementById("coachLevelName");
+  const xpText = document.getElementById("coachXpText");
+  const xpBar = document.getElementById("coachXpBar");
+  if (!levelName || !xpText || !xpBar) return;
+
+  levelName.textContent = info.name;
+  // TOTAL XPは常に増え続ける。Lv.100以降も数値をそのまま表示する。
+  xpText.textContent = coachXp >= 1000 ? `${coachXp} XP` : `${coachXp} / ${info.next} XP`;
+
+  const span = Math.max(1, info.next - info.start);
+  const progress = Math.max(0, Math.min(100, ((coachXp - info.start) / span) * 100));
+  xpBar.style.width = `${progress}%`;
 }
 
 function addCoachXp(value, reason) {
-  coachXp += value;
+  const gain = Number(value) || 0;
+  coachXp = Math.max(0, (Number(coachXp) || 0) + gain);
   safeLocalStorage.set("fSoccerCoachXpV3", String(coachXp));
   renderCoachLevel();
-  addMessage(`チャレンジ達成！ ${reason}で${value}XPを獲得しました。`, "ai");
+  addMessage(`チャレンジ達成！ ${reason}で${gain}XPを獲得しました。TOTAL ${coachXp}XP`, "ai");
 }
 
 challengeTabs.forEach(button => {
@@ -1186,126 +1299,22 @@ document.addEventListener("keydown",e=>{
   }
 });
 
-</script>
 
+/* ===== Challenge ビジュアル同期（既存ロジックはそのまま） ===== */
+document.querySelectorAll("[data-pk]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const scene=document.getElementById("pkScene");
+    if(scene) scene.dataset.shot=btn.dataset.pk;
+  },{capture:true});
+});
+document.querySelectorAll("[data-pass]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const scene=document.getElementById("passScene");
+    if(scene) scene.dataset.passview=btn.dataset.pass;
+  },{capture:true});
+});
 
-
-<!-- ===== Forgeation β Ver3 タップ動作・独立復旧パッチ ===== -->
-<style>
-  .menu-item,.challenge-tab,.challenge-actions button,.quiz-options button,.drone-pad button,
-  .feature-back,.feature-action,.challenge-primary{touch-action:manipulation;-webkit-tap-highlight-color:rgba(69,217,255,.18);cursor:pointer}
-</style>
-<script>
-(function(){
-  "use strict";
-  function byId(id){ return document.getElementById(id); }
-  function all(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
-
-  /* 6機能：メインスクリプトが途中停止しても独立して開閉できる */
-  var fmap={training:"fs-training",analysis:"fs-analysis",growth:"fs-growth",advice:"fs-advice",coach:"fs-coach",parent:"fs-parent"};
-  all(".feature-launch").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var screen=byId(fmap[btn.getAttribute("data-feature")]);
-      if(!screen) return;
-      screen.classList.add("open");
-      screen.setAttribute("aria-hidden","false");
-      document.body.style.overflow="hidden";
-    });
-  });
-  all(".feature-back").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var screen=btn.closest ? btn.closest(".feature-screen") : null;
-      if(!screen) return;
-      screen.classList.remove("open");
-      screen.setAttribute("aria-hidden","true");
-      document.body.style.overflow="";
-    });
-  });
-
-  /* Challenge タブ：PK / ドリブル / パス / 戦術 / Fドローン */
-  var tabs=all(".challenge-tab"), panels=all("[data-challenge-panel]");
-  tabs.forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var id=btn.getAttribute("data-challenge");
-      tabs.forEach(function(t){t.classList.toggle("active",t===btn);});
-      panels.forEach(function(p){p.classList.toggle("active",p.getAttribute("data-challenge-panel")===id);});
-    });
-  });
-
-  function safeXp(value,reason){
-    try { if(typeof window.addCoachXp === "function") window.addCoachXp(value,reason); } catch(e){}
-  }
-
-  /* PK */
-  all("[data-pk]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var shot=btn.getAttribute("data-pk"), choices=["左","中央","右"];
-      var keeper=choices[Math.floor(Math.random()*choices.length)], ok=shot!==keeper;
-      var box=byId("pkResult");
-      if(box) box.textContent=ok ? "GOAL！ あなたは"+shot+"、AIキーパーは"+keeper+"へ飛びました。" : "SAVE！ AIキーパーが"+shot+"を読んでいました。";
-      if(ok) safeXp(10,"PK成功");
-    });
-  });
-
-  /* ドリブル */
-  var dActive=false,dScore=0,dTarget="",dTimer=null;
-  function nextD(){
-    var dirs=["左","前","右"]; dTarget=dirs[Math.floor(Math.random()*dirs.length)];
-    var box=byId("dribbleResult"); if(box) box.textContent="指示："+dTarget+"　スコア："+dScore;
-  }
-  var dStart=byId("dribbleStart");
-  if(dStart) dStart.addEventListener("click",function(){
-    if(dTimer) clearTimeout(dTimer); dActive=true; dScore=0; nextD();
-    dTimer=setTimeout(function(){
-      dActive=false; var box=byId("dribbleResult");
-      if(box) box.textContent="終了！ スコアは"+dScore+"回。顔を上げて素早く判断しよう。";
-      if(dScore>=5) safeXp(15,"ドリブルチャレンジ");
-    },10000);
-  });
-  all("[data-dribble]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      if(!dActive) return;
-      if(btn.getAttribute("data-dribble")===dTarget){dScore++;nextD();}
-      else {var box=byId("dribbleResult");if(box) box.textContent="惜しい！ 指示は"+dTarget+"。スコア："+dScore;}
-    });
-  });
-
-  /* パス */
-  all("[data-pass]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var c=btn.getAttribute("data-pass"), box=byId("passResult"); if(!box)return;
-      if(c==="縦"){box.textContent="GOOD！ 前を向けているので、縦パスで一気に前進できる場面です。";safeXp(10,"正しいパス判断");}
-      else if(c==="サイド"){box.textContent="良い判断！ 相手が中央へ寄っているなら、サイドチェンジも有効です。";safeXp(7,"視野を広く使った判断");}
-      else box.textContent="安全な選択です。ただし前進できる場面では、縦方向も確認しよう。";
-    });
-  });
-
-  /* 戦術 */
-  all("[data-quiz]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var a=btn.getAttribute("data-quiz"), box=byId("quizQuestion"); if(!box)return;
-      if(a==="A"){box.textContent="正解！ フリーの味方へ早く展開すると、相手守備が整う前に攻撃できます。";safeXp(12,"戦術クイズ正解");}
-      else box.textContent="もう一度考えよう。味方がフリーなら、相手が戻る前にボールを届けるのが有効です。";
-    });
-  });
-
-  /* Fドローン */
-  var dx=14,dy=74;
-  function drawDrone(){
-    var drone=byId("miniDrone"); if(!drone)return;
-    drone.style.left=dx+"%"; drone.style.top=dy+"%";
-    if(dx>=76 && dy<=30){var r=byId("droneResult");if(r)r.textContent="MISSION CLEAR！ 上空から右サイドのパスコースを発見しました。";}
-  }
-  all("[data-mini-drone]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var dir=btn.getAttribute("data-mini-drone");
-      if(dir==="up")dy=Math.max(10,dy-10); if(dir==="down")dy=Math.min(88,dy+10);
-      if(dir==="left")dx=Math.max(8,dx-10); if(dir==="right")dx=Math.min(92,dx+10);
-      if(dir==="reset"){dx=14;dy=74;} drawDrone(); if(dx>=76&&dy<=30)safeXp(20,"Fドローンミッション");
-    });
-  });
-  drawDrone();
-})();
 </script>
 
 </body>
+</html>
