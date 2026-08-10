@@ -757,12 +757,12 @@ body{
 
       <h3 class="challenge-title">PKチャレンジ</h3>
       <div class="challenge-media">
-        <video controls playsinline preload="metadata" src="media/f-soccer-pk.mp4"></video>
+        <video controls playsinline preload="metadata" src="f-soccer-pk.mp4"></video>
         <div class="challenge-media-label">PK PLAY</div>
       </div>
 
       <div class="pk-reference">
-        <img id="pkSceneImage" src="media/f-soccer-pk-center.png" alt="PKコース">
+        <img id="pkSceneImage" src="f-soccer-pk-center.png" alt="PKコース">
       </div>
       <p class="production-media-note">左・中央・右を選ぶと、対応するPKイメージへ切り替わります。</p>
 
@@ -779,7 +779,7 @@ body{
 
       <h3 class="challenge-title">ドリブルマスター</h3>
       <div class="challenge-media">
-        <video controls playsinline preload="metadata" src="media/f-soccer-dribble.mp4"></video>
+        <video controls playsinline preload="metadata" src="f-soccer-dribble.mp4"></video>
         <div class="challenge-media-label">DRIBBLE PLAY</div>
       </div>
 
@@ -797,7 +797,7 @@ body{
 
       <h3 class="challenge-title">パスチャレンジ</h3>
       <div class="challenge-media">
-        <img src="media/f-soccer-pass.webp" alt="パスプレー">
+        <img src="f-soccer-pass.webp" alt="パスプレー">
         <div class="challenge-media-label">PASS PLAY</div>
       </div>
 
@@ -823,7 +823,7 @@ body{
     <div class="challenge-panel" data-challenge-panel="drone">
       <h3 class="challenge-title">Fドローン練習場</h3>
       <div class="challenge-media">
-        <img src="media/f-soccer-drone.webp" alt="Fドローン俯瞰イメージ">
+        <img src="f-soccer-drone.webp" alt="Fドローン俯瞰イメージ">
         <div class="challenge-media-label">F DRONE</div>
       </div>
 
@@ -1179,9 +1179,9 @@ challengeTabs.forEach(button => {
 
 
 const pkSceneImages = {
-  "左":"media/f-soccer-pk-left.png",
-  "中央":"media/f-soccer-pk-center.png",
-  "右":"media/f-soccer-pk-right.png"
+  "左":"f-soccer-pk-left.png",
+  "中央":"f-soccer-pk-center.png",
+  "右":"f-soccer-pk-right.png"
 };
 
 /* PK */
@@ -1366,6 +1366,20 @@ try{
     document.getElementById("productionGate")?.classList.add("is-hidden");
   }
 }catch(e){}
+
+
+/* ===== Media fallback diagnostics (API code untouched) ===== */
+document.querySelectorAll("video").forEach(v=>{
+  v.addEventListener("error",()=>{
+    const label=v.closest(".challenge-media")?.querySelector(".challenge-media-label");
+    if(label) label.textContent += " / 読み込みエラー";
+  });
+});
+document.querySelectorAll(".challenge-media img, .pk-reference img").forEach(img=>{
+  img.addEventListener("error",()=>{
+    img.alt = (img.alt || "画像") + "（読み込みエラー）";
+  });
+});
 
 </script>
 
