@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>F Soccer Production Ver1 Demo</title>
+<title>F Soccer Production Ver1｜動画付き・API接続版</title>
 <style>
 :root{
   --navy:#06162f;
@@ -581,6 +581,57 @@ body{
 .member-status{font-size:11px;font-weight:950;padding:6px 9px;border-radius:999px;background:#173f65;color:#9fe9ff}
 .production-note{font-size:11px;color:#8fb4d4;margin-top:8px;line-height:1.6}
 
+
+/* ===== Production Ver1: 外部メディア参照 ===== */
+.challenge-media{
+  margin:10px 0 13px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(155,208,255,.28);
+  background:#020913;
+  box-shadow:0 10px 28px rgba(0,0,0,.22);
+}
+.challenge-media video,
+.challenge-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:520px;
+  object-fit:contain;
+  background:#020913;
+}
+.challenge-media-label{
+  padding:8px 11px;
+  font-size:.74rem;
+  font-weight:900;
+  color:#dff7ff;
+  border-top:1px solid rgba(255,255,255,.1);
+  background:#071b35;
+}
+.pk-reference{
+  margin:10px 0 12px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(89,220,255,.3);
+  background:#020913;
+}
+.pk-reference img{
+  display:block;
+  width:100%;
+  height:auto;
+  transition:opacity .15s ease;
+}
+.challenge-actions button.pk-selected{
+  outline:3px solid #59e5ff;
+  box-shadow:0 0 20px rgba(89,229,255,.45);
+}
+.production-media-note{
+  font-size:.72rem;
+  color:#9fc8e8;
+  line-height:1.55;
+  margin:7px 0 10px;
+}
+
 </style>
 </head>
 <body>
@@ -703,17 +754,35 @@ body{
     </div>
 
     <div class="challenge-panel active" data-challenge-panel="pk">
+
       <h3 class="challenge-title">PKチャレンジ</h3>
+      <div class="challenge-media">
+        <video controls playsinline preload="metadata" src="media/f-soccer-pk.mp4"></video>
+        <div class="challenge-media-label">PK PLAY</div>
+      </div>
+
+      <div class="pk-reference">
+        <img id="pkSceneImage" src="media/f-soccer-pk-center.png" alt="PKコース">
+      </div>
+      <p class="production-media-note">左・中央・右を選ぶと、対応するPKイメージへ切り替わります。</p>
+
       <div class="challenge-actions">
         <button type="button" data-pk="左">左へ蹴る</button>
         <button type="button" data-pk="中央">中央へ蹴る</button>
         <button type="button" data-pk="右">右へ蹴る</button>
       </div>
       <div class="challenge-result" id="pkResult">コースを選んで、AIキーパーと勝負しよう。</div>
+
     </div>
 
     <div class="challenge-panel" data-challenge-panel="dribble">
+
       <h3 class="challenge-title">ドリブルマスター</h3>
+      <div class="challenge-media">
+        <video controls playsinline preload="metadata" src="media/f-soccer-dribble.mp4"></video>
+        <div class="challenge-media-label">DRIBBLE PLAY</div>
+      </div>
+
       <button class="challenge-primary" id="dribbleStart" type="button" style="width:100%">10秒チャレンジ開始</button>
       <div class="challenge-result" id="dribbleResult">スタート後、表示される方向と同じボタンを素早く押そう。</div>
       <div class="challenge-actions" style="margin-top:9px">
@@ -721,16 +790,24 @@ body{
         <button type="button" data-dribble="前">↑</button>
         <button type="button" data-dribble="右">→</button>
       </div>
+
     </div>
 
     <div class="challenge-panel" data-challenge-panel="pass">
+
       <h3 class="challenge-title">パスチャレンジ</h3>
+      <div class="challenge-media">
+        <img src="media/f-soccer-pass.webp" alt="パスプレー">
+        <div class="challenge-media-label">PASS PLAY</div>
+      </div>
+
       <div class="challenge-actions">
         <button type="button" data-pass="安全">安全なパス</button>
         <button type="button" data-pass="縦">縦パス</button>
         <button type="button" data-pass="サイド">サイドチェンジ</button>
       </div>
       <div class="challenge-result" id="passResult">状況を読み、最適なパスを選ぼう。</div>
+
     </div>
 
     <div class="challenge-panel" data-challenge-panel="quiz">
@@ -745,6 +822,11 @@ body{
 
     <div class="challenge-panel" data-challenge-panel="drone">
       <h3 class="challenge-title">Fドローン練習場</h3>
+      <div class="challenge-media">
+        <img src="media/f-soccer-drone.webp" alt="Fドローン俯瞰イメージ">
+        <div class="challenge-media-label">F DRONE</div>
+      </div>
+
       <div class="drone-mini-field">
         <div class="drone-target">PASS</div>
         <div class="drone-mini" id="miniDrone">🚁</div>
@@ -840,7 +922,7 @@ const safeLocalStorage={
     try{window.localStorage.setItem(key,value)}catch(_){}
   }
 };
-const API_URL = "https://forgeation-api.eru1212121.workers.dev/chat";
+const API_URL = "https://forgeation-api.eru12121221.workers.dev";
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
@@ -1095,10 +1177,26 @@ challengeTabs.forEach(button => {
   });
 });
 
+
+const pkSceneImages = {
+  "左":"media/f-soccer-pk-left.png",
+  "中央":"media/f-soccer-pk-center.png",
+  "右":"media/f-soccer-pk-right.png"
+};
+
 /* PK */
 document.querySelectorAll("[data-pk]").forEach(button => {
   button.addEventListener("click", () => {
     const shot = button.dataset.pk;
+    const scene = document.getElementById("pkSceneImage");
+    if (scene && pkSceneImages[shot]) {
+      scene.style.opacity = "0.2";
+      setTimeout(() => {
+        scene.src = pkSceneImages[shot];
+        scene.style.opacity = "1";
+      }, 80);
+    }
+    document.querySelectorAll("[data-pk]").forEach(b => b.classList.toggle("pk-selected", b === button));
     const choices = ["左","中央","右"];
     const keeper = choices[Math.floor(Math.random() * choices.length)];
     const success = shot !== keeper;
