@@ -648,7 +648,7 @@ body{
       <div class="contract-row"><span>契約状態</span><strong><span class="demo-badge">テスト表示</span></strong></div>
       <div class="contract-row"><span>データ</span><strong>DB接続後に本人専用で保存</strong></div>
     </div>
-    <button class="production-enter" id="enterProduction" type="button">正式版 F Soccer を開く</button>
+    <button class="production-enter" id="enterProduction" type="button" onclick="document.getElementById('productionGate').classList.add('is-hidden'); try{sessionStorage.setItem('fSoccerProductionDemoEntered','1')}catch(e){}">正式版 F Soccer を開く</button>
     <div class="production-note">※ 現在は決済・認証未接続のデモです。実際のお金や個人情報は扱いません。</div>
   </div>
 </div>
@@ -756,11 +756,6 @@ body{
     <div class="challenge-panel active" data-challenge-panel="pk">
 
       <h3 class="challenge-title">PKチャレンジ</h3>
-      <div class="challenge-media">
-        <video controls playsinline preload="metadata" src="f-soccer-pk.mp4"></video>
-        <div class="challenge-media-label">PK PLAY</div>
-      </div>
-
       <div class="pk-reference">
         <img id="pkSceneImage" src="f-soccer-pk-center.png" alt="PKコース">
       </div>
