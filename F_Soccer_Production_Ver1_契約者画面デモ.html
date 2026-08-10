@@ -698,7 +698,7 @@ body{
   <header class="topbar">
     <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
     <div class="brand">
-      <img class="brand-logo" src="F_Soccer_assets/fs_asset_01.jpg" alt="Forgeation Fロゴ">
+      <img class="brand-logo" src="fs_asset_01.jpg" alt="Forgeation Fロゴ">
       <div class="brand-title">
         <strong>F Soccer</strong>
         <small>あなたの専属AIコーチ</small><span class="api-state" id="apiState"><span class="api-dot"></span><span id="apiStateText">API確認中</span></span>
@@ -821,7 +821,7 @@ body{
     <div class="challenge-panel" data-challenge-panel="pass">
       <h3 class="challenge-title">AIパス判断クイズ</h3>
       <div class="tile-crop pass-crop" id="passCrop">
-        <img id="passPlaySheet" src="F_Soccer_assets/fs_asset_02.jpg" alt="PASS PLAY 15シーン">
+        <img id="passPlaySheet" src="fs_asset_02.jpg" alt="PASS PLAY 15シーン">
       </div>
       <div class="decision-banner" id="passQuestion">この場面で最も有効なプレーは？</div>
       <div class="challenge-actions">
@@ -836,7 +836,7 @@ body{
     <div class="challenge-panel" data-challenge-panel="quiz">
       <h3 class="challenge-title">戦術クイズ 300</h3>
       <div class="challenge-media tactics-media tactic-visual">
-        <img id="tacticSceneImage" src="F_Soccer_assets/fs_asset_03.jpg" alt="AI戦術シーン">
+        <img id="tacticSceneImage" src="fs_asset_03.jpg" alt="AI戦術シーン">
         <div class="tactic-scanline"></div>
         <div class="tactic-moving-arrow">➜</div>
         <div class="challenge-media-label">TACTICS / AI SOCCER ACADEMY</div>
@@ -849,7 +849,7 @@ body{
     <div class="challenge-panel" data-challenge-panel="drone">
       <h3 class="challenge-title">Fドローン・リアルミッション</h3>
       <div class="tile-crop drone-crop" id="droneCrop">
-        <img id="droneMissionSheet" src="F_Soccer_assets/fs_asset_04.jpg" alt="DRONE CHALLENGE 6ミッション">
+        <img id="droneMissionSheet" src="fs_asset_04.jpg" alt="DRONE CHALLENGE 6ミッション">
         <span class="drone-marker" id="realDroneMarker">🚁</span>
         <span class="drone-target" id="realDroneTarget">◎</span>
       </div>
@@ -1263,7 +1263,7 @@ renderPass();
 // 300 tactical questions with rotating visuals and shuffled answers.
 const tacticBases=[{"q": "中央が密集し、逆サイドが空いている。", "c": "逆サイドへ展開する", "w1": "密集へ突っ込む", "w2": "その場に止まる", "e": "幅を使って守備を広げる。"}, {"q": "相手最終ラインが高い。FWが背後を狙っている。", "c": "タイミングを見て背後へ通す", "w1": "足元だけで回す", "w2": "自陣へ戻すだけ", "e": "高いラインの背後は大きなスペース。"}, {"q": "相手が低いブロックを作っている。", "c": "幅を使って揺さぶる", "w1": "中央に集まる", "w2": "全員同じ場所へ", "e": "守備ブロックを横に動かす。"}, {"q": "ボールを失った直後。", "c": "近い選手で即時奪回", "w1": "全員歩いて戻る", "w2": "攻撃方向だけを見る", "e": "切り替え直後が奪回チャンス。"}, {"q": "カウンターで3対2。", "c": "相手を引きつけてフリーを使う", "w1": "すぐ遠くからシュート", "w2": "立ち止まる", "e": "数的優位を使って確率を上げる。"}, {"q": "自陣でGKからビルドアップ。相手が前から来る。", "c": "受ける角度を作る", "w1": "GKの後ろに隠れる", "w2": "全員前へ走る", "e": "出口を複数作る。"}, {"q": "サイドで1対2。", "c": "サポートを使って作り直す", "w1": "2人へ突っ込む", "w2": "ライン外へ蹴る", "e": "数的不利では無理をしない。"}, {"q": "味方SBがオーバーラップ。", "c": "相手の反応を見て使い分ける", "w1": "必ずSBへ出す", "w2": "必ず無視する", "e": "味方の動きを選択肢にする。"}, {"q": "中央で前を向いた。FWが足元と背後を狙う。", "c": "DFの重心を見て選ぶ", "w1": "毎回足元", "w2": "毎回背後", "e": "相手を見てプレーを変える。"}, {"q": "CKのこぼれ球が外へ。", "c": "周囲を確認して次を選ぶ", "w1": "目を閉じて蹴る", "w2": "必ずバックパス", "e": "セカンドボールでも認知が重要。"}, {"q": "守備で相手が縦パスを狙う。", "c": "コースを切りながら寄せる", "w1": "ボールだけ追う", "w2": "味方から離れる", "e": "寄せとコース制限を同時に。"}, {"q": "相手WGがサイドで前向き。", "c": "内側と縦の優先順位を共有", "w1": "1人で飛び込む", "w2": "中央を完全に空ける", "e": "守備は味方との連動が重要。"}, {"q": "ペナルティエリア内で相手が背を向けた。", "c": "前を向かせない", "w1": "すぐ足を出す", "w2": "離れて見る", "e": "危険地域ではターンを防ぐ。"}, {"q": "相手のカウンターを受ける。", "c": "中央を締めて遅らせる", "w1": "全員ボールへ", "w2": "サイドを空けて中央も空ける", "e": "まず中央の危険を消す。"}, {"q": "味方がワンタッチで返せる位置。", "c": "壁パスを使う", "w1": "長く持ち続ける", "w2": "味方から離れる", "e": "短い連携で守備者の向きを変える。"}, {"q": "終盤、1点リード。", "c": "安全な保持と前進を使い分ける", "w1": "毎回無理な縦パス", "w2": "全員ゴール前へ", "e": "時間とリスクを管理する。"}, {"q": "終盤、1点ビハインド。", "c": "リスクを上げて前進人数を増やす", "w1": "時間を使い続ける", "w2": "自陣だけで回す", "e": "スコアに応じてリスクを変える。"}, {"q": "相手が10人になった。", "c": "幅とテンポで数的優位を使う", "w1": "中央だけで混雑させる", "w2": "守備人数を増やし続ける", "e": "人数差をピッチ全体で使う。"}, {"q": "自チームが10人になった。", "c": "中央を締めて役割を整理", "w1": "全員前へ出る", "w2": "マークを捨てる", "e": "数的不利ではコンパクトさが重要。"}, {"q": "相手がハイプレス。", "c": "背後と中間ポジションを使う", "w1": "足元だけで止める", "w2": "GKを使わない", "e": "プレスの背後にはスペースがある。"}, {"q": "相手がマンツーマン気味。", "c": "動き直しでマークをずらす", "w1": "同じ位置に立つ", "w2": "全員ボールへ寄る", "e": "位置交換でマークを外す。"}, {"q": "相手がゾーン守備。", "c": "ライン間に立つ", "w1": "DFの正面に立つ", "w2": "全員外へ出る", "e": "ゾーン間の隙間を使う。"}, {"q": "自陣深くでFKを得た。", "c": "安全に再開して陣形を整える", "w1": "中央へ無理に蹴る", "w2": "急いで失う", "e": "危険地域ではリスクを抑える。"}, {"q": "敵陣深くでFK。", "c": "相手配置とGK位置を確認", "w1": "すぐ適当に蹴る", "w2": "後方へ大きく戻す", "e": "セットプレーは準備が重要。"}, {"q": "相手CKを守る。", "c": "ゾーンとマークの役割確認", "w1": "全員ボールだけ見る", "w2": "こぼれ球を無視", "e": "一次守備と二次対応を準備。"}, {"q": "自チームCK。", "c": "ニア・中央・ファーの狙いを共有", "w1": "全員同じ場所へ", "w2": "蹴る人だけ考える", "e": "役割を分けて確率を上げる。"}, {"q": "相手がサイドチェンジを多用。", "c": "逆サイドのスライドを早める", "w1": "ボール側だけに全員寄る", "w2": "逆サイドを捨てる", "e": "移動中に陣形を整える。"}, {"q": "中央突破が続けて止められている。", "c": "外を使って相手を広げる", "w1": "同じ中央突破を繰り返す", "w2": "攻撃をやめる", "e": "違うルートで守備を動かす。"}, {"q": "サイド攻撃が読まれている。", "c": "内側の選手と連携して変化", "w1": "同じクロスだけ", "w2": "後ろへ下げ続ける", "e": "攻撃に変化をつける。"}, {"q": "相手GKのキックが長い。", "c": "セカンドボールの位置を準備", "w1": "全員最終ラインへ", "w2": "落下点を見ない", "e": "次のボールまで予測する。"}];
 const tacticContexts=["前半10分・0-0", "前半35分・0-0", "後半5分・1点リード", "後半20分・1点ビハインド", "後半35分・同点", "後半40分・1点リード", "延長前半・同点", "雨天・ピッチが滑る", "相手が疲れてきた時間帯", "自チームが押し込まれている時間帯"];
-const tacticImages=["F_Soccer_assets/fs_asset_05.jpg", "F_Soccer_assets/fs_asset_06.png", "F_Soccer_assets/fs_asset_07.png", "F_Soccer_assets/fs_asset_08.png", "F_Soccer_assets/fs_asset_09.png", "F_Soccer_assets/fs_asset_10.png"];
+const tacticImages=["fs_asset_03.jpg", "fs_asset_06.png", "fs_asset_07.png", "fs_asset_09.png", "fs_asset_10.png"];
 const tacticsQuestions=[];
 tacticContexts.forEach((ctx,ci)=>tacticBases.forEach((b,bi)=>{
   const correctIndex=(ci+bi)%3,opts=[null,null,null],wrongs=[b.w1,b.w2];
