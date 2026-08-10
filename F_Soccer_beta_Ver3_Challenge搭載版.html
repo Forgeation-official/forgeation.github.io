@@ -1188,5 +1188,124 @@ document.addEventListener("keydown",e=>{
 
 </script>
 
+
+
+<!-- ===== Forgeation β Ver3 タップ動作・独立復旧パッチ ===== -->
+<style>
+  .menu-item,.challenge-tab,.challenge-actions button,.quiz-options button,.drone-pad button,
+  .feature-back,.feature-action,.challenge-primary{touch-action:manipulation;-webkit-tap-highlight-color:rgba(69,217,255,.18);cursor:pointer}
+</style>
+<script>
+(function(){
+  "use strict";
+  function byId(id){ return document.getElementById(id); }
+  function all(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+  /* 6機能：メインスクリプトが途中停止しても独立して開閉できる */
+  var fmap={training:"fs-training",analysis:"fs-analysis",growth:"fs-growth",advice:"fs-advice",coach:"fs-coach",parent:"fs-parent"};
+  all(".feature-launch").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var screen=byId(fmap[btn.getAttribute("data-feature")]);
+      if(!screen) return;
+      screen.classList.add("open");
+      screen.setAttribute("aria-hidden","false");
+      document.body.style.overflow="hidden";
+    });
+  });
+  all(".feature-back").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var screen=btn.closest ? btn.closest(".feature-screen") : null;
+      if(!screen) return;
+      screen.classList.remove("open");
+      screen.setAttribute("aria-hidden","true");
+      document.body.style.overflow="";
+    });
+  });
+
+  /* Challenge タブ：PK / ドリブル / パス / 戦術 / Fドローン */
+  var tabs=all(".challenge-tab"), panels=all("[data-challenge-panel]");
+  tabs.forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var id=btn.getAttribute("data-challenge");
+      tabs.forEach(function(t){t.classList.toggle("active",t===btn);});
+      panels.forEach(function(p){p.classList.toggle("active",p.getAttribute("data-challenge-panel")===id);});
+    });
+  });
+
+  function safeXp(value,reason){
+    try { if(typeof window.addCoachXp === "function") window.addCoachXp(value,reason); } catch(e){}
+  }
+
+  /* PK */
+  all("[data-pk]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var shot=btn.getAttribute("data-pk"), choices=["左","中央","右"];
+      var keeper=choices[Math.floor(Math.random()*choices.length)], ok=shot!==keeper;
+      var box=byId("pkResult");
+      if(box) box.textContent=ok ? "GOAL！ あなたは"+shot+"、AIキーパーは"+keeper+"へ飛びました。" : "SAVE！ AIキーパーが"+shot+"を読んでいました。";
+      if(ok) safeXp(10,"PK成功");
+    });
+  });
+
+  /* ドリブル */
+  var dActive=false,dScore=0,dTarget="",dTimer=null;
+  function nextD(){
+    var dirs=["左","前","右"]; dTarget=dirs[Math.floor(Math.random()*dirs.length)];
+    var box=byId("dribbleResult"); if(box) box.textContent="指示："+dTarget+"　スコア："+dScore;
+  }
+  var dStart=byId("dribbleStart");
+  if(dStart) dStart.addEventListener("click",function(){
+    if(dTimer) clearTimeout(dTimer); dActive=true; dScore=0; nextD();
+    dTimer=setTimeout(function(){
+      dActive=false; var box=byId("dribbleResult");
+      if(box) box.textContent="終了！ スコアは"+dScore+"回。顔を上げて素早く判断しよう。";
+      if(dScore>=5) safeXp(15,"ドリブルチャレンジ");
+    },10000);
+  });
+  all("[data-dribble]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      if(!dActive) return;
+      if(btn.getAttribute("data-dribble")===dTarget){dScore++;nextD();}
+      else {var box=byId("dribbleResult");if(box) box.textContent="惜しい！ 指示は"+dTarget+"。スコア："+dScore;}
+    });
+  });
+
+  /* パス */
+  all("[data-pass]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var c=btn.getAttribute("data-pass"), box=byId("passResult"); if(!box)return;
+      if(c==="縦"){box.textContent="GOOD！ 前を向けているので、縦パスで一気に前進できる場面です。";safeXp(10,"正しいパス判断");}
+      else if(c==="サイド"){box.textContent="良い判断！ 相手が中央へ寄っているなら、サイドチェンジも有効です。";safeXp(7,"視野を広く使った判断");}
+      else box.textContent="安全な選択です。ただし前進できる場面では、縦方向も確認しよう。";
+    });
+  });
+
+  /* 戦術 */
+  all("[data-quiz]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var a=btn.getAttribute("data-quiz"), box=byId("quizQuestion"); if(!box)return;
+      if(a==="A"){box.textContent="正解！ フリーの味方へ早く展開すると、相手守備が整う前に攻撃できます。";safeXp(12,"戦術クイズ正解");}
+      else box.textContent="もう一度考えよう。味方がフリーなら、相手が戻る前にボールを届けるのが有効です。";
+    });
+  });
+
+  /* Fドローン */
+  var dx=14,dy=74;
+  function drawDrone(){
+    var drone=byId("miniDrone"); if(!drone)return;
+    drone.style.left=dx+"%"; drone.style.top=dy+"%";
+    if(dx>=76 && dy<=30){var r=byId("droneResult");if(r)r.textContent="MISSION CLEAR！ 上空から右サイドのパスコースを発見しました。";}
+  }
+  all("[data-mini-drone]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var dir=btn.getAttribute("data-mini-drone");
+      if(dir==="up")dy=Math.max(10,dy-10); if(dir==="down")dy=Math.min(88,dy+10);
+      if(dir==="left")dx=Math.max(8,dx-10); if(dir==="right")dx=Math.min(92,dx+10);
+      if(dir==="reset"){dx=14;dy=74;} drawDrone(); if(dx>=76&&dy<=30)safeXp(20,"Fドローンミッション");
+    });
+  });
+  drawDrone();
+})();
+</script>
+
 </body>
-</html>
