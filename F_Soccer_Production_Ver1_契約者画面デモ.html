@@ -779,16 +779,17 @@ body{
 
       <h3 class="challenge-title">ドリブルマスター</h3>
       <div class="challenge-media">
-        <video controls playsinline preload="metadata" src="f-soccer-dribble.mp4"></video>
+        <img src="f-soccer-dribble-pink.png" alt="ピンクユニフォームのドリブル練習イメージ" style="width:100%;display:block;">
         <div class="challenge-media-label">DRIBBLE PLAY</div>
       </div>
-
-      <button class="challenge-primary" id="dribbleStart" type="button" style="width:100%">10秒チャレンジ開始</button>
-      <div class="challenge-result" id="dribbleResult">スタート後、表示される方向と同じボタンを素早く押そう。</div>
+      <div class="challenge-result" id="dribbleResult">左か右を選ぶと、その方向のドリブル動画が自動再生されます。</div>
       <div class="challenge-actions" style="margin-top:9px">
-        <button type="button" data-dribble="左">←</button>
-        <button type="button" data-dribble="前">↑</button>
-        <button type="button" data-dribble="右">→</button>
+        <button type="button" data-dribble-video="left">← 左へ仕掛ける</button>
+        <button type="button" data-dribble-video="right">右へ仕掛ける →</button>
+      </div>
+      <div class="challenge-media" style="margin-top:12px">
+        <video id="dribbleChoiceVideo" controls playsinline preload="metadata"></video>
+        <div class="challenge-media-label" id="dribbleVideoLabel">方向を選んでください</div>
       </div>
 
     </div>
@@ -1383,5 +1384,28 @@ document.querySelectorAll(".challenge-media img, .pk-reference img").forEach(img
 
 </script>
 
+
+<script>
+(function(){
+  const video = document.getElementById('dribbleChoiceVideo');
+  const label = document.getElementById('dribbleVideoLabel');
+  const result = document.getElementById('dribbleResult');
+  const sources = {
+    left: 'f-soccer-dribble-left.mp4',
+    right: 'f-soccer-dribble-right.mp4'
+  };
+  document.querySelectorAll('[data-dribble-video]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const dir = btn.dataset.dribbleVideo;
+      video.pause();
+      video.src = sources[dir];
+      video.load();
+      label.textContent = dir === 'left' ? 'LEFT DRIBBLE' : 'RIGHT DRIBBLE';
+      result.textContent = dir === 'left' ? '左へのドリブルを再生中。' : '右へのドリブルを再生中。';
+      try { await video.play(); } catch(e) { result.textContent += ' ▶を押すと再生できます。'; }
+    });
+  });
+})();
+</script>
 </body>
 </html>
