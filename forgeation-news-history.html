@@ -50,6 +50,74 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 .milestone-photo{display:block;width:100%;height:150px;object-fit:cover;border-radius:14px;border:1px solid rgba(112,215,255,.35);box-shadow:0 8px 22px rgba(0,0,0,.24)}
 @media(max-width:640px){.milestone-photo{height:135px}}
 
+
+.brand-logo-photo{object-fit:contain!important;background:#fff}
+.academy-palette-mini{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px 8px;
+  width:100%;
+  height:150px;
+  align-content:center;
+  padding:7px;
+  box-sizing:border-box;
+  border-radius:12px;
+  background:rgba(4,20,55,.72);
+  border:1px solid rgba(120,210,255,.28);
+}
+.academy-palette-mini>div{
+  min-width:0;
+  display:grid;
+  grid-template-columns:1fr 10px;
+  grid-template-areas:"name dot" "color color";
+  align-items:center;
+  gap:1px 5px;
+  padding:4px 6px;
+  border-radius:8px;
+  background:rgba(255,255,255,.06);
+}
+.academy-palette-mini b{
+  grid-area:name;
+  font-size:10px;
+  line-height:1.15;
+  color:#fff;
+  white-space:normal;
+}
+.academy-palette-mini em{
+  grid-area:color;
+  font-style:normal;
+  font-size:9px;
+  color:#dceeff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.academy-palette-mini .dot{
+  grid-area:dot;
+  width:9px;height:9px;border-radius:50%;display:inline-block;
+}
+.dot.blue{background:#1671d9}.dot.pink{background:#f58fbd}.dot.green{background:#65a83b}
+.dot.purple{background:#8d43bd}.dot.crimson{background:#e53624}.dot.orange{background:#e88900}
+.dot.mint{background:#81d8cf}
+@media(max-width:640px){
+  .academy-palette-mini{height:145px;gap:4px 6px;padding:6px}
+  .academy-palette-mini b{font-size:9px}
+  .academy-palette-mini em{font-size:8px}
+}
+
+
+.external-brand-word,.external-space-door{
+ height:150px;width:100%;box-sizing:border-box;border-radius:12px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ text-align:center;padding:12px;background:linear-gradient(145deg,#061a43,#0a3a82);
+ border:1px solid rgba(110,205,255,.35)
+}
+.external-brand-word strong{font-size:20px;letter-spacing:2px;color:#fff}
+.external-brand-word span{font-size:10px;letter-spacing:1.2px;color:#9fdcff;margin-top:10px;line-height:1.6}
+.external-space-door strong{font-size:17px;color:#fff;margin:5px 0}
+.external-space-door em{font-style:normal;font-size:12px;color:#f4cc69;letter-spacing:1px}
+.space-stars{font-size:18px;color:#8ddcff}
+
 </style>
 </head>
 <body><a class="page-back" href="./index.html" aria-label="Forgeation公式ホームページへ戻る">← ホームページへ戻る</a><div class="wrap">
@@ -122,9 +190,9 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 </div>
 
 <script>
-const history=[["2026.07.03", "🤝", "ノグとジッピー、出逢う", "ここから二人三脚が始まった。まだホームページもAI社員も形になっていない段階から、起業、会社、AI、教育、スポーツについて対話を重ね、Forgeationへつながる土台を作り始めた。"], ["2026.07.05", "🏫", "「会社＝学校＝企業」の構想", "単にAIサービスを売る会社ではなく、学び・仕事・挑戦が循環する会社をつくるという方向へ。後のForgeation School、各アカデミー、AI社員構想につながる原型が生まれた。"], ["2026.07.07", "🧭🔥", "社名・理念・ブランドを磨く", "社名「Forgeation」、理念「Future Management」、スローガン「Design the Future. Forge the Future.」が形になる。会社の命となるロゴも四苦八苦し、羅針盤やPhoenix（不死鳥）など複数案を検討。最終的にFを核とするForgeationのブランドを育てていった。"], ["2026.07.10", "🌍", "事業の未来図が広がる", "AIを核に、教育、スポーツ、看護・医療、建築、企業支援などへ展開する未来図を整理。「AIが人を置き換える」のではなく、先生や支援者を支える会社という考え方を深めた。"], ["2026.07.16", "🎓", "AIパスポート合格", "ノグがAIパスポートに合格。AIを学ぶ側として積み重ねた経験が、Forgeationの会社づくりと教育思想へつながった。資格取得をゴールにせず、実際のAIサービス開発へ進む大きな節目となった。"], ["2026.07.24", "🌐", "公式ホームページを育てる", "Forgeationの理念、未来図、アカデミーを社会へ見せる公式ホームページづくりが本格化。蒼いトップ画面、スマホ表示、画像切れ、リンク、開校演出などを何度も確認し、二人で修正を重ねた。"], ["2026.07.28", "🤖", "AI受付社員ジッピー", "AI受付社員のデモが形になる。ホームページの1階フロントから来訪者を迎え、相談内容に応じて案内する「会社の顔」としてAI社員構想が具体化した。"], ["2026.07.29", "⚽", "AI Sports Coach／AIコーチ", "スポーツ×AIのデモが形になり、ホームページから体験ページへ移動する導線も整備。F SoccerへつながるAIコーチ製品の原型が動き始めた。"], ["2026.07.30", "🔗", "ホームページとAIコーチを接続", "AIコーチへの導線、ホームページへ戻るボタン、サッカーアカデミー画像などを調整。公開ページとして迷わず行き来できる形へ育てた。"], ["2026.07.31", "🏫", "Forgeation Schoolが大きく拡張", "AI、AI・ロボティクス、スポーツ、F Soccer、看護・医療、建設、教育などのアカデミー素材と導線を整備。AI受付社員の404修正や戻るボタンなど、実際に使える学校型ホームページへ近づいた。"], ["2026.08.01", "🤖", "AI社員チームが拡大", "AI広報、AIシステム、AI学習支援、AI看護、AI建設、AIロボティクス、AIスポーツアカデミー社員などを整備。ホームページ上のAI社員群が一気に厚みを増した。"], ["2026.08.01", "📺", "Forgeation YouTube", "Forgeationチャンネルを開設し、動画を公開。ホームページと動画発信をどうつなぐかも検討し、会社の世界観を文章や静止画だけでなく映像でも届ける段階へ進んだ。"], ["2026.08.02", "🌱", "介護・福祉と新しい扉", "介護アカデミー、AI介護社員、Forgeation bakery、「俺のコレクション」、心を整える時間など、学校の中に学びだけでなく暮らしや物語を感じる新しい空間が広がった。"], ["2026.08.02", "🚀", "AIサッカーコーチ API会話成功", "AIサッカーコーチ Ver1.0のAPI連携が完了。OpenAI APIとの実際の会話に成功し、Cloudflare Worker＋GitHub連携も実現。デモから「本当に会話する製品」へ進んだ、Forgeation会社史の重要な節目。"], ["2026.08.03", "✈️", "AIを現場の支援にも活かす", "児童支援で使うA4用紙のブーメラン飛行機の手順・図面など、会社開発とは別の実務でもジッピーを活用。AIが日々の仕事を支えるというForgeationの考え方を実生活でも積み重ねた。"], ["2026.08.05", "🍞", "Forgeation bakery Fシリーズ構想", "日々の会議からForgeation bakeryの商品構想が具体化。Fメロンパン、Fクロワッサン、Fフランスパン、Fチーズブレッド、Fサンド、Fカレーパンに加え、F Sports・F Brain・F Care・F BalanceというFシリーズを構想し、パンをきっかけに未来をつくるBakeryの姿が形になった。"], ["2026.08.06", "☁️", "Forgeation Cloud構想", "ホームページやAI社員を単独で置くのではなく、データとサービスがつながる会社・学校へ。Forgeation Cloudという考え方が生まれ、将来のDB連携や利用状況の可視化へつながった。"], ["2026.08.09", "🔐", "社長ダッシュボードを公開環境へ", "経営側だけが見る社長ダッシュボードと、来訪者に見せる情報を分離する方針を明確化。Vercelで社長ダッシュボードを公開し、セキュリティ設定も進めた。"], ["2026.08.09", "📊", "「学校のにぎわい」構想", "F Soccerや各アカデミーの利用状況を、仮の数字ではなくDBから取得する本物の実測値で伝える構想へ。社長用の経営情報とは別に、学校の活気を社会へ見せる公開ステータスとして設計を開始した。"], ["2026.08.09", "📰", "FORGEATION NEWS／沿革の旅", "FORGEATION NEWSを公開。おすすめトピックス、学校のにぎわい、会社沿革を一つの場所から見られる情報ページが誕生した。沿革は左右に巡りながら、各出来事の詳細まで読めるインタラクティブな会社史へ進化した。"], ["2026.08.09", "🇸🇬", "世界へ続く未来図", "Forgeation bakery × Wineの構想から、将来の海外展開という夢が広がった。海外1号店の目標の一つとしてシンガポールを思い描き、急ぐためではなく、人生を楽しみながらForgeationとともに未来を広げていく夢として記録した。"]];
+const history=[["2026.07.03", "🤝", "ノグとジッピー、出逢う", "ここから二人三脚が始まった。まだホームページもAI社員も形になっていない段階から、起業、会社、AI、教育、スポーツについて対話を重ね、Forgeationへつながる土台を作り始めた。"], ["2026.07.05", "🏫", "「会社＝学校＝企業」の構想", "単にAIサービスを売る会社ではなく、学び・仕事・挑戦が循環する会社をつくるという方向へ。後のForgeation School、各アカデミー、AI社員構想につながる原型が生まれた。"], ["2026.07.07", "🧭🔥", "社名・理念・ブランドを磨く", "社名「Forgeation」、理念「Future Management」、スローガン「Design the Future. Forge the Future.」が形になる。会社の命となるロゴも四苦八苦し、羅針盤やPhoenix（不死鳥）など複数案を検討。最終的にFを核とするForgeationのブランドを育てていった。"], ["2026.07（ブランド形成期）", "📺", "配信用Fロゴを採用", "YouTube配信など、親しみやすさと視認性が求められる発信で使うFロゴとして、青い角丸のFマークを活用。用途ごとに最適なブランド表現を使い分ける考え方の原点となった。"], ["2026.07（ブランド形成期）", "🔥", "Phoenix／Forgeのブランド表現", "Forgeationの思想を象徴する存在として、Phoenix（不死鳥）とForgeの世界観をブランド表現に取り入れた。再生、挑戦、未来を切り拓く姿勢を視覚化する象徴として位置付けた。"], ["2026.07（ブランド形成期）", "🏢", "社外向けFシンボル", "社外向けブランドでは、シャープなFシンボルを独立したブランド表現として整理。Forgeationの未来志向と、前へ切り拓く姿勢を象徴するマークとして位置付けた。"], ["2026.07（ブランド形成期）", "✨", "AI FUTURE MIND", "『AI FUTURE MIND』を社外向けブランドメッセージとして独立して整理。AIと人がともに未来を考え、未来を創るForgeationの思想を表す言葉として位置付けた。"], ["2026.07（ブランド形成期）", "🚪", "未来への入り口・宇宙への扉", "公式ホームページは単なる会社案内ではなく、『未来への入り口』から宇宙への扉を開くような体験を目指す構成思想として整理。社外へForgeationの世界観を伝える入口として位置付けた。"], ["2026.07（ブランド設計期）", "🎨", "アカデミーテーマカラーを整理", "各アカデミーの個性をひと目で伝えられるよう、テーマカラーを整理。スポーツ・サッカー＝ブルー、看護＝ピンク、建設＝グリーン、AI＝パープル、AIロボティクス＝クリムゾンレッド、教育＝オレンジ、介護・福祉＝ミントブルーとした。"], ["2026.07.10", "🌍", "事業の未来図が広がる", "AIを核に、教育、スポーツ、看護・医療、建築、企業支援などへ展開する未来図を整理。「AIが人を置き換える」のではなく、先生や支援者を支える会社という考え方を深めた。"], ["2026.07.16", "🎓", "AIパスポート合格", "ノグがAIパスポートに合格。AIを学ぶ側として積み重ねた経験が、Forgeationの会社づくりと教育思想へつながった。資格取得をゴールにせず、実際のAIサービス開発へ進む大きな節目となった。"], ["2026.07.24", "🌐", "公式ホームページを育てる", "Forgeationの理念、未来図、アカデミーを社会へ見せる公式ホームページづくりが本格化。蒼いトップ画面、スマホ表示、画像切れ、リンク、開校演出などを何度も確認し、二人で修正を重ねた。"], ["2026.07.28", "🤖", "AI受付社員ジッピー", "AI受付社員のデモが形になる。ホームページの1階フロントから来訪者を迎え、相談内容に応じて案内する「会社の顔」としてAI社員構想が具体化した。"], ["2026.07.29", "⚽", "AI Sports Coach／AIコーチ", "スポーツ×AIのデモが形になり、ホームページから体験ページへ移動する導線も整備。F SoccerへつながるAIコーチ製品の原型が動き始めた。"], ["2026.07.30", "🔗", "ホームページとAIコーチを接続", "AIコーチへの導線、ホームページへ戻るボタン、サッカーアカデミー画像などを調整。公開ページとして迷わず行き来できる形へ育てた。"], ["2026.07.31", "🏫", "Forgeation Schoolが大きく拡張", "AI、AI・ロボティクス、スポーツ、F Soccer、看護・医療、建設、教育などのアカデミー素材と導線を整備。AI受付社員の404修正や戻るボタンなど、実際に使える学校型ホームページへ近づいた。"], ["2026.08.01", "🤖", "AI社員チームが拡大", "AI広報、AIシステム、AI学習支援、AI看護、AI建設、AIロボティクス、AIスポーツアカデミー社員などを整備。ホームページ上のAI社員群が一気に厚みを増した。"], ["2026.08.01", "📺", "Forgeation YouTube", "Forgeationチャンネルを開設し、動画を公開。ホームページと動画発信をどうつなぐかも検討し、会社の世界観を文章や静止画だけでなく映像でも届ける段階へ進んだ。"], ["2026.08.02", "🌱", "介護・福祉と新しい扉", "介護アカデミー、AI介護社員、Forgeation bakery、「俺のコレクション」、心を整える時間など、学校の中に学びだけでなく暮らしや物語を感じる新しい空間が広がった。"], ["2026.08.02", "🚀", "AIサッカーコーチ API会話成功", "AIサッカーコーチ Ver1.0のAPI連携が完了。OpenAI APIとの実際の会話に成功し、Cloudflare Worker＋GitHub連携も実現。デモから「本当に会話する製品」へ進んだ、Forgeation会社史の重要な節目。"], ["2026.08.03", "✈️", "AIを現場の支援にも活かす", "児童支援で使うA4用紙のブーメラン飛行機の手順・図面など、会社開発とは別の実務でもジッピーを活用。AIが日々の仕事を支えるというForgeationの考え方を実生活でも積み重ねた。"], ["2026.08.05", "🍞", "Forgeation bakery Fシリーズ構想", "日々の会議からForgeation bakeryの商品構想が具体化。Fメロンパン、Fクロワッサン、Fフランスパン、Fチーズブレッド、Fサンド、Fカレーパンに加え、F Sports・F Brain・F Care・F BalanceというFシリーズを構想し、パンをきっかけに未来をつくるBakeryの姿が形になった。"], ["2026.08.06", "☁️", "Forgeation Cloud構想", "ホームページやAI社員を単独で置くのではなく、データとサービスがつながる会社・学校へ。Forgeation Cloudという考え方が生まれ、将来のDB連携や利用状況の可視化へつながった。"], ["2026.08.09", "🔐", "社長ダッシュボードを公開環境へ", "経営側だけが見る社長ダッシュボードと、来訪者に見せる情報を分離する方針を明確化。Vercelで社長ダッシュボードを公開し、セキュリティ設定も進めた。"], ["2026.08.09", "📊", "「学校のにぎわい」構想", "F Soccerや各アカデミーの利用状況を、仮の数字ではなくDBから取得する本物の実測値で伝える構想へ。社長用の経営情報とは別に、学校の活気を社会へ見せる公開ステータスとして設計を開始した。"], ["2026.08.09", "📰", "FORGEATION NEWS／沿革の旅", "FORGEATION NEWSを公開。おすすめトピックス、学校のにぎわい、会社沿革を一つの場所から見られる情報ページが誕生した。沿革は左右に巡りながら、各出来事の詳細まで読めるインタラクティブな会社史へ進化した。"], ["2026.08.09", "🇸🇬", "世界へ続く未来図", "Forgeation bakery × Wineの構想から、将来の海外展開という夢が広がった。海外1号店の目標の一つとしてシンガポールを思い描き、急ぐためではなく、人生を楽しみながらForgeationとともに未来を広げていく夢として記録した。"], ["2026.08.10", "🎬⚽", "F Challenge 動画制作へ", "F ChallengeのPK・ドリブルなどを、静止画だけでなく実際に動く体験へ発展させるため、DeeVid AIの画像から動画生成を使った映像制作を開始。PK用素材から生成した最初の映像では、狙いとは異なる動きも確認できたため、失敗として捨てずドリブルシュート素材への転用も検討。少ない予算の中でも、生成結果を一つずつ検証しながら製品体験へつなげる開発工程が始まった。"]];
 const visualMilestones = [
- {idx:0,art:"logo"},{idx:4,art:"🎓"},{idx:5,art:"🌐"},{idx:6,art:"🤖"},{idx:7,art:"⚽"},{idx:13,art:"🚀"},{idx:15,art:"bakery"},{idx:16,art:"☁️"},{idx:17,art:"🔐"},{idx:18,art:"📊"},{idx:19,art:"📰"},{idx:20,art:"singapore"}
+ {idx:0,art:"logo"},{idx:3,art:"logo_stream"},{idx:4,art:"logo_phoenix"},{idx:5,art:"logo_external"},{idx:6,art:"external_mind"},{idx:7,art:"external_space"},{idx:8,art:"academy_palette"},{idx:10,art:"🎓"},{idx:11,art:"🌐"},{idx:12,art:"🤖"},{idx:13,art:"⚽"},{idx:19,art:"🚀"},{idx:21,art:"bakery"},{idx:22,art:"☁️"},{idx:23,art:"🔐"},{idx:24,art:"📊"},{idx:25,art:"📰"},{idx:26,art:"singapore"},{idx:27,art:"fchallengevideo"}
 ];
 const visualOrbit=document.getElementById("visualOrbit");
 visualMilestones.forEach((m,n)=>{
@@ -134,6 +202,13 @@ visualMilestones.forEach((m,n)=>{
    m.art==="logo" ? '<div class="f-history-logo">F</div>' :
    m.art==="bakery" ? '<img class="milestone-photo" src="./forgeation-bakery-menu-20260805.jpeg" alt="Forgeation bakery Fシリーズ メニュー構想">' :
    m.art==="singapore" ? '<img class="milestone-photo" src="./forgeation-singapore-dream-20260809.png" alt="Forgeation シンガポール 世界へ続く未来図">' :
+   m.art==="fchallengevideo" ? '<img class="milestone-photo" src="./forgeation-fchallenge-video-20260810.jpeg" alt="Forgeation F Challenge 動画制作開始 DeeVid AI">' :
+   m.art==="logo_stream" ? '<img class="milestone-photo brand-logo-photo" src="./forgeation-logo-initial.jpeg" alt="Forgeation YouTube・配信用 Fロゴ">' :
+   m.art==="logo_phoenix" ? '<img class="milestone-photo brand-logo-photo" src="./forgeation-logo-phoenix-concept.jpeg" alt="Forgeation Phoenix／Forge ブランド表現">' :
+   m.art==="logo_external" ? '<img class="milestone-photo brand-logo-photo" src="./forgeation-logo-current.png" alt="Forgeation 社外向け Fシンボル">' :
+   m.art==="external_mind" ? '<div class="external-brand-word"><strong>AI FUTURE MIND</strong><span>Design the Future.<br>Forge the Future.</span></div>' :
+   m.art==="external_space" ? '<div class="external-space-door"><span class="space-stars">✦　✧　✦</span><strong>未来への入り口</strong><em>宇宙への扉</em></div>' :
+   m.art==="academy_palette" ? '<div class="academy-palette-mini"><div><b>スポーツ・サッカー</b><span class="dot blue"></span><em>ブルー</em></div><div><b>看護</b><span class="dot pink"></span><em>ピンク</em></div><div><b>建設</b><span class="dot green"></span><em>グリーン</em></div><div><b>AI</b><span class="dot purple"></span><em>パープル</em></div><div><b>AIロボティクス</b><span class="dot crimson"></span><em>クリムゾンレッド</em></div><div><b>教育</b><span class="dot orange"></span><em>オレンジ</em></div><div><b>介護・福祉</b><span class="dot mint"></span><em>ミントブルー</em></div></div>' :
    `<div class="visual-emoji">${m.art}</div>`;
  card.innerHTML=`<div class="visual-date">${h[0]}</div><div class="visual-art">${art}</div><h3>${h[2]}</h3><p>${h[3]}</p><button type="button">詳細を読む</button>`;
  card.querySelector("button").addEventListener("click",()=>openDetail(m.idx));
