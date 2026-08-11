@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>F DRONE ∞ REAL 3D STADIUM Ver.7</title>
+<style>
+:root{
+  --cyan:#52dcff; --panel:rgba(2,12,24,.70); --line:rgba(94,226,255,.52);
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020812;color:#fff;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif}
+#app{position:fixed;inset:0;background:#020812}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+#loading{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#0d2b49,#020812 72%);font-weight:900;letter-spacing:.06em}
+#loading.hidden{display:none}
+#hud{position:fixed;inset:0;pointer-events:none;z-index:10}
+.top{position:absolute;top:max(12px,env(safe-area-inset-top));left:12px;right:12px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:9px 13px;backdrop-filter:blur(8px);box-shadow:0 6px 24px rgba(0,0,0,.25);font-weight:800}
+.centerInfo{position:absolute;top:66px;left:50%;transform:translateX(-50%);min-width:min(76vw,540px);text-align:center}
+#stageTitle{font-size:clamp(18px,3vw,28px);font-weight:950;text-shadow:0 2px 12px #000}
+#mission{margin-top:6px;font-size:13px;color:#d7f7ff}
+.telemetry{position:absolute;right:12px;top:112px;width:168px;display:grid;gap:8px}
+.telemetry .pill{font-size:12px}
+#next{pointer-events:auto;position:absolute;right:12px;top:244px;border:1px solid var(--cyan);background:rgba(4,39,61,.84);color:#fff;border-radius:14px;padding:10px 12px;font-weight:850;box-shadow:0 0 24px rgba(67,215,255,.18)}
+#help{position:absolute;left:12px;top:112px;width:210px;font-size:12px;line-height:1.55}
+#help b{color:var(--cyan)}
+#crosshair{position:absolute;left:50%;top:50%;width:34px;height:34px;transform:translate(-50%,-50%);opacity:.78}
+#crosshair:before,#crosshair:after{content:"";position:absolute;background:rgba(255,255,255,.9)}
+#crosshair:before{left:16px;top:0;width:2px;height:34px}
+#crosshair:after{top:16px;left:0;width:34px;height:2px}
+#sticks{position:absolute;left:0;right:0;bottom:max(20px,env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:flex-end;padding:0 18px;pointer-events:none}
+.stickWrap{display:flex;flex-direction:column;gap:8px;align-items:center}
+.stickLabel{font-size:10px;opacity:.7}
+.stick{width:132px;height:132px;border-radius:50%;border:1px solid rgba(139,237,255,.45);background:rgba(1,14,25,.28);position:relative;pointer-events:auto;touch-action:none;backdrop-filter:blur(4px);box-shadow:inset 0 0 40px rgba(0,0,0,.28)}
+.knob{width:56px;height:56px;border-radius:50%;position:absolute;left:38px;top:38px;background:rgba(80,220,255,.36);border:2px solid rgba(223,252,255,.88);box-shadow:0 0 24px rgba(64,220,255,.34)}
+#status{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:12px;white-space:nowrap}
+@media (max-width:760px){
+  #help{display:none}.telemetry{top:106px;width:150px}
+  .stick{width:112px;height:112px}.knob{width:50px;height:50px;left:31px;top:31px}
+  #status{bottom:145px;font-size:11px}.centerInfo{top:64px}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="loading">F DRONE REAL 3D ENGINE LOADING…</div>
+<div id="hud">
+  <div class="top">
+    <div class="pill">F DRONE ∞</div>
+    <div class="pill">STAGE <span id="stageNo">1</span> / ∞</div>
+  </div>
+  <div class="centerInfo">
+    <div id="stageTitle">TOKYO SKY STADIUM</div>
+    <div id="mission">スタジアム上空を旋回し、ピッチ中央の光るゲートへ向かえ。</div>
+  </div>
+  <div id="help" class="pill">
+    <b>PC操作</b><br>
+    W/S：前進・後退<br>
+    A/D：左・右移動<br>
+    ←/→：旋回<br>
+    ↑/↓：上昇・下降
+  </div>
+  <div class="telemetry">
+    <div class="pill">SPEED <span id="speed">0</span> km/h</div>
+    <div class="pill">ALT <span id="alt">0</span> m</div>
+    <div class="pill">DIST <span id="dist">0</span> m</div>
+  </div>
+  <button id="next">NEXT STADIUM →</button>
+  <div id="crosshair"></div>
+  <div id="sticks">
+    <div class="stickWrap">
+      <div class="stick" id="leftStick"><div class="knob"></div></div>
+      <div class="stickLabel">MOVE / STRAFE</div>
+    </div>
+    <div class="stickWrap">
+      <div class="stick" id="rightStick"><div class="knob"></div></div>
+      <div class="stickLabel">YAW / ALTITUDE</div>
+    </div>
+  </div>
+  <div id="status">TAKE OFF — 黒いF DRONEを操縦</div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const mount = document.getElementById('app');
+const loading = document.getElementById('loading');
+const stageNo = document.getElementById('stageNo');
+const stageTitle = document.getElementById('stageTitle');
+const missionEl = document.getElementById('mission');
+const speedEl = document.getElementById('speed');
+const altEl = document.getElementById('alt');
+const distEl = document.getElementById('dist');
+const statusEl = document.getElementById('status');
+
+let scene, renderer, camera, drone, clock;
+let pitchCenter = new THREE.Vector3(0,0,0);
+let stage = 1;
+let input = {forward:0, strafe:0, yaw:0, altitude:0};
+let keys = {};
+let props = [];
+let targetRing;
+let skyObjects = [];
+
+const presets = [
+  {name:"TOKYO SKY STADIUM", sky:0x86bde5, fog:0xadc9db, sun:0xfff2d0, ground:0x405b42, accent:0x57dbff, time:"DAY"},
+  {name:"LONDON NIGHT ARENA", sky:0x07111f, fog:0x0b1826, sun:0xa7cfff, ground:0x15241d, accent:0x58dfff, time:"NIGHT"},
+  {name:"MADRID SUNSET STADIUM", sky:0xd47f62, fog:0xb88372, sun:0xffc47d, ground:0x4b4433, accent:0xffd16b, time:"SUNSET"},
+  {name:"RIO OCEAN STADIUM", sky:0x4fa7d1, fog:0x81bfd8, sun:0xfff2c7, ground:0x37583f, accent:0x66f0ff, time:"DAY"},
+  {name:"MILAN BLUE ARENA", sky:0x15243f, fog:0x243957, sun:0xc6dcff, ground:0x25342b, accent:0x78a8ff, time:"DUSK"}
+];
+
+function init(){
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x86bde5);
+  scene.fog = new THREE.FogExp2(0xadc9db, 0.0026);
+
+  camera = new THREE.PerspectiveCamera(64, innerWidth/innerHeight, 0.1, 2500);
+
+  renderer = new THREE.WebGLRenderer({antialias:true, powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  mount.appendChild(renderer.domElement);
+
+  clock = new THREE.Clock();
+  buildWorld();
+  buildDrone();
+  setupLighting();
+  setupControls();
+
+  drone.position.set(0, 28, 120);
+  camera.position.set(0, 36, 145);
+  applyPreset(0);
+
+  addEventListener('resize', onResize);
+  loading.classList.add('hidden');
+  animate();
+}
+
+function setupLighting(){
+  scene.add(new THREE.HemisphereLight(0xc7e7ff, 0x203020, 1.6));
+
+  const sun = new THREE.DirectionalLight(0xfff1d3, 3.6);
+  sun.position.set(-120,180,80);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048,2048);
+  sun.shadow.camera.left=-240; sun.shadow.camera.right=240;
+  sun.shadow.camera.top=240; sun.shadow.camera.bottom=-240;
+  scene.add(sun);
+
+  const stadiumGlow = new THREE.PointLight(0x61dfff, 140, 420, 2);
+  stadiumGlow.position.set(0,70,0);
+  scene.add(stadiumGlow);
+}
+
+function buildWorld(){
+  // Large terrain
+  const terrain = new THREE.Mesh(
+    new THREE.CircleGeometry(850, 128),
+    new THREE.MeshStandardMaterial({color:0x405b42, roughness:.98})
+  );
+  terrain.rotation.x = -Math.PI/2;
+  terrain.receiveShadow = true;
+  scene.add(terrain);
+
+  // Water ring around city for cinematic depth
+  const water = new THREE.Mesh(
+    new THREE.RingGeometry(420, 900, 128),
+    new THREE.MeshPhysicalMaterial({color:0x164b67, metalness:.05, roughness:.18, transmission:.05, transparent:true, opacity:.92})
+  );
+  water.rotation.x = -Math.PI/2;
+  water.position.y = -1.0;
+  scene.add(water);
+
+  buildStadium();
+  buildCity();
+  buildMountains();
+  buildClouds();
+}
+
+function buildStadium(){
+  // Pitch
+  const pitch = new THREE.Mesh(
+    new THREE.PlaneGeometry(72,112),
+    new THREE.MeshStandardMaterial({color:0x1c7a48, roughness:.78})
+  );
+  pitch.rotation.x=-Math.PI/2;
+  pitch.position.y=.04;
+  pitch.receiveShadow=true;
+  scene.add(pitch);
+
+  // mowing stripes
+  for(let i=0;i<10;i++){
+    const stripe = new THREE.Mesh(
+      new THREE.PlaneGeometry(72,11.2),
+      new THREE.MeshBasicMaterial({color:i%2?0x208650:0x197744,transparent:true,opacity:.38})
+    );
+    stripe.rotation.x=-Math.PI/2; stripe.position.set(0,.055,-50.4+i*11.2); scene.add(stripe);
+  }
+
+  // White lines
+  const lineMat = new THREE.LineBasicMaterial({color:0xffffff});
+  function line(points){
+    const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), lineMat);
+    scene.add(l); return l;
+  }
+  const y=.075;
+  line([new THREE.Vector3(-36,y,-56),new THREE.Vector3(36,y,-56),new THREE.Vector3(36,y,56),new THREE.Vector3(-36,y,56),new THREE.Vector3(-36,y,-56)]);
+  line([new THREE.Vector3(-36,y,0),new THREE.Vector3(36,y,0)]);
+  const circlePts = new THREE.EllipseCurve(0,0,9.15,9.15,0,Math.PI*2).getPoints(96).map(p=>new THREE.Vector3(p.x,y,p.y));
+  scene.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(circlePts), lineMat));
+
+  // Goals
+  for(const z of [-57.5,57.5]){
+    const goal = new THREE.Group();
+    const white = new THREE.MeshStandardMaterial({color:0xffffff,metalness:.25,roughness:.35});
+    for(const x of [-4,4]){
+      const post = new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,2.8,12),white);
+      post.position.set(x,1.4,z); goal.add(post);
+    }
+    const bar = new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,8,12),white);
+    bar.rotation.z=Math.PI/2;bar.position.set(0,2.8,z);goal.add(bar);
+    scene.add(goal);
+  }
+
+  // Multi-tier stadium bowl made from repeated seating rows
+  const seatColors=[0x233247,0x2c3d55,0x1a293a,0x31455d];
+  for(let tier=0;tier<4;tier++){
+    const baseX=52+tier*11, baseZ=72+tier*12, level=3+tier*8;
+    for(let row=0;row<7;row++){
+      const rx=baseX+row*1.7, rz=baseZ+row*1.9;
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(1,1,2,128),
+        new THREE.MeshStandardMaterial({color:seatColors[(tier+row)%seatColors.length],roughness:.82})
+      );
+      ring.geometry.dispose();
+      const shape = new THREE.Shape();
+      shape.absellipse(0,0,rx,rz,0,Math.PI*2,false,0);
+      const hole = new THREE.Path(); hole.absellipse(0,0,rx-2.5,rz-2.5,0,Math.PI*2,true,0); shape.holes.push(hole);
+      const geo = new THREE.ExtrudeGeometry(shape,{depth:1.25,bevelEnabled:false,curveSegments:96});
+      geo.rotateX(Math.PI/2); geo.translate(0,level+row*.55,0);
+      const mesh = new THREE.Mesh(geo, ring.material);
+      mesh.castShadow=true; mesh.receiveShadow=true; scene.add(mesh);
+    }
+  }
+
+  // Roof
+  const roofMat = new THREE.MeshPhysicalMaterial({color:0x182430,metalness:.72,roughness:.28,clearcoat:.7});
+  const roof = new THREE.Mesh(new THREE.TorusGeometry(96,4.2,12,128),roofMat);
+  roof.rotation.x=Math.PI/2; roof.scale.z=1.32; roof.position.y=39; scene.add(roof);
+
+  // Floodlight towers + lights
+  for(const a of [0.55,2.55,3.7,5.7]){
+    const x=Math.cos(a)*106,z=Math.sin(a)*132;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(.55,.9,48,14),new THREE.MeshStandardMaterial({color:0x59636c,metalness:.75,roughness:.35}));
+    pole.position.set(x,24,z); pole.castShadow=true; scene.add(pole);
+    for(let j=0;j<5;j++){
+      const lamp=new THREE.SpotLight(0xffffff,680,320,Math.PI/4.5,.42,1.15);
+      lamp.position.set(x+(j-2)*1.2,48,z);
+      lamp.target.position.set(0,0,0);
+      scene.add(lamp,lamp.target);
+      const bulb=new THREE.Mesh(new THREE.SphereGeometry(.45,10,8),new THREE.MeshBasicMaterial({color:0xffffff}));
+      bulb.position.copy(lamp.position);scene.add(bulb);
+    }
+  }
+
+  // glowing flight gate at center
+  targetRing = new THREE.Mesh(
+    new THREE.TorusGeometry(12,.65,14,64),
+    new THREE.MeshStandardMaterial({color:0x58dfff,emissive:0x127da0,emissiveIntensity:4,metalness:.1,roughness:.22})
+  );
+  targetRing.position.set(0,18,-10);
+  scene.add(targetRing);
+}
+
+function buildCity(){
+  const rng = mulberry32(2026);
+  for(let i=0;i<150;i++){
+    const a=rng()*Math.PI*2, r=170+rng()*260, h=12+rng()*95, w=7+rng()*18, d=7+rng()*18;
+    const mat = new THREE.MeshStandardMaterial({
+      color:new THREE.Color().setHSL(.58,.18,.12+rng()*.15),
+      metalness:.22,roughness:.72
+    });
+    const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
+    b.position.set(Math.cos(a)*r,h/2,Math.sin(a)*r);
+    b.castShadow=true;b.receiveShadow=true;scene.add(b);
+
+    // lit windows as emissive face strips
+    if(i%2===0){
+      const window = new THREE.Mesh(
+        new THREE.BoxGeometry(w*.74,.4,d*.03),
+        new THREE.MeshBasicMaterial({color:i%3===0?0xffd986:0x58cfff})
+      );
+      window.position.set(b.position.x,h*.62,b.position.z - d/2 -.02);
+      scene.add(window);
+    }
+  }
+}
+
+function buildMountains(){
+  const mat = new THREE.MeshStandardMaterial({color:0x344238,roughness:1});
+  for(let i=0;i<26;i++){
+    const a=i/26*Math.PI*2, r=480+Math.sin(i*2.1)*80, h=55+((i*17)%95);
+    const m=new THREE.Mesh(new THREE.ConeGeometry(55+((i*11)%45),h,8),mat);
+    m.position.set(Math.cos(a)*r,h/2-2,Math.sin(a)*r);m.rotation.y=i*.71;scene.add(m);
+  }
+}
+
+function buildClouds(){
+  const cloudMat = new THREE.MeshLambertMaterial({color:0xffffff,transparent:true,opacity:.68});
+  for(let i=0;i<34;i++){
+    const g=new THREE.Group();
+    for(let j=0;j<5;j++){
+      const s=new THREE.Mesh(new THREE.SphereGeometry(8+Math.random()*10,12,8),cloudMat);
+      s.position.set((j-2)*9,Math.random()*5,Math.random()*8);g.add(s);
+    }
+    g.position.set((Math.random()-.5)*700,100+Math.random()*90,(Math.random()-.5)*700);
+    scene.add(g);skyObjects.push(g);
+  }
+}
+
+function buildDrone(){
+  drone=new THREE.Group();
+  drone.name="F_DRONE";
+
+  const bodyMat=new THREE.MeshPhysicalMaterial({color:0x0a0d10,metalness:.78,roughness:.22,clearcoat:1,clearcoatRoughness:.16});
+  const darkMat=new THREE.MeshStandardMaterial({color:0x111922,metalness:.65,roughness:.3});
+  const accentMat=new THREE.MeshStandardMaterial({color:0x22cfff,emissive:0x0a86b1,emissiveIntensity:3});
+
+  const body=new THREE.Mesh(new THREE.BoxGeometry(7.8,2.1,10.8),bodyMat);
+  body.geometry.translate(0,0,-.5);body.castShadow=true;drone.add(body);
+
+  const canopy=new THREE.Mesh(new THREE.SphereGeometry(3.7,32,20,0,Math.PI*2,0,Math.PI*.57),bodyMat);
+  canopy.scale.set(1.1,.52,1.35); canopy.rotation.x=Math.PI/2; canopy.position.z=-4.4; drone.add(canopy);
+
+  // gimbal
+  const gimbal=new THREE.Mesh(new THREE.SphereGeometry(1.25,24,18),darkMat);
+  gimbal.position.set(0,-1.8,-5.6);drone.add(gimbal);
+  const lens=new THREE.Mesh(new THREE.CircleGeometry(.64,24),new THREE.MeshPhysicalMaterial({color:0x041117,metalness:.8,roughness:.05,clearcoat:1}));
+  lens.position.set(0,-1.8,-6.78);drone.add(lens);
+
+  const armGeo=new THREE.CylinderGeometry(.34,.46,8.4,16);
+  for(const sx of [-1,1]) for(const sz of [-1,1]){
+    const arm=new THREE.Mesh(armGeo,bodyMat);
+    arm.rotation.z=Math.PI/2;
+    arm.rotation.y=(sz>0?-.54:.54)*sx;
+    arm.position.set(sx*4.15,0,sz*3.0);
+    arm.castShadow=true;drone.add(arm);
+
+    const mx=sx*7.5,mz=sz*5.35;
+    const motor=new THREE.Mesh(new THREE.CylinderGeometry(.78,.88,.92,18),darkMat);
+    motor.position.set(mx,.18,mz);drone.add(motor);
+
+    const prop=new THREE.Mesh(new THREE.BoxGeometry(7.5,.06,.46),new THREE.MeshStandardMaterial({color:0x283038,metalness:.72,roughness:.28,transparent:true,opacity:.72}));
+    prop.position.set(mx,.72,mz); prop.userData.prop=true;drone.add(prop);
+  }
+
+  const stripe=new THREE.Mesh(new THREE.BoxGeometry(4.2,.18,.58),accentMat);
+  stripe.position.set(0,-.85,-4.9);drone.add(stripe);
+
+  // Forgeation F logo
+  const logoCanvas=document.createElement('canvas');logoCanvas.width=512;logoCanvas.height=256;
+  const lc=logoCanvas.getContext('2d');
+  const grad=lc.createLinearGradient(0,0,512,256);grad.addColorStop(0,'#18b8ff');grad.addColorStop(.65,'#2455ff');grad.addColorStop(1,'#ff7a4d');
+  roundRect(lc,116,20,280,216,54);lc.fillStyle=grad;lc.fill();
+  lc.fillStyle='white';lc.font='900 italic 150px Arial';lc.textAlign='center';lc.textBaseline='middle';lc.fillText('F',256,128);
+  const logoTex=new THREE.CanvasTexture(logoCanvas);
+  const logo=new THREE.Mesh(new THREE.PlaneGeometry(3.35,1.68),new THREE.MeshBasicMaterial({map:logoTex,transparent:true}));
+  logo.rotation.x=-Math.PI/2;logo.position.set(0,1.08,-.8);drone.add(logo);
+
+  scene.add(drone);
+}
+
+function applyPreset(index){
+  const p=presets[index%presets.length];
+  scene.background=new THREE.Color(p.sky); scene.fog.color.setHex(p.fog);
+  stageTitle.textContent=p.name;
+  stageNo.textContent=stage;
+  missionEl.textContent="スタジアム上空を旋回し、ピッチ中央の光るゲートへ向かえ。";
+  statusEl.textContent="STAGE "+stage+" — "+p.name;
+}
+
+function setupControls(){
+  const down = (k,v=1)=>keys[k]=v;
+  const up = k=>keys[k]=0;
+  addEventListener('keydown',e=>{
+    const k=e.key.toLowerCase();
+    if(['w','s','a','d','arrowleft','arrowright','arrowup','arrowdown'].includes(k)) e.preventDefault();
+    down(k);
+  },{passive:false});
+  addEventListener('keyup',e=>up(e.key.toLowerCase()));
+
+  setupStick('leftStick', (x,y)=>{input.strafe=x;input.forward=-y;});
+  setupStick('rightStick',(x,y)=>{input.yaw=x;input.altitude=-y;});
+  document.getElementById('next').onclick=()=>{stage++;applyPreset(stage-1);};
+}
+
+function setupStick(id, cb){
+  const el=document.getElementById(id), knob=el.querySelector('.knob');
+  const reset=()=>{cb(0,0);knob.style.transform='translate(0px,0px)'};
+  el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);move(e)});
+  el.addEventListener('pointermove',e=>{if(el.hasPointerCapture(e.pointerId))move(e)});
+  el.addEventListener('pointerup',reset);el.addEventListener('pointercancel',reset);
+  function move(e){
+    const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,max=r.width*.31;
+    let dx=e.clientX-cx,dy=e.clientY-cy,d=Math.hypot(dx,dy);
+    if(d>max){dx*=max/d;dy*=max/d}
+    cb(dx/max,dy/max);knob.style.transform=`translate(${dx}px,${dy}px)`;
+  }
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  const dt=Math.min(clock.getDelta(),.034);
+
+  const fwd = (keys['w']?1:0) - (keys['s']?1:0) + input.forward;
+  const strafe = (keys['d']?1:0) - (keys['a']?1:0) + input.strafe;
+  const yawInput = (keys['arrowright']?1:0) - (keys['arrowleft']?1:0) + input.yaw;
+  const altInput = (keys['arrowup']?1:0) - (keys['arrowdown']?1:0) + input.altitude;
+
+  const moveSpeed=34, yawSpeed=1.55, climb=20;
+  drone.rotation.y -= yawInput*yawSpeed*dt;
+
+  const forward = new THREE.Vector3(Math.sin(drone.rotation.y),0,-Math.cos(drone.rotation.y));
+  const right = new THREE.Vector3(Math.cos(drone.rotation.y),0,Math.sin(drone.rotation.y));
+  drone.position.addScaledVector(forward,fwd*moveSpeed*dt);
+  drone.position.addScaledVector(right,strafe*moveSpeed*dt);
+  drone.position.y=THREE.MathUtils.clamp(drone.position.y+altInput*climb*dt,3,95);
+
+  drone.rotation.z=THREE.MathUtils.lerp(drone.rotation.z,-strafe*.18-yawInput*.08,.08);
+  drone.rotation.x=THREE.MathUtils.lerp(drone.rotation.x,fwd*.12,.08);
+
+  props.length=0;
+  drone.traverse(o=>{if(o.userData.prop){o.rotation.y+=34*dt;props.push(o)}});
+
+  // chase camera
+  const camOffset=new THREE.Vector3(0,6.5,18).applyAxisAngle(new THREE.Vector3(0,1,0),drone.rotation.y);
+  const desired=drone.position.clone().add(camOffset);
+  camera.position.lerp(desired,1-Math.pow(.001,dt));
+  const look=drone.position.clone().add(forward.clone().multiplyScalar(14)).add(new THREE.Vector3(0,1.4,0));
+  camera.lookAt(look);
+
+  // animate target ring + clouds
+  targetRing.rotation.z += .45*dt;
+  const pulse=1+Math.sin(performance.now()*.003)*.035;targetRing.scale.setScalar(pulse);
+  for(const c of skyObjects)c.position.x+=.18*dt;
+
+  const vel=Math.hypot(fwd*moveSpeed,strafe*moveSpeed,altInput*climb);
+  speedEl.textContent=Math.round(vel*3.6);
+  altEl.textContent=Math.round(drone.position.y);
+  distEl.textContent=Math.round(drone.position.distanceTo(targetRing.position));
+
+  renderer.render(scene,camera);
+}
+
+function onResize(){
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+}
+function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.closePath()}
+
+init();
+</script>
+</body>
+</html>
