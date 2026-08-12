@@ -1281,17 +1281,26 @@ section{padding:68px 0}
 
 
 
-
-/* ===== F Soccer 料金3プラン導線 ===== */
-.f-soccer-pricing-mini{margin-top:26px;padding:22px;border:1px solid #ffffff35;border-radius:22px;background:#ffffff0d}
-.f-soccer-pricing-mini h3{margin:0 0 14px;color:#fff}
-.f-soccer-plan-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.f-soccer-plan-mini{padding:14px;border-radius:14px;background:#fff;color:#12314f;text-align:center}
-.f-soccer-plan-mini b{display:block;font-size:14px}.f-soccer-plan-mini strong{display:block;margin-top:5px;font-size:22px;color:#0a57b5}
-.f-soccer-pricing-button{display:inline-block;margin-top:15px;padding:13px 18px;border-radius:12px;background:linear-gradient(90deg,#e64b98,#266ee2);color:#fff!important;text-decoration:none;font-weight:900}
-@media(max-width:650px){.f-soccer-plan-row{grid-template-columns:1fr}}
-
 </style>
+
+<style id="forgeation-ver323-patch">
+/* Ver3.23: 学校を主役に・縦長解消・埋め込みカリキュラム */
+.vision-collapsible{padding:28px 0!important;background:#f5f8fc}
+.embedded-academy{border:1px solid rgba(120,210,255,.35);border-radius:22px;background:rgba(8,38,78,.92);overflow:hidden;margin:14px 0;color:#fff}
+.embedded-academy>summary{cursor:pointer;list-style:none;padding:18px 22px;font-weight:900;font-size:1.05rem;color:#eaffff;display:flex;align-items:center;justify-content:space-between}
+.embedded-academy>summary::-webkit-details-marker{display:none}
+.embedded-academy>summary:after{content:'＋';font-size:1.4rem}
+.embedded-academy[open]>summary:after{content:'－'}
+.embedded-academy-body{padding:0 16px 18px}
+.embedded-academy-body>section{padding:20px 0!important;background:transparent!important}
+.embedded-academy-body .container{width:100%!important;max-width:none!important;padding:0!important}
+#visionDetails .vision-grid img{width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;background:#081a33}
+.future-inline-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.future-inline-grid .embedded-academy{margin:0}
+.school-room-vision{display:none;text-decoration:none;border-radius:999px;padding:11px 16px;font-weight:900;background:linear-gradient(135deg,#9fffe0,#fff2b8);color:#073a52}
+@media(max-width:760px){.future-inline-grid{grid-template-columns:1fr}.vision-grid{grid-template-columns:1fr!important}}
+</style>
+
 </head>
 <body>
 <!-- Ver3.22: 1階フロント接続・Version表記統一・F Drone/F Python所属修正 -->
@@ -1349,168 +1358,6 @@ section{padding:68px 0}
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.22です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
-
-<section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
-
-<section id="vision"><div class="container"><div class="section-head"><div class="section-kicker">Vision</div><h2>ノグの夢を、未来の現実へ。</h2><p>年商10億円はゴールではありません。未来への挑戦を続けるための力です。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="vision-10billion.webp" alt="年商10億円の長期ビジョン"><div class="card-body"><h3>年商10億円の未来</h3><p>利益を、次の挑戦と学びへ循環させる企業を目指します。</p></div></article><article class="card visual-card"><img src="school-main-visual.webp" alt="3人の開校宣言"><div class="card-body"><h3>3人で始める開校宣言</h3><p>ノグ、ジッピー、フォージ。力をひとつに、未来を切り拓きます。</p></div></article><article class="card visual-card"><img src="opening-declaration.webp" alt="Forgeation開校宣言"><div class="card-body"><h3>開校宣言</h3><p>未来は、誰かが創るものではない。共に創るものです。</p></div></article></div></div></section>
-
-<section id="academy"><div class="container"><div class="section-head"><div class="section-kicker">Eight Academies</div><h2>8つのアカデミー</h2><p>AIを核に、AI・ロボティクス・スポーツ・サッカー・看護医療・介護福祉・建築設計・教育へ展開します。</p></div><div class="grid academy-grid">
-<article class="card visual-card"><img src="ai-academy-overview.webp" alt="AIアカデミー"><div class="card-body"><h3>AIアカデミー</h3><p>Python、生成AI、機械学習、倫理・安全を学び、AIを正しく使い創る力を育てる。</p></div></article>
-
-<article class="card visual-card"><img src="academy-robotics.webp" alt="AI・ロボティクスアカデミー"><div class="card-body"><h3>AI・ロボティクス</h3><p>ロボット開発、制御、センサー、社会実装を学び、未来を動かす機械を創る。</p></div></article>
-<article class="card visual-card"><img src="academy-sports.webp" alt="スポーツアカデミー"><div class="card-body"><h3>スポーツ</h3><p>科学とテクノロジーで、一人ひとりの可能性を最大化する。</p></div></article>
-<article class="card visual-card"><img src="soccer-academy-overview.webp" alt="サッカーアカデミー"><div class="card-body"><h3>サッカーアカデミー</h3><p>AIコーチ、データ分析、個別練習、F Challengeで選手の成長を支える。</p></div></article>
-<article class="card visual-card"><img src="academy-nursing.webp" alt="看護アカデミー"><div class="card-body"><h3>看護・医療</h3><p>やさしさ、科学、テクノロジーで、未来の命を支える。</p></div></article>
-<article class="card visual-card"><img src="care-academy-overview.webp" alt="介護・福祉アカデミー"><div class="card-body"><h3>介護・福祉</h3><p>現場・事務・地域をつなぎ、誰もが安心して暮らせる未来を支える。</p></div></article>
-<article class="card visual-card"><img src="academy-construction.webp" alt="建設アカデミー"><div class="card-body"><h3>建設・建築</h3><p>AI設計、シミュレーション、安全管理で、未来の街を創る。</p></div></article>
-<article class="card visual-card"><img src="academy-education.webp" alt="教育アカデミー"><div class="card-body"><h3>教育・未来創造</h3><p>学びを進化させ、未来を創る人を育てる。</p></div></article></div>
-<div class="section-head" style="margin-top:60px"><div class="section-kicker">Special Course</div><h2>サッカーアカデミー構想</h2><p>世界で活躍する選手を育てる。AIと人の力で、日本のスポーツを進化させる。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="academy-soccer.webp" alt="サッカーアカデミー"><div class="card-body"><h3>Forgeation Soccer Academy</h3><p>データ分析、フィードバック、個別最適化、コーチングで、選手の成長を支えます。</p></div></article><article class="card card-pad" style="grid-column:span 2"><div class="icon">⚽</div><h3>長期ビジョン</h3><p>Forgeationは、スポーツ・教育・AIを通じて社会に貢献し、将来的にはJリーグクラブをはじめとするスポーツ界を支えるスポンサー・パートナー企業となることを目指します。</p></article></div>
-<div class="section-head" style="margin-top:60px"><div class="section-kicker">Soccer Academy Gallery</div><h2>サッカーアカデミー課</h2><p>画像をタップすると、大きく表示できます。</p></div>
-<div class="soccer-gallery">
-<figure><img src="soccer-academy-overview.webp" alt="サッカーアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="soccer-visualization.webp" alt="選手データの見える化"><figcaption>見える化</figcaption></figure>
-<figure><img src="soccer-feedback.webp" alt="選手へのフィードバック"><figcaption>フィードバック</figcaption></figure>
-<figure><img src="soccer-training.webp" alt="個別トレーニング提案"><figcaption>トレーニング提案</figcaption></figure>
-<figure><img src="soccer-coaching.webp" alt="AIと人によるコーチング"><figcaption>コーチング</figcaption></figure>
-<figure><img src="soccer-recruitment.webp" alt="サッカーアカデミー 募集案内"><figcaption>募集案内</figcaption></figure>
-</div></div></section>
-
-<section id="sports-academy-detail" data-academy="sports"><div class="container"><div class="section-head"><div class="section-kicker">Sports Academy Gallery</div><h2>スポーツアカデミー課</h2><p>AIとスポーツ科学で、選手一人ひとりの成長を見える化し、最適なトレーニングとコーチングにつなげます。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="sports-academy-overview.webp" data-candidates="sports-academy-overview.webp|sports-overview.webp|academy-sports.webp" alt="スポーツアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="sports-visualization.webp" alt="スポーツデータの見える化"><figcaption>見える化</figcaption></figure>
-<figure><img src="sports-training.webp" alt="個別トレーニング提案"><figcaption>トレーニング提案</figcaption></figure>
-<figure><img src="sports-feedback.webp" alt="選手へのフィードバック"><figcaption>フィードバック</figcaption></figure>
-<figure><img src="sports-coaching.webp" alt="AIと人によるコーチング"><figcaption>コーチング</figcaption></figure>
-</div></div></section>
-
-<section id="nursing-academy-detail" data-academy="nursing"><div class="container"><div class="section-head"><div class="section-kicker">Nursing & Medical Academy Gallery</div><h2>看護・医療アカデミー課</h2><p>やさしさ、科学、テクノロジーをつなぎ、未来の看護と医療を支える学びを創ります。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="medical-overview.webp" alt="看護・医療アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="medical-nursing.webp" alt="看護基礎"><figcaption>看護基礎</figcaption></figure>
-<figure><img src="medical-ai.webp" alt="AI看護支援"><figcaption>AI看護支援</figcaption></figure>
-<figure><img src="medical-simulation.webp" alt="看護シミュレーション"><figcaption>シミュレーション</figcaption></figure>
-<figure><img src="medical-community.webp" alt="地域・在宅看護"><figcaption>地域・在宅看護</figcaption></figure>
-<figure><img src="medical-research.webp" data-candidates="medical-research.webp|medical-nursing-research.webp|medical-dx.webp|medical-overview.webp" alt="看護研究"><figcaption>看護研究</figcaption></figure>
-</div></div></section>
-
-
-
-<section class="care-academy-section" id="care-academy-detail" data-academy="care"><div class="container"><div class="section-head"><div class="section-kicker">Care & Welfare Academy Gallery</div><h2>介護・福祉アカデミー課</h2><p>介護の基礎、AI支援、記録・事務、レクリエーション、在宅介護、地域連携、DX・ICT活用を通して、現場と施設運営の両方を支える学びを創ります。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="care-academy-overview.webp" alt="介護・福祉アカデミー 総合案内"><figcaption>総合案内</figcaption></figure>
-<figure><img src="care-basic-care.webp" alt="介護基礎"><figcaption>介護基礎</figcaption></figure>
-<figure><img src="care-ai-support.webp" alt="AI介護支援"><figcaption>AI介護支援</figcaption></figure>
-<figure><img src="care-record-office-support.webp" alt="記録・事務支援"><figcaption>記録・事務支援</figcaption></figure>
-<figure><img src="care-recreation-support.webp" alt="レクリエーション支援"><figcaption>レクリエーション支援</figcaption></figure>
-<figure><img src="care-home-community-care.webp" alt="在宅介護・地域連携"><figcaption>在宅介護・地域連携</figcaption></figure>
-<figure><img src="care-dx-ict.webp" alt="介護DX・ICT活用"><figcaption>介護DX・ICT活用</figcaption></figure>
-<figure><img src="care-ai-facility-staff.webp" alt="AI介護施設社員"><figcaption>AI介護施設社員</figcaption></figure>
-<figure><img src="care-facility-team.webp" alt="福祉ドライバー・受付・事務・介護スタッフを含む介護施設チーム"><figcaption>介護施設を支えるチーム</figcaption></figure>
-</div></div></section>
-
-<section id="robotics-academy-detail" data-academy="robotics"><div class="container"><div class="section-head"><div class="section-kicker">AI & Robotics Academy Gallery</div><h2>AI・ロボティクス研究アカデミー課</h2><p>AI、ロボット、ドローン、空間技術、データ分析をつなぎ、未来を動かす技術と社会実装を学びます。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="ai-robotics-academy-overview.webp" data-candidates="ai-robotics-academy-overview.webp|robotics-academy-overview.webp|academy-robotics.webp" alt="AI・ロボティクス研究アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="ai-robotics-drone-spatial.webp" data-candidates="ai-robotics-drone-spatial.webp|robotics-drone-spatial.webp|academy-robotics.webp" alt="ドローン・空間技術"><figcaption>ドローン・空間技術</figcaption></figure>
-<figure><img src="ai-robotics-social-implementation.webp" data-candidates="ai-robotics-social-implementation.webp|robotics-social-implementation.webp|academy-robotics.webp" alt="社会実装プロジェクト"><figcaption>社会実装プロジェクト</figcaption></figure>
-<figure><img src="ai-robotics-development.webp" data-candidates="ai-robotics-development.webp|robotics-development.webp|academy-robotics.webp" alt="ロボティクス開発"><figcaption>ロボティクス開発</figcaption></figure>
-<figure><img src="ai-robotics-ai-basics.webp" data-candidates="ai-robotics-ai-basics.webp|robotics-ai-basics.webp|academy-robotics.webp" alt="AI基礎"><figcaption>AI基礎</figcaption></figure>
-<figure><img src="ai-robotics-data-analysis.webp" data-candidates="ai-robotics-data-analysis.webp|robotics-data-analysis.webp|academy-robotics.webp" alt="データ分析・AI活用"><figcaption>データ分析・AI活用</figcaption></figure>
-</div></div></section>
-
-<section id="ai-academy-detail" data-academy="ai"><div class="container">
-<div class="notice" style="margin:0 0 28px;border-color:#b9a8ff;background:#f4f0ff;color:#3a2674">
-  🧠 <strong>AIアカデミー課アプリは現在、鋭意開発中です。</strong>
-  AI基礎・機械学習・深層学習・生成AI・AI開発・倫理と安全を、ジッピー先生と段階的に学べるアプリを目指しています。✨ 乞うご期待！
-</div>
-<div class="section-head"><div class="section-kicker">AI Academy Gallery</div><h2>AIアカデミー課</h2><p>AI基礎から機械学習・深層学習、生成AI、倫理・安全、開発・実装まで段階的に学びます。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="ai-academy-overview.webp" alt="AIアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="ai-academy-basics.webp" data-candidates="ai-academy-basics.webp|ai-basics.webp|ai-academy-ai-basics.webp|ai-academy-overview.webp" alt="AI基礎"><figcaption>AI基礎</figcaption></figure>
-<figure><img src="ai-academy-machine-deep-learning.webp" data-candidates="ai-academy-machine-deep-learning.webp|ai-machine-deep-learning.webp|ai-machine-learning.webp|ai-academy-overview.webp" alt="機械学習・深層学習"><figcaption>機械学習・深層学習</figcaption></figure>
-<figure><img src="ai-academy-ethics-safety-implementation.webp" data-candidates="ai-academy-ethics-safety-implementation.webp|ai-ethics-safety-implementation.webp|ai-ethics-safety.webp|ai-academy-overview.webp" alt="倫理・安全・実装"><figcaption>倫理・安全・実装</figcaption></figure>
-<figure><img src="ai-academy-development.webp" alt="AI開発"><figcaption>AI開発</figcaption></figure>
-<figure><img src="ai-academy-generative-ai.webp" alt="生成AI"><figcaption>生成AI</figcaption></figure>
-</div>
-
-</div></section>
-
-<section id="construction-academy-detail" data-academy="construction"><div class="container"><div class="section-head"><div class="section-kicker">Construction Academy Gallery</div><h2>建設アカデミー課</h2><p>AI設計、シミュレーション、VR・AR、安全管理、サステナブル建設で、未来の街と暮らしを創ります。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="construction-academy-overview.webp" alt="建設アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="construction-ai-design.webp" alt="AI設計"><figcaption>AI設計</figcaption></figure>
-<figure><img src="construction-simulation.webp" alt="シミュレーション"><figcaption>シミュレーション</figcaption></figure>
-<figure><img src="construction-simulation-analysis.webp" data-candidates="construction-simulation-analysis.webp|construction-analysis.webp|construction-future-analysis.webp|construction-academy-overview.webp" alt="未来計算・分析"><figcaption>未来計算・分析</figcaption></figure>
-<figure><img src="construction-vr-ar.webp" alt="VR・AR体験"><figcaption>VR・AR体験</figcaption></figure>
-<figure><img src="construction-safety.webp" alt="施工・安全管理"><figcaption>施工・安全管理</figcaption></figure>
-<figure><img src="construction-sustainable.webp" alt="サステナブル建設"><figcaption>サステナブル建設</figcaption></figure>
-</div></div></section>
-
-<section id="education-academy-detail" data-academy="education"><div class="container"><div class="section-head"><div class="section-kicker">Education Academy Gallery</div><h2>教育アカデミー課</h2><p>AIリテラシー、AI学習、プログラミング、コミュニケーション、キャリア、未来教育を通じて、未来を創る人を育てます。画像をタップすると、大きく表示できます。</p></div>
-<div class="academy-detail-gallery">
-<figure><img src="education-academy-overview.webp" alt="教育アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
-<figure><img src="education-ai-literacy.webp" alt="AIリテラシー"><figcaption>AIリテラシー</figcaption></figure>
-<figure><img src="education-ai-learning.webp" alt="AI学習"><figcaption>AI学習</figcaption></figure>
-<figure><img src="education-programming.webp" data-candidates="education-programming.webp|education-programing.webp|education-coding.webp|education-academy-overview.webp" alt="プログラミング"><figcaption>プログラミング</figcaption></figure>
-<figure><img src="education-communication.webp" alt="コミュニケーション"><figcaption>コミュニケーション</figcaption></figure>
-<figure><img src="education-career.webp" alt="キャリア"><figcaption>キャリア</figcaption></figure>
-<figure><img src="education-future.webp" alt="未来教育"><figcaption>未来教育</figcaption></figure>
-</div></div></section>
-
-
-
-<section class="soccer-product-section" id="soccer-product">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-kicker" style="color:#9fe9ff">FORGEATION PRODUCT</div>
-      <h2>Forgeation AI Soccer Academy Coach</h2>
-      <p>選手一人ひとりの特徴や課題に合わせて、練習・振り返り・次の目標づくりを支援する、ForgeationのAIサッカーアカデミーコーチです。</p>
-    </div>
-    <div class="soccer-product-wrap">
-      <figure class="soccer-product-visual">
-        <img class="soccer-product-flyer" src="ai-soccer-academy-coach-flyer.webp" alt="Forgeation AI Soccer Academy Coach セールスパンフレット">
-      </figure>
-      <div class="soccer-product-copy">
-        <span class="product-badge">⚽ 一人ひとりに、専属AIコーチを。</span>
-        <h2>成長を、見える力へ。</h2>
-        <p>年齢・学年・ポジション・目標・現在の課題を整理し、選手に合った練習メニューや試合前後の振り返りを提案します。AIは人のコーチに代わるのではなく、選手とコーチの成長を支えるパートナーです。</p>
-        <div class="product-feature-grid">
-          <div class="product-feature">🎯 個別練習メニュー</div>
-          <div class="product-feature">🧠 試合前のアドバイス</div>
-          <div class="product-feature">📝 試合後の振り返り</div>
-          <div class="product-feature">📊 成長課題の見える化</div>
-          <div class="product-feature">👨‍👩‍👧 保護者向けサポート</div>
-          <div class="product-feature">🕒 24時間いつでも相談</div>
-        </div>
-        <div class="product-actions">
-         
-          <a class="product-button app" href="./F_Soccer_beta_Ver3_Challenge搭載版.html">📱 F Soccer β版を開く</a>
-          <a class="product-button contact" href="#contact">📩 導入を相談する</a>
-        <a class="button youtube-button-restored" href="https://www.youtube.com/@Forgeation" target="_blank" rel="noopener">▶ Forgeation YouTubeを見る</a></div>
-
-        <div class="f-soccer-pricing-mini">
-          <h3>⚽ F Soccer 料金プラン</h3>
-          <div class="f-soccer-plan-row">
-            <div class="f-soccer-plan-mini"><b>個人プラン</b><strong>月額 980円（税込）〜</strong></div>
-            <div class="f-soccer-plan-mini"><b>プレミアムプラン</b><strong>月額 2,980円（税込）〜</strong></div>
-            <div class="f-soccer-plan-mini"><b>チームプラン</b><strong>月額 9,800円（税込）〜</strong></div>
-          </div>
-          <a class="f-soccer-pricing-button" href="./f-soccer-plans.html">料金プラン・お申込みを見る →</a>
-        </div>
-        <div class="product-note">AIサッカーアカデミーコーチは、Forgeationの製品化を目指す開発プロジェクトです。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="ai-coach-section" id="ai-coach"><div class="container"><div class="ai-coach-box"><div><div class="section-kicker" style="color:#9fe9ff">AI SPORTS COACH</div><h2>AIスポーツコーチを体験する。</h2><p>Web体験版では気軽にAIコーチを試せます。F Soccer β版では、プロフィール・練習メニュー・試合前後の振り返りなど、アプリらしい画面を体験できます。</p><div class="product-actions"><a class="ai-button" href="./ai-sports-coach-demo.html">🌐 Web体験版を開く</a></div></div><div class="ai-coach-icon">⚽🤖</div></div></div></section>
-
-
-
-
-
 <section class="school-map-section" id="forgeation-school">
   <div class="container">
     <div class="section-head">
@@ -1528,7 +1375,7 @@ section{padding:68px 0}
       data-title="職員室"
       data-description="Forgeationを支える仲間と先生たちの部屋です。採用情報やチーム紹介をご覧いただけます。"
       data-features="仲間・先生の紹介|採用・パートナー情報|チームの活動"
-      data-href="./F_Care_beta_Ver1.html"
+      data-href="#characters"
       aria-label="職員室の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:38.0%;top:35.6%"
@@ -1576,7 +1423,7 @@ section{padding:68px 0}
       data-title="AI商品体験"
       data-description="Forgeationが開発するWeb版・β版・AI社員を体験できる製品展示室です。"
       data-features="Web体験版|β版アプリ|開発中プロダクト"
-      data-href="#ai-employees"
+      data-href="#f-series"
       aria-label="AI商品体験の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:59.6%;top:48.1%"
@@ -1590,9 +1437,9 @@ section{padding:68px 0}
       style="left:77.9%;top:48.1%"
       data-floor="4F"
       data-title="デモルーム"
-      data-description="AI社員や各アカデミーのデモを実際に試せる体験ルームです。"
-      data-features="AI社員デモ|アプリ体験|サービス紹介"
-      data-href="#ai-employees"
+      data-description="AI社員や各アカデミーのデモ、ForgeationのVISIONを体験できるルームです。"
+      data-features="VISION|AI社員デモ|アプリ体験"
+      data-href="#vision"
       aria-label="デモルームの詳細を表示">i</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:18.7%;top:60.6%"
@@ -1786,6 +1633,165 @@ section{padding:68px 0}
 
 
 
+
+
+
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.23です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+
+<section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
+
+<section id="vision" class="vision-collapsible"><div class="container">
+<details class="embedded-academy" id="visionDetails">
+<summary>✨ VISIONを見る</summary>
+<div class="embedded-academy-body"><div class="section-head"><div class="section-kicker">Vision</div><h2>ノグの夢を、未来の現実へ。</h2><p>年商10億円はゴールではありません。未来への挑戦を続けるための力です。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="vision-10billion.webp" alt="年商10億円の長期ビジョン"><div class="card-body"><h3>年商10億円の未来</h3><p>利益を、次の挑戦と学びへ循環させる企業を目指します。</p></div></article><article class="card visual-card"><img src="school-main-visual.webp" alt="3人の開校宣言"><div class="card-body"><h3>3人で始める開校宣言</h3><p>ノグ、ジッピー、フォージ。力をひとつに、未来を切り拓きます。</p></div></article><article class="card visual-card"><img src="opening-declaration.webp" alt="Forgeation開校宣言"><div class="card-body"><h3>開校宣言</h3><p>未来は、誰かが創るものではない。共に創るものです。</p></div></article></div></div></div></details>
+</section>
+
+<section id="academy"><div class="container"><div class="section-head"><div class="section-kicker">Eight Academies</div><h2>8つのアカデミー</h2><p>AIを核に、AI・ロボティクス・スポーツ・サッカー・看護医療・介護福祉・建築設計・教育へ展開します。</p></div><div class="grid academy-grid">
+<article class="card visual-card"><img src="ai-academy-overview.webp" alt="AIアカデミー"><div class="card-body"><h3>AIアカデミー</h3><p>Python、生成AI、機械学習、倫理・安全を学び、AIを正しく使い創る力を育てる。</p></div></article>
+
+<article class="card visual-card"><img src="academy-robotics.webp" alt="AI・ロボティクスアカデミー"><div class="card-body"><h3>AI・ロボティクス</h3><p>ロボット開発、制御、センサー、社会実装を学び、未来を動かす機械を創る。</p></div></article>
+<article class="card visual-card"><img src="academy-sports.webp" alt="スポーツアカデミー"><div class="card-body"><h3>スポーツ</h3><p>科学とテクノロジーで、一人ひとりの可能性を最大化する。</p></div></article>
+<article class="card visual-card"><img src="soccer-academy-overview.webp" alt="サッカーアカデミー"><div class="card-body"><h3>サッカーアカデミー</h3><p>AIコーチ、データ分析、個別練習、F Challengeで選手の成長を支える。</p></div></article>
+<article class="card visual-card"><img src="academy-nursing.webp" alt="看護アカデミー"><div class="card-body"><h3>看護・医療</h3><p>やさしさ、科学、テクノロジーで、未来の命を支える。</p></div></article>
+<article class="card visual-card"><img src="care-academy-overview.webp" alt="介護・福祉アカデミー"><div class="card-body"><h3>介護・福祉</h3><p>現場・事務・地域をつなぎ、誰もが安心して暮らせる未来を支える。</p></div></article>
+<article class="card visual-card"><img src="academy-construction.webp" alt="建設アカデミー"><div class="card-body"><h3>建設・建築</h3><p>AI設計、シミュレーション、安全管理で、未来の街を創る。</p></div></article>
+<article class="card visual-card"><img src="academy-education.webp" alt="教育アカデミー"><div class="card-body"><h3>教育・未来創造</h3><p>学びを進化させ、未来を創る人を育てる。</p></div></article></div>
+<div class="section-head" style="margin-top:60px"><div class="section-kicker">Special Course</div><h2>サッカーアカデミー構想</h2><p>世界で活躍する選手を育てる。AIと人の力で、日本のスポーツを進化させる。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="academy-soccer.webp" alt="サッカーアカデミー"><div class="card-body"><h3>Forgeation Soccer Academy</h3><p>データ分析、フィードバック、個別最適化、コーチングで、選手の成長を支えます。</p></div></article><article class="card card-pad" style="grid-column:span 2"><div class="icon">⚽</div><h3>長期ビジョン</h3><p>Forgeationは、スポーツ・教育・AIを通じて社会に貢献し、将来的にはJリーグクラブをはじめとするスポーツ界を支えるスポンサー・パートナー企業となることを目指します。</p></article></div>
+<div class="section-head" style="margin-top:60px"><div class="section-kicker">Soccer Academy Gallery</div><h2>サッカーアカデミー課</h2><p>画像をタップすると、大きく表示できます。</p></div>
+<div class="soccer-gallery">
+<figure><img src="soccer-academy-overview.webp" alt="サッカーアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="soccer-visualization.webp" alt="選手データの見える化"><figcaption>見える化</figcaption></figure>
+<figure><img src="soccer-feedback.webp" alt="選手へのフィードバック"><figcaption>フィードバック</figcaption></figure>
+<figure><img src="soccer-training.webp" alt="個別トレーニング提案"><figcaption>トレーニング提案</figcaption></figure>
+<figure><img src="soccer-coaching.webp" alt="AIと人によるコーチング"><figcaption>コーチング</figcaption></figure>
+<figure><img src="soccer-recruitment.webp" alt="サッカーアカデミー 募集案内"><figcaption>募集案内</figcaption></figure>
+</div></div></section>
+
+<section id="sports-academy-detail" data-academy="sports"><div class="container"><div class="section-head"><div class="section-kicker">Sports Academy Gallery</div><h2>スポーツアカデミー課</h2><p>AIとスポーツ科学で、選手一人ひとりの成長を見える化し、最適なトレーニングとコーチングにつなげます。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="sports-academy-overview.webp" data-candidates="sports-academy-overview.webp|sports-overview.webp|academy-sports.webp" alt="スポーツアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="sports-visualization.webp" alt="スポーツデータの見える化"><figcaption>見える化</figcaption></figure>
+<figure><img src="sports-training.webp" alt="個別トレーニング提案"><figcaption>トレーニング提案</figcaption></figure>
+<figure><img src="sports-feedback.webp" alt="選手へのフィードバック"><figcaption>フィードバック</figcaption></figure>
+<figure><img src="sports-coaching.webp" alt="AIと人によるコーチング"><figcaption>コーチング</figcaption></figure>
+</div></div></section>
+
+<section id="nursing-academy-detail" data-academy="nursing"><div class="container"><div class="section-head"><div class="section-kicker">Nursing & Medical Academy Gallery</div><h2>看護・医療アカデミー課</h2><p>やさしさ、科学、テクノロジーをつなぎ、未来の看護と医療を支える学びを創ります。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="medical-overview.webp" alt="看護・医療アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="medical-nursing.webp" alt="看護基礎"><figcaption>看護基礎</figcaption></figure>
+<figure><img src="medical-ai.webp" alt="AI看護支援"><figcaption>AI看護支援</figcaption></figure>
+<figure><img src="medical-simulation.webp" alt="看護シミュレーション"><figcaption>シミュレーション</figcaption></figure>
+<figure><img src="medical-community.webp" alt="地域・在宅看護"><figcaption>地域・在宅看護</figcaption></figure>
+<figure><img src="medical-research.webp" data-candidates="medical-research.webp|medical-nursing-research.webp|medical-dx.webp|medical-overview.webp" alt="看護研究"><figcaption>看護研究</figcaption></figure>
+</div></div></section>
+
+
+
+<section class="care-academy-section" id="care-academy-detail" data-academy="care"><div class="container"><div class="section-head"><div class="section-kicker">Care & Welfare Academy Gallery</div><h2>介護・福祉アカデミー課</h2><p>介護の基礎、AI支援、記録・事務、レクリエーション、在宅介護、地域連携、DX・ICT活用を通して、現場と施設運営の両方を支える学びを創ります。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="care-academy-overview.webp" alt="介護・福祉アカデミー 総合案内"><figcaption>総合案内</figcaption></figure>
+<figure><img src="care-basic-care.webp" alt="介護基礎"><figcaption>介護基礎</figcaption></figure>
+<figure><img src="care-ai-support.webp" alt="AI介護支援"><figcaption>AI介護支援</figcaption></figure>
+<figure><img src="care-record-office-support.webp" alt="記録・事務支援"><figcaption>記録・事務支援</figcaption></figure>
+<figure><img src="care-recreation-support.webp" alt="レクリエーション支援"><figcaption>レクリエーション支援</figcaption></figure>
+<figure><img src="care-home-community-care.webp" alt="在宅介護・地域連携"><figcaption>在宅介護・地域連携</figcaption></figure>
+<figure><img src="care-dx-ict.webp" alt="介護DX・ICT活用"><figcaption>介護DX・ICT活用</figcaption></figure>
+<figure><img src="care-ai-facility-staff.webp" alt="AI介護施設社員"><figcaption>AI介護施設社員</figcaption></figure>
+<figure><img src="care-facility-team.webp" alt="福祉ドライバー・受付・事務・介護スタッフを含む介護施設チーム"><figcaption>介護施設を支えるチーム</figcaption></figure>
+</div></div></section>
+
+<section id="robotics-academy-detail" data-academy="robotics"><div class="container"><div class="section-head"><div class="section-kicker">AI & Robotics Academy Gallery</div><h2>AI・ロボティクス研究アカデミー課</h2><p>AI、ロボット、ドローン、空間技術、データ分析をつなぎ、未来を動かす技術と社会実装を学びます。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="ai-robotics-academy-overview.webp" data-candidates="ai-robotics-academy-overview.webp|robotics-academy-overview.webp|academy-robotics.webp" alt="AI・ロボティクス研究アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="ai-robotics-drone-spatial.webp" data-candidates="ai-robotics-drone-spatial.webp|robotics-drone-spatial.webp|academy-robotics.webp" alt="ドローン・空間技術"><figcaption>ドローン・空間技術</figcaption></figure>
+<figure><img src="ai-robotics-social-implementation.webp" data-candidates="ai-robotics-social-implementation.webp|robotics-social-implementation.webp|academy-robotics.webp" alt="社会実装プロジェクト"><figcaption>社会実装プロジェクト</figcaption></figure>
+<figure><img src="ai-robotics-development.webp" data-candidates="ai-robotics-development.webp|robotics-development.webp|academy-robotics.webp" alt="ロボティクス開発"><figcaption>ロボティクス開発</figcaption></figure>
+<figure><img src="ai-robotics-ai-basics.webp" data-candidates="ai-robotics-ai-basics.webp|robotics-ai-basics.webp|academy-robotics.webp" alt="AI基礎"><figcaption>AI基礎</figcaption></figure>
+<figure><img src="ai-robotics-data-analysis.webp" data-candidates="ai-robotics-data-analysis.webp|robotics-data-analysis.webp|academy-robotics.webp" alt="データ分析・AI活用"><figcaption>データ分析・AI活用</figcaption></figure>
+</div></div></section>
+
+<section id="ai-academy-detail" data-academy="ai"><div class="container">
+<div class="notice" style="margin:0 0 28px;border-color:#b9a8ff;background:#f4f0ff;color:#3a2674">
+  🧠 <strong>AIアカデミー課アプリは現在、鋭意開発中です。</strong>
+  AI基礎・機械学習・深層学習・生成AI・AI開発・倫理と安全を、ジッピー先生と段階的に学べるアプリを目指しています。✨ 乞うご期待！
+</div>
+<div class="section-head"><div class="section-kicker">AI Academy Gallery</div><h2>AIアカデミー課</h2><p>AI基礎から機械学習・深層学習、生成AI、倫理・安全、開発・実装まで段階的に学びます。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="ai-academy-overview.webp" alt="AIアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="ai-academy-basics.webp" data-candidates="ai-academy-basics.webp|ai-basics.webp|ai-academy-ai-basics.webp|ai-academy-overview.webp" alt="AI基礎"><figcaption>AI基礎</figcaption></figure>
+<figure><img src="ai-academy-machine-deep-learning.webp" data-candidates="ai-academy-machine-deep-learning.webp|ai-machine-deep-learning.webp|ai-machine-learning.webp|ai-academy-overview.webp" alt="機械学習・深層学習"><figcaption>機械学習・深層学習</figcaption></figure>
+<figure><img src="ai-academy-ethics-safety-implementation.webp" data-candidates="ai-academy-ethics-safety-implementation.webp|ai-ethics-safety-implementation.webp|ai-ethics-safety.webp|ai-academy-overview.webp" alt="倫理・安全・実装"><figcaption>倫理・安全・実装</figcaption></figure>
+<figure><img src="ai-academy-development.webp" alt="AI開発"><figcaption>AI開発</figcaption></figure>
+<figure><img src="ai-academy-generative-ai.webp" alt="生成AI"><figcaption>生成AI</figcaption></figure>
+</div>
+
+</div></section>
+
+<section id="construction-academy-detail" data-academy="construction"><div class="container"><div class="section-head"><div class="section-kicker">Construction Academy Gallery</div><h2>建設アカデミー課</h2><p>AI設計、シミュレーション、VR・AR、安全管理、サステナブル建設で、未来の街と暮らしを創ります。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="construction-academy-overview.webp" alt="建設アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="construction-ai-design.webp" alt="AI設計"><figcaption>AI設計</figcaption></figure>
+<figure><img src="construction-simulation.webp" alt="シミュレーション"><figcaption>シミュレーション</figcaption></figure>
+<figure><img src="construction-simulation-analysis.webp" data-candidates="construction-simulation-analysis.webp|construction-analysis.webp|construction-future-analysis.webp|construction-academy-overview.webp" alt="未来計算・分析"><figcaption>未来計算・分析</figcaption></figure>
+<figure><img src="construction-vr-ar.webp" alt="VR・AR体験"><figcaption>VR・AR体験</figcaption></figure>
+<figure><img src="construction-safety.webp" alt="施工・安全管理"><figcaption>施工・安全管理</figcaption></figure>
+<figure><img src="construction-sustainable.webp" alt="サステナブル建設"><figcaption>サステナブル建設</figcaption></figure>
+</div></div></section>
+
+<section id="education-academy-detail" data-academy="education"><div class="container"><div class="section-head"><div class="section-kicker">Education Academy Gallery</div><h2>教育アカデミー課</h2><p>AIリテラシー、AI学習、プログラミング、コミュニケーション、キャリア、未来教育を通じて、未来を創る人を育てます。画像をタップすると、大きく表示できます。</p></div>
+<div class="academy-detail-gallery">
+<figure><img src="education-academy-overview.webp" alt="教育アカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
+<figure><img src="education-ai-literacy.webp" alt="AIリテラシー"><figcaption>AIリテラシー</figcaption></figure>
+<figure><img src="education-ai-learning.webp" alt="AI学習"><figcaption>AI学習</figcaption></figure>
+<figure><img src="education-programming.webp" data-candidates="education-programming.webp|education-programing.webp|education-coding.webp|education-academy-overview.webp" alt="プログラミング"><figcaption>プログラミング</figcaption></figure>
+<figure><img src="education-communication.webp" alt="コミュニケーション"><figcaption>コミュニケーション</figcaption></figure>
+<figure><img src="education-career.webp" alt="キャリア"><figcaption>キャリア</figcaption></figure>
+<figure><img src="education-future.webp" alt="未来教育"><figcaption>未来教育</figcaption></figure>
+</div></div></section>
+
+
+
+<section class="soccer-product-section" id="soccer-product">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker" style="color:#9fe9ff">FORGEATION PRODUCT</div>
+      <h2>Forgeation AI Soccer Academy Coach</h2>
+      <p>選手一人ひとりの特徴や課題に合わせて、練習・振り返り・次の目標づくりを支援する、ForgeationのAIサッカーアカデミーコーチです。</p>
+    </div>
+    <div class="soccer-product-wrap">
+      <figure class="soccer-product-visual">
+        <img class="soccer-product-flyer" src="ai-soccer-academy-coach-flyer.webp" alt="Forgeation AI Soccer Academy Coach セールスパンフレット">
+      </figure>
+      <div class="soccer-product-copy">
+        <span class="product-badge">⚽ 一人ひとりに、専属AIコーチを。</span>
+        <h2>成長を、見える力へ。</h2>
+        <p>年齢・学年・ポジション・目標・現在の課題を整理し、選手に合った練習メニューや試合前後の振り返りを提案します。AIは人のコーチに代わるのではなく、選手とコーチの成長を支えるパートナーです。</p>
+        <div class="product-feature-grid">
+          <div class="product-feature">🎯 個別練習メニュー</div>
+          <div class="product-feature">🧠 試合前のアドバイス</div>
+          <div class="product-feature">📝 試合後の振り返り</div>
+          <div class="product-feature">📊 成長課題の見える化</div>
+          <div class="product-feature">👨‍👩‍👧 保護者向けサポート</div>
+          <div class="product-feature">🕒 24時間いつでも相談</div>
+        </div>
+        <div class="product-actions">
+         
+          <a class="product-button app" href="./F_Soccer_beta_Ver3_Challenge搭載版.html">📱 F Soccer β版を開く</a>
+          <a class="product-button contact" href="#contact">📩 導入を相談する</a>
+        <a class="button youtube-button-restored" href="https://www.youtube.com/@Forgeation" target="_blank" rel="noopener">▶ Forgeation YouTubeを見る</a></div>
+        <div class="product-note">AIサッカーアカデミーコーチは、Forgeationの製品化を目指す開発プロジェクトです。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ai-coach-section" id="ai-coach"><div class="container"><div class="ai-coach-box"><div><div class="section-kicker" style="color:#9fe9ff">AI SPORTS COACH</div><h2>AIスポーツコーチを体験する。</h2><p>Web体験版では気軽にAIコーチを試せます。F Soccer β版では、プロフィール・練習メニュー・試合前後の振り返りなど、アプリらしい画面を体験できます。</p><div class="product-actions"><a class="ai-button" href="./ai-sports-coach-demo.html">🌐 Web体験版を開く</a></div></div><div class="ai-coach-icon">⚽🤖</div></div></div></section>
+
+
+
+
+
 <section class="future-lessons" id="future-lessons">
   <div class="container">
     <div class="section-head">
@@ -1961,8 +1967,7 @@ print(lesson + "を始めよう！")</code>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
           <a class="door-open-button visitor-track" data-page="forgeation-news-history" href="./forgeation-news-history.html">📺 FORGEATION NEWS / HISTORY</a>
-          <button class="door-open-button" id="collectionDoorButton" type="button"
-onclick="const m=document.getElementById('collectionComingSoon');if(m){m.classList.add('open');m.setAttribute('aria-hidden','false');}">🚪 扉を開ける</button>
+          <button class="door-open-button" id="collectionDoorButton" type="button">🚪 扉を開ける</button>
         </div>
       </div>
     </div>
@@ -2223,8 +2228,7 @@ onclick="const m=document.getElementById('collectionComingSoon');if(m){m.classLi
     </figure>
     <span class="coming-soon-label">COMING SOON</span><br>
     <div class="coming-soon-actions">
-      <button class="coming-soon-close" id="collectionComingSoonClose" type="button"
-onclick="const m=document.getElementById('collectionComingSoon');if(m){m.classList.remove('open');m.setAttribute('aria-hidden','true');}">← ホームページへ戻る</button>
+      <button class="coming-soon-close" id="collectionComingSoonClose" type="button">← ホームページへ戻る</button>
     </div>
   </div>
 </div>
@@ -2235,11 +2239,11 @@ let slideIndex=0,isPaused=false,timer;
 function showSlide(index){slides.forEach((s,i)=>s.classList.toggle('is-active',i===index));dots.forEach((d,i)=>d.classList.toggle('is-active',i===index));slideIndex=index}
 function startSlider(){clearInterval(timer);timer=setInterval(()=>{if(!isPaused)showSlide((slideIndex+1)%slides.length)},6500)}
 dots.forEach((d,i)=>d.addEventListener('click',()=>{showSlide(i);startSlider()}));
-pauseButton.addEventListener('click',()=>{isPaused=!isPaused;pauseButton.textContent=isP
-aused?'再生':'一時停止'});
+pauseButton.addEventListener('click',()=>{isPaused=!isPaused;pauseButton.textContent=isPaused?'再生':'一時停止'});
 startSlider();
 
-const menuButton=document.getElementById('menuButton'),navLinks=document.getElementById('navLinks');
+const 
+menuButton=document.getElementById('menuButton'),navLinks=document.getElementById('navLinks');
 menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(open))});
 navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false')}));
 
@@ -2774,6 +2778,127 @@ document.addEventListener("click", (event) => {
 </script>
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e817f8ce1d5849a79f102e8a41335f32"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script id="forgeation-ver323-script">
+document.addEventListener('DOMContentLoaded', () => {
+  // 校舎を主役にする。サッカーアカデミー課は既存の直接掲載を維持。
+  const lessons = document.getElementById('future-lessons');
+  if (lessons) {
+    const grid = lessons.querySelector('.future-grid');
+    const cards = grid ? [...grid.querySelectorAll('.future-card')] : [];
+    const byTitle = title => cards.find(c => c.querySelector('h3')?.textContent.trim() === title);
+
+    function makeEmbedded(card, summaryText, nodes) {
+      if (!card) return;
+      const old = card.querySelector('a');
+      if (old) old.remove();
+      const d = document.createElement('details');
+      d.className = 'embedded-academy';
+      const sm = document.createElement('summary');
+      sm.textContent = summaryText;
+      const body = document.createElement('div');
+      body.className = 'embedded-academy-body';
+      nodes.filter(Boolean).forEach(n => body.appendChild(n));
+      d.append(sm, body);
+      card.appendChild(d);
+    }
+
+    // AIカリキュラム：AIアカデミー課 + F Python 1分授業
+    makeEmbedded(byTitle('AIカリキュラム'), 'カリキュラムを見る', [
+      document.getElementById('ai-academy-detail'),
+      document.getElementById('python-lab')
+    ]);
+
+    // Fドローン・ロボティクス：ロボティクス課 + Fドローン + IoT/センサー
+    makeEmbedded(byTitle('Fドローン・ロボティクス'), 'カリキュラムを見る', [
+      document.getElementById('robotics-academy-detail'),
+      document.getElementById('drone-lab'),
+      document.getElementById('iot-lab')
+    ]);
+
+    // Python入門カードは建設アカデミー課へ変更
+    const pythonCard = byTitle('Python入門');
+    if (pythonCard) {
+      pythonCard.querySelector('.future-icon').textContent = '🏗️';
+      pythonCard.querySelector('h3').textContent = '建設アカデミー課';
+      pythonCard.querySelector('p').textContent = '建築・設計・CAD・安全管理・建設DXを学びます。';
+      makeEmbedded(pythonCard, '建設アカデミー課を見る', [document.getElementById('construction-academy-detail')]);
+    }
+
+    // データ分析：スポーツアカデミー課をその場に埋め込み
+    makeEmbedded(byTitle('データ分析'), '分析授業を見る', [document.getElementById('sports-academy-detail')]);
+
+    // AI倫理・安全：重複を避け、看護・医療アカデミー課へ
+    makeEmbedded(byTitle('AI倫理・安全'), '看護・医療アカデミー課を見る', [document.getElementById('nursing-academy-detail')]);
+
+    // 未来プロジェクトは未来研究へ
+    const futureCard = byTitle('未来プロジェクト');
+    const futureLink = futureCard?.querySelector('a');
+    if (futureLink) futureLink.href = '#future';
+
+    // 旧3体験があった位置の代わりに教育・介護を埋め込み
+    const inline = document.createElement('div');
+    inline.className = 'future-inline-grid';
+    function addAcademy(label, icon, node) {
+      const d = document.createElement('details'); d.className='embedded-academy';
+      const sm = document.createElement('summary'); sm.textContent = icon + ' ' + label;
+      const body = document.createElement('div'); body.className='embedded-academy-body';
+      if (node) body.appendChild(node); d.append(sm,body); inline.appendChild(d);
+    }
+    addAcademy('教育アカデミー課', '📚', document.getElementById('education-academy-detail'));
+    addAcademy('介護・福祉アカデミー課', '🤝', document.getElementById('care-academy-detail'));
+    grid?.after(inline);
+  }
+
+  // 校舎マップの固定導線
+  document.querySelectorAll('.school-map-hotspot').forEach(b => {
+    if (b.dataset.title === '職員室') b.dataset.href = '#characters';
+    if (b.dataset.title === 'AI商品体験') b.dataset.href = '#f-series';
+    if (b.dataset.title === 'デモルーム') b.dataset.href = '#vision';
+  });
+
+  // デモルームだけ VISION ボタンを追加
+  const actions = document.querySelector('.school-room-actions');
+  if (actions && !document.getElementById('schoolRoomVision')) {
+    const a = document.createElement('a');
+    a.id='schoolRoomVision'; a.className='school-room-vision'; a.href='#vision'; a.textContent='✨ VISIONを見る';
+    actions.insertBefore(a, document.getElementById('schoolRoomCancel'));
+  }
+
+  // F Series のアップロードファイル名を固定
+  const fixed = {
+    'F Drone':'./F_Drone_beta_Ver1.html',
+    'F Goggle':'./F_Goggle_beta_Ver1.html',
+    'F Nightingale':'./F_Nightingale_beta_Ver1.html',
+    'F Mind':'./F_Mind_beta_Ver1.html',
+    'F Python':'./F_Python_beta_Ver1.html',
+    'F Teacher':'./F_Teacher_beta_Ver1.html'
+  };
+  document.querySelectorAll('.f-series-card').forEach(card => {
+    const title = card.querySelector('h3')?.textContent.trim();
+    if (!fixed[title]) return;
+    let a = card.querySelector('.f-series-play-button');
+    if (!a) {
+      a = document.createElement('a'); a.className='f-series-play-button';
+      card.querySelector('.f-series-detail')?.appendChild(a);
+    }
+    a.href = fixed[title]; a.textContent = '＋ ' + title + 'を体験する';
+  });
+});
+
+// 既存の校舎モーダルが開いた直後にVISIONボタンの表示を同期
+const _openForgeationRoomObserver = new MutationObserver(() => {
+  const modal = document.getElementById('schoolRoomModal');
+  const v = document.getElementById('schoolRoomVision');
+  const title = document.getElementById('schoolRoomTitle')?.textContent.trim();
+  if (v) v.style.display = (modal?.classList.contains('open') && title === 'デモルーム') ? 'inline-flex' : 'none';
+});
+window.addEventListener('load', () => {
+  const modal=document.getElementById('schoolRoomModal');
+  if(modal) _openForgeationRoomObserver.observe(modal,{attributes:true,subtree:true,childList:true});
+});
+</script>
 
 </body>
 </html>
