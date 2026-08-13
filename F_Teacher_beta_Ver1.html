@@ -1,4 +1,32 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F Teacher | Forgeation</title><style>*{box-sizing:border-box}body{margin:0;background:linear-gradient(#050505,#3b1900);color:#fff;font-family:-apple-system,"Noto Sans JP",sans-serif}main{max-width:440px;margin:auto;padding:15px 15px 30px}.nav{display:flex;gap:8px;margin-bottom:10px}.nav button{border:1px solid #ff8500;border-radius:12px;background:#1b0d00;color:#fff;padding:9px 12px;font-weight:850}.panel{display:none;margin:12px 0;padding:14px;border:1px solid #ff850088;border-radius:16px;background:#0009}.panel.show{display:block}.panel textarea{width:100%;min-height:100px;border-radius:12px;padding:10px}.panel button{margin-top:8px;width:100%;padding:10px;border-radius:10px;border:0;background:#ff8500;font-weight:900}.api{font-size:12px;color:#ffb65f;margin-top:8px;white-space:pre-wrap}.hero{border-radius:22px;overflow:hidden;border:1px solid #ff8500}.hero img{width:100%;display:block}h1{font-size:32px;margin:18px 0 4px}.tag{color:#ff9a24;font-size:18px;font-weight:900}.intro{line-height:1.7;color:#ddd}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px 7px;margin:22px 0}.m{border:0;background:none;color:#fff}.m i{width:91px;height:91px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:34px;font-style:normal;background:radial-gradient(circle,#ff8500,#111 72%);border:2px solid #ff8500}.m b{display:block;font-size:12px;margin-top:7px}.card{padding:16px;border-radius:20px;border:1px solid #ff850088;background:#0009}.bar{height:9px;background:#ffffff22;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#ff8500}.a{width:100%;padding:12px;margin-top:9px;border-radius:13px;border:1px solid #ff8500;background:#ff850022;color:#fff;font-weight:800}#fb{margin-top:10px;color:#ffb65f}</style></head><body><main><div class="nav"><button onclick="forgeBack()">← 戻る</button><button onclick="location.href='index.html#f-series'">🏫 Forgeationホームへ</button></div><div class="hero"><img src="f-teacher-main.webp" alt="F Teacher"></div><h1>F Teacher</h1><div class="tag">未来をつくる先生が、ここから育つ。</div><p class="intro">FTN — Future Teacher Network。AIとともに学び続け、子どもの可能性を信じ、未来をつくる力を育てる先生へ。</p><section class="grid"><button class="m" data-mode="授業づくり"><i>🧑‍🏫</i><b>授業づくり</b></button><button class="m" data-mode="声かけ練習"><i>💬</i><b>声かけ練習</b></button><button class="m" data-mode="ケース判断"><i>🧩</i><b>ケース判断</b></button><button class="m" data-mode="教材づくり"><i>📚</i><b>教材づくり</b></button><button class="m" data-mode="AI相談室"><i>🤖</i><b>AI相談室</b></button><button class="m" data-mode="成長記録"><i>📈</i><b>成長記録</b></button></section><section class="panel" id="panel"><b id="panelTitle">機能</b><p id="panelText"></p><textarea id="teacherQ" placeholder="ジッピー先生へ相談…"></textarea><button id="teacherSend">AI先生に送る</button><div class="api" id="teacherAnswer">ボタンを選ぶと、その機能を体験できます。</div></section><section class="card"><b>🏆 F Teacher Challenge　<span id="xp">0 XP</span></b><div class="bar"><i id="fill"></i></div><p>子どもが「分からない」と手を止めた。最初にどうする？</p><button class="a" data-n="20">まず子どもの考えを聞く</button><button class="a" data-n="15">ヒントを一つ出す</button><button class="a" data-n="5">すぐ正解を説明する</button><div id="fb">選択するとXPが反映されます。</div></section></main><script>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F Teacher | Forgeation</title><style>*{box-sizing:border-box}body{margin:0;background:linear-gradient(#050505,#3b1900);color:#fff;font-family:-apple-system,"Noto Sans JP",sans-serif}main{max-width:440px;margin:auto;padding:15px 15px 30px}.nav{display:flex;gap:8px;margin-bottom:10px}.nav button{border:1px solid #ff8500;border-radius:12px;background:#1b0d00;color:#fff;padding:9px 12px;font-weight:850}.panel{display:none;margin:12px 0;padding:14px;border:1px solid #ff850088;border-radius:16px;background:#0009}.panel.show{display:block}.panel textarea{width:100%;min-height:100px;border-radius:12px;padding:10px}.panel button{margin-top:8px;width:100%;padding:10px;border-radius:10px;border:0;background:#ff8500;font-weight:900}.api{font-size:12px;color:#ffb65f;margin-top:8px;white-space:pre-wrap}.hero{border-radius:22px;overflow:hidden;border:1px solid #ff8500}.hero img{width:100%;display:block}h1{font-size:32px;margin:18px 0 4px}.tag{color:#ff9a24;font-size:18px;font-weight:900}.intro{line-height:1.7;color:#ddd}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px 7px;margin:22px 0}.m{border:0;background:none;color:#fff}.m i{width:91px;height:91px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:34px;font-style:normal;background:radial-gradient(circle,#ff8500,#111 72%);border:2px solid #ff8500}.m b{display:block;font-size:12px;margin-top:7px}.card{padding:16px;border-radius:20px;border:1px solid #ff850088;background:#0009}.bar{height:9px;background:#ffffff22;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#ff8500}.a{width:100%;padding:12px;margin-top:9px;border-radius:13px;border:1px solid #ff8500;background:#ff850022;color:#fff;font-weight:800}#fb{margin-top:10px;color:#ffb65f}</style>
+<style id="f-teacher-ver11-fix">
+:root{--ft-orange:#ff8500;--ft-amber:#ffb347;--ft-dark:#070707;--ft-panel:#160b02}
+body{
+  background:
+    radial-gradient(circle at 50% -10%,rgba(255,133,0,.24),transparent 34%),
+    linear-gradient(180deg,#070707 0%,#170b02 55%,#2a1200 100%)!important;
+}
+.nav{position:sticky;top:8px;z-index:50}
+.nav button{cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+.hero{position:relative;background:#120800}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,133,0,.12),transparent 45%,rgba(255,170,50,.08));
+  mix-blend-mode:screen
+}
+.hero img{filter:saturate(.92) contrast(1.03) brightness(.98)}
+.m{cursor:pointer;border-radius:16px;padding:6px;transition:transform .15s ease,background .15s ease}
+.m:hover,.m:focus-visible{transform:translateY(-2px);background:rgba(255,133,0,.08);outline:1px solid rgba(255,133,0,.55)}
+.m.active i{box-shadow:0 0 0 4px rgba(255,133,0,.18),0 0 30px rgba(255,133,0,.38)}
+.panel{scroll-margin-top:80px}
+.teacher-status{
+  margin:10px 0 0;padding:9px 11px;border-radius:11px;
+  color:#ffd59c;background:rgba(255,133,0,.10);border:1px solid rgba(255,133,0,.32);
+  font-size:12px;line-height:1.5
+}
+</style>
+
+</head><body><main><div class="nav"><button onclick="forgeBack()">← 戻る</button><button onclick="location.href='index.html#f-series'">🏫 Forgeationホームへ</button></div><div class="hero"><img src="f-teacher-main.webp" alt="F Teacher"></div><h1>F Teacher</h1><div class="tag">未来をつくる先生が、ここから育つ。</div><p class="intro">FTN — Future Teacher Network。AIとともに学び続け、子どもの可能性を信じ、未来をつくる力を育てる先生へ。</p><section class="grid"><button class="m" data-mode="授業づくり"><i>🧑‍🏫</i><b>授業づくり</b></button><button class="m" data-mode="声かけ練習"><i>💬</i><b>声かけ練習</b></button><button class="m" data-mode="ケース判断"><i>🧩</i><b>ケース判断</b></button><button class="m" data-mode="教材づくり"><i>📚</i><b>教材づくり</b></button><button class="m" data-mode="AI相談室"><i>🤖</i><b>AI相談室</b></button><button class="m" data-mode="成長記録"><i>📈</i><b>成長記録</b></button></section><section class="panel" id="panel"><b id="panelTitle">機能</b><p id="panelText"></p><textarea id="teacherQ" placeholder="ジッピー先生へ相談…"></textarea><button id="teacherSend">AI先生に送る</button><div class="api" id="teacherAnswer">ボタンを選ぶと、その機能を体験できます。</div></section><section class="card"><b>🏆 F Teacher Challenge　<span id="xp">0 XP</span></b><div class="bar"><i id="fill"></i></div><p>子どもが「分からない」と手を止めた。最初にどうする？</p><button class="a" data-n="20">まず子どもの考えを聞く</button><button class="a" data-n="15">ヒントを一つ出す</button><button class="a" data-n="5">すぐ正解を説明する</button><div id="fb">選択するとXPが反映されます。</div></section></main><script>
 function forgeBack(){
   if(document.referrer && document.referrer!==location.href){ history.back(); }
   else { location.href='index.html#f-series'; }
@@ -11,4 +39,37 @@ async function forgeAI(payload){
   if(!r.ok) throw new Error(d.error||('API '+r.status));
   return d.reply||d.answer||d.message||d.text||'応答を受信しました。';
 }
-let x=+localStorage.FTeacherXP||0;let currentMode='授業づくり';function r(){xp.textContent=x+' XP';fill.style.width=(x%100)+'%'}r();document.querySelectorAll('.a').forEach(b=>b.onclick=()=>{x+=+b.dataset.n;localStorage.FTeacherXP=x;r();fb.textContent=b.textContent+' ＋'+b.dataset.n+' XP'});const tips={'授業づくり':'学年・教科・ねらいを入力すると授業案を一緒に整理します。','声かけ練習':'子どもの様子に合わせた声かけをAIと練習します。','ケース判断':'教室場面の対応を考え、選択肢と振り返りを行います。','教材づくり':'教材・ワーク・SST案を作る相談ができます。','AI相談室':'先生として困っていることを自由に相談できます。','成長記録':'今日の振り返りや次の目標を言語化します。'};document.querySelectorAll('.m').forEach(b=>b.onclick=()=>{currentMode=b.dataset.mode;panel.classList.add('show');panelTitle.textContent=currentMode;panelText.textContent=tips[currentMode];teacherQ.value='';teacherAnswer.textContent='内容を入力してAI先生に送ってください。';panel.scrollIntoView({behavior:'smooth',block:'center'})});teacherSend.onclick=async()=>{const q=teacherQ.value.trim();if(!q){teacherAnswer.textContent='相談内容を入力してください。';return}teacherSend.disabled=true;teacherAnswer.textContent='AI先生が考えています…';try{teacherAnswer.textContent=await forgeAI({message:q,product:'f-teacher',mode:currentMode});x+=10;localStorage.FTeacherXP=x;r()}catch(e){teacherAnswer.textContent='API接続を確認してください：'+e.message}finally{teacherSend.disabled=false}};</script></body></html>
+let x=+localStorage.FTeacherXP||0;let currentMode='授業づくり';function r(){xp.textContent=x+' XP';fill.style.width=(x%100)+'%'}r();document.querySelectorAll('.a').forEach(b=>b.onclick=()=>{x+=+b.dataset.n;localStorage.FTeacherXP=x;r();fb.textContent=b.textContent+' ＋'+b.dataset.n+' XP'});const tips={'授業づくり':'学年・教科・ねらいを入力すると授業案を一緒に整理します。','声かけ練習':'子どもの様子に合わせた声かけをAIと練習します。','ケース判断':'教室場面の対応を考え、選択肢と振り返りを行います。','教材づくり':'教材・ワーク・SST案を作る相談ができます。','AI相談室':'先生として困っていることを自由に相談できます。','成長記録':'今日の振り返りや次の目標を言語化します。'};document.querySelectorAll('.m').forEach(b=>b.onclick=()=>{currentMode=b.dataset.mode;panel.classList.add('show');panelTitle.textContent=currentMode;panelText.textContent=tips[currentMode];teacherQ.value='';teacherAnswer.textContent='内容を入力してAI先生に送ってください。';panel.scrollIntoView({behavior:'smooth',block:'center'})});teacherSend.onclick=async()=>{const q=teacherQ.value.trim();if(!q){teacherAnswer.textContent='相談内容を入力してください。';return}teacherSend.disabled=true;teacherAnswer.textContent='AI先生が考えています…';try{teacherAnswer.textContent=await forgeAI({message:q,product:'f-teacher',mode:currentMode});x+=10;localStorage.FTeacherXP=x;r()}catch(e){teacherAnswer.textContent='API接続を確認してください：'+e.message}finally{teacherSend.disabled=false}};</script>
+<script id="f-teacher-ver11-fix-script">
+document.addEventListener('DOMContentLoaded',()=>{
+  const navBack=document.querySelector('.nav button:first-child');
+  if(navBack) navBack.onclick=()=>{
+    if(history.length>1 && document.referrer && document.referrer!==location.href) history.back();
+    else location.href='index.html#f-series';
+  };
+
+  document.querySelectorAll('.m').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.m').forEach(x=>x.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  const panel=document.getElementById('panel');
+  if(panel && !document.getElementById('teacherStatus')){
+    const s=document.createElement('div');
+    s.id='teacherStatus';s.className='teacher-status';
+    s.textContent='6つの機能ボタンはHTML側で動作します。AI会話はCloudflare Worker側の接続確認後に有効になります。';
+    panel.appendChild(s);
+  }
+
+  document.getElementById('teacherQ')?.addEventListener('keydown',e=>{
+    if(e.key==='Enter' && !e.shiftKey){
+      e.preventDefault();
+      document.getElementById('teacherSend')?.click();
+    }
+  });
+});
+</script>
+
+</body></html>
