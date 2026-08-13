@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>F GOGGLE 2026 β｜HERO 拓（ヒロ）</title>
-<style>:root{--accent1:#0b66b7;--accent2:#65caff;--accent:#29a7ff;--badgeText:#fff;--markText:#06213a;--xp:64%;}
+<style>:root{--accent1:#0059a8;--accent2:#74d7ff;--accent:#18a9ff;--badgeText:#fff;--markText:#06213a;--xp:64%;}
 :root{
   --navy:#071629; --deep:#10263d; --text:#f8fbff; --muted:#d5e4f2;
   --line:rgba(255,255,255,.18);
@@ -14,7 +14,7 @@ body{
   color:var(--text);
   background:
     radial-gradient(circle at 82% 0%,color-mix(in srgb,var(--accent2) 22%,transparent),transparent 28%),
-    linear-gradient(180deg,#091629 0%,#123350 54%,var(--accent1) 135%);
+    linear-gradient(180deg,#03182d 0%,#063d69 48%,#0879ba 105%);
 }
 button,textarea{font:inherit}
 button{cursor:pointer}
@@ -42,7 +42,7 @@ button{cursor:pointer}
 .visual{
   position:relative; overflow:hidden; margin-top:8px; min-height:240px; border-radius:24px;
   border:1px solid rgba(255,255,255,.22); box-shadow:0 16px 38px rgba(0,0,0,.28);
-  background:#0c2740;
+  background:#052b4c;
 }
 .visual img{width:100%;height:240px;object-fit:cover;display:block}
 .visual:after{
@@ -112,9 +112,9 @@ button{cursor:pointer}
 }
 </style></head>
 <body><main class="app">
-<header class="topbar"><button class="back" type="button" aria-label="戻る">‹</button>
+<header class="topbar"><button class="back" type="button" aria-label="戻る" onclick="forgeBack()">‹</button>
 <div class="brand"><div class="brand-mark">F</div><div class="brand-title"><strong>F GOGGLE</strong><small>Forgeation Construction Academy</small></div></div>
-<button class="settings" type="button" aria-label="設定">⚙</button></header>
+<button class="settings" type="button" aria-label="設定" onclick="document.getElementById('status').textContent='設定：APIはCloudflare Worker経由／画像は外部参照'">⚙</button></header>
 
 <section class="visual">
 <img src="F_GOGGLE_2026_HERO_拓ヒロ.png" alt="F GOGGLE 拓（ヒロ）の建築設計体験">
@@ -127,7 +127,7 @@ button{cursor:pointer}
 <div class="stats"><div class="stat"><b>8件</b><span>設計実績</span></div><div class="stat"><b>92%</b><span>安全スコア</span></div><div class="stat"><b>12.5h</b><span>体験時間</span></div></div>
 </section>
 
-<div class="section-title">F SOCCER型｜6つの体験モード</div>
+<div class="section-title">6つの体験モード</div>
 <section class="menu-grid">
 <button class="menu-item" data-mode="設計"><span class="icon-circle">📐</span><span class="menu-label">設計</span></button>
 <button class="menu-item" data-mode="施工"><span class="icon-circle">🏗️</span><span class="menu-label">施工</span></button>
@@ -143,10 +143,15 @@ button{cursor:pointer}
 <section id="chat" class="chat-wrap"><div class="chat-title">AI設計士｜<span id="selected">設計 を選択中</span></div>
 <div id="messages" class="messages"><div class="msg ai">F設計士：こんにちは、拓！ 今日はどんな建物を設計してみたい？ 用途・予算・希望から一緒に整理しよう。</div></div>
 <form id="chatForm" class="chat-box"><textarea id="q" placeholder="AI設計士に相談..." aria-label="AI設計士への相談"></textarea><button class="send" type="submit" aria-label="送信">➤</button></form>
-<div id="status" class="status">F GOGGLE β 2026｜API接続準備済み</div></section>
+<div id="status" class="status">F GOGGLE β 2026｜API接続版｜サーバー側キー管理</div></section>
 </main>
 <script>
-const API_ENDPOINT=""; // 本番はCloudflare Worker等のサーバー側API。APIキーはHTMLへ直書きしない。
+function forgeBack(){
+  if(document.referrer && document.referrer!==location.href){ history.back(); }
+  else { location.href='index.html#f-series'; }
+}
+
+const API_ENDPOINT="/api/forgeation-ai"; // Forgeation共通サーバーAPI。OpenAI APIキーはHTMLに置かない。
 const items=[...document.querySelectorAll('.menu-item')];
 items.forEach(btn=>btn.addEventListener('click',()=>{
   items.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
