@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F Python β API</title>
+<style>
+:root{--bg:#07111d;--cyan:#57d9ff;--green:#7dffb2;--text:#f4f8ff;--line:#28405a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#183b59 0,#07111d 45%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
+.app{max-width:1100px;margin:auto;padding:16px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}.logo{font-weight:950;letter-spacing:.08em;font-size:20px}.logo b{color:var(--cyan)}.topright{display:flex;gap:8px}.xp,.api{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#091827;font-weight:800;font-size:12px}.api.ok{color:var(--green)}.api.ng{color:#ff8b8b}
+.monitor{background:#10151b;border:10px solid #202a34;border-bottom-width:18px;border-radius:22px;box-shadow:0 25px 60px #0008;overflow:hidden}.monitorbar{height:38px;background:#17222d;display:flex;align-items:center;gap:7px;padding:0 12px;color:#93a9bd;font-size:12px}.dot{width:10px;height:10px;border-radius:50%;background:#536576}.dot:first-child{background:#ff6b6b}.dot:nth-child(2){background:#ffd166}.dot:nth-child(3){background:#62df9a}
+.screen{min-height:420px;display:grid;grid-template-columns:52px 1fr;background:#071018}.side{border-right:1px solid #1d3448;padding:12px 8px;text-align:center;color:#61798f;line-height:2.2}.editor{padding:18px;overflow:auto}.tab{display:inline-block;background:#102538;border-top:2px solid var(--cyan);padding:8px 14px;font-size:12px;margin-bottom:12px}pre{margin:0;font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.n{color:#516c83}.kw{color:#ff8bd5}.fn{color:#75dfff}.str{color:#a8e879}
+.console{margin-top:22px;border-top:1px solid #1e374d;padding-top:14px;color:#b8c9d8;font:13px/1.7 ui-monospace,monospace}.console strong{color:var(--green)}.ai-panel{display:none;margin-top:15px;padding:14px;border:1px solid #28405a;border-radius:14px;background:#0b1825}.ai-panel.show{display:block}.ai-panel textarea{width:100%;min-height:95px;background:#071018;color:#fff;border:1px solid #28405a;border-radius:10px;padding:12px;font:13px/1.5 ui-monospace,monospace;resize:vertical}.send{margin-top:9px;border:0;border-radius:10px;padding:11px 16px;background:linear-gradient(90deg,#57d9ff,#7dffb2);color:#06101a;font-weight:950;cursor:pointer}.send:disabled{opacity:.5}.answer{margin-top:12px;padding:12px;border-radius:10px;background:#06101a;border:1px solid #1e374d;white-space:pre-wrap;line-height:1.7;color:#dce8f4}
+.stand{width:170px;height:18px;margin:0 auto;background:#202a34;clip-path:polygon(35% 0,65% 0,78% 100%,22% 100%)}.base{width:240px;height:12px;margin:0 auto 16px;border-radius:10px;background:#293640}.buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.btn{border:1px solid var(--line);border-radius:16px;background:linear-gradient(#12263a,#0c1b2a);color:#fff;padding:15px 8px;min-height:72px;font-weight:850;font-size:14px;cursor:pointer;box-shadow:0 7px 16px #0004}.btn.active{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan) inset}.ico{display:block;font-size:22px;margin-bottom:5px}.msg{margin:14px 0 4px;padding:12px 14px;background:#0d1c2b;border:1px solid var(--line);border-radius:13px;color:#c6d5e5;font-size:13px}
+@media(max-width:650px){.app{padding:10px}.monitor{border-width:6px;border-bottom-width:12px}.screen{min-height:350px;grid-template-columns:38px 1fr}.editor{padding:12px}pre{font-size:12px}.buttons{grid-template-columns:repeat(2,1fr)}.btn{min-height:68px;font-size:12px}.stand{width:120px}.base{width:180px}}
+</style></head>
+<body>
+<div class="app">
+<div class="top"><div class="logo">FORGEATION <b>F PYTHON</b></div><div class="topright"><div id="apiState" class="api">API 未確認</div><div class="xp">XP <span id="xp">0</span></div></div></div>
+<div class="monitor">
+<div class="monitorbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>F Python Studio — main.py</span></div>
+<div class="screen"><div class="side">⌘<br>⌕<br>⑂<br>▷<br>▦</div><div class="editor">
+<div class="tab">main.py</div>
+<pre id="code"><span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Hello, Forgeation!"</span>)
+<span class="n">02</span>
+<span class="n">03</span>  future = <span class="str">"つくる"</span>
+<span class="n">04</span>  <span class="kw">print</span>(<span class="str">"Pythonで未来を"</span> + future)</pre>
+<div class="console" id="console">TERMINAL<br><strong>▶ Ready.</strong><br>下の6つのボタンからミッションを選択してください。</div>
+<div id="aiPanel" class="ai-panel"><b>🤖 AI先生に質問</b><textarea id="question" placeholder="例：このエラーの原因をヒントで教えて。"></textarea><button id="sendBtn" class="send" onclick="askAI()">AI先生に送る</button><div id="answer" class="answer">ここにAI先生の返答が表示されます。</div></div>
+</div></div></div><div class="stand"></div><div class="base"></div>
+<div class="buttons">
+<button class="btn" onclick="mode(this,0)"><span class="ico">⌨️</span>コードを書く</button>
+<button class="btn" onclick="mode(this,1)"><span class="ico">▶️</span>実行する</button>
+<button class="btn" onclick="mode(this,2)"><span class="ico">🐞</span>バグを直す</button>
+<button class="btn" onclick="mode(this,3)"><span class="ico">🧠</span>Pythonクイズ</button>
+<button class="btn" onclick="mode(this,4)"><span class="ico">🤖</span>AI先生</button>
+<button class="btn" onclick="mode(this,5)"><span class="ico">🏆</span>F Challenge</button>
+</div>
+<div class="msg" id="msg">API接続対応版。AI先生はCloudflare Worker経由でOpenAI APIへ接続します。</div>
+</div>
+<script>
+const API_URL="/api/f-python";
+let xp=0;
+const data=[
+["コードを書く","変数 name を作って、自分だけのプログラムを書いてみよう。",`<span class="n">01</span>  name = <span class="str">"F Python"</span>\n<span class="n">02</span>  <span class="kw">print</span>(name)`],
+["実行する","プログラムを実行しました。XP +10！",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Hello, Future!"</span>)`],
+["バグを直す","エラーを探そう：カッコが1つ足りません。直せたらクリア！",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Find the bug!"</span>`],
+["Pythonクイズ","Q. print() は何をする命令？ ①表示する ②消す ③保存する",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Quiz Time!"</span>)`],
+["AI先生","下の入力欄から、Pythonの質問やエラー内容をAI先生へ送れます。",`<span class="n">01</span>  <span class="fn">AI_Teacher</span> = <span class="str">"一緒に考えよう"</span>`],
+["F Challenge","制限時間内にミッションを攻略する発展モード。XP +30！",`<span class="n">01</span>  <span class="kw">for</span> level <span class="kw">in</span> <span class="fn">range</span>(1, 6):\n<span class="n">02</span>      <span class="kw">print</span>(level)`]
+];
+function mode(b,i){
+document.querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+document.getElementById('code').innerHTML=data[i][2];document.getElementById('msg').textContent=data[i][1];
+document.getElementById('console').innerHTML='TERMINAL<br><strong>▶ '+data[i][0]+'</strong><br>'+data[i][1];
+document.getElementById('aiPanel').classList.toggle('show',i===4);
+if(i===1)xp+=10;if(i===5)xp+=30;document.getElementById('xp').textContent=xp;
+}
+async function askAI(){
+const q=document.getElementById('question').value.trim(),answer=document.getElementById('answer'),btn=document.getElementById('sendBtn');
+if(!q){answer.textContent="質問を入力してください。";return}
+btn.disabled=true;answer.textContent="AI先生が考えています…";
+try{
+const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q,code:document.getElementById('code').innerText})});
+const d=await r.json().catch(()=>({}));
+if(!r.ok)throw new Error(d.error||"API接続エラー");
+answer.textContent=d.answer||"返答を取得できませんでした。";xp+=10;document.getElementById('xp').textContent=xp;setApi(true);
+}catch(e){answer.textContent="接続できませんでした："+e.message;setApi(false)}finally{btn.disabled=false}
+}
+function setApi(ok){const e=document.getElementById('apiState');e.textContent=ok?"API 接続OK":"API 未接続";e.className="api "+(ok?"ok":"ng")}
+(async()=>{try{const r=await fetch(API_URL,{method:"GET"});setApi(r.ok)}catch(e){setApi(false)}})();
+</script></body></html>
