@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>F GOGGLE 2026 β｜HERO 拓（ヒロ）</title>
+<style>:root{--accent1:#0b66b7;--accent2:#65caff;--accent:#29a7ff;--badgeText:#fff;--markText:#06213a;--xp:64%;}
+:root{
+  --navy:#071629; --deep:#10263d; --text:#f8fbff; --muted:#d5e4f2;
+  --line:rgba(255,255,255,.18);
+}
+*{box-sizing:border-box}
+html{background:#050b14}
+body{
+  margin:0; min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 82% 0%,color-mix(in srgb,var(--accent2) 22%,transparent),transparent 28%),
+    linear-gradient(180deg,#091629 0%,#123350 54%,var(--accent1) 135%);
+}
+button,textarea{font:inherit}
+button{cursor:pointer}
+.app{
+  width:min(430px,100%); min-height:100vh; margin:auto;
+  padding:env(safe-area-inset-top) 16px calc(20px + env(safe-area-inset-bottom));
+}
+.topbar{
+  display:grid; grid-template-columns:40px 1fr 40px; align-items:center; gap:8px;
+  padding:16px 2px 10px;
+}
+.back,.settings{
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);color:#fff;font-size:1.15rem;
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-mark{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  font-weight:950;background:linear-gradient(145deg,var(--accent2),var(--accent1));
+  box-shadow:0 8px 20px rgba(0,0,0,.25); color:var(--markText);
+}
+.brand-title{min-width:0}
+.brand-title strong{display:block;font-size:1.08rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-title small{display:block;color:var(--muted);margin-top:2px;font-size:.73rem}
+.visual{
+  position:relative; overflow:hidden; margin-top:8px; min-height:240px; border-radius:24px;
+  border:1px solid rgba(255,255,255,.22); box-shadow:0 16px 38px rgba(0,0,0,.28);
+  background:#0c2740;
+}
+.visual img{width:100%;height:240px;object-fit:cover;display:block}
+.visual:after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(4,14,28,.88) 100%);
+  pointer-events:none;
+}
+.visual-copy{position:absolute;left:16px;right:16px;bottom:14px;z-index:2}
+.visual-copy .badge{
+  display:inline-flex;padding:6px 9px;border-radius:999px;background:var(--accent);
+  color:var(--badgeText);font-size:.7rem;font-weight:950;letter-spacing:.05em
+}
+.visual-copy h1{margin:8px 0 2px;font-size:1.7rem;line-height:1.05}
+.visual-copy p{margin:0;color:#edf7ff;font-size:.8rem;line-height:1.45;font-weight:700}
+.profile{
+  margin-top:14px;padding:15px;border-radius:19px;
+  background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.075));
+  border:1px solid var(--line);
+}
+.profile-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.name strong{font-size:1.08rem}.name small{color:var(--accent2);font-weight:800}
+.level{font-size:.78rem;color:var(--muted);text-align:right}
+.xpbar{height:8px;margin-top:10px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.xpbar i{display:block;height:100%;width:var(--xp);background:linear-gradient(90deg,var(--accent2),var(--accent))}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stat{padding:10px 7px;border-radius:13px;background:rgba(255,255,255,.07);text-align:center}
+.stat b{display:block;color:var(--accent2);font-size:1.05rem}.stat span{font-size:.67rem;color:var(--muted)}
+.section-title{margin:20px 2px 10px;font-size:.92rem;font-weight:950}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px}
+.menu-item{border:0;background:transparent;color:#fff;padding:0;text-align:center}
+.icon-circle{
+  width:74px;height:74px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:2rem;
+  background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.07));
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 10px 22px rgba(0,0,0,.22);
+  transition:.18s transform,.18s box-shadow;
+}
+.menu-item:active .icon-circle{transform:scale(.96)}
+.menu-item.active .icon-circle{box-shadow:0 0 0 2px var(--accent),0 12px 28px rgba(0,0,0,.25)}
+.menu-label{display:block;margin-top:8px;font-size:.75rem;font-weight:900;line-height:1.28}
+.mission{
+  margin-top:18px;padding:15px;border-radius:18px;background:rgba(255,255,255,.09);border:1px solid var(--line)
+}
+.mission-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.mission h3{margin:0;font-size:.95rem}.mission .tag{font-size:.68rem;color:var(--accent2);font-weight:900}
+.mission p{margin:8px 0 0;font-size:.78rem;line-height:1.6;color:var(--muted)}
+.chat-wrap{
+  margin-top:18px;padding:14px;border-radius:19px;background:rgba(3,11,23,.36);border:1px solid var(--line)
+}
+.chat-title{font-weight:950;font-size:.88rem;margin-bottom:10px}
+.messages{max-height:180px;overflow:auto}
+.msg{padding:10px 12px;border-radius:14px;margin:7px 0;font-size:.82rem;line-height:1.55}
+.ai{background:rgba(255,255,255,.12)}
+.me{margin-left:14%;background:color-mix(in srgb,var(--accent) 62%,#10263d)}
+.chat-box{margin-top:10px;display:grid;grid-template-columns:1fr 56px;gap:10px;align-items:end}
+.chat-box textarea{
+  width:100%;min-height:54px;max-height:120px;resize:none;border:1px solid rgba(255,255,255,.28);
+  border-radius:18px;background:#f8fbff;color:#12243c;padding:15px;outline:none
+}
+.send{
+  width:56px;height:56px;border-radius:50%;border:0;color:var(--markText);
+  background:linear-gradient(145deg,var(--accent2),var(--accent1));font-size:1.45rem;font-weight:900
+}
+.status{margin-top:12px;text-align:center;color:var(--muted);font-size:.7rem}
+@media(min-width:700px){
+ body{display:grid;place-items:center;padding:20px}
+ .app{min-height:auto;border-radius:34px;border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+}
+</style></head>
+<body><main class="app">
+<header class="topbar"><button class="back" type="button" aria-label="戻る">‹</button>
+<div class="brand"><div class="brand-mark">F</div><div class="brand-title"><strong>F GOGGLE</strong><small>Forgeation Construction Academy</small></div></div>
+<button class="settings" type="button" aria-label="設定">⚙</button></header>
+
+<section class="visual">
+<img src="F_GOGGLE_2026_HERO_拓ヒロ.png" alt="F GOGGLE 拓（ヒロ）の建築設計体験">
+<div class="visual-copy"><span class="badge">HERO</span><h1>拓（ヒロ）</h1><p>建築士見習い｜AIと設計し、未来の空間をつくる。</p></div>
+</section>
+
+<section class="profile">
+<div class="profile-head"><div class="name"><strong>HERO 拓（ヒロ）</strong><br><small>建築士見習い</small></div><div class="level">LEVEL 12<br>2,450 / 3,000 XP</div></div>
+<div class="xpbar"><i></i></div>
+<div class="stats"><div class="stat"><b>8件</b><span>設計実績</span></div><div class="stat"><b>92%</b><span>安全スコア</span></div><div class="stat"><b>12.5h</b><span>体験時間</span></div></div>
+</section>
+
+<div class="section-title">F SOCCER型｜6つの体験モード</div>
+<section class="menu-grid">
+<button class="menu-item" data-mode="設計"><span class="icon-circle">📐</span><span class="menu-label">設計</span></button>
+<button class="menu-item" data-mode="施工"><span class="icon-circle">🏗️</span><span class="menu-label">施工</span></button>
+<button class="menu-item" data-mode="安全"><span class="icon-circle">🦺</span><span class="menu-label">安全</span></button>
+<button class="menu-item" data-mode="重機"><span class="icon-circle">🚜</span><span class="menu-label">重機</span></button>
+<button class="menu-item" data-mode="完成評価"><span class="icon-circle">🏠</span><span class="menu-label">完成評価</span></button>
+<button class="menu-item" data-mode="AI設計士"><span class="icon-circle">🤖</span><span class="menu-label">AI設計士</span></button>
+</section>
+
+<section class="mission"><div class="mission-top"><h3>今日の設計ミッション</h3><span class="tag">+120 XP</span></div>
+<p>3人家族・南向きLDK・収納重視。予算を意識しながら、暮らしやすさと安全性を両立したプランを考えよう。</p></section>
+
+<section id="chat" class="chat-wrap"><div class="chat-title">AI設計士｜<span id="selected">設計 を選択中</span></div>
+<div id="messages" class="messages"><div class="msg ai">F設計士：こんにちは、拓！ 今日はどんな建物を設計してみたい？ 用途・予算・希望から一緒に整理しよう。</div></div>
+<form id="chatForm" class="chat-box"><textarea id="q" placeholder="AI設計士に相談..." aria-label="AI設計士への相談"></textarea><button class="send" type="submit" aria-label="送信">➤</button></form>
+<div id="status" class="status">F GOGGLE β 2026｜API接続準備済み</div></section>
+</main>
+<script>
+const API_ENDPOINT=""; // 本番はCloudflare Worker等のサーバー側API。APIキーはHTMLへ直書きしない。
+const items=[...document.querySelectorAll('.menu-item')];
+items.forEach(btn=>btn.addEventListener('click',()=>{
+  items.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+  document.getElementById('selected').textContent=btn.dataset.mode+' を選択中';
+  document.getElementById('chat').scrollIntoView({behavior:'smooth',block:'start'});
+}));
+document.getElementById('chatForm').addEventListener('submit',async(e)=>{
+ e.preventDefault(); const ta=document.getElementById('q'); const text=ta.value.trim(); if(!text)return;
+ const box=document.getElementById('messages'); box.insertAdjacentHTML('beforeend','<div class="msg me">'+esc(text)+'</div>'); ta.value='';
+ if(!API_ENDPOINT){box.insertAdjacentHTML('beforeend','<div class="msg ai">F設計士（デモ）：いいね。まず『誰が使う建物か』『絶対に譲れない条件』『予算』の3つから設計条件を整理しよう。</div>');box.scrollTop=box.scrollHeight;return;}
+ document.getElementById('status').textContent='APIへ接続中…';
+ try{
+  const r=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,product:'f-goggle',mode:document.getElementById('selected').textContent})});
+  const d=await r.json(); box.insertAdjacentHTML('beforeend','<div class="msg ai">'+esc(d.reply||'応答を取得できませんでした。')+'</div>');
+  document.getElementById('status').textContent='API CONNECTED';
+ }catch(err){document.getElementById('status').textContent='API接続を確認してください。';}
+ box.scrollTop=box.scrollHeight;
+});
+function esc(x){return x.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+</script>
+</body></html>
