@@ -1595,6 +1595,86 @@ section{padding:68px 0}
 @media(max-width:600px){.staff-room-inside-grid{grid-template-columns:1fr;}}
 </style>
 
+
+
+
+
+<script id="forgeation-scroll-reset-ver3249">
+try{
+  sessionStorage.removeItem("forgeation-home-scroll-y");
+  sessionStorage.removeItem("forgeation-home-path");
+}catch(_){}
+if("scrollRestoration" in history){ history.scrollRestoration="manual"; }
+window.addEventListener("pageshow",()=>{ 
+  if(!location.hash){ window.scrollTo({top:0,left:0,behavior:"auto"}); }
+},{once:true});
+</script>
+
+
+<style id="forgeation-school-map-single-source-ver3249">
+#forgeation-school .school-map-visual{position:relative!important;}
+#forgeation-school .school-map-image{
+  display:block!important;width:100%!important;height:auto!important;
+  pointer-events:none!important;user-select:none!important;
+}
+#forgeation-school .school-map-hotspot{
+  position:absolute!important;
+  transform:translate(calc(-50% - 4px),-50%)!important;
+  width:30px!important;height:30px!important;
+  min-width:30px!important;min-height:30px!important;
+  padding:0!important;margin:0!important;
+  border:2px solid rgba(255,255,255,.98)!important;
+  border-radius:50%!important;
+  background:#071a3a!important;color:#fff!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.72)!important;
+  overflow:hidden!important;z-index:30!important;
+  font-size:0!important;line-height:1!important;
+  cursor:pointer!important;touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+#forgeation-school .school-map-hotspot::before{
+  content:"❗"!important;
+  position:static!important;display:block!important;
+  background:transparent!important;color:#fff!important;
+  font-size:15px!important;line-height:1!important;z-index:auto!important;
+}
+#forgeation-school .school-map-hotspot::after{content:none!important;display:none!important;}
+#forgeation-school .school-map-hotspot>span,
+#forgeation-school .school-map-hotspot>small,
+#forgeation-school .school-map-hotspot>i{display:none!important;}
+#forgeation-school .school-map-hotspot:hover,
+#forgeation-school .school-map-hotspot:focus-visible{
+  transform:translate(calc(-50% - 4px),-50%) scale(1.10)!important;
+  background:#087cad!important;outline:2px solid #8ee8ff!important;outline-offset:2px!important;
+}
+#forgeation-school .school-map-hotspot[data-title="職員室"]{
+  left:29.0%!important;top:35.6%!important;
+}
+@media(max-width:760px){
+  #forgeation-school .school-map-hotspot{
+    transform:translate(calc(-50% - 3px),-50%)!important;
+    width:26px!important;height:26px!important;
+    min-width:26px!important;min-height:26px!important;
+  }
+  #forgeation-school .school-map-hotspot::before{font-size:13px!important;}
+  #forgeation-school .school-map-hotspot:hover,
+  #forgeation-school .school-map-hotspot:focus-visible{
+    transform:translate(calc(-50% - 3px),-50%) scale(1.08)!important;
+  }
+}
+.academy-detail-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;}
+.future-card .embedded-academy-body .academy-detail-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+#construction-academy-detail .academy-detail-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+#visionDetails[open]>summary:after{content:"－"!important;}
+#visionDetails:not([open])>summary:after{content:"＋"!important;}
+@media(max-width:760px){
+  .academy-detail-gallery,
+  .future-card .embedded-academy-body .academy-detail-gallery,
+  #construction-academy-detail .academy-detail-gallery{grid-template-columns:1fr!important;}
+}
+</style>
+
 </head>
 <body>
 <!-- Ver3.23.5: Ver3.23.4原本を維持し、スポーツアカデミー課 F Motion 導線のみ差分統合 -->
@@ -1668,11 +1748,11 @@ section{padding:68px 0}
         <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:29.0%;top:35.6%"
       data-floor="5F"
-      data-title="職員室" data-status="staff-coming-soon"
+      data-title="職員室" data-status="open"
       data-description="Forgeationを支える仲間と先生たちが集う職員室です。学校を支えるチーム、先生、AIパートナーが、ここから未来の授業と挑戦を支えていきます。"
       data-features="仲間・先生の紹介|チームの活動|未来の授業を支える拠点"
-      data-href="#"
-      aria-label="職員室の詳細を表示">i</button>
+      data-href="#forgeation-final-staff-room"
+      aria-label="職員室の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:38.0%;top:35.6%"
       data-floor="5F"
@@ -1680,7 +1760,7 @@ section{padding:68px 0}
       data-description="AI・教育・経営・スポーツ・医療など、未来を切り拓く知識を集める図書館です。現在、開館準備中です。近日公開予定、乞うご期待！"
       data-features="未来の参考図書|AI学習資料|近日公開予定"
       data-href="#"
-      aria-label="AI図書館の詳細を表示">i</button>
+      aria-label="AI図書館の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:51.8%;top:35.6%"
       data-floor="5F"
@@ -1688,7 +1768,7 @@ section{padding:68px 0}
       data-description="Forgeationの理念・決断・未来設計を発信する校長室兼社長室です。"
       data-features="企業理念|社長の扉|未来への設計図"
       data-href="#president-door"
-      aria-label="社長室の詳細を表示">i</button>
+      aria-label="社長室の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:65.7%;top:35.6%"
       data-floor="5F"
@@ -1696,7 +1776,7 @@ section{padding:68px 0}
       data-description="新しいAI社員、教育、スポーツ、医療、建設の未来を研究する場所です。"
       data-features="新製品研究|未来技術|社会実装"
       data-href="#future"
-      aria-label="未来研究室の詳細を表示">i</button>
+      aria-label="未来研究室の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:80.5%;top:35.6%"
       data-floor="5F"
@@ -1704,7 +1784,7 @@ section{padding:68px 0}
       data-description="協業、取材、導入相談、一般のお問い合わせを受け付けます。"
       data-features="導入相談|協業・取材|一般お問い合わせ"
       data-href="#contact"
-      aria-label="お問い合わせ室の詳細を表示">i</button>
+      aria-label="お問い合わせ室の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:28.4%;top:48.1%"
       data-floor="4F"
@@ -1712,7 +1792,7 @@ section{padding:68px 0}
       data-description="一人ひとりの課題に合わせて、練習・振り返り・次の目標を支える専属AIコーチです。"
       data-features="個別練習メニュー|試合分析・振り返り|成長の見える化"
       data-href="#soccer-product"
-      aria-label="AI Soccer Academy Coachの詳細を表示">i</button>
+      aria-label="AI Soccer Academy Coachの詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:44.3%;top:48.1%"
       data-floor="4F"
@@ -1720,7 +1800,7 @@ section{padding:68px 0}
       data-description="Forgeationが開発するWeb版・β版・AI社員を体験できる製品展示室です。"
       data-features="Web体験版|β版アプリ|開発中プロダクト"
       data-href="#f-series"
-      aria-label="AI商品体験の詳細を表示">i</button>
+      aria-label="AI商品体験の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:59.6%;top:48.1%"
       data-floor="4F"
@@ -1728,15 +1808,15 @@ section{padding:68px 0}
       data-description="学びと交流が生まれる、未来のパン屋プロジェクトです。"
       data-features="Bakery構想|ジッピーモン|店舗体験"
       data-href="#bakery"
-      aria-label="Forgeation Bakeryの詳細を表示">i</button>
+      aria-label="Forgeation Bakeryの詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:77.9%;top:48.1%"
       data-floor="4F"
       data-title="デモルーム"
       data-description="AI社員や各アカデミーのデモ、ForgeationのVISIONを体験できるルームです。"
       data-features="VISION|AI社員デモ|アプリ体験"
-      data-href="#vision"
-      aria-label="デモルームの詳細を表示">i</button>
+      data-href="#future-lessons"
+      aria-label="デモルームの詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:18.7%;top:60.6%"
       data-floor="3F"
@@ -1744,7 +1824,7 @@ section{padding:68px 0}
       data-description="ジッピーが来訪目的を聞き、最適な教室・AI社員・相談窓口へ案内します。"
       data-features="来訪者受付|校内案内|相談窓口"
       data-href="./forgeation-school-front_来訪者受付_全体対応版.html"
-      aria-label="AI受付社員の詳細を表示">i</button>
+      aria-label="AI受付社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:26.7%;top:60.6%"
       data-floor="3F"
@@ -1752,7 +1832,7 @@ section{padding:68px 0}
       data-description="SNS、イベント告知、プレスリリース、採用広報を支援します。"
       data-features="SNS投稿|イベント告知|広報文章"
       data-href="./ai-public-relations-demo.html"
-      aria-label="AI広報社員の詳細を表示">i</button>
+      aria-label="AI広報社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:34.6%;top:60.6%"
       data-floor="3F"
@@ -1760,7 +1840,7 @@ section{padding:68px 0}
       data-description="HTML・CSS・JavaScript・GitHub公開など、開発業務を支援します。"
       data-features="Web開発|不具合確認|公開支援"
       data-href="./ai-system-employee-demo.html"
-      aria-label="AIシステム社員の詳細を表示">i</button>
+      aria-label="AIシステム社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:42.3%;top:60.6%"
       data-floor="3F"
@@ -1768,7 +1848,7 @@ section{padding:68px 0}
       data-description="算数・数学・国語・英語・SSTなどの学習を支援します。"
       data-features="個別学習|教材作成|学習計画"
       data-href="./ai-learning-support-demo.html"
-      aria-label="AI学習支援社員の詳細を表示">i</button>
+      aria-label="AI学習支援社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:50.1%;top:60.6%"
       data-floor="3F"
@@ -1776,7 +1856,7 @@ section{padding:68px 0}
       data-description="看護基礎、在宅看護、医療DX、学習支援を案内します。"
       data-features="看護学習|医療DX|在宅・地域"
       data-href="./ai-nursing-employee-demo.html"
-      aria-label="AI看護社員の詳細を表示">i</button>
+      aria-label="AI看護社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:58.0%;top:60.6%"
       data-floor="3F"
@@ -1784,7 +1864,7 @@ section{padding:68px 0}
       data-description="住宅プラン、設計、CAD、安全管理、建設DXを案内します。"
       data-features="住宅設計|建設DX|安全管理"
       data-href="./ai-construction-employee-demo.html"
-      aria-label="AI建設社員の詳細を表示">i</button>
+      aria-label="AI建設社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:65.8%;top:60.6%"
       data-floor="3F"
@@ -1792,7 +1872,7 @@ section{padding:68px 0}
       data-description="ロボット、ドローン、IoT、AI制御を案内します。"
       data-features="ロボット|ドローン|IoT・AI制御"
       data-href="./ai-robotics-employee-demo.html"
-      aria-label="AIロボティクス社員の詳細を表示">i</button>
+      aria-label="AIロボティクス社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:73.7%;top:60.6%"
       data-floor="3F"
@@ -1800,7 +1880,7 @@ section{padding:68px 0}
       data-description="選手データの可視化、課題分析、育成計画を支援します。"
       data-features="データ分析|個別育成|フィードバック"
       data-href="./ai-sports-academy-employee-demo.html"
-      aria-label="AIスポーツアカデミー社員の詳細を表示">i</button>
+      aria-label="AIスポーツアカデミー社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:81.4%;top:60.6%"
       data-floor="3F"
@@ -1808,7 +1888,7 @@ section{padding:68px 0}
       data-description="介護記録、事務書類、シフト、家族連絡、レクリエーション、施設運営を支援します。"
       data-features="介護記録|家族連絡・シフト|施設運営"
       data-href="./ai-care-facility-employee-demo.html"
-      aria-label="AI介護施設社員の詳細を表示">i</button>
+      aria-label="AI介護施設社員の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:21.5%;top:72.7%"
       data-floor="2F"
@@ -1816,7 +1896,7 @@ section{padding:68px 0}
       data-description="AI基礎から生成AI、開発、倫理・安全まで段階的に学ぶForgeationの中心教室です。"
       data-features="AI基礎|生成AI・開発|倫理・安全"
       data-href="./ai-academy-web.html"
-      aria-label="AIアカデミー課の詳細を表示">i</button>
+      aria-label="AIアカデミー課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:32.7%;top:72.7%"
       data-floor="2F"
@@ -1824,7 +1904,7 @@ section{padding:68px 0}
       data-description="AI、ロボット、ドローン、データ分析、社会実装を学びます。"
       data-features="AI基礎|ロボット開発|社会実装"
       data-href="./robotics-academy-web.html"
-      aria-label="AI・ロボティクス課の詳細を表示">i</button>
+      aria-label="AI・ロボティクス課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:43.9%;top:72.7%"
       data-floor="2F"
@@ -1832,7 +1912,7 @@ section{padding:68px 0}
       data-description="データとAIを使い、選手とコーチの成長を支える教室です。"
       data-features="トレーニング|分析|コーチング"
       data-href="./sports-academy-web.html"
-      aria-label="スポーツアカデミー課の詳細を表示">i</button>
+      aria-label="スポーツアカデミー課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:55.1%;top:72.7%"
       data-floor="2F"
@@ -1840,7 +1920,7 @@ section{padding:68px 0}
       data-description="看護基礎、医療DX、在宅・地域医療、看護研究を学びます。"
       data-features="看護基礎|医療DX|地域・在宅"
       data-href="./nursing-academy-web.html"
-      aria-label="看護・医療アカデミー課の詳細を表示">i</button>
+      aria-label="看護・医療アカデミー課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:66.3%;top:72.7%"
       data-floor="2F"
@@ -1848,7 +1928,7 @@ section{padding:68px 0}
       data-description="建築、設計、CAD、安全管理、未来の空間づくりを学びます。"
       data-features="設計・CAD|安全管理|建設DX"
       data-href="./construction-academy-web.html"
-      aria-label="建設アカデミー課の詳細を表示">i</button>
+      aria-label="建設アカデミー課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:73.8%;top:72.7%"
       data-floor="2F"
@@ -1856,7 +1936,7 @@ section{padding:68px 0}
       data-description="教育、教材、学校DX、学習支援、SSTを学ぶ教室です。"
       data-features="教材開発|学校DX|学習支援"
       data-href="./education-academy-web.html"
-      aria-label="教育アカデミー課の詳細を表示">i</button>
+      aria-label="教育アカデミー課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
  style="left:88.7%;top:72.7%"
  data-floor="2F"
@@ -1864,7 +1944,7 @@ section{padding:68px 0}
  data-description="介護記録、見守り、レクリエーション、施設運営、家族支援を学ぶ教室です。"
  data-features="介護記録|見守り・レクリエーション|施設運営"
  data-href="./care-academy-web.html"
- aria-label="介護・福祉アカデミー課の詳細を表示">i</button>
+ aria-label="介護・福祉アカデミー課の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:30.2%;top:86.0%"
       data-floor="1F"
@@ -1872,7 +1952,7 @@ section{padding:68px 0}
       data-description="Forgeation Schoolの顔として、皆さまをお迎えします。"
       data-features="受付対応|教室案内|AI社員案内"
      
-      aria-label="AI受付社員ジッピーの詳細を表示">i</button>
+      aria-label="AI受付社員ジッピーの詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:42.8%;top:86.0%"
       data-floor="1F"
@@ -1880,7 +1960,7 @@ section{padding:68px 0}
       data-description="来訪目的を選び、校内マップや各教室へ進むための総合受付です。"
       data-features="本日の校内案内|来訪目的選択|各教室へ案内"
       data-href="./forgeation-school-front_来訪者受付_全体対応版.html"
-      aria-label="来訪者受付の詳細を表示">i</button>
+      aria-label="来訪者受付の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:55.4%;top:86.0%"
       data-floor="1F"
@@ -1888,7 +1968,7 @@ section{padding:68px 0}
       data-description="校舎全体のフロアと教室を確認できます。"
       data-features="フロア案内|教室検索|移動導線"
       data-href="#forgeation-school"
-      aria-label="校内マップの詳細を表示">i</button>
+      aria-label="校内マップの詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:67.2%;top:86.0%"
       data-floor="1F"
@@ -1896,7 +1976,7 @@ section{padding:68px 0}
       data-description="新しいAI社員、アプリ、教室、イベントなどの最新情報を発信します。"
       data-features="新着情報|開発状況|イベント案内"
       data-href="#home"
-      aria-label="未来掲示板の詳細を表示">i</button>
+      aria-label="未来掲示板の詳細を表示">!</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:76.6%;top:86.0%"
       data-floor="1F"
@@ -1904,7 +1984,7 @@ section{padding:68px 0}
       data-description="Forgeationの理念、各アカデミー、AI社員について知ることができます。"
       data-features="企業理念|アカデミー紹介|長期ビジョン"
       data-href="#about"
-      aria-label="学校案内コーナーの詳細を表示">i</button>
+      aria-label="学校案内コーナーの詳細を表示">!</button>
 
 <span class="school-map-clean-hint" aria-hidden="true">
   <span class="hint-symbol">i</span>
@@ -1932,7 +2012,7 @@ section{padding:68px 0}
 
 
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.23.3です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 Forgeation School Ver3.25.0｜校舎マップ・各アカデミー・AI社員・Fシリーズを公開中。未来の学びを体験できる校舎として、順次アップデートしています。✨</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
@@ -2252,7 +2332,8 @@ print(lesson + "を始めよう！")</code>
       <div class="door-copy">
         <div class="section-kicker" style="color:#9fe9ff">NOGU'S COLLECTION</div>
         <h2>ノグのコレクション</h2>
-        <p>ノグの日常、挑戦、学び、そしてAIと楽しむ作品を集める特別な扉です。主夫、お弁当、メガネ、サイクリングなど、Forgeationをつくる等身大の物語を、これから少しずつ公開します。</p>
+        <p>ノグの日常、挑戦、学び、そしてAIと楽しむ作品を集める特別な扉です
+。主夫、お弁当、メガネ、サイクリングなど、Forgeationをつくる等身大の物語を、これから少しずつ公開します。</p>
         <div class="collection-grid">
           <div class="collection-item">🍱 お弁当シリーズ</div>
           <div class="collection-item">🏠 主夫モード</div>
@@ -2297,8 +2378,7 @@ print(lesson + "を始めよう！")</code>
 
 <section class="phoenix" id="phoenix"><div class="container"><div class="phoenix-box"><div class="section-head"><div class="section-kicker">Project Phoenix</div><h2>何度でも挑戦し、何度でも未来へ羽ばたく。</h2><p>未来は待つものではない。創るものだ。</p></div><p><strong>PHOENIX</strong>は、Forgeationの挑戦する精神。失敗しても、学び、立ち上がり、次の未来へ進む。</p><p><strong>挑戦は、未来を超える。</strong></p></div></div></section>
 
-<section id="contact"><div class="container"><div class="section-head"><div class="section-kicker">Contact</div><h2>お問い合わせ</h2><p>共に挑
-戦したい方、連携・取材・支援をご検討の方からのご連絡をお待ちしています。</p></div><div class="contact-panel"><div class="contact-box chat-box"><h3>🤖 ジッピー相談窓口</h3><p>まずは相談内容を選んでください。現在は案内とメール作成を行う簡易版です。</p><div class="chat-options"><button data-topic="創業メンバー・仲間として参加したい">🤝 創業メンバー・仲間として参加したい</button><button data-topic="アカデミーについて相談したい">🏫 アカデミーについて相談したい</button><button data-topic="連携・パートナーシップを提案したい">🌍 連携・パートナーシップを提案したい</button><button data-topic="メディア・取材について問い合わせたい">📰 メディア・取材について問い合わせたい</button></div><div class="chat-reply" id="chatReply">こんにちは。ジッピーです。ご相談内容を選んでください。</div></div><div class="contact-box"><h3>Forgeationへ連絡する</h3><div class="contact-list"><div>🤝 共に挑戦する仲間・創業メンバー</div><div>🌍 国内外の連携・パートナーシップ</div><div>💡 企画・技術・教育に関するご提案</div><div>📰 メディア・取材</div></div><a class="button button-primary" id="mailButton" href="mailto:eru12121221@gmail.com?subject=Forgeationへのお問い合わせ">メールで問い合わせる</a></div></div></div></section>
+<section id="contact"><div class="container"><div class="section-head"><div class="section-kicker">Contact</div><h2>お問い合わせ</h2><p>共に挑戦したい方、連携・取材・支援をご検討の方からのご連絡をお待ちしています。</p></div><div class="contact-panel"><div class="contact-box chat-box"><h3>🤖 ジッピー相談窓口</h3><p>まずは相談内容を選んでください。現在は案内とメール作成を行う簡易版です。</p><div class="chat-options"><button data-topic="創業メンバー・仲間として参加したい">🤝 創業メンバー・仲間として参加したい</button><button data-topic="アカデミーについて相談したい">🏫 アカデミーについて相談したい</button><button data-topic="連携・パートナーシップを提案したい">🌍 連携・パートナーシップを提案したい</button><button data-topic="メディア・取材について問い合わせたい">📰 メディア・取材について問い合わせたい</button></div><div class="chat-reply" id="chatReply">こんにちは。ジッピーです。ご相談内容を選んでください。</div></div><div class="contact-box"><h3>Forgeationへ連絡する</h3><div class="contact-list"><div>🤝 共に挑戦する仲間・創業メンバー</div><div>🌍 国内外の連携・パートナーシップ</div><div>💡 企画・技術・教育に関するご提案</div><div>📰 メディア・取材</div></div><a class="button button-primary" id="mailButton" href="mailto:eru12121221@gmail.com?subject=Forgeationへのお問い合わせ">メールで問い合わせる</a></div></div></div></section>
 
 <section class="f-series-section" id="f-series">
   <div class="container">
@@ -2533,21 +2613,6 @@ print(lesson + "を始めよう！")</code>
 
 </main>
 
-<section class="f-series-section" id="fseries">
-<div class="container">
-<div class="section-head">
-<div class="section-kicker">COMING SOON</div>
-<h2>Fシリーズ（アプリ限定）</h2>
-<p>Forgeationアプリで遊びながら学ぶ、新しい学習体験。</p>
-</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
-<div class="card card-pad"><h3>🚁 Fドローン</h3><p>AIアカデミー課の看板コンテンツ。ゲーム感覚でドローン・AI・IoT・センサーを学習。</p></div>
-<div class="card card-pad"><h3>🥽 Fゴーグル</h3><p>建設アカデミー課。VR風の現場体験、安全確認や建設シミュレーション。</p></div>
-<div class="card card-pad"><h3>🏆 Fチャレンジ</h3><p>サッカーアカデミー課。PK・ドリブル・戦術クイズなどをアプリ限定で搭載予定。</p></div>
-<div class="card card-pad"><h3>🏅 F Motion</h3><p>スポーツアカデミー課。反応・視野・判断・正確性をゲームで鍛える。</p><p><a class="f-series-play-button" href="./F_Motion_beta_Ver1.1_API接続準備版.html">🏅 F Motionを体験する</a></p></div>
-</div>
-</div>
-</section>
 <footer><div class="footer-inner"><strong>Forgeation — Design the Future. Forge the Future.</strong><span>© 2026 Forgeation. All Rights Reserved.</span></div></footer>
 
 <div class="coming-soon-modal" id="collectionComingSoon" aria-hidden="true">
@@ -2909,168 +2974,135 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <script>
-/* ===== Ver3.22 校舎マップ確実操作（インライン＋グローバル関数） ===== */
+/* Forgeation School Ver3.25.0 校舎マップ安定版 */
 (() => {
-  let lastSchoolRoomTrigger = null;
-
-  function getRoomElements() {
-    return {
-      modal: document.getElementById("schoolRoomModal"),
-      floor: document.getElementById("schoolRoomFloor"),
-      title: document.getElementById("schoolRoomTitle"),
-      description: document.getElementById("schoolRoomDescription"),
-      features: document.getElementById("schoolRoomFeatures"),
-      enter: document.getElementById("schoolRoomEnter"),
-      close: document.getElementById("schoolRoomClose"),
-      cancel: document.getElementById("schoolRoomCancel")
-    };
-  }
+  let lastTrigger = null;
+  const getEls = () => ({
+    modal: document.getElementById("schoolRoomModal"),
+    floor: document.getElementById("schoolRoomFloor"),
+    title: document.getElementById("schoolRoomTitle"),
+    description: document.getElementById("schoolRoomDescription"),
+    features: document.getElementById("schoolRoomFeatures"),
+    enter: document.getElementById("schoolRoomEnter"),
+    close: document.getElementById("schoolRoomClose"),
+    cancel: document.getElementById("schoolRoomCancel")
+  });
 
   window.openForgeationRoom = function(trigger) {
-    const el = getRoomElements();
-    if (!trigger || !el.modal || !el.floor || !el.title ||
-        !el.description || !el.features || !el.enter) {
-      console.error("校舎マップ詳細画面を開けませんでした。");
-      return false;
-    }
+    const e = getEls();
+    if (!trigger || !e.modal || !e.title || !e.description || !e.features || !e.enter) return false;
 
-    lastSchoolRoomTrigger = trigger;
-    el.floor.textContent = `${trigger.dataset.floor || ""} / FORGEATION SCHOOL`;
-    el.title.textContent = trigger.dataset.title || "Forgeation School";
-    el.description.textContent = trigger.dataset.description || "";
-    el.features.innerHTML = (trigger.dataset.features || "")
-      .split("|")
-      .filter(Boolean)
-      .map(item => `<li>✓ ${item}</li>`)
-      .join("");
+    lastTrigger = trigger;
+    if (e.floor) e.floor.textContent = `${trigger.dataset.floor || ""} / FORGEATION SCHOOL`;
+    e.title.textContent = trigger.dataset.title || "Forgeation School";
+    e.description.textContent = trigger.dataset.description || "";
+
+    e.features.textContent = "";
+    String(trigger.dataset.features || "")
+      .split("|").map(v => v.trim()).filter(Boolean)
+      .forEach(v => {
+        const li = document.createElement("li");
+        li.textContent = "✓ " + v;
+        e.features.appendChild(li);
+      });
 
     const comingSoon = trigger.dataset.status === "coming-soon";
-    const href = comingSoon ? "#" : (trigger.dataset.href || "#forgeation-school");
+    const href = comingSoon ? "" : (trigger.dataset.href || "#forgeation-school");
 
-    el.enter.href = href;
-    el.enter.dataset.targetHref = href;
-    el.enter.textContent = comingSoon
-      ? "🚧 近日公開予定・乞うご期待！"
-      : `🚪 ${trigger.dataset.title || "この部屋"}へ入る`;
-    el.enter.style.pointerEvents = comingSoon ? "none" : "auto";
-    el.enter.style.opacity = comingSoon ? ".72" : "1";
+    e.enter.dataset.targetHref = href;
+    e.enter.href = href || "#";
+    e.enter.textContent = comingSoon ? "🚧 近日公開予定・乞うご期待！" : `🚪 ${trigger.dataset.title || "この部屋"}へ入る`;
+    e.enter.style.pointerEvents = comingSoon ? "none" : "auto";
+    e.enter.style.opacity = comingSoon ? ".72" : "1";
 
-    el.modal.classList.add("open");
-    el.modal.setAttribute("aria-hidden", "false");
+    e.modal.classList.add("open");
+    e.modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    setTimeout(() => el.close?.focus(), 0);
+
+    // Ver3.25.0: 監視ループを使わず、開いた瞬間に一度だけ状態を同期
+    const roomTitle = e.title.textContent.trim();
+    const visionBtn = document.getElementById("schoolRoomVision");
+    const staffInside = document.getElementById("staffRoomInside");
+    const staffNotice = document.getElementById("schoolRoomStaffNotice");
+    const demoNote = document.getElementById("schoolRoomDemoNote");
+
+    if (visionBtn) {
+      visionBtn.style.display = (roomTitle === "デモルーム") ? "inline-flex" : "none";
+    }
+    if (staffInside) staffInside.classList.remove("show");
+    if (staffNotice) staffNotice.classList.remove("show");
+    if (demoNote) demoNote.classList.toggle("show", roomTitle === "デモルーム");
+
+    if (roomTitle === "職員室") {
+      e.enter.href = "#";
+      e.enter.dataset.targetHref = "#";
+      e.enter.textContent = "🚪 職員室へ入る";
+      e.enter.style.pointerEvents = "auto";
+      e.enter.style.opacity = "1";
+    } else if (roomTitle === "デモルーム") {
+      e.enter.href = "#future-lessons";
+      e.enter.dataset.targetHref = "#future-lessons";
+      e.enter.textContent = "🚪 デモルームに入る";
+      e.enter.style.pointerEvents = "auto";
+      e.enter.style.opacity = "1";
+    }
+
     return false;
   };
 
-  window.closeForgeationRoom = function(restoreFocus = true) {
-    const el = getRoomElements();
-    if (!el.modal) return false;
-
-    el.modal.classList.remove("open");
-    el.modal.setAttribute("aria-hidden", "true");
+  window.closeForgeationRoom = function() {
+    const e = getEls();
+    if (!e.modal) return false;
+    e.modal.classList.remove("open");
+    e.modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-
-    if (restoreFocus && lastSchoolRoomTrigger) {
-      try { lastSchoolRoomTrigger.focus({preventScroll:true}); } catch (_) {}
+    if (lastTrigger) {
+      try { lastTrigger.focus({preventScroll:true}); } catch (_) {}
     }
     return false;
   };
 
-  function bindRoomControls() {
-    const el = getRoomElements();
-    if (!el.modal) return;
+  function enterRoom(ev) {
+    const e = getEls();
+    const href = e.enter?.dataset.targetHref || "";
+    if (!href) { ev.preventDefault(); return; }
 
-    el.close?.addEventListener("click", () => window.closeForgeationRoom());
-    el.cancel?.addEventListener("click", () => window.closeForgeationRoom());
+    if (href.startsWith("#")) {
+      ev.preventDefault();
+      const target = document.querySelector(href);
+      window.closeForgeationRoom();
+      if (target) {
+        target.scrollIntoView({behavior:"auto", block:"start"});
+        try { history.replaceState(null, "", href); } catch (_) {}
+      }
+    } else {
+      window.closeForgeationRoom();
+    }
+  }
 
-    el.modal.addEventListener("click", event => {
-      if (event.target === el.modal) window.closeForgeationRoom();
+  function bind() {
+    const e = getEls();
+    if (!e.modal) return;
+    e.close?.addEventListener("click", window.closeForgeationRoom);
+    e.cancel?.addEventListener("click", window.closeForgeationRoom);
+    e.enter?.addEventListener("click", enterRoom);
+    e.modal.addEventListener("click", ev => {
+      if (ev.target === e.modal) window.closeForgeationRoom();
     });
-
-    el.enter?.addEventListener("click", event => {
-      const href = el.enter.dataset.targetHref || el.enter.getAttribute("href") || "";
-      if (!href || href === "#") {
-        event.preventDefault();
-        return;
-      }
-
-      if (href.startsWith("#")) {
-        event.preventDefault();
-        window.closeForgeationRoom(false);
-        const target = document.querySelector(href);
-        if (target) {
-          history.replaceState(null, "", href);
-          target.scrollIntoView({behavior:"smooth", block:"start"});
-        }
-      } else {
-        window.closeForgeationRoom(false);
-      }
+    document.addEventListener("keydown", ev => {
+      if (ev.key === "Escape" && e.modal.classList.contains("open")) window.closeForgeationRoom();
     });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindRoomControls, {once:true});
+    document.addEventListener("DOMContentLoaded", bind, {once:true});
   } else {
-    bindRoomControls();
+    bind();
   }
-
-  document.addEventListener("keydown", event => {
-    const modal = document.getElementById("schoolRoomModal");
-    if (event.key === "Escape" && modal?.classList.contains("open")) {
-      window.closeForgeationRoom();
-    }
-  });
 })();
 </script>
 
-<script>
-/* ===== Ver3.22 元の閲覧位置へ復帰 ===== */
-(() => {
-  const STORAGE_KEY = "forgeation-home-scroll-y";
-  const PATH_KEY = "forgeation-home-path";
-  const currentPath = location.pathname;
 
-  function saveScrollPosition() {
-    try{window.sessionStorage.setItem(STORAGE_KEY, String(Math.max(0, window.scrollY)))}catch(_){}
-    try{window.sessionStorage.setItem(PATH_KEY, currentPath)}catch(_){}
-  }
-
-  document.addEventListener("click", (event) => {
-    const link = event.target.closest("a[href]");
-    if (!link) return;
-
-    const rawHref = link.getAttribute("href");
-    if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("javascript:")) return;
-
-    try {
-      const destination = new URL(link.href, location.href);
-      if (destination.origin === location.origin &&
-          destination.pathname !== location.pathname) {
-        saveScrollPosition();
-      }
-    } catch (_) {}
-  }, true);
-
-  window.addEventListener("pagehide", saveScrollPosition);
-
-  function restoreScrollPosition() {
-    let savedPath=null; try{savedPath=window.sessionStorage.getItem(PATH_KEY)}catch(_){}
-    let savedY=0; try{savedY=Number(window.sessionStorage.getItem(STORAGE_KEY))}catch(_){}
-
-    if (savedPath !== currentPath || !Number.isFinite(savedY) || savedY <= 0) return;
-
-    const restore = () => window.scrollTo({ top: savedY, left: 0, behavior: "auto" });
-    requestAnimationFrame(() => {
-      restore();
-      setTimeout(restore, 80);
-      setTimeout(restore, 300);
-    });
-  }
-
-  window.addEventListener("pageshow", restoreScrollPosition);
-  window.addEventListener("load", restoreScrollPosition);
-})();
-</script>
 
 
 <script>
@@ -3187,9 +3219,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 校舎マップの固定導線
   document.querySelectorAll('.school-map-hotspot').forEach(b => {
-    if (b.dataset.title === '職員室') { b.dataset.href = '#'; b.dataset.status = 'staff-coming-soon'; }
+    if (b.dataset.title === '職員室') { b.dataset.href = '#'; b.dataset.status = ''; }
     if (b.dataset.title === 'AI商品体験') b.dataset.href = '#f-series';
-    if (b.dataset.title === 'デモルーム') b.dataset.href = '#vision';
+    if (b.dataset.title === 'デモルーム') b.dataset.href = '#future-lessons';
   });
 
   // デモルームだけ VISION ボタンを追加
@@ -3222,17 +3254,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// 既存の校舎モーダルが開いた直後にVISIONボタンの表示を同期
-const _openForgeationRoomObserver = new MutationObserver(() => {
-  const modal = document.getElementById('schoolRoomModal');
-  const v = document.getElementById('schoolRoomVision');
-  const title = document.getElementById('schoolRoomTitle')?.textContent.trim();
-  if (v) v.style.display = (modal?.classList.contains('open') && title === 'デモルーム') ? 'inline-flex' : 'none';
-});
-window.addEventListener('load', () => {
-  const modal=document.getElementById('schoolRoomModal');
-  if(modal) _openForgeationRoomObserver.observe(modal,{attributes:true,subtree:true,childList:true});
-});
 
 
   // Ver3.23.4: 職員室は「紹介 → 職員室へ入る → 乞うご期待」の2段階表示
@@ -3261,21 +3282,6 @@ window.addEventListener('load', () => {
     }, true);
   }
 
-  // 職員室モーダルを開くたび、最初の「職員室へ入る」に戻す
-  if (roomModal) {
-    new MutationObserver(() => {
-      if (!roomModal.classList.contains('open')) return;
-      const title = document.getElementById('schoolRoomTitle')?.textContent.trim();
-      if (title === '職員室' && roomEnter) {
-        staffNotice?.classList.remove('show');
-        roomEnter.href = '#';
-        roomEnter.dataset.targetHref = '#';
-        roomEnter.textContent = '🚪 職員室へ入る';
-        roomEnter.style.pointerEvents = 'auto';
-        roomEnter.style.opacity = '1';
-      }
-    }).observe(roomModal,{attributes:true,attributeFilter:['class']});
-  }
 </script>
 
 
@@ -3313,17 +3319,6 @@ document.addEventListener('DOMContentLoaded', function(){
     enter.style.opacity='.78';
   }, true);
 
-  new MutationObserver(function(){
-    if(!modal.classList.contains('open')) return;
-    const title=document.getElementById('schoolRoomTitle')?.textContent.trim();
-    inside.classList.remove('show');
-    if(title==='職員室'){
-      enter.href='#';
-      enter.textContent='🚪 職員室へ入る';
-      enter.style.pointerEvents='auto';
-      enter.style.opacity='1';
-    }
-  }).observe(modal,{attributes:true,attributeFilter:['class']});
 });
 </script>
 
@@ -3371,37 +3366,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 <!-- Ver3.24.4 final delta: map marker fine alignment / duplicate visual suppression / F-Series links -->
-<style id="forgeation-ver3244-final">
-/* 校舎マップ：全❗を部屋中央へごく僅か左補正。PC/スマホ共通 */
-.school-map-hotspot{
-  transform:translate(calc(-50% - 4px),-50%)!important;
-  font-size:0!important;
-  overflow:hidden!important;
-}
-.school-map-hotspot:hover,.school-map-hotspot:focus-visible{
-  transform:translate(calc(-50% - 4px),-50%) scale(1.12)!important;
-}
-.school-map-hotspot::before{
-  content:"❗"!important;position:static!important;background:transparent!important;
-  font-size:15px!important;line-height:1!important;color:#fff!important;z-index:auto!important;
-}
-/* DOM由来の余分な i / 疑似要素を完全に出さない */
-.school-map-hotspot::after{content:none!important;display:none!important;}
-.school-map-hotspot>span,.school-map-hotspot>small{display:none!important;}
-@media(max-width:760px){
-  .school-map-hotspot{transform:translate(calc(-50% - 3px),-50%)!important;}
-  .school-map-hotspot:hover,.school-map-hotspot:focus-visible{transform:translate(calc(-50% - 3px),-50%) scale(1.10)!important;}
-  .school-map-hotspot::before{font-size:13px!important;}
-}
-/* VISION は初期表示。summary の－で閉じられる */
-#visionDetails[open]>summary:after{content:"－"!important;}
-#visionDetails:not([open])>summary:after{content:"＋"!important;}
-/* アカデミー紹介はPC 2列、スマホ1列へ統一。建設も同じ規格 */
-.future-inline-grid,.future-lessons-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
-#construction-academy-detail .academy-detail-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
-#construction-academy-detail .academy-detail-gallery figure{min-width:0!important;}
-@media(max-width:760px){.future-inline-grid,.future-lessons-grid,#construction-academy-detail .academy-detail-gallery{grid-template-columns:1fr!important;}}
-</style>
+
 <script id="forgeation-ver3244-final-script">
 document.addEventListener('DOMContentLoaded',()=>{
   const v=document.getElementById('visionDetails'); if(v) v.open=true;
@@ -3421,6 +3386,197 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(!a){a=document.createElement('a');a.className='f-series-play-button';card.querySelector('.f-series-detail')?.appendChild(a);}
     if(a){a.href=href;a.textContent='＋ '+title+'を体験する';a.setAttribute('aria-label',title+'を体験する');}
   });
+});
+</script>
+
+
+<!-- ===== Forgeation Ver3.24.5 final delta: AI ethics / school map / staff room / demo room ===== -->
+<style id="forgeation-ver3245-final">
+/* AI倫理・安全：看護アカデミーへの誤導線を廃止 */
+.ai-ethics-panel{
+  margin-top:14px;padding:16px;border:1px solid rgba(120,220,255,.35);
+  border-radius:16px;background:rgba(5,27,61,.82);color:#eef8ff
+}
+.ai-ethics-panel h4{margin:0 0 10px;font-size:1rem;color:#9fe9ff}
+.ai-ethics-panel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ai-ethics-panel-grid div{
+  padding:11px 12px;border:1px solid rgba(255,255,255,.13);
+  border-radius:12px;background:rgba(255,255,255,.06);font-size:.88rem;line-height:1.55
+}
+@media(max-width:640px){.ai-ethics-panel-grid{grid-template-columns:1fr}}
+
+/* 校舎マップ：赤い絵文字❗をやめ、白い「！」に統一 */
+.school-map-help{font-size:0!important}
+.school-map-help::after{
+  content:"💡 校舎マップ上の「！」をクリックすると、各部屋の詳細が表示されます。";
+  font-size:initial
+}
+.school-map-hotspot{
+  overflow:visible!important;
+  color:#fff!important;
+  background:#071a3a!important;
+  border:2px solid rgba(255,255,255,.96)!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.72)!important
+}
+.school-map-hotspot::before{
+  content:"!"!important;
+  display:grid!important;place-items:center!important;
+  width:100%!important;height:100%!important;
+  position:absolute!important;inset:0!important;
+  color:#fff!important;background:#071a3a!important;
+  border-radius:50%!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:18px!important;font-weight:1000!important;line-height:1!important;
+  z-index:2!important
+}
+/* 元画像に残っている小さい i を右側からマスク */
+.school-map-hotspot::after{
+  content:""!important;display:block!important;
+  position:absolute!important;
+  left:23px!important;top:50%!important;
+  width:16px!important;height:18px!important;
+  transform:translateY(-50%)!important;
+  border-radius:50%!important;
+  background:#071a3a!important;
+  box-shadow:0 0 0 2px rgba(7,26,58,.92)!important;
+  z-index:1!important;pointer-events:none!important
+}
+.school-map-hotspot:hover::before,.school-map-hotspot:focus-visible::before{background:#087cad!important}
+@media(max-width:760px){
+  .school-map-hotspot::before{font-size:16px!important}
+  .school-map-hotspot::after{left:20px!important;width:14px!important;height:16px!important}
+}
+
+/* 職員室：仲間たちを室内に表示 */
+.staff-room-inside{display:none;margin-top:18px}
+.staff-room-inside.show{display:block}
+.staff-room-title{margin:0 0 8px;font-size:1.1rem}
+.staff-room-lead{margin:0 0 14px;color:#dcecff;line-height:1.65}
+.staff-partners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.staff-partner{
+  padding:12px;border:1px solid rgba(255,255,255,.17);border-radius:16px;
+  background:rgba(255,255,255,.07);text-align:center
+}
+.staff-partner img{
+  width:72px;height:72px;border-radius:18px;display:block;margin:0 auto 9px;
+  box-shadow:0 8px 22px rgba(0,0,0,.28)
+}
+.staff-partner strong{display:block;font-size:.98rem;margin-bottom:4px}
+.staff-partner small{display:block;color:#9fe9ff;font-weight:800;line-height:1.4}
+.staff-partner p{margin:7px 0 0;font-size:.78rem;line-height:1.5;color:#dcecff}
+@media(max-width:560px){.staff-partners{grid-template-columns:1fr}.staff-partner{text-align:left}.staff-partner img{float:left;margin:0 12px 6px 0;width:58px;height:58px}}
+
+/* デモルーム：専用の未来授業へ入ることを明確化 */
+.school-room-demo-note{
+  display:none;margin-top:14px;padding:12px 14px;border-radius:13px;
+  color:#e9fbff;background:rgba(80,216,255,.10);border:1px solid rgba(80,216,255,.25)
+}
+.school-room-demo-note.show{display:block}
+</style>
+
+<script id="forgeation-ver3245-final-script">
+document.addEventListener('DOMContentLoaded',()=>{
+  /* 1) AI倫理・安全：看護・医療アカデミー課への誤導線を撤去 */
+  const ethicsCard=[...document.querySelectorAll('.future-card')].find(c=>c.querySelector('h3')?.textContent.trim()==='AI倫理・安全');
+  if(ethicsCard){
+    const oldEmbedded=ethicsCard.querySelector('.embedded-academy');
+    if(oldEmbedded) oldEmbedded.remove();
+    let ethics=document.getElementById('ai-ethics-detail');
+    if(!ethics){
+      ethics=document.createElement('div');
+      ethics.id='ai-ethics-detail';
+      ethics.className='ai-ethics-panel';
+      ethics.innerHTML=`
+        <h4>🛡️ AI倫理・安全</h4>
+        <div class="ai-ethics-panel-grid">
+          <div><strong>🔐 個人情報</strong><br>入力してよい情報・守るべき情報を学ぶ。</div>
+          <div><strong>©️ 著作権</strong><br>画像・文章・生成物の安全な扱いを学ぶ。</div>
+          <div><strong>🔎 誤情報</strong><br>AIの回答を鵜呑みにせず確認する習慣を身につける。</div>
+          <div><strong>🧭 安全利用</strong><br>責任あるAI活用と人の最終判断を学ぶ。</div>
+        </div>`;
+      ethicsCard.appendChild(ethics);
+    }
+    const link=ethicsCard.querySelector('a');
+    if(link){
+      link.textContent='AI倫理・安全を見る';
+      link.href='#ai-ethics-detail';
+    }
+  }
+
+  /* 2) 校舎マップ：職員室・デモルームの最終導線 */
+  document.querySelectorAll('.school-map-hotspot').forEach(b=>{
+    if(b.dataset.title==='職員室'){
+      b.dataset.href='#';
+      b.dataset.status='';
+    }
+    if(b.dataset.title==='デモルーム'){
+      b.dataset.href='#future-lessons';
+      b.dataset.description='AI社員や各アカデミーのデモ、Fドローン、Python、IoTなど、Forgeationの未来授業を体験できるルームです。';
+      b.dataset.features='AI社員デモ|Fシリーズ・アプリ体験|Fドローン・Python・IoT';
+    }
+  });
+
+  /* 3) 職員室の中に「苦楽を共にする仲間たち」を埋め込み */
+  const modal=document.getElementById('schoolRoomModal');
+  const body=modal?.querySelector('.school-room-body');
+  const enter=document.getElementById('schoolRoomEnter');
+  if(body && enter){
+    const svg=(letter,c1,c2)=>'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><rect width="180" height="180" rx="42" fill="url(#g)"/><circle cx="90" cy="78" r="43" fill="rgba(255,255,255,.13)" stroke="rgba(255,255,255,.55)" stroke-width="3"/><text x="90" y="97" text-anchor="middle" font-family="Arial" font-weight="900" font-size="54" fill="white">${letter}</text><text x="90" y="150" text-anchor="middle" font-family="Arial" font-weight="700" font-size="16" fill="white">FORGEATION</text></svg>`
+    );
+    let inside=document.getElementById('staffRoomInside');
+    if(!inside){
+      inside=document.createElement('section');
+      inside.id='staffRoomInside';
+      inside.className='staff-room-inside';
+      inside.innerHTML=`
+        <h4 class="staff-room-title">🏫 Forgeation 職員室 ― 苦楽を共にする仲間たち</h4>
+        <p class="staff-room-lead">Forgeationを支える仲間・先生・AIパートナーが集まり、未来の授業と挑戦をつくる場所です。</p>
+        <div class="staff-partners">
+          <article class="staff-partner"><img src="${svg('Z','#078bd9','#7428d9')}" alt="ジッピー"><strong>ジッピー</strong><small>AIサポートパートナー</small><p>AIの力で、学びと成長を支える頼れるパートナー。</p></article>
+          <article class="staff-partner"><img src="${svg('N','#0b58c7','#14a8dd')}" alt="AIノグ"><strong>AIノグ</strong><small>創設者 / 未来を切り拓くリーダー</small><p>未来を見据え、人と共に歩み、未来を切り拓く。</p></article>
+          <article class="staff-partner"><img src="${svg('F','#c62918','#ff8a00')}" alt="フォージ"><strong>フォージ</strong><small>未来を切り拓くパートナー</small><p>挑戦する心を燃やし、未来への道を切り拓く存在。</p></article>
+        </div>`;
+      body.appendChild(inside);
+    }
+
+    let demoNote=document.getElementById('schoolRoomDemoNote');
+    if(!demoNote){
+      demoNote=document.createElement('div');
+      demoNote.id='schoolRoomDemoNote';
+      demoNote.className='school-room-demo-note';
+      demoNote.textContent='🚀 デモルームに入ると「未来授業を体験する」へ移動します。';
+      body.appendChild(demoNote);
+    }
+
+    /* 既存のクリック処理より先に職員室だけ室内表示へ */
+    enter.addEventListener('click',e=>{
+      const title=document.getElementById('schoolRoomTitle')?.textContent.trim();
+      if(title!=='職員室') return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      inside.classList.add('show');
+      enter.textContent='🏫 職員室に入りました';
+      enter.style.pointerEvents='none';
+      enter.style.opacity='.78';
+    },true);
+
+  }
+
+  /* 4) VISIONボタンは副導線として残し、デモルーム入室先は未来授業にする */
+  const visionBtn=document.getElementById('schoolRoomVision');
+  if(visionBtn){
+    visionBtn.href='#vision';
+    visionBtn.textContent='✨ VISIONを見る';
+  }
+});
+</script>
+
+
+<script id="forgeation-vision-default-open-ver3249">
+document.addEventListener("DOMContentLoaded",()=>{
+  const v=document.getElementById("visionDetails");
+  if(v) v.open=true;
 });
 </script>
 
