@@ -3424,5 +3424,209 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
 
+
+<!-- ===== Forgeation Ver3.24.5 final delta: AI ethics / school map / staff room / demo room ===== -->
+<style id="forgeation-ver3245-final">
+/* AI倫理・安全：看護アカデミーへの誤導線を廃止 */
+.ai-ethics-panel{
+  margin-top:14px;padding:16px;border:1px solid rgba(120,220,255,.35);
+  border-radius:16px;background:rgba(5,27,61,.82);color:#eef8ff
+}
+.ai-ethics-panel h4{margin:0 0 10px;font-size:1rem;color:#9fe9ff}
+.ai-ethics-panel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ai-ethics-panel-grid div{
+  padding:11px 12px;border:1px solid rgba(255,255,255,.13);
+  border-radius:12px;background:rgba(255,255,255,.06);font-size:.88rem;line-height:1.55
+}
+@media(max-width:640px){.ai-ethics-panel-grid{grid-template-columns:1fr}}
+
+/* 校舎マップ：赤い絵文字❗をやめ、白い「！」に統一 */
+.school-map-help{font-size:0!important}
+.school-map-help::after{
+  content:"💡 校舎マップ上の「！」をクリックすると、各部屋の詳細が表示されます。";
+  font-size:initial
+}
+.school-map-hotspot{
+  overflow:visible!important;
+  color:#fff!important;
+  background:#071a3a!important;
+  border:2px solid rgba(255,255,255,.96)!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.72)!important
+}
+.school-map-hotspot::before{
+  content:"!"!important;
+  display:grid!important;place-items:center!important;
+  width:100%!important;height:100%!important;
+  position:absolute!important;inset:0!important;
+  color:#fff!important;background:#071a3a!important;
+  border-radius:50%!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:18px!important;font-weight:1000!important;line-height:1!important;
+  z-index:2!important
+}
+/* 元画像に残っている小さい i を右側からマスク */
+.school-map-hotspot::after{
+  content:""!important;display:block!important;
+  position:absolute!important;
+  left:23px!important;top:50%!important;
+  width:16px!important;height:18px!important;
+  transform:translateY(-50%)!important;
+  border-radius:50%!important;
+  background:#071a3a!important;
+  box-shadow:0 0 0 2px rgba(7,26,58,.92)!important;
+  z-index:1!important;pointer-events:none!important
+}
+.school-map-hotspot:hover::before,.school-map-hotspot:focus-visible::before{background:#087cad!important}
+@media(max-width:760px){
+  .school-map-hotspot::before{font-size:16px!important}
+  .school-map-hotspot::after{left:20px!important;width:14px!important;height:16px!important}
+}
+
+/* 職員室：仲間たちを室内に表示 */
+.staff-room-inside{display:none;margin-top:18px}
+.staff-room-inside.show{display:block}
+.staff-room-title{margin:0 0 8px;font-size:1.1rem}
+.staff-room-lead{margin:0 0 14px;color:#dcecff;line-height:1.65}
+.staff-partners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.staff-partner{
+  padding:12px;border:1px solid rgba(255,255,255,.17);border-radius:16px;
+  background:rgba(255,255,255,.07);text-align:center
+}
+.staff-partner img{
+  width:72px;height:72px;border-radius:18px;display:block;margin:0 auto 9px;
+  box-shadow:0 8px 22px rgba(0,0,0,.28)
+}
+.staff-partner strong{display:block;font-size:.98rem;margin-bottom:4px}
+.staff-partner small{display:block;color:#9fe9ff;font-weight:800;line-height:1.4}
+.staff-partner p{margin:7px 0 0;font-size:.78rem;line-height:1.5;color:#dcecff}
+@media(max-width:560px){.staff-partners{grid-template-columns:1fr}.staff-partner{text-align:left}.staff-partner img{float:left;margin:0 12px 6px 0;width:58px;height:58px}}
+
+/* デモルーム：専用の未来授業へ入ることを明確化 */
+.school-room-demo-note{
+  display:none;margin-top:14px;padding:12px 14px;border-radius:13px;
+  color:#e9fbff;background:rgba(80,216,255,.10);border:1px solid rgba(80,216,255,.25)
+}
+.school-room-demo-note.show{display:block}
+</style>
+
+<script id="forgeation-ver3245-final-script">
+document.addEventListener('DOMContentLoaded',()=>{
+  /* 1) AI倫理・安全：看護・医療アカデミー課への誤導線を撤去 */
+  const ethicsCard=[...document.querySelectorAll('.future-card')].find(c=>c.querySelector('h3')?.textContent.trim()==='AI倫理・安全');
+  if(ethicsCard){
+    const oldEmbedded=ethicsCard.querySelector('.embedded-academy');
+    if(oldEmbedded) oldEmbedded.remove();
+    let ethics=document.getElementById('ai-ethics-detail');
+    if(!ethics){
+      ethics=document.createElement('div');
+      ethics.id='ai-ethics-detail';
+      ethics.className='ai-ethics-panel';
+      ethics.innerHTML=`
+        <h4>🛡️ AI倫理・安全</h4>
+        <div class="ai-ethics-panel-grid">
+          <div><strong>🔐 個人情報</strong><br>入力してよい情報・守るべき情報を学ぶ。</div>
+          <div><strong>©️ 著作権</strong><br>画像・文章・生成物の安全な扱いを学ぶ。</div>
+          <div><strong>🔎 誤情報</strong><br>AIの回答を鵜呑みにせず確認する習慣を身につける。</div>
+          <div><strong>🧭 安全利用</strong><br>責任あるAI活用と人の最終判断を学ぶ。</div>
+        </div>`;
+      ethicsCard.appendChild(ethics);
+    }
+    const link=ethicsCard.querySelector('a');
+    if(link){
+      link.textContent='AI倫理・安全を見る';
+      link.href='#ai-ethics-detail';
+    }
+  }
+
+  /* 2) 校舎マップ：職員室・デモルームの最終導線 */
+  document.querySelectorAll('.school-map-hotspot').forEach(b=>{
+    if(b.dataset.title==='職員室'){
+      b.dataset.href='#';
+      b.dataset.status='';
+    }
+    if(b.dataset.title==='デモルーム'){
+      b.dataset.href='#future-lessons';
+      b.dataset.description='AI社員や各アカデミーのデモ、Fドローン、Python、IoTなど、Forgeationの未来授業を体験できるルームです。';
+      b.dataset.features='AI社員デモ|Fシリーズ・アプリ体験|Fドローン・Python・IoT';
+    }
+  });
+
+  /* 3) 職員室の中に「苦楽を共にする仲間たち」を埋め込み */
+  const modal=document.getElementById('schoolRoomModal');
+  const body=modal?.querySelector('.school-room-body');
+  const enter=document.getElementById('schoolRoomEnter');
+  if(body && enter){
+    const svg=(letter,c1,c2)=>'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><rect width="180" height="180" rx="42" fill="url(#g)"/><circle cx="90" cy="78" r="43" fill="rgba(255,255,255,.13)" stroke="rgba(255,255,255,.55)" stroke-width="3"/><text x="90" y="97" text-anchor="middle" font-family="Arial" font-weight="900" font-size="54" fill="white">${letter}</text><text x="90" y="150" text-anchor="middle" font-family="Arial" font-weight="700" font-size="16" fill="white">FORGEATION</text></svg>`
+    );
+    let inside=document.getElementById('staffRoomInside');
+    if(!inside){
+      inside=document.createElement('section');
+      inside.id='staffRoomInside';
+      inside.className='staff-room-inside';
+      inside.innerHTML=`
+        <h4 class="staff-room-title">🏫 Forgeation 職員室 ― 苦楽を共にする仲間たち</h4>
+        <p class="staff-room-lead">Forgeationを支える仲間・先生・AIパートナーが集まり、未来の授業と挑戦をつくる場所です。</p>
+        <div class="staff-partners">
+          <article class="staff-partner"><img src="${svg('Z','#078bd9','#7428d9')}" alt="ジッピー"><strong>ジッピー</strong><small>AIサポートパートナー</small><p>AIの力で、学びと成長を支える頼れるパートナー。</p></article>
+          <article class="staff-partner"><img src="${svg('N','#0b58c7','#14a8dd')}" alt="AIノグ"><strong>AIノグ</strong><small>創設者 / 未来を切り拓くリーダー</small><p>未来を見据え、人と共に歩み、未来を切り拓く。</p></article>
+          <article class="staff-partner"><img src="${svg('F','#c62918','#ff8a00')}" alt="フォージ"><strong>フォージ</strong><small>未来を切り拓くパートナー</small><p>挑戦する心を燃やし、未来への道を切り拓く存在。</p></article>
+        </div>`;
+      body.appendChild(inside);
+    }
+
+    let demoNote=document.getElementById('schoolRoomDemoNote');
+    if(!demoNote){
+      demoNote=document.createElement('div');
+      demoNote.id='schoolRoomDemoNote';
+      demoNote.className='school-room-demo-note';
+      demoNote.textContent='🚀 デモルームに入ると「未来授業を体験する」へ移動します。';
+      body.appendChild(demoNote);
+    }
+
+    /* 既存のクリック処理より先に職員室だけ室内表示へ */
+    enter.addEventListener('click',e=>{
+      const title=document.getElementById('schoolRoomTitle')?.textContent.trim();
+      if(title!=='職員室') return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      inside.classList.add('show');
+      enter.textContent='🏫 職員室に入りました';
+      enter.style.pointerEvents='none';
+      enter.style.opacity='.78';
+    },true);
+
+    new MutationObserver(()=>{
+      if(!modal.classList.contains('open')) return;
+      const title=document.getElementById('schoolRoomTitle')?.textContent.trim();
+      inside.classList.remove('show');
+      demoNote.classList.toggle('show',title==='デモルーム');
+
+      if(title==='職員室'){
+        enter.href='#';
+        enter.dataset.targetHref='#';
+        enter.textContent='🚪 職員室へ入る';
+        enter.style.pointerEvents='auto';
+        enter.style.opacity='1';
+      }
+      if(title==='デモルーム'){
+        enter.href='#future-lessons';
+        enter.dataset.targetHref='#future-lessons';
+        enter.textContent='🚪 デモルームに入る';
+        enter.style.pointerEvents='auto';
+        enter.style.opacity='1';
+      }
+    }).observe(modal,{attributes:true,subtree:true,childList:true});
+  }
+
+  /* 4) VISIONボタンは副導線として残し、デモルーム入室先は未来授業にする */
+  const visionBtn=document.getElementById('schoolRoomVision');
+  if(visionBtn){
+    visionBtn.href='#vision';
+    visionBtn.textContent='✨ VISIONを見る';
+  }
+});
+</script>
+
 </body>
 </html>
