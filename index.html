@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Forgeation — AIと人の力で、未来を切り拓く学校。">
-<title>Forgeation School Ver3.22｜1階フロント接続・表記修正版</title>
+<title>Forgeation School Ver3.23.5｜Ver3.23.4原本維持・F Motion統合版</title>
 <style>
 :root{--navy:#071a3a;--blue:#0a57d5;--cyan:#22c8ff;--orange:#ff6a24;--gold:#f4c85a;--ink:#10203a;--paper:#f7faff;--line:rgba(10,87,213,.16);--radius:22px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,var(--paper))}
@@ -1384,78 +1384,114 @@ section{padding:68px 0}
 </style>
 
 
-<style id="forgeation-ver3233-final-patch">
-/* Forgeation Ver3.23.3 一括修正 */
+<style id="forgeation-ver3234-final-patch">
+/* ===== Forgeation Ver3.23.4 最終差分 =====
+   原本を維持し、校舎マップ / F Series / 職員室導線のみを修正
+================================================ */
 
-/* 校舎マップ i マーク：全体の右寄りを左へ補正 */
+/* 校舎マップの i は画像そのものを基準に％座標で固定。
+   PC/スマホ共通座標とし、一律 margin 補正は使わない。 */
+.school-map-visual{position:relative!important;}
+.school-map-image{display:block!important;width:100%!important;height:auto!important;}
 .school-map-hotspot{
-  margin-left:-2.05% !important;
-  width:clamp(22px,1.62vw,28px) !important;
+  margin:0!important;
+  transform:translate(-50%,-50%)!important;
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  min-height:30px!important;
+  padding:0!important;
+  border:2px solid rgba(255,255,255,.98)!important;
+  border-radius:50%!important;
+  color:#fff!important;
+  background:#071a3a!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.72)!important;
+  font-size:16px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  z-index:30!important;
+  overflow:hidden!important;
+}
+.school-map-hotspot:hover,
+.school-map-hotspot:focus-visible{
+  transform:translate(-50%,-50%) scale(1.14)!important;
+  background:#087cad!important;
+  outline:2px solid #8ee8ff!important;
+  outline-offset:2px!important;
 }
 
-/* 5F 職員室の旧座標だけ大きく外れていたため個別補正 */
-.school-map-hotspot[data-title="職員室"]{
-  left:29.0% !important;
+/* 旧・小型 i が下に残って見えるケースを、操作用 i の面で完全に覆う。 */
+.school-map-hotspot::before{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  background:#071a3a;
+  z-index:-1;
 }
 
-/* 5Fの隣接2室を少し離す */
-.school-map-hotspot[data-title="未来研究室"]{
-  margin-left:-2.25% !important;
-}
-.school-map-hotspot[data-title="お問い合わせ室"]{
-  margin-left:-1.70% !important;
-}
+/* 職員室は原本の旧0.5%ではなく、5F左室中央へ固定。 */
+.school-map-hotspot[data-title="職員室"]{left:29.0%!important;top:35.6%!important;}
 
-/* 1Fの重複して見える小さいiを操作用iで覆う */
-.school-map-hotspot[data-title="AI受付社員ジッピー"],
-.school-map-hotspot[data-title="来訪者受付"],
-.school-map-hotspot[data-title="校内マップ"]{
-  margin-left:-2.30% !important;
+/* PC/スマホとも同じ画像比率に追従。スマホでは押しやすさだけ確保。 */
+@media(max-width:760px){
+  .school-map-hotspot{
+    width:26px!important;
+    height:26px!important;
+    min-width:26px!important;
+    min-height:26px!important;
+    font-size:14px!important;
+    border-width:1.5px!important;
+  }
+}
+@media(max-width:430px){
+  .school-map-hotspot{
+    width:24px!important;
+    height:24px!important;
+    min-width:24px!important;
+    min-height:24px!important;
+    font-size:13px!important;
+  }
 }
 
 /* 各アカデミー課紹介：PCは2列、スマホは1列 */
-.academy-detail-gallery{
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:18px !important;
-}
-.academy-detail-gallery img{
-  max-height:none !important;
-}
-
-/* 未来授業内に埋め込まれた各アカデミー課も2列 */
-.future-card .embedded-academy-body .academy-detail-gallery{
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:10px !important;
-}
-.future-card .embedded-academy-body .academy-detail-gallery img{
-  max-height:138px !important;
-}
-
+.academy-detail-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;}
+.academy-detail-gallery img{max-height:none!important;}
+.future-card .embedded-academy-body .academy-detail-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+.future-card .embedded-academy-body .academy-detail-gallery img{max-height:138px!important;}
 @media(max-width:640px){
   .academy-detail-gallery,
-  .future-card .embedded-academy-body .academy-detail-gallery{
-    grid-template-columns:1fr !important;
-  }
-  .future-card .embedded-academy-body .academy-detail-gallery img{
-    max-height:none !important;
-  }
+  .future-card .embedded-academy-body .academy-detail-gallery{grid-template-columns:1fr!important;}
+  .future-card .embedded-academy-body .academy-detail-gallery img{max-height:none!important;}
 }
 
-/* VISION：初期表示。＋／－で開閉可能 */
-#visionDetails>summary:after{
-  display:inline-block !important;
-  content:"＋" !important;
-  font-size:1.35rem !important;
-  line-height:1 !important;
-  color:#fff !important;
+/* VISION：＋／－開閉表示を維持 */
+#visionDetails>summary:after{display:inline-block!important;content:"＋"!important;font-size:1.35rem!important;line-height:1!important;color:#fff!important;}
+#visionDetails[open]>summary:after{content:"－"!important;}
+
+/* 職員室の最終表示 */
+.school-room-comingsoon-message{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:16px;
+  text-align:center;
+  color:#fff;
+  background:rgba(255,255,255,.10);
+  font-weight:900;
+  line-height:1.8;
 }
-#visionDetails[open]>summary:after{
-  content:"－" !important;
-}
+.school-room-comingsoon-message.show{display:block;}
 </style>
 
 </head>
 <body>
+<!-- Ver3.23.5: Ver3.23.4原本を維持し、スポーツアカデミー課 F Motion 導線のみ差分統合 -->
+<!-- Ver3.23.4: 校舎マップ全iのPC/スマホ共通座標化・重複小i対策・F Series固定リンク・職員室2段階導線 -->
 <!-- Ver3.22: 1階フロント接続・Version表記統一・F Drone/F Python所属修正 -->
 <!-- Ver3.22: 開校宣言を復活・サイトへ進むを確実操作・Version表記修正・F PythonをAIアカデミー課へ明記 -->
 <!-- Ver3.22: 開校画面がサイト操作を遮る不具合を解消するため、オーバーレイを完全解除 -->
@@ -1523,12 +1559,12 @@ section{padding:68px 0}
       <figure class="school-map-visual">
         <img class="school-map-image" src="forgeation-school-campus-map.webp" data-visual-search="disable" draggable="false" alt="Forgeation School 校舎マップ">
         <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
-      style="left:0.5%;top:35.6%"
+      style="left:29.0%;top:35.6%"
       data-floor="5F"
-      data-title="職員室"
-      data-description="Forgeationを支える仲間と先生たちの部屋です。採用情報やチーム紹介をご覧いただけます。"
-      data-features="仲間・先生の紹介|採用・パートナー情報|チームの活動"
-      data-href="#characters"
+      data-title="職員室" data-status="staff-coming-soon"
+      data-description="Forgeationを支える仲間と先生たちが集う職員室です。学校を支えるチーム、先生、AIパートナーが、ここから未来の授業と挑戦を支えていきます。"
+      data-features="仲間・先生の紹介|チームの活動|未来の授業を支える拠点"
+      data-href="#"
       aria-label="職員室の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
       style="left:38.0%;top:35.6%"
@@ -2228,6 +2264,34 @@ print(lesson + "を始めよう！")</code>
         <summary>
           <div class="f-series-top">
             <span class="f-series-logo" aria-label="Forgeation Fロゴ">F</span>
+            <span class="f-series-emoji">🏅</span>
+          </div>
+          <div class="f-series-badges">
+            <span class="f-series-badge">APP PREVIEW</span>
+            <span class="f-series-badge">スポーツアカデミー課</span>
+          </div>
+          <h3>F Motion</h3>
+          <p>スポーツアカデミー課のゲーム型トレーニング。反応・視野・判断・正確性を鍛え、成長をデータで見える化する。</p>
+          <div class="f-series-more">内容を見る</div>
+        </summary>
+        <div class="f-series-detail">
+          <ul>
+            <li>F REACTION：反応速度と瞬間判断</li>
+            <li>F VISION・F JUDGE：視覚認知と瞬間判断</li>
+            <li>F ACCURACY：正確性とハンドアイ・コーディネーション</li>
+            <li>XP・LEVEL・BEST記録を保存</li>
+          
+</ul>
+          <a class="f-series-play-button"
+             href="./F_Motion_beta_Ver1.1_API接続準備版.html"
+             aria-label="F Motionを体験する">🏅 F Motionを体験する</a>
+        </div>
+      </details>
+
+      <details class="f-series-card">
+        <summary>
+          <div class="f-series-top">
+            <span class="f-series-logo" aria-label="Forgeation Fロゴ">F</span>
             <span class="f-series-emoji">🥽</span>
           </div>
           <div class="f-series-badges">
@@ -2293,8 +2357,7 @@ print(lesson + "を始めよう！")</code>
             <li>目配り：転倒・水分・環境への気付き</li>
             <li>気配り：表情や体調に合わせた声掛け</li>
             <li>心配り：思いに寄り添い、信頼を育てる</li>
-            <li>Mi
-nd Pointと「3配りマスター」</li>
+            <li>Mind Pointと「3配りマスター」</li>
           </ul>
         
           <a class="f-series-play-button" href="./F_Mind_beta_Ver1.html">❤️ F Mindを体験する</a>
@@ -2374,6 +2437,7 @@ nd Pointと「3配りマスター」</li>
 <div class="card card-pad"><h3>🚁 Fドローン</h3><p>AIアカデミー課の看板コンテンツ。ゲーム感覚でドローン・AI・IoT・センサーを学習。</p></div>
 <div class="card card-pad"><h3>🥽 Fゴーグル</h3><p>建設アカデミー課。VR風の現場体験、安全確認や建設シミュレーション。</p></div>
 <div class="card card-pad"><h3>🏆 Fチャレンジ</h3><p>サッカーアカデミー課。PK・ドリブル・戦術クイズなどをアプリ限定で搭載予定。</p></div>
+<div class="card card-pad"><h3>🏅 F Motion</h3><p>スポーツアカデミー課。反応・視野・判断・正確性をゲームで鍛える。</p><p><a class="f-series-play-button" href="./F_Motion_beta_Ver1.1_API接続準備版.html">🏅 F Motionを体験する</a></p></div>
 </div>
 </div>
 </section>
@@ -2943,7 +3007,7 @@ document.addEventListener("click", (event) => {
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e817f8ce1d5849a79f102e8a41335f32"}'></script><!-- End Cloudflare Web Analytics -->
 
 
-<script id="forgeation-ver323-script">
+<script id="forgeation-ver3234-script">
 document.addEventListener('DOMContentLoaded', () => {
   // 校舎を主役にする。サッカーアカデミー課は既存の直接掲載を維持。
   const lessons = document.getElementById('future-lessons');
@@ -3016,7 +3080,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 校舎マップの固定導線
   document.querySelectorAll('.school-map-hotspot').forEach(b => {
-    if (b.dataset.title === '職員室') b.dataset.href = '#characters';
+    if (b.dataset.title === '職員室') { b.dataset.href = '#'; b.dataset.status = 'staff-coming-soon'; }
     if (b.dataset.title === 'AI商品体験') b.dataset.href = '#f-series';
     if (b.dataset.title === 'デモルーム') b.dataset.href = '#vision';
   });
@@ -3032,6 +3096,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // F Series のアップロードファイル名を固定
   const fixed = {
     'F Drone':'./F_Drone_beta_Ver1.html',
+    'F Motion':'./F_Motion_beta_Ver1.1_API接続準備版.html',
     'F Goggle':'./F_Goggle_beta_Ver1.html',
     'F Nightingale':'./F_Nightingale_beta_Ver1.html',
     'F Mind':'./F_Mind_beta_Ver1.html',
@@ -3061,6 +3126,49 @@ window.addEventListener('load', () => {
   const modal=document.getElementById('schoolRoomModal');
   if(modal) _openForgeationRoomObserver.observe(modal,{attributes:true,subtree:true,childList:true});
 });
+
+
+  // Ver3.23.4: 職員室は「紹介 → 職員室へ入る → 乞うご期待」の2段階表示
+  const roomModal = document.getElementById('schoolRoomModal');
+  const roomEnter = document.getElementById('schoolRoomEnter');
+  const roomBody = roomModal?.querySelector('.school-room-body');
+  let staffNotice = document.getElementById('schoolRoomStaffNotice');
+  if (roomBody && !staffNotice) {
+    staffNotice = document.createElement('div');
+    staffNotice.id = 'schoolRoomStaffNotice';
+    staffNotice.className = 'school-room-comingsoon-message';
+    staffNotice.innerHTML = '🚧 <strong>職員室は現在準備中です。</strong><br>新しい仲間と先生たちの紹介を順次公開予定。<br>乞うご期待！';
+    roomBody.appendChild(staffNotice);
+  }
+
+  if (roomEnter) {
+    roomEnter.addEventListener('click', (event) => {
+      const title = document.getElementById('schoolRoomTitle')?.textContent.trim();
+      if (title !== '職員室') return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      staffNotice?.classList.add('show');
+      roomEnter.textContent = '🚧 乞うご期待！';
+      roomEnter.style.pointerEvents = 'none';
+      roomEnter.style.opacity = '.78';
+    }, true);
+  }
+
+  // 職員室モーダルを開くたび、最初の「職員室へ入る」に戻す
+  if (roomModal) {
+    new MutationObserver(() => {
+      if (!roomModal.classList.contains('open')) return;
+      const title = document.getElementById('schoolRoomTitle')?.textContent.trim();
+      if (title === '職員室' && roomEnter) {
+        staffNotice?.classList.remove('show');
+        roomEnter.href = '#';
+        roomEnter.dataset.targetHref = '#';
+        roomEnter.textContent = '🚪 職員室へ入る';
+        roomEnter.style.pointerEvents = 'auto';
+        roomEnter.style.opacity = '1';
+      }
+    }).observe(roomModal,{attributes:true,attributeFilter:['class']});
+  }
 </script>
 
 </body>
