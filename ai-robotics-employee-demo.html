@@ -1,236 +1,42 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Forgeation AIロボティクス社員デモ</title>
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIロボティクス社員 | Forgeation</title>
 <style>
-:root{
-  --navy:#07162f;
-  --blue:#0d63d8;
-  --cyan:#49d9ff;
-  --paper:#f4f8ff;
-  --ink:#14233d;
-  --line:rgba(13,99,216,.16);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at top right,rgba(73,217,255,.17),transparent 28%),
-    linear-gradient(180deg,#edf5ff,#fff);
-}
-.wrap{
-  width:min(1120px,94vw);
-  margin:auto;
-  padding:28px 0;
-}
-.panel{
-  overflow:hidden;
-  border-radius:24px;
-  background:#fff;
-  box-shadow:0 20px 55px rgba(7,22,47,.12);
-}
-.hero{
-  padding:36px;
-  color:#fff;
-  background:
-    radial-gradient(circle at 80% 20%,rgba(73,217,255,.28),transparent 26%),
-    linear-gradient(145deg,#07162f,#0a3f8e 65%,#0d63d8);
-}
-.badge{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:999px;
-  background:#ffffff1f;
-  color:#bfefff;
-  font-weight:800;
-}
-.hero h1{
-  margin:16px 0 10px;
-  font-size:clamp(2.2rem,6vw,4.8rem);
-}
-.hero p{
-  max-width:720px;
-  margin:0;
-  line-height:1.9;
-  color:#eaf4ff;
-}
-.content{padding:28px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-button{
-  min-height:64px;
-  padding:14px 16px;
-  text-align:left;
-  border:1px solid var(--line);
-  border-radius:15px;
-  color:var(--navy);
-  background:#f8fbff;
-  font-weight:850;
-  cursor:pointer;
-  transition:.2s ease;
-}
-button:hover{
-  transform:translateY(-2px);
-  background:#edf6ff;
-  border-color:#0d63d866;
-}
-button span{
-  display:block;
-  margin-top:4px;
-  color:#6d7b90;
-  font-size:.78rem;
-  font-weight:600;
-}
-#out{
-  margin-top:22px;
-  padding:20px;
-  min-height:150px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:#f7fbff;
-  white-space:pre-wrap;
-  line-height:1.8;
-}
-.home{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  margin-top:24px;
-  padding:14px 24px;
-  border-radius:999px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:900;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));
-  box-shadow:0 10px 20px rgba(13,99,216,.22);
-}
-.notice{
-  margin-top:14px;
-  color:#7b889d;
-  font-size:.8rem;
-  line-height:1.6;
-}
-@media(max-width:680px){
-  .hero{padding:28px}
-  .content{padding:20px}
-  .grid{grid-template-columns:1fr}
-}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <main class="panel">
-    <section class="hero">
-      <div class="badge">Forgeation AI・ロボティクスアカデミー</div>
-      <h1>🤖 AIロボティクス社員</h1>
-      <p>
-        ロボット、ドローン、IoT、プログラミング、AI制御を通じて、
-        技術を社会で役立てる方法をご案内します。
-      </p>
-    </section>
-
-    <section class="content">
-      <div class="grid">
-        <button onclick="showTopic('robot')">
-          ロボット開発
-          <span>設計・センサー・制御の基礎</span>
-        </button>
-        <button onclick="showTopic('drone')">
-          ドローン活用
-          <span>空撮・点検・災害支援</span>
-        </button>
-        <button onclick="showTopic('iot')">
-          IoT・センサー
-          <span>機器とデータをつなぐ</span>
-        </button>
-        <button onclick="showTopic('programming')">
-          プログラミング
-          <span>ロボットを動かす考え方</span>
-        </button>
-        <button onclick="showTopic('ai')">
-          AI制御
-          <span>認識・判断・自動化</span>
-        </button>
-        <button onclick="showTopic('social')">
-          社会実装
-          <span>教育・医療・建設への応用</span>
-        </button>
-      </div>
-
-      <div id="out">
-こんにちは。ForgeationのAIロボティクス社員です。
-知りたい分野を選択してください。
-      </div>
-
-      <a class="home" href="index.html">🏠 ホームページに戻る</a>
-      <div class="notice">
-        ※これは動作確認用デモです。実機制御、飛行操作、外部機器との接続は行いません。
-      </div>
-    </section>
-  </main>
-</div>
-
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:radial-gradient(circle at 85% 5%,#3544c9 0,#0b2361 32%,#061536 72%);color:#fff}
+a{color:inherit;text-decoration:none}.top{position:sticky;top:0;z-index:9;background:#07142fdd;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff20}
+.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.f{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#11c7ff,#5146e5,#ff5fb4);display:grid;place-items:center;font-size:24px;font-weight:900}
+.btn{border:0;border-radius:999px;padding:12px 18px;font-weight:800;background:linear-gradient(90deg,#3de6e1,#fff);color:#10234b;cursor:pointer}.ghost{background:#ffffff12;color:#fff;border:1px solid #ffffff38}
+.wrap{max-width:1120px;margin:auto;padding:64px 22px 80px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;min-height:420px}
+.kicker{color:#6ff4e8;font-size:13px;letter-spacing:.16em;font-weight:900}h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:16px 0}.lead{font-size:17px;line-height:1.9;color:#dce8ff;max-width:720px}
+.heroCard{background:linear-gradient(145deg,#ffffff18,#ffffff08);border:1px solid #ffffff2c;border-radius:28px;padding:30px;box-shadow:0 30px 80px #0006}.bigEmoji{font-size:82px}.heroCard h2{font-size:28px;margin:12px 0}
+.section{margin-top:72px}.section h2{font-size:36px;margin:0 0 12px}.section p{color:#cbd9fa;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.module{text-align:left;min-height:160px;border:1px solid #ffffff2b;background:#ffffff10;color:#fff;border-radius:22px;padding:22px;cursor:pointer;transition:.2s}.module:hover{transform:translateY(-3px);background:#ffffff18}.module span{font-size:30px;display:block;margin-bottom:12px}.module b{display:block;font-size:18px;margin-bottom:8px}.module small{display:block;color:#cbd9fa;line-height:1.6}
+.chat{margin-top:28px;background:#f7f9ff;color:#17223d;border-radius:26px;overflow:hidden;box-shadow:0 30px 80px #0005}.chatHead{background:#081633;color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}.status{font-size:12px;color:#73f0a3}.messages{height:330px;overflow:auto;padding:22px;background:linear-gradient(#f8fbff,#eef3fb)}.msg{max-width:82%;padding:13px 16px;border-radius:16px;margin:10px 0;line-height:1.65;white-space:pre-wrap}.ai{background:#fff;border:1px solid #dce3ef}.user{background:#0d56d8;color:#fff;margin-left:auto}form{display:flex;gap:10px;padding:16px;background:#fff;border-top:1px solid #dce3ef}input{flex:1;border:1px solid #cbd5e5;border-radius:14px;padding:14px;font-size:16px}form button{border:0;border-radius:14px;background:#0d56d8;color:#fff;padding:0 22px;font-weight:800;cursor:pointer}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.note{margin-top:18px;font-size:12px;color:#9fb1d8}footer{text-align:center;padding:30px;color:#9fb1d8;border-top:1px solid #ffffff18}
+@media(max-width:800px){.hero{grid-template-columns:1fr;min-height:auto}.grid{grid-template-columns:1fr}.wrap{padding-top:38px}.messages{height:390px}}
+</style></head><body>
+<header class="top"><div class="nav"><a class="brand" href="./index.html#forgeation-school"><span class="f">F</span><span>Forgeation<br><small>AI EMPLOYEE</small></span></a><a class="btn ghost" href="./index.html#forgeation-school">🏫 校舎マップへ戻る</a></div></header>
+<main class="wrap">
+<section class="hero"><div><div class="kicker">FORGEATION AI EMPLOYEE</div><h1>技術を、社会で動かす。</h1><p class="lead">ロボット、ドローン、IoT、プログラミング、AI制御、社会実装を支援します。</p><div class="actions"><a class="btn" href="#experience">✨ 体験を始める</a></div></div>
+<aside class="heroCard"><div class="bigEmoji">🤖</div><h2>AIロボティクス社員</h2><p class="lead">見る・知るだけで終わらない。選んで、試して、AIと対話して、未来の学び・仕事を体験するページです。</p></aside></section>
+<section class="section"><div class="kicker">LEARNING / WORK AREAS</div><h2>6つの体験領域</h2><p>カードを選ぶと、そのテーマをAIへすぐ相談できます。</p><div class="grid"><button class="module" type="button" data-q="ロボット開発の流れを教えて"><span>🤖</span><b>ロボット開発</b><small>設計・センサー</small></button>
+<button class="module" type="button" data-q="ドローン活用案を考えて"><span>🚁</span><b>ドローン活用</b><small>安全と用途</small></button>
+<button class="module" type="button" data-q="IoTの仕組みを説明して"><span>📡</span><b>IoT・センサー</b><small>情報をつなぐ</small></button>
+<button class="module" type="button" data-q="制御プログラムの考え方を教えて"><span>💻</span><b>プログラミング</b><small>動きを作る</small></button>
+<button class="module" type="button" data-q="AI制御の例を教えて"><span>🧠</span><b>AI制御</b><small>認識・判断</small></button>
+<button class="module" type="button" data-q="ロボティクスの社会実装案を考えて"><span>🌏</span><b>社会実装</b><small>現場で役立てる</small></button></div></section>
+<section class="section" id="experience"><div class="kicker">AI EXPERIENCE</div><h2>AIと実際に話してみる。</h2><p>下の入力欄から自由に質問できます。各カードを押すと、そのテーマの質問例が入力されます。</p>
+<div class="chat"><div class="chatHead"><div><b>AIロボティクス社員</b><div class="status">● API接続対応</div></div><button class="btn ghost" id="reset" type="button">最初から</button></div>
+<div class="messages" id="messages"><div class="msg ai">こんにちは。AIロボティクス社員です。知りたいこと・試したいことを選ぶか、自由に入力してください。</div></div>
+<form id="chatForm"><input id="messageInput" autocomplete="off" placeholder="メッセージを入力…"><button id="sendBtn">送信</button></form></div>
+<p class="note">※ AIは学習・業務支援用です。医療・法律・安全等の最終判断は、必ず資格者・責任者・専門家が行ってください。</p></section>
+</main><footer>Forgeation — Design the Future. Forge the Future.</footer>
 <script>
-const topics={
-  robot:`【ロボット開発】
-ロボットは、機械・電子回路・センサー・プログラムを組み合わせて作ります。
-
-学習例
-・ロボットの構造
-・モーターとセンサー
-・自動走行
-・課題発見と改善`,
-  drone:`【ドローン活用】
-ドローンは、空から情報を集める技術として幅広く活用されています。
-
-活用例
-・空撮
-・建物や設備の点検
-・農業支援
-・災害時の情報収集`,
-  iot:`【IoT・センサー】
-IoTは、機器をインターネットにつなぎ、データを集めて活用する仕組みです。
-
-学習例
-・温度や距離の測定
-・機器の遠隔確認
-・データの見える化
-・異常の早期発見`,
-  programming:`【プログラミング】
-ロボットに「何を、どの順番で行うか」を伝えるためにプログラムを使います。
-
-学習例
-・順次処理
-・条件分岐
-・繰り返し
-・センサーの値による動作変更`,
-  ai:`【AI制御】
-AIを使うことで、ロボットが画像や音を認識し、状況に応じて判断できるようになります。
-
-活用例
-・画像認識
-・音声認識
-・障害物回避
-・作業の自動化`,
-  social:`【社会実装】
-技術は、実際の社会課題を解決してこそ価値を持ちます。
-
-応用例
-・教育支援ロボット
-・看護や介護の支援
-・建設現場の安全管理
-・災害対応ドローン`
-};
-function showTopic(key){
-  document.getElementById("out").textContent=topics[key];
-}
-</script>
-</body>
-</html>
+const API_URL="https://forgeation-api.eru12121221.workers.dev";
+const SYSTEM_PROMPT="あなたはForgeation AI・ロボティクスアカデミーのAI社員です。ロボット、ドローン、IoT、プログラミング、AI制御を安全第一で支援してください。危険な操作は具体的に誘導せず、安全な学習内容にしてください。";
+const messages=document.getElementById("messages"), input=document.getElementById("messageInput");
+function addMsg(text,who){const d=document.createElement("div");d.className="msg "+who;d.textContent=text;messages.appendChild(d);messages.scrollTop=messages.scrollHeight;}
+document.querySelectorAll(".module").forEach(b=>b.addEventListener("click",()=>{input.value=b.dataset.q;input.focus();document.getElementById("experience").scrollIntoView({behavior:"smooth"});}));
+document.getElementById("reset").onclick=()=>{messages.innerHTML='<div class="msg ai">最初から始めます。何を体験しますか？</div>';input.value="";};
+document.getElementById("chatForm").addEventListener("submit",async e=>{e.preventDefault();const m=input.value.trim();if(!m)return;addMsg(m,"user");input.value="";const s=document.getElementById("sendBtn");s.disabled=true;s.textContent="…";try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:SYSTEM_PROMPT+"\n質問："+m})});const data=await r.json();if(!r.ok)throw new Error(data.error||"API error");addMsg(data.reply||"回答を取得できませんでした。","ai");}catch(err){addMsg("APIへ接続できませんでした。Cloudflare Workerの公開状態・CORS設定をご確認ください。","ai");}finally{s.disabled=false;s.textContent="送信";}});
+</script></body></html>
