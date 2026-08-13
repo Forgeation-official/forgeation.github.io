@@ -1,55 +1,42 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Forgeation AI介護施設社員デモ">
-<title>AI介護施設社員デモ｜Forgeation</title>
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI介護施設社員 | Forgeation</title>
 <style>
-:root{--navy:#071a3a;--mint:#57d6d0;--mint-dark:#159ca2;--mint-light:#dffaf8;--blue:#0a57d5;--paper:#f5ffff;--ink:#12323a;--line:#cfeeee}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",Meiryo,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,#dffaf8,transparent 32%),linear-gradient(145deg,#fbffff,#eaf8fb)}
-button,a{font:inherit}.wrap{width:min(1180px,94vw);min-height:100vh;margin:auto;padding:28px 0;display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:stretch}.brand,.panel{border:1px solid #ffffffaa;border-radius:28px;box-shadow:0 20px 60px #0b5f6b22}.brand{padding:clamp(28px,5vw,56px);color:#fff;background:radial-gradient(circle at 20% 15%,#86eee855,transparent 30%),linear-gradient(155deg,#083f4a,#159ca2 58%,#57d6d0);display:flex;flex-direction:column;justify-content:space-between}.logo{width:72px;height:72px;display:grid;place-items:center;border-radius:20px;background:#fff;color:var(--mint-dark);font-weight:900;font-style:italic;font-size:44px}.kicker{margin-top:26px;color:#d9fffd;font-weight:900;letter-spacing:.16em}.brand h1{margin:10px 0;font-size:clamp(2.5rem,6vw,5rem);line-height:1.04}.brand p{line-height:1.9;color:#f2ffff}.employee{display:flex;align-items:center;gap:14px;margin-top:34px;padding:16px;border:1px solid #ffffff3d;border-radius:18px;background:#ffffff17}.employee .avatar{font-size:2.5rem}.employee span{display:block;color:#ddfffd;font-size:.86rem;margin-top:4px}.panel{padding:24px;background:#fffffff0;backdrop-filter:blur(12px)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}.status{display:flex;align-items:center;gap:10px}.dot{width:11px;height:11px;border-radius:50%;background:#37d6cf;box-shadow:0 0 0 5px #37d6cf22}.reset,.home{border:0;border-radius:999px;font-weight:800;cursor:pointer}.reset{padding:10px 15px;color:var(--mint-dark);background:#e2f9f8}.intro{margin:20px 0;padding:18px;border-radius:16px;background:#eefbfb;line-height:1.8}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice{padding:18px;text-align:left;border:1px solid var(--line);border-radius:17px;background:#fff;cursor:pointer;transition:.2s}.choice:hover{transform:translateY(-3px);border-color:#66d9d4;box-shadow:0 10px 25px #159ca218}.choice strong{display:block;color:var(--mint-dark);font-size:1.05rem}.choice span{display:block;margin-top:7px;color:#607168;font-size:.88rem;line-height:1.55}.reply{min-height:155px;margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:18px;background:#fbffff;line-height:1.85;white-space:pre-line}.notice{margin-top:14px;color:#718178;font-size:.78rem;line-height:1.6}.home{display:inline-flex;margin-top:18px;padding:13px 19px;color:#fff;background:linear-gradient(90deg,var(--mint-dark),var(--mint));text-decoration:none}.home:hover{filter:brightness(1.06)}
-@media(max-width:860px){.wrap{grid-template-columns:1fr}.brand{min-height:500px}.choices{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:radial-gradient(circle at 85% 5%,#3544c9 0,#0b2361 32%,#061536 72%);color:#fff}
+a{color:inherit;text-decoration:none}.top{position:sticky;top:0;z-index:9;background:#07142fdd;backdrop-filter:blur(12px);border-bottom:1px solid #ffffff20}
+.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.f{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#11c7ff,#5146e5,#ff5fb4);display:grid;place-items:center;font-size:24px;font-weight:900}
+.btn{border:0;border-radius:999px;padding:12px 18px;font-weight:800;background:linear-gradient(90deg,#3de6e1,#fff);color:#10234b;cursor:pointer}.ghost{background:#ffffff12;color:#fff;border:1px solid #ffffff38}
+.wrap{max-width:1120px;margin:auto;padding:64px 22px 80px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;min-height:420px}
+.kicker{color:#6ff4e8;font-size:13px;letter-spacing:.16em;font-weight:900}h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:16px 0}.lead{font-size:17px;line-height:1.9;color:#dce8ff;max-width:720px}
+.heroCard{background:linear-gradient(145deg,#ffffff18,#ffffff08);border:1px solid #ffffff2c;border-radius:28px;padding:30px;box-shadow:0 30px 80px #0006}.bigEmoji{font-size:82px}.heroCard h2{font-size:28px;margin:12px 0}
+.section{margin-top:72px}.section h2{font-size:36px;margin:0 0 12px}.section p{color:#cbd9fa;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.module{text-align:left;min-height:160px;border:1px solid #ffffff2b;background:#ffffff10;color:#fff;border-radius:22px;padding:22px;cursor:pointer;transition:.2s}.module:hover{transform:translateY(-3px);background:#ffffff18}.module span{font-size:30px;display:block;margin-bottom:12px}.module b{display:block;font-size:18px;margin-bottom:8px}.module small{display:block;color:#cbd9fa;line-height:1.6}
+.chat{margin-top:28px;background:#f7f9ff;color:#17223d;border-radius:26px;overflow:hidden;box-shadow:0 30px 80px #0005}.chatHead{background:#081633;color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}.status{font-size:12px;color:#73f0a3}.messages{height:330px;overflow:auto;padding:22px;background:linear-gradient(#f8fbff,#eef3fb)}.msg{max-width:82%;padding:13px 16px;border-radius:16px;margin:10px 0;line-height:1.65;white-space:pre-wrap}.ai{background:#fff;border:1px solid #dce3ef}.user{background:#0d56d8;color:#fff;margin-left:auto}form{display:flex;gap:10px;padding:16px;background:#fff;border-top:1px solid #dce3ef}input{flex:1;border:1px solid #cbd5e5;border-radius:14px;padding:14px;font-size:16px}form button{border:0;border-radius:14px;background:#0d56d8;color:#fff;padding:0 22px;font-weight:800;cursor:pointer}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.note{margin-top:18px;font-size:12px;color:#9fb1d8}footer{text-align:center;padding:30px;color:#9fb1d8;border-top:1px solid #ffffff18}
+@media(max-width:800px){.hero{grid-template-columns:1fr;min-height:auto}.grid{grid-template-columns:1fr}.wrap{padding-top:38px}.messages{height:390px}}
+</style></head><body>
+<header class="top"><div class="nav"><a class="brand" href="./index.html#forgeation-school"><span class="f">F</span><span>Forgeation<br><small>AI EMPLOYEE</small></span></a><a class="btn ghost" href="./index.html#forgeation-school">🏫 校舎マップへ戻る</a></div></header>
 <main class="wrap">
-<section class="brand">
-<div><div class="logo">F</div><div class="kicker">CARE & WELFARE ACADEMY AI EMPLOYEE</div><h1>やさしい介護を、<br>現場と事務から。</h1><p>介護スタッフ、事務職、施設運営、ご家族をつなぎ、記録・連携・企画・業務整理を支えるForgeationのAI介護施設社員デモです。</p></div>
-<div class="employee"><div class="avatar">🏡🤖</div><div><strong>AI介護施設社員 ケアフォージ</strong><span>社員番号 AI-CARE-001／介護・福祉アカデミー課</span></div></div>
-</section>
-<section class="panel">
-<div class="head"><div class="status"><span class="dot"></span><div><strong>Forgeation 介護・福祉アカデミー課</strong><small style="display:block;color:#6c7d72">AI社員が対応中</small></div></div><button class="reset" id="reset">最初から</button></div>
-<div class="intro">こんにちは。AI介護施設社員です。現場のケアだけでなく、介護事務や施設運営も含めて、必要な支援メニューを選んでください。</div>
-<div class="choices">
-<button class="choice" data-key="record"><strong>📝 介護記録支援</strong><span>申し送り・経過記録・家族連絡の文章を整理</span></button>
-<button class="choice" data-key="office"><strong>💼 介護事務支援</strong><span>書類、帳票、請求前確認、行政提出資料を整理</span></button>
-<button class="choice" data-key="shift"><strong>📅 シフト・業務整理</strong><span>役割分担、業務一覧、引き継ぎ漏れを見える化</span></button>
-<button class="choice" data-key="recreation"><strong>🎈 レクリエーション企画</strong><span>状態・季節・人数に合わせた活動を提案</span></button>
-<button class="choice" data-key="family"><strong>👪 ご家族への連絡</strong><span>丁寧で分かりやすい報告文や案内文を作成</span></button>
-<button class="choice" data-key="dx"><strong>💻 介護DX・ICT相談</strong><span>記録、情報共有、スケジュール管理の改善案</span></button>
-<button class="choice" data-key="home"><strong>🏠 在宅介護・地域連携</strong><span>関係職種・地域資源・家族支援を整理</span></button>
-<button class="choice" data-key="management"><strong>📊 施設運営支援</strong><span>稼働状況、課題、改善案を分かりやすく整理</span></button>
-</div>
-<div class="reply" id="reply">メニューを選択してください。</div>
-<p class="notice">※このデモは学習・業務整理支援用です。医療判断、介護認定、個別ケア方針、請求確定などの専門判断は、必ず有資格者・担当者・管理者が確認してください。</p>
-<a class="home" href="index.html">🏠 ホームページに戻る</a>
-</section>
-</main>
+<section class="hero"><div><div class="kicker">FORGEATION AI EMPLOYEE</div><h1>暮らしを支える、チームの力へ。</h1><p class="lead">支援記録、レクリエーション、家族対応、介護知識、見守り、施設運営を支える、介護・福祉アカデミーのAI社員です。</p><div class="actions"><a class="btn" href="#experience">✨ 体験を始める</a></div></div>
+<aside class="heroCard"><div class="bigEmoji">🌿</div><h2>AI介護施設社員</h2><p class="lead">見る・知るだけで終わらない。選んで、試して、AIと対話して、未来の学び・仕事を体験するページです。</p></aside></section>
+<section class="section"><div class="kicker">LEARNING / WORK AREAS</div><h2>6つの体験領域</h2><p>カードを選ぶと、そのテーマをAIへすぐ相談できます。</p><div class="grid"><button class="module" type="button" data-q="支援記録の文章を整えるポイントを教えて"><span>📝</span><b>支援記録</b><small>事実を整理</small></button>
+<button class="module" type="button" data-q="レクリエーション案を3つ考えて"><span>🎲</span><b>レク提案</b><small>参加しやすい活動</small></button>
+<button class="module" type="button" data-q="家族向け連絡文を作って"><span>👨‍👩‍👧</span><b>家族対応</b><small>丁寧な連絡</small></button>
+<button class="module" type="button" data-q="介護の基礎問題を1問出して"><span>🧠</span><b>介護知識</b><small>基礎を確認</small></button>
+<button class="module" type="button" data-q="見守りで大切な視点を整理して"><span>👀</span><b>見守り</b><small>安全と自立</small></button>
+<button class="module" type="button" data-q="施設業務の改善案を考えて"><span>🏢</span><b>施設運営</b><small>チームを支える</small></button></div></section>
+<section class="section" id="experience"><div class="kicker">AI EXPERIENCE</div><h2>AIと実際に話してみる。</h2><p>下の入力欄から自由に質問できます。各カードを押すと、そのテーマの質問例が入力されます。</p>
+<div class="chat"><div class="chatHead"><div><b>AI介護施設社員</b><div class="status">● API接続対応</div></div><button class="btn ghost" id="reset" type="button">最初から</button></div>
+<div class="messages" id="messages"><div class="msg ai">こんにちは。AI介護施設社員です。知りたいこと・試したいことを選ぶか、自由に入力してください。</div></div>
+<form id="chatForm"><input id="messageInput" autocomplete="off" placeholder="メッセージを入力…"><button id="sendBtn">送信</button></form></div>
+<p class="note">※ AIは学習・業務支援用です。医療・法律・安全等の最終判断は、必ず資格者・責任者・専門家が行ってください。</p></section>
+</main><footer>Forgeation — Design the Future. Forge the Future.</footer>
 <script>
-const messages={
-record:'【介護記録支援】\n①事実 ②利用者さまの様子 ③職員の対応 ④結果 ⑤次の申し送り、の順に整理します。\n主観や断定を避け、誰が読んでも分かる記録文の下書きを支援します。',
-office:'【介護事務支援】\n必要書類、提出期限、確認担当、保存場所を一覧化します。\n請求や制度に関する最終確認は、最新の通知・自治体・管理者の確認を前提とします。',
-shift:'【シフト・業務整理】\n時間帯ごとの業務、担当者、優先度、引き継ぎ事項を整理します。\n欠員や急な変更があった場合も、利用者さまの安全を最優先に再配置案をまとめます。',
-recreation:'【レクリエーション企画】\n季節、人数、身体状況、認知機能、所要時間をもとに、無理なく楽しめる活動案を作ります。\n目的・準備物・安全確認・振り返りまでセットで整理します。',
-family:'【ご家族への連絡】\n利用者さまの様子を、安心につながる丁寧な文章に整えます。\n事実と今後の対応を分け、個人情報に配慮した連絡文の下書きを作ります。',
-dx:'【介護DX・ICT相談】\n紙記録、申し送り、シフト、家族連絡など、負担の大きい業務を確認します。\nいきなり全面導入せず、小さく試して改善する手順を提案します。',
-home:'【在宅介護・地域連携】\nご本人、ご家族、ケアマネジャー、医療職、介護サービス、地域資源の役割を整理します。\n連携の抜けや重複を見える化し、切れ目のない支援につなげます。',
-management:'【施設運営支援】\n利用状況、職員負担、事故・ヒヤリハット、家族対応、業務時間などを整理します。\n現場の声を大切にしながら、改善テーマと優先順位を提案します。'
-};
-const reply=document.getElementById('reply');
-document.querySelectorAll('[data-key]').forEach(btn=>btn.addEventListener('click',()=>{reply.textContent=messages[btn.dataset.key];reply.scrollIntoView({behavior:'smooth',block:'nearest'})}));
-document.getElementById('reset').addEventListener('click',()=>reply.textContent='メニューを選択してください。');
-</script>
-</body>
-</html>
+const API_URL="https://forgeation-api.eru12121221.workers.dev";
+const SYSTEM_PROMPT="あなたはForgeation介護・福祉アカデミーのAI介護施設社員です。支援記録、レクリエーション、家族対応、介護知識、相談、施設運営を支援してください。医療判断はせず、利用者の安全・尊厳・個人情報を最優先してください。";
+const messages=document.getElementById("messages"), input=document.getElementById("messageInput");
+function addMsg(text,who){const d=document.createElement("div");d.className="msg "+who;d.textContent=text;messages.appendChild(d);messages.scrollTop=messages.scrollHeight;}
+document.querySelectorAll(".module").forEach(b=>b.addEventListener("click",()=>{input.value=b.dataset.q;input.focus();document.getElementById("experience").scrollIntoView({behavior:"smooth"});}));
+document.getElementById("reset").onclick=()=>{messages.innerHTML='<div class="msg ai">最初から始めます。何を体験しますか？</div>';input.value="";};
+document.getElementById("chatForm").addEventListener("submit",async e=>{e.preventDefault();const m=input.value.trim();if(!m)return;addMsg(m,"user");input.value="";const s=document.getElementById("sendBtn");s.disabled=true;s.textContent="…";try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:SYSTEM_PROMPT+"\n質問："+m})});const data=await r.json();if(!r.ok)throw new Error(data.error||"API error");addMsg(data.reply||"回答を取得できませんでした。","ai");}catch(err){addMsg("APIへ接続できませんでした。Cloudflare Workerの公開状態・CORS設定をご確認ください。","ai");}finally{s.disabled=false;s.textContent="送信";}});
+</script></body></html>
