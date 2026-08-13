@@ -16,11 +16,16 @@
 </style>
 
 <script>
+function forgeBack(){
+  if(document.referrer && document.referrer!==location.href){ history.back(); }
+  else { location.href='index.html#f-series'; }
+}
+
 /* F Motion API-ready configuration
    Production: set API_BASE to your Worker/API endpoint.
    No API key is embedded in this HTML. Keep secrets server-side. */
 window.FM_CONFIG = {
-  API_BASE: "", // Example: https://your-worker.example.workers.dev
+  API_BASE: location.origin, // same-origin Cloudflare Pages/Worker
   APP_ID: "f-motion",
   VERSION: "beta-Ver1.1"
 };
@@ -50,7 +55,7 @@ async function syncMotionProgress(payload){
 <body>
 <div class="wrap">
   <nav class="topnav">
-    <a class="navbtn" href="javascript:history.back()">← 戻る</a>
+    <a class="navbtn" href="#" onclick="forgeBack();return false">← 戻る</a>
     <a class="navbtn" href="index.html">🏫 Forgeationホームへ</a>
   </nav>
   <div class="brand">
