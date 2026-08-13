@@ -1356,7 +1356,7 @@ section{padding:68px 0}
 
 
 <style id="forgeation-ver3232-vision">
-/* Ver3.23.2 VISION readability + zoom */
+/* Ver3.23.3 VISION readability + zoom */
 #visionDetails>summary:after{content:""!important;display:none!important}
 #visionDetails>summary{color:#fff!important;background:rgba(9,46,89,.96)!important}
 #visionDetails .embedded-academy-body{background:linear-gradient(180deg,#0a3f75,#0b2c55)!important;color:#fff!important}
@@ -1380,6 +1380,77 @@ section{padding:68px 0}
 }
 @media(max-width:760px){
   .school-map-hotspot{width:28px!important;height:28px!important;min-width:28px!important;min-height:28px!important;font-size:15px!important}
+}
+</style>
+
+
+<style id="forgeation-ver3233-final-patch">
+/* Forgeation Ver3.23.3 一括修正 */
+
+/* 校舎マップ i マーク：全体の右寄りを左へ補正 */
+.school-map-hotspot{
+  margin-left:-2.05% !important;
+  width:clamp(22px,1.62vw,28px) !important;
+}
+
+/* 5F 職員室の旧座標だけ大きく外れていたため個別補正 */
+.school-map-hotspot[data-title="職員室"]{
+  left:29.0% !important;
+}
+
+/* 5Fの隣接2室を少し離す */
+.school-map-hotspot[data-title="未来研究室"]{
+  margin-left:-2.25% !important;
+}
+.school-map-hotspot[data-title="お問い合わせ室"]{
+  margin-left:-1.70% !important;
+}
+
+/* 1Fの重複して見える小さいiを操作用iで覆う */
+.school-map-hotspot[data-title="AI受付社員ジッピー"],
+.school-map-hotspot[data-title="来訪者受付"],
+.school-map-hotspot[data-title="校内マップ"]{
+  margin-left:-2.30% !important;
+}
+
+/* 各アカデミー課紹介：PCは2列、スマホは1列 */
+.academy-detail-gallery{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:18px !important;
+}
+.academy-detail-gallery img{
+  max-height:none !important;
+}
+
+/* 未来授業内に埋め込まれた各アカデミー課も2列 */
+.future-card .embedded-academy-body .academy-detail-gallery{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+}
+.future-card .embedded-academy-body .academy-detail-gallery img{
+  max-height:138px !important;
+}
+
+@media(max-width:640px){
+  .academy-detail-gallery,
+  .future-card .embedded-academy-body .academy-detail-gallery{
+    grid-template-columns:1fr !important;
+  }
+  .future-card .embedded-academy-body .academy-detail-gallery img{
+    max-height:none !important;
+  }
+}
+
+/* VISION：初期表示。＋／－で開閉可能 */
+#visionDetails>summary:after{
+  display:inline-block !important;
+  content:"＋" !important;
+  font-size:1.35rem !important;
+  line-height:1 !important;
+  color:#fff !important;
+}
+#visionDetails[open]>summary:after{
+  content:"－" !important;
 }
 </style>
 
@@ -1718,12 +1789,12 @@ section{padding:68px 0}
 
 
 
-<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.23.2です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
+<section id="about"><div class="container"><div class="notice">🏫 本サイトはVersion 3.23.3です。Welcome to Forgeation School・校舎マップ・1階フロントを公開中。📱 F Soccer β版・F Reception β版・AIアカデミー課アプリは、正式版に向けて鋭意開発中です。✨ 乞うご期待！</div><div class="section-head" style="margin-top:48px"><div class="section-kicker">Philosophy</div><h2>未来を資本にする。</h2><p>Forgeationは、「学校＝会社＝企業（起業）」という考えのもと、学び・挑戦・成長が循環する場所を創ります。</p></div><div class="grid feature-grid"><article class="card card-pad"><div class="icon">🎓</div><h3>共に学ぶ</h3><p>一人ひとりの可能性を信じ、学びを未来へつなげます。</p></article><article class="card card-pad"><div class="icon">🔥</div><h3>共に挑戦する</h3><p>失敗を恐れず、一歩ずつ未来を切り拓きます。</p></article><article class="card card-pad"><div class="icon">∞</div><h3>共に成長する</h3><p>AIと人の力を掛け合わせ、可能性を最大化します。</p></article></div></div></section>
 
 <section class="future-visual" id="future"><img src="forgeation-future-mind.webp" alt="Forgeationの未来図"><div class="container future-copy"><div class="section-head"><div class="section-kicker">Future Mind</div><h2>未来を切り拓くための設計図。</h2><p>学び、AI、スポーツ、看護・医療、建築・設計、社会・企業連携。すべてをつなぎ、未来を創る人を育てます。</p></div></div></section>
 
 <section id="vision" class="vision-collapsible"><div class="container">
-<details class="embedded-academy" id="visionDetails">
+<details class="embedded-academy" id="visionDetails" open>
 <summary>✨ VISIONを見る</summary>
 <div class="embedded-academy-body"><div class="section-head"><div class="section-kicker">Vision</div><h2>ノグの夢を、未来の現実へ。</h2><p>年商10億円はゴールではありません。未来への挑戦を続けるための力です。</p></div><div class="grid vision-grid"><article class="card visual-card"><img src="vision-10billion.webp" alt="年商10億円の長期ビジョン"><div class="card-body"><h3>年商10億円の未来</h3><p>利益を、次の挑戦と学びへ循環させる企業を目指します。</p></div></article><article class="card visual-card"><img src="school-main-visual.webp" alt="3人の開校宣言"><div class="card-body"><h3>3人で始める開校宣言</h3><p>ノグ、ジッピー、フォージ。力をひとつに、未来を切り拓きます。</p></div></article><article class="card visual-card"><img src="opening-declaration.webp" alt="Forgeation開校宣言"><div class="card-body"><h3>開校宣言</h3><p>未来は、誰かが創るものではない。共に創るものです。</p></div></article></div></div></div></details>
 </section>
@@ -2222,7 +2293,8 @@ print(lesson + "を始めよう！")</code>
             <li>目配り：転倒・水分・環境への気付き</li>
             <li>気配り：表情や体調に合わせた声掛け</li>
             <li>心配り：思いに寄り添い、信頼を育てる</li>
-            <li>Mind Pointと「3配りマスター」</li>
+            <li>Mi
+nd Pointと「3配りマスター」</li>
           </ul>
         
           <a class="f-series-play-button" href="./F_Mind_beta_Ver1.html">❤️ F Mindを体験する</a>
@@ -2269,8 +2341,7 @@ print(lesson + "を始めよう！")</code>
         </summary>
         <div class="f-series-detail">
           <ul>
-            <li>新人AI先生のキャラク
-ター育成</li>
+            <li>新人AI先生のキャラクター育成</li>
             <li>授業クリエイター・教材づくり</li>
             <li>SST・学習支援・クラス運営チャレンジ</li>
           </ul>
