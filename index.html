@@ -3197,7 +3197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const actions = document.querySelector('.school-room-actions');
   if (actions && !document.getElementById('schoolRoomVision')) {
     const a = document.createElement('a');
-    a.id='schoolRoomVision'; a.className='school-room-vision'; a.href='#future-lessons'; a.textContent='🎮 体験へ進む';
+    a.id='schoolRoomVision'; a.className='school-room-vision'; a.href='#vision'; a.textContent='✨ VISIONを見る';
     actions.insertBefore(a, document.getElementById('schoolRoomCancel'));
   }
 
@@ -3495,8 +3495,8 @@ document.querySelectorAll('.school-map-hotspot').forEach(function(b){
 
   const demoButton=document.getElementById('schoolRoomVision');
   if(demoButton){
-    demoButton.href='#future-lessons';
-    demoButton.textContent='🎮 体験へ進む';
+    demoButton.href='#vision';
+    demoButton.textContent='✨ VISIONを見る';
   }
 
 const inside=document.getElementById('staffRoomInside');
