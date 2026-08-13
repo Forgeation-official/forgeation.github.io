@@ -1,1 +1,100 @@
-<!DOCTYPE html><html lang='ja'><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>F Robotics β</title><style>body{font-family:sans-serif;background:linear-gradient(#07182f,#0b5fae);color:#fff;max-width:430px;margin:auto;padding:18px}.c{background:#fff;color:#123;padding:18px;border-radius:18px}.g{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.b{background:#153d69;padding:18px;border-radius:18px;text-align:center}input{width:100%;padding:14px;border-radius:14px;border:0;margin-top:18px}</style><body><h2>🤖 F Robotics</h2><p>AI・ロボティクスアカデミー</p><div class='c'><b>ジッピー先生へようこそ！</b><br>AI・ロボット・ドローン・プログラミングを楽しく学ぼう！</div><div class='g'><div class='b'>🤖<br>AI体験</div><div class='b'>💻<br>プログラミング</div><div class='b'>🚁<br>ドローン</div><div class='b'>🦾<br>ロボット工作</div><div class='b'>🧠<br>AI社員を作る</div><div class='b'>🏆<br>チャレンジ</div></div><input placeholder='ジッピー先生に質問'></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>F Robotics β</title>
+<style>
+:root{--bg1:#07182f;--bg2:#0b5fae;--a1:#49d8ff;--a2:#7859ff;--panel:#ffffff10;--line:#ffffff24;--text:#f8fbff;--muted:#c9d6ea}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;background:radial-gradient(circle at 70% 10%,#7859ff33,transparent 35%),linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--text);min-height:100vh}
+button,textarea{font:inherit}
+button{cursor:pointer}
+.app{width:min(100%,470px);margin:auto;padding:18px;min-height:100vh}
+.topbar{display:flex;align-items:center;gap:12px}
+.circle{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#ffffff10;color:#fff;font-size:1.5rem}
+.brand{display:flex;align-items:center;gap:10px;flex:1}
+.logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,var(--a1),var(--a2));font-weight:900;font-size:1.5rem}
+.brand strong{display:block} .brand small{color:var(--muted)}
+.badge{margin:12px 0;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#ffffff0b;font-size:.8rem;font-weight:800}
+.welcome,.progress,.practice-card{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:16px;margin:12px 0}
+.welcome-head{display:flex;align-items:center;gap:12px} .avatar{font-size:2rem} h1{font-size:1.1rem;margin:0} p{line-height:1.65}
+.progress-head{display:flex;justify-content:space-between;font-weight:800} .bar{height:9px;background:#ffffff18;border-radius:999px;margin-top:10px;overflow:hidden} .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--a1),var(--a2));width:18%}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0} .tabs button{padding:11px;border-radius:12px;border:1px solid var(--line);background:#ffffff08;color:#fff;font-weight:800} .tabs button.active{background:linear-gradient(90deg,var(--a1),var(--a2));color:#10213b}
+.panel{display:none} .panel.active{display:block}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.menu-item{border:1px solid var(--line);background:#ffffff0b;color:#fff;border-radius:18px;padding:14px 8px;min-height:104px}
+.icon-circle{font-size:1.8rem;display:block;margin-bottom:8px} .menu-label{font-size:.78rem;font-weight:800;line-height:1.25}
+.practice-card textarea,.chat-form textarea{width:100%;border:1px solid var(--line);border-radius:15px;background:#fff;color:#17243b;padding:13px;resize:vertical}
+.action{width:100%;padding:12px;border:0;border-radius:14px;background:linear-gradient(90deg,var(--a1),var(--a2));color:#11223d;font-weight:900;margin-top:10px}
+.prompt-output{white-space:pre-wrap;margin-top:10px;padding:12px;border-radius:14px;background:#ffffff0b;line-height:1.6}
+.chat-log{min-height:170px;max-height:330px;overflow:auto;padding:12px;border-radius:16px;background:#07111fcc;border:1px solid var(--line)}
+.msg{padding:11px 13px;border-radius:14px;margin:8px 0;line-height:1.55} .msg.user{margin-left:28px;background:var(--a2)} .msg.ai{margin-right:28px;background:#ffffff14}
+.chat-form{display:grid;grid-template-columns:1fr 54px;gap:9px;margin-top:10px} .send{border:0;border-radius:50%;background:linear-gradient(145deg,var(--a1),var(--a2));font-size:1.2rem;font-weight:900}
+.footer{text-align:center;color:var(--muted);font-size:.75rem;margin:16px 0}
+@media(max-width:390px){.menu-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:700px){body{display:grid;place-items:center;padding:20px}.app{min-height:auto;border-radius:34px;border:1px solid var(--line);box-shadow:0 30px 80px #0008}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="topbar">
+<button class="circle" id="backBtn" aria-label="ホームページへ戻る">‹</button>
+<div class="brand"><span class="logo">🤖</span><div><strong>F Robotics</strong><small>AI・ロボティクスアカデミー</small></div></div>
+<button class="circle" id="resetBtn" aria-label="リセット">↻</button>
+</header>
+<div class="badge">📱 学ぶだけで終わらない。使って身につける。</div>
+<section class="welcome"><div class="welcome-head"><div class="avatar">🤖</div><div><h1>ジッピー先生へようこそ！</h1></div></div><p>AI・ロボット・ドローン・プログラミングを、ジッピー先生と一緒に楽しく学びます。</p></section>
+<section class="progress"><div class="progress-head"><span>今日の学習進捗</span><span id="progressText">18%</span></div><div class="bar"><span id="progressBar"></span></div></section>
+<div class="tabs"><button class="active" data-tab="learn">学ぶ</button><button data-tab="practice">実習</button><button data-tab="chat">相談</button></div>
+
+<section class="panel active" id="learn">
+<div class="menu-grid">
+<button class="menu-item topic" data-prompt="AIとロボットがどのようにつながるか、小学生にも分かるように教えてください。"><span class="icon-circle">🤖</span><span class="menu-label">AI体験</span></button>
+<button class="menu-item topic" data-prompt="ロボットを動かすプログラミングの基本を、簡単な例で教えてください。"><span class="icon-circle">💻</span><span class="menu-label">プログラミング</span></button>
+<button class="menu-item topic" data-prompt="ドローンの仕組み、安全な操作、AIとの関係を教えてください。"><span class="icon-circle">🚁</span><span class="menu-label">ドローン</span></button>
+<button class="menu-item topic" data-prompt="ロボット工作を始めるときの基本部品と考え方を教えてください。"><span class="icon-circle">🦾</span><span class="menu-label">ロボット工作</span></button>
+<button class="menu-item topic" data-prompt="AI社員を作るには何が必要か、初心者向けに手順を教えてください。"><span class="icon-circle">🧠</span><span class="menu-label">AI社員を作る</span></button>
+<button class="menu-item topic" data-prompt="AI・ロボティクスのミニチャレンジ問題を1問出してください。"><span class="icon-circle">🏆</span><span class="menu-label">チャレンジ</span></button>
+</div>
+</section>
+
+<section class="panel" id="practice">
+<div class="practice-card">
+<h2 style="font-size:1rem;margin-top:0">ロボティクス・ミニ実習</h2>
+<p>身近な場所で使えるロボットを1つ考え、役割・センサー・安全対策を書いてみよう。</p>
+<textarea id="practiceInput" placeholder="ここに書いてみよう…"></textarea>
+<button class="action" id="practiceToChat">ジッピー先生に見てもらう</button>
+</div>
+</section>
+
+<section class="panel" id="chat">
+<div class="chat-log" id="chatLog"><div class="msg ai">こんにちは。AI・ロボティクスアカデミーのジッピー先生です。上のメニューから選ぶか、自由に質問してください。</div></div>
+<form class="chat-form" id="chatForm">
+<textarea id="messageInput" placeholder="ジッピー先生へ質問…" aria-label="質問"></textarea>
+<button class="send" id="sendBtn" type="submit" aria-label="送信">➤</button>
+</form>
+</section>
+
+<div class="footer">F Robotics β／Forgeation Network School｜API接続版</div>
+</main>
+<script>
+const API_URL="https://forgeation-api.eru12121221.workers.dev";
+const progressKey="f-robotics-beta_progress";
+let progress=Number(localStorage.getItem(progressKey)||18);
+function setProgress(v){progress=Math.min(100,Math.max(progress,v));localStorage.setItem(progressKey,String(progress));document.getElementById("progressText").textContent=progress+"%";document.getElementById("progressBar").style.width=progress+"%";}
+setProgress(progress);
+document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-tab]").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));btn.classList.add("active");document.getElementById(btn.dataset.tab).classList.add("active");}));
+document.getElementById("backBtn").addEventListener("click",()=>location.href="./index.html");
+document.getElementById("resetBtn").addEventListener("click",()=>{localStorage.removeItem(progressKey);setProgress(18);document.getElementById("chatLog").innerHTML='<div class="msg ai">学習状態をリセットしました。今日も一緒に学びましょう。</div>';});
+
+function openChatWith(text){document.querySelector('[data-tab="chat"]').click();document.getElementById("messageInput").value=text;document.getElementById("messageInput").focus();}
+document.querySelectorAll(".topic").forEach(btn=>btn.addEventListener("click",()=>{setProgress(progress+4);openChatWith(btn.dataset.prompt);}));
+document.getElementById("practiceToChat").addEventListener("click",()=>{const v=document.getElementById("practiceInput").value.trim();if(!v)return;openChatWith("次の実習内容について、良い点と改善点をやさしく教えてください。\\n"+v);setProgress(progress+6);});
+
+function addMsg(text,type){const d=document.createElement("div");d.className="msg "+type;d.textContent=text;document.getElementById("chatLog").appendChild(d);d.scrollIntoView({behavior:"smooth"});}
+document.getElementById("chatForm").addEventListener("submit",async e=>{e.preventDefault();const input=document.getElementById("messageInput");const message=input.value.trim();if(!message)return;addMsg(message,"user");input.value="";const send=document.getElementById("sendBtn");send.disabled=true;send.textContent="…";try{const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:`あなたはForgeation AI・ロボティクスアカデミー課のジッピー先生です。AI、ロボット、ドローン、IoT、プログラミング、社会実装を、学習者のレベルに合わせて日本語で親切に教えてください。安全を最優先し、不明なことを推測で断定しないでください。 質問：${message}`})});const data=await response.json();if(!response.ok)throw new Error(data.error||"通信失敗");addMsg(data.reply||"回答を取得できませんでした。","ai");setProgress(progress+5);}catch(err){addMsg("通信できませんでした。Cloudflare Workerの状態をご確認ください。","ai");}finally{send.disabled=false;send.textContent="➤";}});
+(function(){let id=localStorage.getItem("forgeation_visitor_id");if(!id){id=crypto.randomUUID?.()||"visitor-"+Date.now();localStorage.setItem("forgeation_visitor_id",id);}fetch(API_URL+"/visit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({visitorId:id,page:"f-robotics-beta"})}).catch(()=>{});})();
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>F DRONE ∞ — REAL FPV CONTROLLER Ver14</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020914;color:#fff;font-family:Arial,"Noto Sans JP",sans-serif;touch-action:none}
+#app{position:relative;width:100%;height:100%;background:#020914}
+#scene{position:absolute;inset:0;background:url("f_drone_singapore_fpv.webp") center 42%/cover no-repeat;transform:scale(1.04);transition:transform .08s linear,filter .2s ease}
+#shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,5,15,.04),rgba(0,5,15,.08) 62%,rgba(0,5,15,.32));pointer-events:none}
+.top{position:absolute;top:max(12px,env(safe-area-inset-top));left:14px;right:14px;display:flex;justify-content:space-between;gap:10px;pointer-events:none}
+.brand,.telemetry{background:rgba(3,12,26,.78);border:1px solid rgba(90,220,255,.55);border-radius:14px;padding:10px 14px;backdrop-filter:blur(8px);font-weight:800}
+.telemetry{display:flex;gap:12px;font-size:12px}
+.center{position:absolute;left:50%;top:7%;transform:translateX(-50%);text-align:center;text-shadow:0 2px 8px #000;pointer-events:none}
+.center h1{font-size:clamp(18px,3vw,34px);margin:0 0 5px;letter-spacing:2px}.center div{font-size:12px;letter-spacing:2px}
+.cross{position:absolute;left:50%;top:42%;width:44px;height:44px;transform:translate(-50%,-50%);opacity:.8;pointer-events:none}
+.cross:before,.cross:after{content:"";position:absolute;background:#dffaff}.cross:before{width:44px;height:1px;top:21px}.cross:after{height:44px;width:1px;left:21px}
+.controller{touch-action:none;user-select:none;-webkit-user-select:none;position:absolute;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(760px,94vw);height:clamp(150px,28vh,260px);background:linear-gradient(#252b32,#0d1117);border:2px solid #4b535e;border-radius:38px 38px 22px 22px;box-shadow:0 15px 45px #000c;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,42px);gap:12px}
+.stick{width:clamp(105px,18vw,180px);height:clamp(105px,18vw,180px);border-radius:50%;background:radial-gradient(circle,#111 0 28%,#222 29% 52%,#080a0d 53% 100%);border:3px solid #555;position:relative;touch-action:none;box-shadow:inset 0 0 25px #000}
+.knob{position:absolute;left:50%;top:50%;width:38%;height:38%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#777,#191919 48%,#050505);border:2px solid #777;box-shadow:0 5px 12px #000}
+.mid{flex:1;text-align:center;min-width:120px}.mid b{display:block;font-size:clamp(16px,2.2vw,25px);margin-bottom:10px}.status{font-size:11px;opacity:.8;margin:5px}
+.buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+button{border:1px solid #68727d;background:#171d24;color:#fff;border-radius:9px;padding:8px 5px;font-weight:800;font-size:11px}
+button:active{transform:scale(.96);background:#16495d}#hover{color:#75ff96}#home{color:#ffd45c}
+.help{position:absolute;left:50%;bottom:calc(max(8px,env(safe-area-inset-bottom)) + clamp(150px,28vh,260px) + 8px);transform:translateX(-50%);background:#07111dcc;border:1px solid #4fdfff66;padding:6px 12px;border-radius:10px;font-size:11px;white-space:nowrap}
+@media(max-width:600px){
+ .telemetry{gap:6px;padding:7px;font-size:9px}.brand{padding:8px;font-size:12px}.center{top:13%}
+ .controller{height:190px;padding:12px 14px;border-radius:28px 28px 18px 18px}
+ .stick{width:112px;height:112px}.mid{min-width:90px}.buttons button{font-size:9px;padding:7px 3px}.help{bottom:205px;font-size:9px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+ <div id="scene"></div><div id="shade"></div>
+ <div class="top">
+   <div class="brand">F DRONE ∞<br><small>AI ROBOTICS LAB</small></div>
+   <div class="telemetry"><span id="gps">GPS ▮▮▮▮</span><span id="bat">BAT 98%</span><span id="alt">ALT 40m</span><span id="spd">SPD 0km/h</span><span id="hdg">HDG 000°</span></div>
+ </div>
+ <div class="center"><h1>SINGAPORE FOOTBALL</h1><div>MARINA BAY / LIVE FPV CAMERA</div></div>
+ <div class="cross"></div>
+ <div class="help">左：高度 / 旋回　｜　右：前後 / 左右移動　｜　2本同時操作</div>
+ <div class="controller">
+   <div class="stick" id="leftStick"><div class="knob"></div></div>
+   <div class="mid">
+     <b>F DRONE ∞</b>
+     <div class="status" id="status">LIVE FPV / HOVER</div>
+     <div class="buttons"><button id="camera">CAMERA</button><button id="hover">HOVER</button><button id="home">RETURN</button></div>
+   </div>
+   <div class="stick" id="rightStick"><div class="knob"></div></div>
+ </div>
+</div>
+<script>
+const scene=document.getElementById('scene');
+const spd=document.getElementById('spd');
+const alt=document.getElementById('alt');
+const hdg=document.getElementById('hdg');
+const statusEl=document.getElementById('status');
+
+let x=0,y=0,z=40,yaw=0;
+let vx=0,vy=0;
+let leftX=0,leftY=0,rightX=0,rightY=0;
+let last=performance.now();
+
+function loop(now){
+  const dt=Math.min(.035,(now-last)/1000); last=now;
+
+  // 左スティック：上下=高度、左右=Yaw（連続360°）
+  yaw=(yaw + leftX*95*dt + 360)%360;
+  z=Math.max(5,Math.min(120,z + leftY*24*dt));
+
+  // 右スティック：上下=前後、左右=左右移動
+  const accel=34;
+  vx += rightX*accel*dt;
+  vy += rightY*accel*dt;
+
+  const drag=Math.pow(.06,dt);
+  if(Math.abs(rightX)<.02) vx*=drag;
+  if(Math.abs(rightY)<.02) vy*=drag;
+  vx=Math.max(-9,Math.min(9,vx));
+  vy=Math.max(-9,Math.min(9,vy));
+
+  x += vx*dt;
+  y += vy*dt;
+
+  // 1枚画像なので移動域だけは画面外へ抜けない範囲に制限
+  x=Math.max(-7,Math.min(7,x));
+  y=Math.max(-5,Math.min(5,y));
+
+  const speed=Math.hypot(vx,vy)*2.6;
+
+  // 外部画像はそのまま。操縦量だけで視界を連続変化。
+  // yawは360°数値管理。1枚画像なので視界自体は擬似旋回。
+  const visualYaw=((yaw+180)%360)-180;
+  const tilt=Math.max(-4,Math.min(4,visualYaw/45));
+  const zoom=1.12 + (z-40)/1500;
+  scene.style.transform=`scale(${zoom}) translate(${x}%,${y}%) rotate(${tilt}deg)`;
+
+  spd.textContent='SPD '+Math.round(speed)+'km/h';
+  alt.textContent='ALT '+Math.round(z)+'m';
+  hdg.textContent='HDG '+String(Math.round(yaw)%360).padStart(3,'0')+'°';
+  statusEl.textContent=
+    speed>.8||Math.abs(leftX)>.05||Math.abs(leftY)>.05
+      ? 'LIVE FPV / FLYING'
+      : 'LIVE FPV / HOVER';
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+// PC補助操作
+const held=new Set();
+function syncKeys(){
+  leftX=(held.has('a')?-1:0)+(held.has('d')?1:0);
+  leftY=(held.has('q')?-1:0)+(held.has('e')?1:0);
+  rightX=(held.has('ArrowLeft')?-1:0)+(held.has('ArrowRight')?1:0);
+  rightY=(held.has('ArrowUp')?1:0)+(held.has('ArrowDown')?-1:0);
+}
+addEventListener('keydown',e=>{
+  if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','q','e'].includes(e.key)){
+    e.preventDefault(); held.add(e.key); syncKeys();
+  }
+});
+addEventListener('keyup',e=>{held.delete(e.key);syncKeys()});
+
+// スマホ：左右2本を別Pointerで同時操作
+function setupStick(el,type){
+  const knob=el.querySelector('.knob');
+  let pointerId=null;
+
+  function setFrom(clientX,clientY){
+    const r=el.getBoundingClientRect();
+    let dx=clientX-(r.left+r.width/2);
+    let dy=clientY-(r.top+r.height/2);
+    const max=r.width*.31;
+    const len=Math.hypot(dx,dy);
+    if(len>max){dx*=max/len;dy*=max/len}
+
+    knob.style.transform=
+      `translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
+
+    const nx=dx/max;
+    const ny=-dy/max;
+
+    if(type==='left'){
+      leftX=nx;
+      leftY=ny;
+    }else{
+      rightX=nx;
+      rightY=ny;
+    }
+  }
+
+  function reset(){
+    pointerId=null;
+    knob.style.transition='transform .12s ease-out';
+    knob.style.transform='translate(-50%,-50%)';
+    setTimeout(()=>knob.style.transition='',130);
+
+    if(type==='left'){leftX=0;leftY=0}
+    else{rightX=0;rightY=0}
+  }
+
+  el.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    pointerId=e.pointerId;
+    try{el.setPointerCapture(pointerId)}catch(_){}
+    setFrom(e.clientX,e.clientY);
+  });
+
+  el.addEventListener('pointermove',e=>{
+    if(e.pointerId===pointerId){
+      e.preventDefault();
+      setFrom(e.clientX,e.clientY);
+    }
+  });
+
+  el.addEventListener('pointerup',e=>{
+    if(e.pointerId===pointerId) reset();
+  });
+  el.addEventListener('pointercancel',reset);
+  el.addEventListener('lostpointercapture',reset);
+}
+
+setupStick(document.getElementById('leftStick'),'left');
+setupStick(document.getElementById('rightStick'),'right');
+
+document.getElementById('hover').onclick=()=>{
+  leftX=leftY=rightX=rightY=0;
+  vx=vy=0;
+  statusEl.textContent='LIVE FPV / HOVER';
+};
+
+document.getElementById('home').onclick=()=>{
+  leftX=leftY=rightX=rightY=0;
+  vx=vy=0;
+  x=y=0;
+  z=40;
+  yaw=0;
+  statusEl.textContent='RETURN HOME / READY';
+};
+
+document.getElementById('camera').onclick=()=>{
+  scene.style.filter='brightness(1.18) saturate(1.08)';
+  statusEl.textContent='PHOTO CAPTURED';
+  setTimeout(()=>scene.style.filter='',220);
+};
+</script>
+</body>
+</html>
