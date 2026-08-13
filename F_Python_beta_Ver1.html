@@ -33,7 +33,7 @@
 <button class="btn" onclick="mode(this,2)"><span class="ico">🐞</span>バグを直す</button>
 <button class="btn" onclick="mode(this,3)"><span class="ico">🧠</span>Pythonクイズ</button>
 <button class="btn" onclick="mode(this,4)"><span class="ico">🤖</span>AI先生</button>
-<button class="btn" onclick="mode(this,5)"><span class="ico">🏆</span>F Challenge</button>
+<button class="btn" onclick="mode(this,5)"><span class="ico">🏆</span>コードミッション</button>
 </div>
 <div class="msg" id="msg">API接続対応版。AI先生はCloudflare Worker経由でOpenAI APIへ接続します。</div>
 </div>
@@ -51,7 +51,7 @@ const data=[
 ["バグを直す","エラーを探そう：カッコが1つ足りません。直せたらクリア！",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Find the bug!"</span>`],
 ["Pythonクイズ","Q. print() は何をする命令？ ①表示する ②消す ③保存する",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Quiz Time!"</span>)`],
 ["AI先生","下の入力欄から、Pythonの質問やエラー内容をAI先生へ送れます。",`<span class="n">01</span>  <span class="fn">AI_Teacher</span> = <span class="str">"一緒に考えよう"</span>`],
-["F Challenge","制限時間内にミッションを攻略する発展モード。XP +30！",`<span class="n">01</span>  <span class="kw">for</span> level <span class="kw">in</span> <span class="fn">range</span>(1, 6):\n<span class="n">02</span>      <span class="kw">print</span>(level)`]
+["コードミッション","指定された課題をPythonで解いて、XPを獲得する実践モード。XP +30！",`<span class="n">01</span>  <span class="kw">for</span> level <span class="kw">in</span> <span class="fn">range</span>(1, 6):\n<span class="n">02</span>      <span class="kw">print</span>(level)`]
 ];
 function mode(b,i){
 document.querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
