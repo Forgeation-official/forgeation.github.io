@@ -2122,10 +2122,10 @@ section{padding:68px 0}
         <a href="#sports-academy-detail">分析授業を見る</a>
       </article>
       <article class="future-card">
-        <div class="future-icon">🛡️</div>
-        <h3>AI倫理・安全</h3>
-        <p>個人情報、著作権、誤情報、AIの安全な使い方を学びます。</p>
-        <a href="#ai-academy-detail">安全授業を見る</a>
+        <div class="future-icon">🩺</div>
+        <h3>看護アカデミー</h3>
+        <p>看護基礎、患者対応、シミュレーション、AI活用を通じて未来の看護を学びます。</p>
+        <a href="#nursing-academy-detail">看護アカデミーを見る</a>
       </article>
       <article class="future-card">
         <div class="future-icon">🚀</div>
@@ -2297,8 +2297,8 @@ print(lesson + "を始めよう！")</code>
 
 <section class="phoenix" id="phoenix"><div class="container"><div class="phoenix-box"><div class="section-head"><div class="section-kicker">Project Phoenix</div><h2>何度でも挑戦し、何度でも未来へ羽ばたく。</h2><p>未来は待つものではない。創るものだ。</p></div><p><strong>PHOENIX</strong>は、Forgeationの挑戦する精神。失敗しても、学び、立ち上がり、次の未来へ進む。</p><p><strong>挑戦は、未来を超える。</strong></p></div></div></section>
 
-<section id="contact"><div class="container"><div class="section-head"><div class="section-kicker">Contact</div><h2>お問い合わ
-せ</h2><p>共に挑
+<section id="contact"><div class="container"><div class="section-head"><div class="sec
+tion-kicker">Contact</div><h2>お問い合わせ</h2><p>共に挑
 戦したい方、連携・取材・支援をご検討の方からのご連絡をお待ちしています。</p></div><div class="contact-panel"><div class="contact-box chat-box"><h3>🤖 ジッピー相談窓口</h3><p>まずは相談内容を選んでください。現在は案内とメール作成を行う簡易版です。</p><div class="chat-options"><button data-topic="創業メンバー・仲間として参加したい">🤝 創業メンバー・仲間として参加したい</button><button data-topic="アカデミーについて相談したい">🏫 アカデミーについて相談したい</button><button data-topic="連携・パートナーシップを提案したい">🌍 連携・パートナーシップを提案したい</button><button data-topic="メディア・取材について問い合わせたい">📰 メディア・取材について問い合わせたい</button></div><div class="chat-reply" id="chatReply">こんにちは。ジッピーです。ご相談内容を選んでください。</div></div><div class="contact-box"><h3>Forgeationへ連絡する</h3><div class="contact-list"><div>🤝 共に挑戦する仲間・創業メンバー</div><div>🌍 国内外の連携・パートナーシップ</div><div>💡 企画・技術・教育に関するご提案</div><div>📰 メディア・取材</div></div><a class="button button-primary" id="mailButton" href="mailto:eru12121221@gmail.com?subject=Forgeationへのお問い合わせ">メールで問い合わせる</a></div></div></div></section>
 
 <section class="f-series-section" id="f-series">
@@ -2545,7 +2545,7 @@ print(lesson + "を始めよう！")</code>
 <div class="card card-pad"><h3>🚁 Fドローン</h3><p>AIアカデミー課の看板コンテンツ。ゲーム感覚でドローン・AI・IoT・センサーを学習。</p></div>
 <div class="card card-pad"><h3>🥽 Fゴーグル</h3><p>建設アカデミー課。VR風の現場体験、安全確認や建設シミュレーション。</p></div>
 <div class="card card-pad"><h3>🏆 Fチャレンジ</h3><p>サッカーアカデミー課。PK・ドリブル・戦術クイズなどをアプリ限定で搭載予定。</p></div>
-<div class="card card-pad"><h3>🏅 F Motion</h3><p>スポーツアカデミー課。反応・視野・判断・正確性をゲームで鍛える。</p><p><a class="f-series-play-button" href="./F_Motion_beta_Ver1.1_API接続準備版.html">🏅 F Motionを体験する</a></p></div>
+<div class="card card-pad"><h3>🏅 F Motion</h3><p>スポーツアカデミー課。反応・視野・判断・正確性をゲームで鍛える。</p></div>
 </div>
 </div>
 </section>
@@ -3164,8 +3164,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // データ分析：スポーツアカデミー課をその場に埋め込み
     makeEmbedded(byTitle('データ分析'), '分析授業を見る', [document.getElementById('sports-academy-detail')]);
 
-    // AI倫理・安全：AIアカデミー課へ統一
-    makeEmbedded(byTitle('AI倫理・安全'), 'AIアカデミー課を見る', [document.getElementById('ai-academy-detail')]);
+    // 看護アカデミー：旧AI倫理・安全カードの位置へ
+    makeEmbedded(byTitle('看護アカデミー'), '看護アカデミーを見る', [document.getElementById('nursing-academy-detail')]);
 
     // 未来プロジェクトは未来研究へ
     const futureCard = byTitle('未来プロジェクト');
@@ -3475,7 +3475,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 .staff-room-heading{margin:18px 0 6px;color:#9fe9ff;font-weight:900;}
 @media(max-width:640px){.staff-room-partners{grid-template-columns:1fr;}}
 
-.f-motion-home-hidden{display:none!important;}
+
 </style>
 
 <script id="forgeation-ver3250-corrections-script">
@@ -3485,13 +3485,7 @@ document.addEventListener('DOMContentLoaded', function(){
     b.setAttribute('aria-label',(b.dataset.title || '教室')+'の詳細を表示');
   });
 
-  const ethics=[...document.querySelectorAll('.future-card')].find(c=>c.querySelector('h3')?.textContent.trim()==='AI倫理・安全');
-  if(ethics){
-    const link=ethics.querySelector('a');
-    if(link){link.href='#ai-academy-detail';link.textContent='AIアカデミー課を見る';}
-  }
-
-  document.querySelectorAll('.school-map-hotspot').forEach(function(b){
+document.querySelectorAll('.school-map-hotspot').forEach(function(b){
     if(b.dataset.title==='デモルーム'){
       b.dataset.href='#future-lessons';
       b.dataset.description='AI社員や各アカデミー、Fシリーズ、未来授業のデモを体験できるルームです。';
@@ -3505,17 +3499,7 @@ document.addEventListener('DOMContentLoaded', function(){
     demoButton.textContent='🎮 体験へ進む';
   }
 
-  document.querySelectorAll('.f-series-card').forEach(function(card){
-    if(card.querySelector('h3')?.textContent.trim()==='F Motion'){
-      card.classList.add('f-motion-home-hidden');
-    }
-  });
-  document.querySelectorAll('#fseries .card').forEach(function(card){
-    const title=card.querySelector('h3')?.textContent.trim() || '';
-    if(title.includes('F Motion')) card.classList.add('f-motion-home-hidden');
-  });
-
-  const inside=document.getElementById('staffRoomInside');
+const inside=document.getElementById('staffRoomInside');
   if(inside && !document.getElementById('staffRoomPartners')){
     const wrap=document.createElement('div');
     wrap.id='staffRoomPartners';
