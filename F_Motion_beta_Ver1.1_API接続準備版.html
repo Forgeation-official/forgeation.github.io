@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>F Motion beta Ver1</title>
+<style>
+:root{--bg:#06162f;--panel:#10284d;--line:#426181;--text:#f7fbff;--sub:#b8d1e8;--accent:#69dff4;--good:#6df0aa}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top,#153c67 0,#071a36 38%,#030d1d 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;min-height:100vh}
+.wrap{max-width:920px;margin:auto;padding:22px 18px 48px}.topnav{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.navbtn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #55789b;background:#10284d;color:#fff;border-radius:14px;padding:11px 15px;font-weight:900}.brand{display:flex;align-items:center;gap:14px;margin-bottom:20px}.logo{width:66px;height:66px;border-radius:19px;background:linear-gradient(145deg,#26c6f5,#086de0 60%,#f27b5d);display:grid;place-items:center;font-size:42px;font-weight:900;font-style:italic;box-shadow:0 10px 35px #0007}.brand h1{margin:0;font-size:28px}.brand small{letter-spacing:.2em;color:#9edcf7;font-weight:800}
+.hero,.card{border:1px solid #4c6d8c;border-radius:28px;background:#10284de8;box-shadow:0 18px 45px #0004}.hero{padding:25px;margin-bottom:18px}.eyebrow{display:inline-block;border:1px solid #6886a4;border-radius:999px;padding:7px 12px;color:#dcecff;font-weight:800;letter-spacing:.08em}.hero h2{font-size:38px;margin:14px 0 5px}.hero p{color:#c5dbed;line-height:1.8;margin:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{background:#071a35;border:1px solid #385879;border-radius:18px;padding:13px;text-align:center}.stat b{display:block;font-size:22px;color:#78e6f7}.stat span{font-size:12px;color:#9bb5cc}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.card{padding:20px;min-height:190px;display:flex;flex-direction:column}.icon{font-size:32px}.card h3{font-size:22px;margin:9px 0}.card p{color:#bcd2e6;line-height:1.55;margin:0 0 15px}.btn{margin-top:auto;border:0;border-radius:15px;padding:13px 16px;font-weight:900;font-size:15px;background:#f8fbff;color:#07162d;cursor:pointer}.btn:active{transform:scale(.98)}
+#game{display:none;margin-top:18px}.gamebox{padding:22px;text-align:center}.target{height:260px;border-radius:25px;background:#06152c;border:1px solid #3e6183;display:grid;place-items:center;user-select:none;touch-action:manipulation;overflow:hidden}.target.ready{background:#0b213e}.target.go{background:#dffcff;color:#06203d}.big{font-size:48px;font-weight:1000}.hint{color:#aac4da;min-height:48px;line-height:1.5}.result{font-size:24px;font-weight:900;color:#7be9f7}.actions{display:flex;gap:10px;margin-top:12px}.actions button{flex:1}.secondary{background:#17385e;color:white;border:1px solid #55789b}
+.footer{text-align:center;color:#7695b1;font-size:12px;margin-top:28px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.hero h2{font-size:31px}.stats{grid-template-columns:repeat(3,1fr)}.stat b{font-size:18px}.target{height:230px}}
+</style>
+
+<script>
+/* F Motion API-ready configuration
+   Production: set API_BASE to your Worker/API endpoint.
+   No API key is embedded in this HTML. Keep secrets server-side. */
+window.FM_CONFIG = {
+  API_BASE: "", // Example: https://your-worker.example.workers.dev
+  APP_ID: "f-motion",
+  VERSION: "beta-Ver1.1"
+};
+async function fmApi(path, options={}) {
+  const base = window.FM_CONFIG.API_BASE;
+  if (!base) return {ok:false, localOnly:true};
+  const res = await fetch(base + path, {
+    ...options,
+    headers: {"Content-Type":"application/json", ...(options.headers||{})}
+  });
+  if (!res.ok) throw new Error("API " + res.status);
+  return await res.json();
+}
+async function syncMotionProgress(payload){
+  try{
+    return await fmApi("/api/f-motion/progress", {
+      method:"POST",
+      body:JSON.stringify(payload)
+    });
+  }catch(e){
+    console.warn("F Motion sync pending:", e);
+    return {ok:false, pending:true};
+  }
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="navbtn" href="javascript:history.back()">← 戻る</a>
+    <a class="navbtn" href="index.html">🏫 Forgeationホームへ</a>
+  </nav>
+  <div class="brand">
+    <div class="logo">F</div>
+    <div><h1>F Motion</h1><small>SPORTS ACADEMY</small></div>
+  </div>
+
+  <section class="hero">
+    <span class="eyebrow">APP PREVIEW · beta Ver1</span>
+    <h2>動け。見抜け。超えていけ。</h2>
+    <p>AI時代のスポーツ基礎トレーニング。反応・視野・判断・正確性をゲームで鍛え、昨日の自分を超えていく。</p>
+    <div class="stats">
+      <div class="stat"><b id="xp">0</b><span>XP</span></div>
+      <div class="stat"><b id="best">--</b><span>BEST REACTION</span></div>
+      <div class="stat"><b id="level">1</b><span>LEVEL</span></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card"><div class="icon">⚡</div><h3>F REACTION</h3><p>合図が出た瞬間に反応。ミリ秒単位で反応速度を測定する。</p><button class="btn" onclick="startReaction()">挑戦する</button></section>
+    <section class="card"><div class="icon">👁️</div><h3>F VISION</h3><p>一瞬だけ現れる方向を見抜く。視覚認知と集中力に挑戦。</p><button class="btn" onclick="startVision()">挑戦する</button></section>
+    <section class="card"><div class="icon">🧠</div><h3>F JUDGE</h3><p>表示された指示を瞬時に判断。正解を選ぶまでの速さと精度を測る。</p><button class="btn" onclick="startJudge()">挑戦する</button></section>
+    <section class="card"><div class="icon">🎯</div><h3>F ACCURACY</h3><p>ランダムに現れるターゲットを追う。正確性とハンドアイ・コーディネーションを鍛える。</p><button class="btn" onclick="startAccuracy()">挑戦する</button></section>
+  </div>
+
+  <section id="game" class="hero gamebox">
+    <div id="gameTitle" class="eyebrow">F MOTION</div>
+    <h2 id="gameName">TRAINING</h2>
+    <p id="hint" class="hint"></p>
+    <div id="target" class="target" onclick="targetTap(event)"><div id="targetContent" class="big">START</div></div>
+    <div id="result" class="result"></div>
+    <div class="actions"><button class="btn secondary" onclick="closeGame()">戻る</button><button class="btn" id="retry" onclick="retryGame()">もう一度</button></div>
+  </section>
+
+  <div class="footer">Forgeation · FUTURE MANAGEMENT<br>F Motion beta Ver1.1 — API-ready / Local fallback<br><span id="apiState"></span></div>
+</div>
+<script>
+let xp=Number(localStorage.getItem('fm_xp')||0), best=Number(localStorage.getItem('fm_best')||0);
+let mode='', timer=null, started=0, active=false, visionAnswer='', judgeAnswer='', accuracyHits=0, accuracyStart=0;
+const $=id=>document.getElementById(id);
+function refresh(){ $('xp').textContent=xp; $('level').textContent=Math.floor(xp/100)+1; $('best').textContent=best?best+'ms':'--';}
+function save(){
+ localStorage.setItem('fm_xp',xp);
+ localStorage.setItem('fm_best',best);
+ refresh();
+ syncMotionProgress({
+   user_id: localStorage.getItem('forgeation_user_id') || null,
+   xp: xp,
+   best_reaction_ms: best || null,
+   level: Math.floor(xp/100)+1,
+   updated_at: new Date().toISOString()
+ });
+}
+function show(name,hint){$('game').style.display='block';$('gameName').textContent=name;$('hint').textContent=hint;$('result').textContent='';$('retry').style.visibility='visible';$('game').scrollIntoView({behavior:'smooth'});}
+function clear(){clearTimeout(timer);active=false;$('target').className='target';$('target').innerHTML='<div id="targetContent" class="big"></div>'}
+function startReaction(){mode='reaction';clear();show('F REACTION','白く光るまで待ってください。早押しは失敗です。');$('targetContent').textContent='WAIT';$('target').classList.add('ready');timer=setTimeout(()=>{active=true;started=performance.now();$('target').className='target go';$('targetContent').textContent='TAP!'},1200+Math.random()*2200)}
+function startVision(){mode='vision';clear();show('F VISION','一瞬だけ出る矢印の方向を覚えてください。');const dirs=[['←','左'],['→','右'],['↑','上'],['↓','下']];let d=dirs[Math.floor(Math.random()*dirs.length)];visionAnswer=d[1];$('targetContent').textContent=d[0];setTimeout(()=>{$('target').innerHTML='<div><button class="btn" onclick="answerVision(\'左\',event)">← 左</button> <button class="btn" onclick="answerVision(\'右\',event)">右 →</button><br><br><button class="btn" onclick="answerVision(\'上\',event)">↑ 上</button> <button class="btn" onclick="answerVision(\'下\',event)">↓ 下</button></div>';active=true},650)}
+function answerVision(a,e){e.stopPropagation();if(!active)return;active=false;if(a===visionAnswer){xp+=20;$('result').textContent='正解！ +20 XP'}else{$('result').textContent='惜しい！ 正解は「'+visionAnswer+'」'}save()}
+function startJudge(){mode='judge';clear();show('F JUDGE','文字の意味ではなく「矢印の向き」を選んでください。');const dirs=[['←','LEFT','左'],['→','RIGHT','右'],['↑','UP','上'],['↓','DOWN','下']];let d=dirs[Math.floor(Math.random()*dirs.length)];judgeAnswer=d[2];started=performance.now();$('target').innerHTML='<div><div class="big">'+d[0]+' '+d[1]+'</div><br><button class="btn" onclick="answerJudge(\'左\',event)">左</button> <button class="btn" onclick="answerJudge(\'右\',event)">右</button> <button class="btn" onclick="answerJudge(\'上\',event)">上</button> <button class="btn" onclick="answerJudge(\'下\',event)">下</button></div>';active=true}
+function answerJudge(a,e){e.stopPropagation();if(!active)return;active=false;let ms=Math.round(performance.now()-started);if(a===judgeAnswer){xp+=25;$('result').textContent='正解 '+ms+'ms · +25 XP'}else{$('result').textContent='不正解 · 正解は「'+judgeAnswer+'」'}save()}
+function startAccuracy(){mode='accuracy';clear();show('F ACCURACY','10秒間、現れる●をできるだけ正確にタップ！');accuracyHits=0;accuracyStart=performance.now();active=true;spawnDot();timer=setTimeout(()=>{active=false;$('target').innerHTML='<div class="big">FINISH</div>';xp+=accuracyHits*3;$('result').textContent=accuracyHits+' HIT · +'+(accuracyHits*3)+' XP';save()},10000)}
+function spawnDot(){if(!active)return;let x=10+Math.random()*80,y=10+Math.random()*75;$('target').innerHTML='<div onclick="hitDot(event)" style="position:absolute;left:'+x+'%;top:'+y+'%;width:58px;height:58px;border-radius:50%;background:white;box-shadow:0 0 28px #7cecff;transform:translate(-50%,-50%);"></div>';$('target').style.position='relative'}
+function hitDot(e){e.stopPropagation();if(!active)return;accuracyHits++;$('result').textContent=accuracyHits+' HIT';spawnDot()}
+function targetTap(){if(mode==='reaction'){if(active){active=false;let ms=Math.round(performance.now()-started);xp+=20;if(!best||ms<best)best=ms;$('result').textContent=ms+' ms · +20 XP';$('targetContent').textContent='NICE!';save()}else if(timer){clearTimeout(timer);timer=null;$('result').textContent='早すぎ！ もう一度挑戦';$('targetContent').textContent='FALSE START'}}}
+function retryGame(){({reaction:startReaction,vision:startVision,judge:startJudge,accuracy:startAccuracy}[mode]||startReaction)()}
+function closeGame(){clear();$('game').style.display='none';window.scrollTo({top:0,behavior:'smooth'})}
+refresh();
+$('apiState').textContent = window.FM_CONFIG.API_BASE ? 'API接続設定あり' : '現在は端末保存（API接続先を設定すると同期可能）';
+</script>
+</body>
+</html>
