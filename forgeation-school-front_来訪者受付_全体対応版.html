@@ -254,10 +254,14 @@ function getVisitorId(){
 }
 
 function recordVisit(page){
+  // 本番「学校の賑わい」導線：実来訪だけをWorker /visitへ記録
+  // visitorIdは端末ごとに固定し、同一来訪者を識別できるようにする。
+  const payload={visitorId:getVisitorId(),page};
   return fetch(API_BASE + "/visit",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({visitorId:getVisitorId(),page})
+    body:JSON.stringify(payload),
+    keepalive:true
   }).catch(error=>console.warn("来訪記録に失敗しました。",error));
 }
 
