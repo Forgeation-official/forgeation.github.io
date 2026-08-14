@@ -137,6 +137,44 @@ button{font:inherit}
   transition:.25s ease;z-index:50
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* 現在ホームページ閲覧中：この表示だけを追加 */
+.live-presence{
+  margin:0 0 14px;
+  padding:15px 16px;
+  border:1px solid rgba(53,213,255,.45);
+  border-radius:16px;
+  background:linear-gradient(90deg,rgba(53,213,255,.15),rgba(40,210,103,.10));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.live-presence-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+.live-dot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#28d267;
+  box-shadow:0 0 14px rgba(40,210,103,.85);
+  flex:0 0 auto;
+}
+.live-presence-count{
+  font-size:1.45rem;
+  font-weight:950;
+  color:#fff;
+  white-space:nowrap;
+}
+.live-presence-count strong{
+  font-size:2rem;
+  color:#9fffd0;
+}
+
 @media(max-width:900px){
   .hero{grid-template-columns:1fr}
   .quick-grid{grid-template-columns:repeat(2,1fr)}
@@ -181,6 +219,13 @@ button{font:inherit}
 
       <aside class="guide">
         <h2>📍 本日の校内案内</h2>
+        <div class="live-presence" aria-live="polite">
+          <div class="live-presence-label">
+            <span class="live-dot"></span>
+            <span>現在ホームページを見ている人</span>
+          </div>
+          <div class="live-presence-count"><strong id="homepageLiveCount">--</strong> 人</div>
+        </div>
         <div class="status-list">
           <div class="status"><span class="light"></span><div><strong>AI受付社員</strong><small>待ち時間：なし</small></div><span class="tag">受付中</span></div>
           <div class="status"><span class="light"></span><div><strong>AI Soccer Academy Coach</strong><small>専属AIコーチを体験できます</small></div><span class="tag">利用可</span></div>
@@ -253,20 +298,66 @@ function getVisitorId(){
   return visitorId;
 }
 
-function recordVisit(page){
+async function recordVisit(page){
   // 本番「学校の賑わい」導線：実来訪だけをWorker /visitへ記録
   // visitorIdは端末ごとに固定し、同一来訪者を識別できるようにする。
-  const payload={visitorId:getVisitorId(),page};
-  return fetch(API_BASE + "/visit",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(payload),
-    keepalive:true
-  }).catch(error=>console.warn("来訪記録に失敗しました。",error));
+  const payload={
+    visitorId:getVisitorId(),
+    page:String(page || "forgeation-school-front")
+  };
+
+  try{
+    const response = await fetch(API_BASE + "/visit",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      credentials:"omit",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(payload),
+      keepalive:true
+    });
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    return await response.json();
+  }catch(error){
+    console.warn("来訪記録に失敗しました。",error);
+    return null;
+  }
 }
 
-// 1階フロントへの来訪を記録
+// 1階フロントへの来訪を本番DBへ記録
 recordVisit("forgeation-school-front");
+
+// ホームページを「今」見ている人数を表示
+async function loadHomepageLiveCount(){
+  const countEl=document.getElementById("homepageLiveCount");
+  if(!countEl) return;
+
+  try{
+    const response=await fetch(
+      API_BASE + "/presence?page=forgeation-home",
+      {method:"GET",mode:"cors",cache:"no-store",credentials:"omit"}
+    );
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data=await response.json();
+    countEl.textContent=String(Number(data.activeVisitors || 0));
+  }catch(error){
+    console.warn("現在閲覧中人数の取得に失敗しました。",error);
+    countEl.textContent="--";
+  }
+}
+
+loadHomepageLiveCount();
+setInterval(loadHomepageLiveCount,15000);
 
 // 各案内先のクリックも記録
 document.querySelectorAll(".track-link").forEach(link=>{
