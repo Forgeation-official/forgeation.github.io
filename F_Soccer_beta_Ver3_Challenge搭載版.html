@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>F Soccer β Ver3｜Forgeation Cloud接続版</title>
+<title>F Soccer β Ver3｜Forgeation Cloud・本番DB接続版</title>
 <style>
 :root{
   --navy:#06162f;
@@ -786,6 +786,83 @@ const safeLocalStorage={
   }
 };
 const API_URL = "https://forgeation-api.eru12121221.workers.dev";
+const PRODUCTION_USER_ID_KEYS = ["fSoccerUserId", "f_soccer_user_id", "user_id", "forgeation_f_soccer_user_id"];
+let productionUserId = "";
+let productionDbReady = false;
+
+function getProductionUserId(){
+  const params = new URLSearchParams(location.search);
+  const fromUrl = (params.get("user_id") || params.get("userId") || "").trim();
+  if (fromUrl) {
+    PRODUCTION_USER_ID_KEYS.forEach(key => safeLocalStorage.set(key, fromUrl));
+    return fromUrl;
+  }
+  for (const key of PRODUCTION_USER_ID_KEYS) {
+    const value = String(safeLocalStorage.get(key, "") || "").trim();
+    if (value) return value;
+  }
+  return "";
+}
+
+async function productionApi(path, options={}){
+  const response = await fetch(API_URL + path, {
+    headers:{"Content-Type":"application/json", ...(options.headers || {})},
+    ...options
+  });
+  let data = {};
+  try { data = await response.json(); } catch (_) {}
+  if (!response.ok) throw new Error(data.error || data.message || "本番DBとの通信に失敗しました。");
+  return data;
+}
+
+function profileFromDb(user){
+  const saved = (user && typeof user.profile === "object" && user.profile) ? user.profile : {};
+  return {
+    grade: saved.grade || user?.grade || profileDefaults.grade,
+    position: saved.position || user?.position || profileDefaults.position,
+    strength: saved.strength || saved.dominant_foot || user?.dominant_foot || profileDefaults.strength,
+    goal: saved.goal || profileDefaults.goal
+  };
+}
+
+async function loadProductionProfile(){
+  productionUserId = getProductionUserId();
+  if (!productionUserId) return false;
+  try {
+    const data = await productionApi(`/profile?user_id=${encodeURIComponent(productionUserId)}`, {method:"GET"});
+    if (!data.user) return false;
+    playerProfile = profileFromDb(data.user);
+    safeLocalStorage.set("fSoccerProfileV3", JSON.stringify(playerProfile));
+    renderProfile();
+    productionDbReady = true;
+    return true;
+  } catch (error) {
+    console.warn("本番プロフィール読み込み:", error);
+    return false;
+  }
+}
+
+async function saveProductionProfile(){
+  if (!productionUserId) productionUserId = getProductionUserId();
+  if (!productionUserId) return false;
+  try {
+    await productionApi("/profile", {
+      method:"POST",
+      body:JSON.stringify({
+        user_id: productionUserId,
+        grade: playerProfile.grade,
+        position: playerProfile.position,
+        profile: playerProfile
+      })
+    });
+    productionDbReady = true;
+    return true;
+  } catch (error) {
+    console.warn("本番プロフィール保存:", error);
+    return false;
+  }
+}
+
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
@@ -899,7 +976,8 @@ async function sendToCoach(message, sourceButton = null) {
         message,
         profile: playerProfile,
         history: conversationHistory.slice(-8),
-        app: "F Soccer β Ver3"
+        app: "F Soccer β Ver3",
+        user_id: productionUserId || getProductionUserId() || undefined
       })
     });
 
@@ -945,7 +1023,7 @@ document.getElementById("profileEditButton").addEventListener("click", () => {
   document.getElementById("profileEditor").classList.toggle("open");
 });
 
-document.getElementById("profileSaveButton").addEventListener("click", () => {
+document.getElementById("profileSaveButton").addEventListener("click", async () => {
   playerProfile = {
     grade: document.getElementById("profileGrade").value.trim() || profileDefaults.grade,
     position: document.getElementById("profilePosition").value,
@@ -955,7 +1033,8 @@ document.getElementById("profileSaveButton").addEventListener("click", () => {
   safeLocalStorage.set("fSoccerProfileV3", JSON.stringify(playerProfile));
   renderProfile();
   document.getElementById("profileEditor").classList.remove("open");
-  addMessage("プロフィールを保存しました。次の相談から内容に反映します。", "ai");
+  const dbSaved = await saveProductionProfile();
+  addMessage(dbSaved ? "プロフィールを本番DBへ保存しました。次の相談から内容に反映します。" : "プロフィールをこの端末へ保存しました。本番User IDが確認できるとDBにも保存されます。", "ai");
 });
 
 resetButton.addEventListener("click", () => {
@@ -998,7 +1077,7 @@ async function checkApi() {
 }
 
 renderProfile();
-checkApi();
+loadProductionProfile().finally(checkApi);
 
 
 /* ===== F Soccer Challenge ===== */
