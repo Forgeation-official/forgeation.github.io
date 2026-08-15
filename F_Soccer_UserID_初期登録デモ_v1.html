@@ -1,1 +1,417 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>F Soccer｜ユーザーID発行・初期登録</title>
+<style>
+:root{
+  --navy:#061426; --navy2:#082b53; --blue:#2879ed; --cyan:#22c8ff;
+  --pink:#e84c98; --white:#fff; --muted:#a9c8e3; --line:#ffffff26;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+  background:
+    radial-gradient(circle at 50% 10%,rgba(34,200,255,.22),transparent 35%),
+    linear-gradient(160deg,var(--navy),var(--navy2) 58%,#07172b);
+  color:#fff;
+}
+.wrap{width:min(760px,94vw);margin:auto;padding:24px 0 48px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.mark{
+  width:58px;height:58px;border-radius:16px;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--cyan),#1767e8 65%,#ff7b27);
+  font-size:38px;font-style:italic;font-weight:1000;
+}
+.brand b{font-size:22px}.brand small{display:block;color:#9fd8ff;letter-spacing:.08em}
+.card{
+  border:1px solid var(--line); border-radius:24px; padding:24px;
+  background:rgba(7,27,52,.88); box-shadow:0 20px 55px rgba(0,0,0,.28);
+  backdrop-filter:blur(10px);
+}
+.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px}
+.step{
+  min-height:52px;border-radius:13px;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:12px;color:#89aeca;background:#ffffff0b;padding:8px
+}
+.step.active{color:#fff;background:linear-gradient(90deg,#164f8d,#803e7f);border-color:#68c9ff}
+h1{font-size:30px;margin:4px 0 8px}.lead{color:#c6def1;line-height:1.7}
+.notice{padding:13px;border-radius:13px;background:#fff3cd;color:#6b5619;font-size:12px;line-height:1.7;margin:16px 0}
+.panel{display:none}.panel.active{display:block;animation:fade .24s ease}
+@keyframes fade{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:12px;color:#a8c8e5;margin-bottom:6px;font-weight:800}
+input,select{
+  width:100%;min-height:48px;border-radius:12px;border:1px solid #3c6690;
+  background:#071b34;color:#fff;padding:0 13px;font-size:15px;outline:none
+}
+input:focus,select:focus{border-color:#6dd4ff;box-shadow:0 0 0 3px #54cfff22}
+.full{grid-column:1/-1}
+.plan-box,.id-box,.complete-box{
+  margin:18px 0;padding:18px;border-radius:17px;background:#ffffff0b;border:1px solid var(--line)
+}
+.plan-row,.data-row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid #ffffff12}
+.plan-row:last-child,.data-row:last-child{border-bottom:0}
+.plan-row span:first-child,.data-row span:first-child{color:#9fc1dd}
+.id-value{
+  text-align:center;font-size:34px;font-weight:1000;letter-spacing:.08em;
+  color:#9fe9ff;margin:14px 0
+}
+.actions{display:flex;gap:10px;margin-top:20px}
+button,a.btn{
+  min-height:50px;border:0;border-radius:14px;padding:0 18px;font-size:15px;font-weight:950;
+  cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center
+}
+.primary{flex:1;color:#fff;background:linear-gradient(90deg,var(--pink),var(--blue))}
+.secondary{color:#d7ecff;background:#0b3158;border:1px solid #467aa7}
+button:active,a.btn:active{transform:scale(.985)}
+.status{display:inline-block;padding:6px 10px;border-radius:999px;background:#193f62;color:#9fe9ff;font-size:11px;font-weight:950}
+.checks{display:grid;gap:9px;margin-top:14px}
+.check{padding:12px 14px;border-radius:12px;background:#0a2342;border:1px solid #244f77}
+.check b{color:#9fe9ff}
+.note{font-size:11px;color:#8fb4d4;line-height:1.6;margin-top:12px}
+footer{text-align:center;color:#8dafca;font-size:11px;padding-top:24px}
+@media(max-width:620px){
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .stepper{grid-template-columns:1fr 1fr}
+  h1{font-size:26px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="margin:0 0 14px;">
+    <a href="./F_Soccer_Production_Plan_Select_Demo.html"
+       style="display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #ffffff35;color:#fff;text-decoration:none;background:#ffffff10;font-weight:700;">
+      ← プラン選択へ戻る
+    </a>
+  </div>
+  <div class="brand">
+    <div class="mark">F</div>
+    <div><b>F Soccer</b><small>MEMBER SETUP</small></div>
+  </div>
+
+  <main class="card">
+    <div class="stepper">
+      <div class="step active" data-step="1">1 契約確認</div>
+      <div class="step" data-step="2">2 ID発行</div>
+      <div class="step" data-step="3">3 初期登録</div>
+      <div class="step" data-step="4">4 利用開始</div>
+    </div>
+
+    <section class="panel active" id="panel1">
+      <span class="status" id="contractStatusBadge">契約確認</span>
+      <h1>F Soccerへようこそ。</h1>
+      <p class="lead">決済完了後、契約内容を確認してユーザーIDを発行します。</p>
+
+      <div class="plan-box">
+        <div class="plan-row"><span>契約プラン</span><strong>個人プラン</strong></div>
+        <div class="plan-row"><span>料金</span><strong>月額 980円</strong></div>
+        <div class="plan-row"><span>契約状態</span><strong id="contractStatus">確認中</strong></div>
+        <div class="plan-row"><span>決済</span><strong id="paymentStatus">確認中</strong></div>
+      </div>
+
+      <div class="notice">
+        本番では決済完了情報をサーバー側で確認し、契約者本人のUser IDを発行してDBへ登録します。
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="issueId">ユーザーIDを発行する</button>
+      </div>
+
+      <div style="margin-top:24px;padding-top:22px;border-top:1px solid #ffffff26">
+        <span class="status">既存ユーザー</span>
+        <h1 style="font-size:22px;margin-top:12px">昨日のプロフィールを確認する。</h1>
+        <p class="lead">すでに発行済みのUser IDを入力すると、DBに保存されているプロフィールを読み込みます。新しいUser IDは発行しません。</p>
+
+        <div class="form-grid" style="margin-top:14px">
+          <div class="full">
+            <label>既存のF SOCCER USER ID</label>
+            <input id="existingUserId" placeholder="例：FS-XXXXXXXX-XXXXXX" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="checkExistingProfile" type="button">既存User IDでプロフィールを確認</button>
+        </div>
+
+        <div id="existingProfileResult" class="complete-box" style="display:none">
+          <div class="data-row"><span>User ID</span><strong id="existingSummaryId">－</strong></div>
+          <div class="data-row"><span>ニックネーム</span><strong id="existingSummaryName">－</strong></div>
+          <div class="data-row"><span>年代・学年</span><strong id="existingSummaryGrade">－</strong></div>
+          <div class="data-row"><span>ポジション</span><strong id="existingSummaryPosition">－</strong></div>
+          <div class="data-row"><span>利き足</span><strong id="existingSummaryFoot">－</strong></div>
+          <div class="data-row"><span>目標</span><strong id="existingSummaryGoal">－</strong></div>
+          <div class="actions">
+            <a class="btn primary" id="existingEnterProduction" href="./F_Soccer_Production_Ver1_契約者画面デモ.html">このUser IDで正式版 F Soccerを開く</a>
+          </div>
+        </div>
+
+        <div id="existingProfileMessage" class="note"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel2">
+      <span class="status">ID発行</span>
+      <h1>ユーザーIDを発行しました。</h1>
+      <p class="lead">重複しないUser IDをサーバー側で発行し、契約情報とDBで紐づけます。</p>
+
+      <div class="id-box">
+        <div style="text-align:center;color:#9fc1dd;font-size:12px">F SOCCER USER ID</div>
+        <div class="id-value" id="generatedId">FS-000001</div>
+        <div class="note">※ User IDはサーバー側で一意に発行します。</div>
+      </div>
+
+      <div class="checks">
+        <div class="check">✅ <b>契約情報</b> とUser IDを紐づけ</div>
+        <div class="check">✅ <b>プロフィール領域</b> を初期作成</div>
+        <div class="check">✅ <b>AIコーチ履歴・Challenge履歴</b> の保存先を準備</div>
+      </div>
+
+      <div class="actions">
+        <button class="secondary prev" data-back="1">戻る</button>
+        <button class="primary next" data-next="3">初期プロフィール登録へ</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel3">
+      <span class="status">初期登録</span>
+      <h1>あなたの情報を登録。</h1>
+      <p class="lead">F Soccerが最初のアドバイスをしやすくするための初期プロフィールです。</p>
+
+      <div class="form-grid">
+        <div>
+          <label>ニックネーム</label>
+          <input id="nickname" placeholder="例：ノグ">
+        </div>
+        <div>
+          <label>年代・学年</label>
+          <select id="grade">
+            <option value="">選択してください</option>
+            <option>小学生</option>
+            <option>中学生</option>
+            <option>高校生</option>
+            <option>大学生・一般</option>
+          </select>
+        </div>
+        <div>
+          <label>ポジション</label>
+          <select id="position">
+            <option value="">選択してください</option>
+            <option>GK</option><option>DF</option><option>MF</option><option>FW</option>
+            <option>未定・複数</option>
+          </select>
+        </div>
+        <div>
+          <label>利き足</label>
+          <select id="foot">
+            <option value="">選択してください</option>
+            <option>右</option><option>左</option><option>両足</option>
+          </select>
+        </div>
+        <div class="full">
+          <label>今伸ばしたいこと</label>
+          <input id="goal" placeholder="例：パスの精度、シュート、判断力">
+        </div>
+      </div>
+
+      <div class="notice">
+        入力内容を本人のUser IDに紐づけてDBへ保存します。
+      </div>
+
+      <div class="actions">
+        <button class="secondary prev" data-back="2">戻る</button>
+        <button class="primary" id="completeSetup">アカウント作成を完了する</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel4">
+      <span class="status">セットアップ完了</span>
+      <h1>F Soccerをはじめられます。</h1>
+      <p class="lead">契約者専用の正式版F Soccerへ移行する直前の画面です。</p>
+
+      <div class="complete-box">
+        <div class="data-row"><span>User ID</span><strong id="summaryId">FS-000001</strong></div>
+        <div class="data-row"><span>ニックネーム</span><strong id="summaryName">未登録</strong></div>
+        <div class="data-row"><span>ポジション</span><strong id="summaryPosition">未登録</strong></div>
+        <div class="data-row"><span>目標</span><strong id="summaryGoal">未登録</strong></div>
+        <div class="data-row"><span>契約状態</span><strong id="summaryContract">契約済み</strong></div>
+      </div>
+
+      <div class="checks">
+        <div class="check">✅ User ID発行</div>
+        <div class="check">✅ 契約者プロフィール初期化</div>
+        <div class="check">✅ 正式版F Soccerへ移行準備</div>
+      </div>
+
+      <div class="actions">
+        <button class="secondary prev" data-back="3">登録内容を戻る</button>
+        <a class="btn primary" href="./F_Soccer_Production_Ver1_契約者画面デモ.htmll">正式版 F Soccer をはじめる</a>
+      </div>
+
+      <div class="note">
+        ※ GitHubで使う場合は、このファイルと「F_Soccer_Production_Ver1_契約者画面デモ.html」を同じ階層に置くとボタンで移動できます。
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Forgeation / F Soccer Member Setup</footer>
+</div>
+
+<script>
+/*
+  F Soccer 本番導線
+  Cloudflare Worker 側で以下のAPIを用意してください。
+    GET  /api/f-soccer/contract   -> 契約状態確認
+    POST /api/f-soccer/user       -> User ID発行
+    POST /api/f-soccer/profile    -> 初期プロフィール保存
+
+  同一ドメイン配下なら API_BASE は空文字のままで動作します。
+  Worker を別ドメインで公開する場合だけ、そのURLを設定してください。
+*/
+const API_BASE = "https://forgeation-api.eru12121221.workers.dev";
+let issuedId = "";
+let contractVerified = false;
+
+function showStep(n){
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  document.getElementById("panel"+n).classList.add("active");
+  document.querySelectorAll(".step").forEach(s=>s.classList.toggle("active",Number(s.dataset.step)===n));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function api(path, options={}){
+  const res = await fetch(API_BASE + path, {
+    credentials:"include",
+    headers:{"Content-Type":"application/json", ...(options.headers||{})},
+    ...options
+  });
+  let data={};
+  try{ data=await res.json(); }catch(e){}
+  if(!res.ok) throw new Error(data.error || data.message || "通信に失敗しました");
+  return data;
+}
+
+async function verifyContract(){
+  const contract=document.getElementById("contractStatus");
+  const payment=document.getElementById("paymentStatus");
+  const badge=document.getElementById("contractStatusBadge");
+  const btn=document.getElementById("issueId");
+  btn.disabled=true;
+  try{
+    const data=await api("/api/f-soccer/contract",{method:"GET"});
+    contractVerified=!!data.active;
+    contract.textContent=data.active ? "契約済み" : "未確認";
+    payment.textContent=data.payment_status || (data.active ? "決済済み" : "未確認");
+    badge.textContent=data.active ? "契約確認済み" : "契約未確認";
+    btn.disabled=!data.active;
+    if(data.plan) document.querySelectorAll(".plan-row strong")[0].textContent=data.plan;
+    if(data.price) document.querySelectorAll(".plan-row strong")[1].textContent=data.price;
+  }catch(e){
+    contract.textContent="確認できません";
+    payment.textContent="確認できません";
+    badge.textContent="契約確認エラー";
+    btn.disabled=true;
+  }
+}
+
+document.getElementById("issueId").addEventListener("click",async()=>{
+  if(!contractVerified) return alert("契約確認が完了していません。");
+  const btn=document.getElementById("issueId");
+  btn.disabled=true; btn.textContent="User ID発行中…";
+  try{
+    const data=await api("/api/f-soccer/user",{method:"POST",body:JSON.stringify({})});
+    issuedId=data.user_id || data.userId;
+    if(!issuedId) throw new Error("User IDを取得できませんでした");
+    document.getElementById("generatedId").textContent=issuedId;
+    document.getElementById("summaryId").textContent=issuedId;
+    showStep(2);
+  }catch(e){ alert(e.message); }
+  finally{ btn.disabled=false; btn.textContent="ユーザーIDを発行する"; }
+});
+
+document.querySelectorAll(".next").forEach(b=>b.addEventListener("click",()=>showStep(Number(b.dataset.next))));
+document.querySelectorAll(".prev").forEach(b=>b.addEventListener("click",()=>showStep(Number(b.dataset.back))));
+
+document.getElementById("completeSetup").addEventListener("click",async()=>{
+  if(!issuedId) return alert("User IDが発行されていません。");
+  const nickname=document.getElementById("nickname").value.trim();
+  const grade=document.getElementById("grade").value;
+  const position=document.getElementById("position").value;
+  const foot=document.getElementById("foot").value;
+  const goal=document.getElementById("goal").value.trim();
+  if(!nickname || !grade || !position || !foot || !goal){
+    return alert("すべての項目を入力してください。");
+  }
+  const btn=document.getElementById("completeSetup");
+  btn.disabled=true; btn.textContent="DBへ登録中…";
+  try{
+    await api("/api/f-soccer/profile",{
+      method:"POST",
+      body:JSON.stringify({user_id:issuedId,nickname,grade,position,foot,goal})
+    });
+    document.getElementById("summaryName").textContent=nickname;
+    document.getElementById("summaryPosition").textContent=position;
+    document.getElementById("summaryGoal").textContent=goal;
+    try{ sessionStorage.setItem("fSoccerUserId",issuedId); }catch(e){}
+    showStep(4);
+  }catch(e){ alert(e.message); }
+  finally{ btn.disabled=false; btn.textContent="アカウント作成を完了する"; }
+});
+
+
+document.getElementById("checkExistingProfile").addEventListener("click", async()=>{
+  const input = document.getElementById("existingUserId");
+  const btn = document.getElementById("checkExistingProfile");
+  const result = document.getElementById("existingProfileResult");
+  const message = document.getElementById("existingProfileMessage");
+  const userId = input.value.trim();
+
+  result.style.display = "none";
+  message.textContent = "";
+
+  if(!userId){
+    message.textContent = "User IDを入力してください。";
+    input.focus();
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "DBから確認中…";
+
+  try{
+    const data = await api("/profile?user_id=" + encodeURIComponent(userId), {method:"GET"});
+    const user = data.user || data;
+
+    document.getElementById("existingSummaryId").textContent = user.user_id || userId;
+    document.getElementById("existingSummaryName").textContent = user.nickname || "未登録";
+    document.getElementById("existingSummaryGrade").textContent = user.grade || "未登録";
+    document.getElementById("existingSummaryPosition").textContent = user.position || "未登録";
+    document.getElementById("existingSummaryFoot").textContent = user.dominant_foot || user.foot || "未登録";
+    document.getElementById("existingSummaryGoal").textContent = user.goal || "未登録";
+
+    try{
+      sessionStorage.setItem("fSoccerUserId", user.user_id || userId);
+      localStorage.setItem("fSoccerUserId", user.user_id || userId);
+    }catch(e){}
+
+    result.style.display = "block";
+    message.textContent = "✅ DBに保存されているプロフィールを読み込みました。内容を確認してから正式版F Soccerへ進めます。";
+    result.scrollIntoView({behavior:"smooth", block:"center"});
+  }catch(e){
+    message.textContent = "⚠️ プロフィールを確認できませんでした：" + e.message;
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "既存User IDでプロフィールを確認";
+  }
+});
+
+verifyContract();
+</script>
+</body>
+</html>
 
