@@ -683,9 +683,9 @@ body{
     <h1>契約者専用 F Soccer</h1>
     <p>決済・会員登録が完了した利用者が、ここから正式版へ移行するイメージです。</p>
     <div class="contract-box">
-      <div class="contract-row"><span>User ID</span><strong>DEMO-0001</strong></div>
-      <div class="contract-row"><span>プラン</span><strong>個人プラン ¥980/月</strong></div>
-      <div class="contract-row"><span>契約状態</span><strong><span class="demo-badge">テスト表示</span></strong></div>
+      <div class="contract-row"><span>User ID</span><strong id="gateUserId">DEMO-0001</strong></div>
+      <div class="contract-row"><span>プラン</span><strong id="gatePlan">個人プラン ¥980/月</strong></div>
+      <div class="contract-row"><span>契約状態</span><strong><span class="demo-badge" id="gateStatus">テスト表示</span></strong></div>
       <div class="contract-row"><span>データ</span><strong>DB接続後に本人専用で保存</strong></div>
     </div>
     <button class="production-enter" id="enterProduction" type="button">正式版 F Soccer を開く</button>
@@ -697,6 +697,7 @@ body{
 <main class="app">
   <header class="topbar">
     <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
+    <a href="./F_Soccer_UserID_初期登録デモ.html" aria-label="初期登録へ戻る" style="position:fixed;top:18px;left:78px;z-index:60;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.25);background:rgba(8,30,58,.82);border-radius:14px;padding:10px 16px;font-weight:900;backdrop-filter:blur(10px);">← 初期登録へ戻る</a>
     <div class="brand">
       <img class="brand-logo" src="fs_asset_01.jpg" alt="Forgeation Fロゴ">
       <div class="brand-title">
@@ -710,11 +711,12 @@ body{
   <section class="member-strip" aria-label="契約者情報">
     <div class="member-main">
       <b>F Soccer Member</b>
-      User ID：DEMO-0001 ／ 個人プラン（月額980円）※デモ表示
+      <span id="memberUserSummary">User ID：DEMO-0001 ／ 個人プラン（月額980円）※デモ表示</span>
     </div>
     <div class="member-status">契約者専用</div>
   </section>
   <div class="production-note">本画面は契約後の正式版イメージです。実際のUser ID・契約状態・利用履歴はDB接続後に本人の情報だけを表示します。</div>
+  <div id="memberDbStatus" class="production-note" style="margin-top:8px;">DBプロフィール確認中…</div>
 
 
   <section class="coach-message">
@@ -731,7 +733,6 @@ body{
       <h2>あなたのプロフィール</h2>
       <button class="profile-edit" id="profileEditButton" type="button">✏️ 編集</button>
     </div>
-    <div id="profileDbStatus" style="margin:0 0 14px;padding:10px 12px;border-radius:10px;background:#ffffff10;border:1px solid #ffffff22;font-size:13px;line-height:1.6;">DBプロフィール確認中…</div>
     <dl class="profile-grid">
       <dt>学年</dt><dd id="profileGradeText">中学2年生</dd>
       <dt>ポジション</dt><dd id="profilePositionText">MF</dd>
@@ -985,80 +986,6 @@ function profileContext() {
   return `選手プロフィール：${playerProfile.grade}、ポジションは${playerProfile.position}、得意は${playerProfile.strength}、目標は「${playerProfile.goal}」です。`;
 }
 
-
-function getExistingFSoccerUserId() {
-  try {
-    const fromSession = sessionStorage.getItem("fSoccerUserId");
-    if (fromSession) return fromSession.trim();
-  } catch (_) {}
-  try {
-    const fromLocal = localStorage.getItem("fSoccerUserId");
-    if (fromLocal) return fromLocal.trim();
-  } catch (_) {}
-  const params = new URLSearchParams(location.search);
-  return (params.get("user_id") || "").trim();
-}
-
-async function loadProfileFromDb() {
-  const status = document.getElementById("profileDbStatus");
-  const userId = getExistingFSoccerUserId();
-
-  if (!userId) {
-    if (status) {
-      status.textContent = "既存User IDが見つかりません。昨日の登録時と同じブラウザで開くか、URL末尾に ?user_id=USER_ID を付けて確認してください。";
-    }
-    return;
-  }
-
-  if (status) status.textContent = `DBからプロフィール読込中… User ID：${userId}`;
-
-  try {
-    const response = await fetch(`${API_URL}/profile?user_id=${encodeURIComponent(userId)}`, {
-      method: "GET",
-      headers: {"Accept":"application/json"},
-      cache: "no-store"
-    });
-
-    let data = null;
-    try { data = await response.json(); } catch (_) {}
-
-    if (!response.ok) {
-      throw new Error(data?.error || `プロフィール取得エラー (${response.status})`);
-    }
-
-    const user = data?.user || data || {};
-    const dbProfile = user.profile || {};
-
-    playerProfile = {
-      ...playerProfile,
-      grade: user.grade || dbProfile.grade || playerProfile.grade,
-      position: user.position || dbProfile.position || playerProfile.position,
-      strength: user.strength || dbProfile.strength || playerProfile.strength,
-      goal: user.goal || dbProfile.goal || playerProfile.goal
-    };
-
-    renderProfile();
-    safeLocalStorage.set("fSoccerProfileV3", JSON.stringify(playerProfile));
-
-    const nickname = user.nickname || dbProfile.nickname || "未設定";
-    const plan = user.plan || dbProfile.plan || "未設定";
-    if (status) {
-      status.textContent = `✅ DBプロフィール読込済み｜User ID：${userId}｜ニックネーム：${nickname}｜プラン：${plan}`;
-    }
-
-    const memberMain = document.querySelector(".member-main");
-    if (memberMain) {
-      memberMain.innerHTML = `<b>F Soccer Member</b>User ID：${userId} ／ ${plan}`;
-    }
-  } catch (error) {
-    if (status) {
-      status.textContent = `⚠️ DBプロフィールを読み込めませんでした｜User ID：${userId}｜${error.message}`;
-    }
-    console.error("F Soccer profile load error:", error);
-  }
-}
-
-
 function setApiState(state, text) {
   apiState.classList.remove("online", "error");
   if (state) apiState.classList.add(state);
@@ -1228,7 +1155,6 @@ async function checkApi() {
 }
 
 renderProfile();
-loadProfileFromDb();
 checkApi();
 
 
@@ -1440,6 +1366,104 @@ document.addEventListener("keydown",e=>{
 });
 
 
+
+/* ===== Production member DB profile load ===== */
+const F_SOCCER_API_BASE = "https://forgeation-api.eru12121221.workers.dev";
+
+function getFSoccerUserId(){
+  try{
+    const s = sessionStorage.getItem("fSoccerUserId");
+    if(s) return s.trim();
+  }catch(e){}
+  try{
+    const l = localStorage.getItem("fSoccerUserId");
+    if(l) return l.trim();
+  }catch(e){}
+  const q = new URLSearchParams(location.search).get("user_id");
+  return (q || "").trim();
+}
+
+async function loadProductionMemberProfile(){
+  const userId = getFSoccerUserId();
+  const statusEl = document.getElementById("memberDbStatus");
+
+  if(!userId){
+    if(statusEl) statusEl.textContent = "既存User IDが見つかりません。前画面から入り直してください。";
+    return;
+  }
+
+  if(statusEl) statusEl.textContent = `DBからプロフィール読込中… User ID：${userId}`;
+
+  try{
+    const res = await fetch(
+      F_SOCCER_API_BASE + "/profile?user_id=" + encodeURIComponent(userId),
+      {
+        method:"GET",
+        mode:"cors",
+        cache:"no-store",
+        credentials:"omit",
+        headers:{"Accept":"application/json"}
+      }
+    );
+
+    let data = {};
+    try{ data = await res.json(); }catch(e){}
+
+    if(!res.ok){
+      throw new Error(data.error || data.message || `HTTP ${res.status}`);
+    }
+
+    const user = data.user || data;
+    const profile = user.profile || {};
+
+    const planText = user.plan || profile.plan || "プラン未登録";
+    const nickname = user.nickname || profile.nickname || "";
+    const displayName = nickname || user.full_name || "F Soccer Member";
+
+    const gateUserId = document.getElementById("gateUserId");
+    const gatePlan = document.getElementById("gatePlan");
+    const gateStatus = document.getElementById("gateStatus");
+    const memberUserSummary = document.getElementById("memberUserSummary");
+
+    if(gateUserId) gateUserId.textContent = user.user_id || userId;
+    if(gatePlan) gatePlan.textContent = planText;
+    if(gateStatus) gateStatus.textContent = user.status || "active";
+    if(memberUserSummary){
+      memberUserSummary.textContent = `User ID：${user.user_id || userId} ／ ${planText} ／ ${displayName}`;
+    }
+
+    if(typeof playerProfile === "object" && playerProfile){
+      playerProfile = {
+        ...playerProfile,
+        grade: user.grade || profile.grade || playerProfile.grade,
+        position: user.position || profile.position || playerProfile.position,
+        strength: user.strength || profile.strength || playerProfile.strength,
+        goal: user.goal || profile.goal || playerProfile.goal
+      };
+      if(typeof renderProfile === "function") renderProfile();
+      try{
+        localStorage.setItem("fSoccerProfileV3", JSON.stringify(playerProfile));
+      }catch(e){}
+    }
+
+    try{
+      sessionStorage.setItem("fSoccerUserId", user.user_id || userId);
+      localStorage.setItem("fSoccerUserId", user.user_id || userId);
+    }catch(e){}
+
+    if(statusEl){
+      statusEl.textContent = `✅ DBプロフィール読込済み｜User ID：${user.user_id || userId}｜${displayName}`;
+    }
+  }catch(err){
+    if(statusEl){
+      statusEl.textContent = `⚠️ DBプロフィールを読み込めませんでした｜${err.message}`;
+    }
+    console.error("F Soccer member profile load error:", err);
+  }
+}
+
+loadProductionMemberProfile();
+
 /* ===== Production member gate ===== */
 document.getElementById("enterProduction")?.addEventListener("click",()=>{
   document.getElementById("productionGate")?.classList.add("is-hidden");
@@ -1469,4 +1493,3 @@ document.querySelectorAll(".challenge-media img, .pk-reference img").forEach(img
 
 </body>
 </html>
-
