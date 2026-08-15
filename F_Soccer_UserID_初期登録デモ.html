@@ -116,6 +116,37 @@ footer{text-align:center;color:#8dafca;font-size:11px;padding-top:24px}
       <div class="actions">
         <button class="primary" id="issueId">ユーザーIDを発行する</button>
       </div>
+
+      <div style="margin-top:24px;padding-top:22px;border-top:1px solid #ffffff26">
+        <span class="status">既存ユーザー</span>
+        <h1 style="font-size:22px;margin-top:12px">昨日のプロフィールを確認する。</h1>
+        <p class="lead">すでに発行済みのUser IDを入力すると、DBに保存されているプロフィールを読み込みます。新しいUser IDは発行しません。</p>
+
+        <div class="form-grid" style="margin-top:14px">
+          <div class="full">
+            <label>既存のF SOCCER USER ID</label>
+            <input id="existingUserId" placeholder="例：FS-XXXXXXXX-XXXXXX" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="checkExistingProfile" type="button">既存User IDでプロフィールを確認</button>
+        </div>
+
+        <div id="existingProfileResult" class="complete-box" style="display:none">
+          <div class="data-row"><span>User ID</span><strong id="existingSummaryId">－</strong></div>
+          <div class="data-row"><span>ニックネーム</span><strong id="existingSummaryName">－</strong></div>
+          <div class="data-row"><span>年代・学年</span><strong id="existingSummaryGrade">－</strong></div>
+          <div class="data-row"><span>ポジション</span><strong id="existingSummaryPosition">－</strong></div>
+          <div class="data-row"><span>利き足</span><strong id="existingSummaryFoot">－</strong></div>
+          <div class="data-row"><span>目標</span><strong id="existingSummaryGoal">－</strong></div>
+          <div class="actions">
+            <a class="btn primary" id="existingEnterProduction" href="./F_Soccer_Production_Ver1_契約者画面デモ.html">このUser IDで正式版 F Soccerを開く</a>
+          </div>
+        </div>
+
+        <div id="existingProfileMessage" class="note"></div>
+      </div>
     </section>
 
     <section class="panel" id="panel2">
@@ -236,7 +267,7 @@ footer{text-align:center;color:#8dafca;font-size:11px;padding-top:24px}
   同一ドメイン配下なら API_BASE は空文字のままで動作します。
   Worker を別ドメインで公開する場合だけ、そのURLを設定してください。
 */
-const API_BASE = "";
+const API_BASE = "https://forgeation-api.eru12121221.workers.dev";
 let issuedId = "";
 let contractVerified = false;
 
@@ -324,6 +355,53 @@ document.getElementById("completeSetup").addEventListener("click",async()=>{
     showStep(4);
   }catch(e){ alert(e.message); }
   finally{ btn.disabled=false; btn.textContent="アカウント作成を完了する"; }
+});
+
+
+document.getElementById("checkExistingProfile").addEventListener("click", async()=>{
+  const input = document.getElementById("existingUserId");
+  const btn = document.getElementById("checkExistingProfile");
+  const result = document.getElementById("existingProfileResult");
+  const message = document.getElementById("existingProfileMessage");
+  const userId = input.value.trim();
+
+  result.style.display = "none";
+  message.textContent = "";
+
+  if(!userId){
+    message.textContent = "User IDを入力してください。";
+    input.focus();
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "DBから確認中…";
+
+  try{
+    const data = await api("/profile?user_id=" + encodeURIComponent(userId), {method:"GET"});
+    const user = data.user || data;
+
+    document.getElementById("existingSummaryId").textContent = user.user_id || userId;
+    document.getElementById("existingSummaryName").textContent = user.nickname || "未登録";
+    document.getElementById("existingSummaryGrade").textContent = user.grade || "未登録";
+    document.getElementById("existingSummaryPosition").textContent = user.position || "未登録";
+    document.getElementById("existingSummaryFoot").textContent = user.dominant_foot || user.foot || "未登録";
+    document.getElementById("existingSummaryGoal").textContent = user.goal || "未登録";
+
+    try{
+      sessionStorage.setItem("fSoccerUserId", user.user_id || userId);
+      localStorage.setItem("fSoccerUserId", user.user_id || userId);
+    }catch(e){}
+
+    result.style.display = "block";
+    message.textContent = "✅ DBに保存されているプロフィールを読み込みました。内容を確認してから正式版F Soccerへ進めます。";
+    result.scrollIntoView({behavior:"smooth", block:"center"});
+  }catch(e){
+    message.textContent = "⚠️ プロフィールを確認できませんでした：" + e.message;
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "既存User IDでプロフィールを確認";
+  }
 });
 
 verifyContract();
