@@ -731,6 +731,7 @@ body{
       <h2>あなたのプロフィール</h2>
       <button class="profile-edit" id="profileEditButton" type="button">✏️ 編集</button>
     </div>
+    <div id="profileDbStatus" style="margin:0 0 14px;padding:10px 12px;border-radius:10px;background:#ffffff10;border:1px solid #ffffff22;font-size:13px;line-height:1.6;">DBプロフィール確認中…</div>
     <dl class="profile-grid">
       <dt>学年</dt><dd id="profileGradeText">中学2年生</dd>
       <dt>ポジション</dt><dd id="profilePositionText">MF</dd>
@@ -984,6 +985,80 @@ function profileContext() {
   return `選手プロフィール：${playerProfile.grade}、ポジションは${playerProfile.position}、得意は${playerProfile.strength}、目標は「${playerProfile.goal}」です。`;
 }
 
+
+function getExistingFSoccerUserId() {
+  try {
+    const fromSession = sessionStorage.getItem("fSoccerUserId");
+    if (fromSession) return fromSession.trim();
+  } catch (_) {}
+  try {
+    const fromLocal = localStorage.getItem("fSoccerUserId");
+    if (fromLocal) return fromLocal.trim();
+  } catch (_) {}
+  const params = new URLSearchParams(location.search);
+  return (params.get("user_id") || "").trim();
+}
+
+async function loadProfileFromDb() {
+  const status = document.getElementById("profileDbStatus");
+  const userId = getExistingFSoccerUserId();
+
+  if (!userId) {
+    if (status) {
+      status.textContent = "既存User IDが見つかりません。昨日の登録時と同じブラウザで開くか、URL末尾に ?user_id=USER_ID を付けて確認してください。";
+    }
+    return;
+  }
+
+  if (status) status.textContent = `DBからプロフィール読込中… User ID：${userId}`;
+
+  try {
+    const response = await fetch(`${API_URL}/profile?user_id=${encodeURIComponent(userId)}`, {
+      method: "GET",
+      headers: {"Accept":"application/json"},
+      cache: "no-store"
+    });
+
+    let data = null;
+    try { data = await response.json(); } catch (_) {}
+
+    if (!response.ok) {
+      throw new Error(data?.error || `プロフィール取得エラー (${response.status})`);
+    }
+
+    const user = data?.user || data || {};
+    const dbProfile = user.profile || {};
+
+    playerProfile = {
+      ...playerProfile,
+      grade: user.grade || dbProfile.grade || playerProfile.grade,
+      position: user.position || dbProfile.position || playerProfile.position,
+      strength: user.strength || dbProfile.strength || playerProfile.strength,
+      goal: user.goal || dbProfile.goal || playerProfile.goal
+    };
+
+    renderProfile();
+    safeLocalStorage.set("fSoccerProfileV3", JSON.stringify(playerProfile));
+
+    const nickname = user.nickname || dbProfile.nickname || "未設定";
+    const plan = user.plan || dbProfile.plan || "未設定";
+    if (status) {
+      status.textContent = `✅ DBプロフィール読込済み｜User ID：${userId}｜ニックネーム：${nickname}｜プラン：${plan}`;
+    }
+
+    const memberMain = document.querySelector(".member-main");
+    if (memberMain) {
+      memberMain.innerHTML = `<b>F Soccer Member</b>User ID：${userId} ／ ${plan}`;
+    }
+  } catch (error) {
+    if (status) {
+      status.textContent = `⚠️ DBプロフィールを読み込めませんでした｜User ID：${userId}｜${error.message}`;
+    }
+    console.error("F Soccer profile load error:", error);
+  }
+}
+
+
 function setApiState(state, text) {
   apiState.classList.remove("online", "error");
   if (state) apiState.classList.add(state);
@@ -1153,6 +1228,7 @@ async function checkApi() {
 }
 
 renderProfile();
+loadProfileFromDb();
 checkApi();
 
 
