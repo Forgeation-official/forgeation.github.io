@@ -1,1 +1,1472 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>F Soccer Production Ver1｜動画付き・API接続版</title>
+<style>
+:root{
+  --navy:#06162f;
+  --deep:#082043;
+  --blue:#0a63d8;
+  --cyan:#45d9ff;
+  --line:rgba(127,198,255,.26);
+  --panel:#0d2d58;
+  --text:#f6fbff;
+  --muted:#b9d5ef;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(69,217,255,.18),transparent 26%),
+    linear-gradient(180deg,#06162f 0%,#082853 55%,#0b4b8f 100%);
+  color:var(--text);
+}
+.app{
+  width:min(430px,100%);
+  min-height:100vh;
+  margin:auto;
+  padding:env(safe-area-inset-top) 16px calc(18px + env(safe-area-inset-bottom));
+}
+.topbar{
+  display:grid;
+  grid-template-columns:40px 1fr 40px;
+  align-items:center;
+  gap:8px;
+  padding:18px 2px 12px;
+}
+.back,.settings{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:#fff;font-size:1.15rem;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+}
+.brand-logo{
+  width:40px;height:40px;border-radius:12px;
+  object-fit:cover;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+.brand-title strong{
+  display:block;font-size:1.1rem;letter-spacing:.01em;
+}
+.brand-title small{
+  display:block;color:var(--muted);margin-top:2px;
+}
+.coach-message{
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:12px;
+  align-items:start;
+  margin-top:8px;
+  padding:16px;
+  background:#fff;
+  color:#10223c;
+  border-radius:20px;
+  box-shadow:0 12px 28px rgba(0,0,0,.2);
+}
+.coach-avatar{
+  width:48px;height:48px;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#ffd45a,#ff8c42);
+  font-size:1.5rem;
+}
+.coach-message p{
+  margin:0;line-height:1.65;font-weight:700;
+}
+.profile{
+  margin-top:14px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#103766,#0b2b54);
+  border:1px solid var(--line);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.profile h2{
+  margin:0 0 12px;
+  font-size:1rem;
+  color:#dff2ff;
+}
+.profile-grid{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:7px 12px;
+  font-size:.92rem;
+}
+.profile-grid dt{color:#7fc7ff;font-weight:800}
+.profile-grid dd{margin:0;color:#fff;font-weight:700}
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px 10px;
+  margin-top:18px;
+}
+.menu-item{
+  border:0;
+  background:transparent;
+  color:#fff;
+  padding:0;
+  text-align:center;
+}
+.icon-circle{
+  width:74px;height:74px;
+  margin:auto;
+  border-radius:50%;
+  display:grid;place-items:center;
+  font-size:2rem;
+  background:linear-gradient(180deg,#17477a,#0a294f);
+  border:1px solid rgba(144,207,255,.35);
+  box-shadow:0 10px 22px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.08);
+  transition:.18s ease;
+}
+.menu-item:active .icon-circle{
+  transform:scale(.96);
+}
+.menu-label{
+  display:block;
+  margin-top:8px;
+  font-size:.78rem;
+  font-weight:800;
+  line-height:1.35;
+  color:#f1f8ff;
+}
+.chat-box{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:1fr 56px;
+  gap:10px;
+  align-items:end;
+}
+.chat-box textarea{
+  width:100%;
+  min-height:54px;
+  max-height:120px;
+  resize:none;
+  border:1px solid rgba(155,208,255,.42);
+  border-radius:18px;
+  background:#f8fbff;
+  color:#12243c;
+  padding:15px;
+  outline:none;
+  font:inherit;
+}
+.chat-box textarea:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 0 4px rgba(69,217,255,.13);
+}
+.send{
+  width:56px;height:56px;
+  border-radius:50%;
+  border:0;
+  color:#062141;
+  background:linear-gradient(145deg,#7ae8ff,#39bfff);
+  font-size:1.45rem;
+  font-weight:900;
+  box-shadow:0 10px 22px rgba(0,0,0,.23);
+}
+.status{
+  margin-top:14px;
+  text-align:center;
+  color:#b8d6f0;
+  font-size:.76rem;
+}
+
+.conversation{
+  display:grid;
+  gap:10px;
+  margin-top:20px;
+  max-height:310px;
+  overflow-y:auto;
+  padding:4px 2px;
+}
+.message{
+  max-width:88%;
+  padding:13px 15px;
+  border-radius:17px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  word-break:break-word;
+  font-size:.92rem;
+}
+.message.user{
+  justify-self:end;
+  color:#082142;
+  background:linear-gradient(145deg,#86eaff,#47cfff);
+  border-bottom-right-radius:5px;
+}
+.message.ai,
+.coach-message-small{
+  justify-self:start;
+  color:#112541;
+  background:#fff;
+  border-bottom-left-radius:5px;
+}
+.message.error{
+  justify-self:start;
+  color:#7f1111;
+  background:#ffe7e7;
+}
+.send:disabled{opacity:.55;cursor:not-allowed}
+.back{
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  color:#fff;
+}
+@media(min-width:700px){
+  body{display:grid;place-items:center;padding:20px}
+  .app{
+    min-height:auto;
+    border-radius:34px;
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+  }
+}
+
+/* ===== F Soccer β Ver3 ===== */
+.api-state{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:5px;
+  color:#9fe9ff;
+  font-size:.68rem;
+  font-weight:800;
+}
+.api-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:#ffd45a;
+  box-shadow:0 0 10px currentColor;
+}
+.api-state.online .api-dot{background:#61f29a}
+.api-state.error .api-dot{background:#ff7272}
+
+.profile-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-bottom:12px;
+}
+.profile h2{margin:0}
+.profile-edit{
+  border:1px solid rgba(155,208,255,.35);
+  border-radius:999px;
+  padding:7px 11px;
+  color:#dff2ff;
+  background:rgba(255,255,255,.07);
+  font-weight:800;
+  font-size:.75rem;
+}
+.profile-editor{
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(155,208,255,.18);
+}
+.profile-editor.open{display:grid}
+.profile-field{display:grid;gap:5px}
+.profile-field.wide{grid-column:1/-1}
+.profile-field label{color:#8fd3ff;font-size:.72rem;font-weight:800}
+.profile-field input,.profile-field select{
+  min-width:0;width:100%;
+  border:1px solid rgba(155,208,255,.32);
+  border-radius:11px;
+  background:#071e3d;
+  color:#fff;
+  padding:10px;
+}
+.profile-save{
+  grid-column:1/-1;
+  min-height:42px;
+  border:0;border-radius:12px;
+  color:#062141;
+  background:linear-gradient(145deg,#8bedff,#45d9ff);
+  font-weight:900;
+}
+.menu-item.loading .icon-circle{animation:pulse .8s ease-in-out infinite alternate}
+@keyframes pulse{to{transform:scale(.92);filter:brightness(1.25)}}
+.menu-hint{
+  margin-top:12px;
+  text-align:center;
+  color:#a9cee9;
+  font-size:.72rem;
+}
+.typing{
+  display:inline-flex;gap:5px;align-items:center;
+}
+.typing i{
+  width:6px;height:6px;border-radius:50%;
+  background:#3b78ad;animation:typing 1s infinite ease-in-out;
+}
+.typing i:nth-child(2){animation-delay:.15s}
+.typing i:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(-4px);opacity:1}}
+.message-time{
+  display:block;margin-top:5px;font-size:.62rem;opacity:.58;
+}
+@media(max-width:360px){
+  .icon-circle{width:68px;height:68px}
+  .profile-editor{grid-template-columns:1fr}
+  .profile-field.wide,.profile-save{grid-column:auto}
+}
+
+
+/* ===== F Soccer Challenge（Ver3追加） ===== */
+.challenge-card{
+  margin-top:20px;
+  padding:16px;
+  border-radius:20px;
+  border:1px solid rgba(127,198,255,.28);
+  background:
+    radial-gradient(circle at 85% 10%,rgba(255,79,163,.18),transparent 28%),
+    linear-gradient(180deg,#123766,#0a274d);
+  box-shadow:0 14px 30px rgba(0,0,0,.22);
+}
+.challenge-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.challenge-head h2{
+  margin:0;
+  font-size:1.05rem;
+}
+.app-only-badge{
+  padding:7px 10px;
+  border-radius:999px;
+  color:#062141;
+  background:linear-gradient(145deg,#ffe27a,#ffb84d);
+  font-size:.68rem;
+  font-weight:950;
+}
+.coach-level{
+  margin-top:12px;
+  padding:12px;
+  border-radius:15px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+}
+.coach-level-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  font-size:.8rem;
+  font-weight:900;
+}
+.level-meter{
+  height:9px;
+  margin-top:8px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+}
+.level-meter span{
+  display:block;
+  height:100%;
+  width:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,#45d9ff,#8c5cff,#ff4fa3);
+  transition:width .35s ease;
+}
+.challenge-tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-top:14px;
+  padding-bottom:4px;
+}
+.challenge-tab{
+  flex:0 0 auto;
+  min-height:40px;
+  padding:0 13px;
+  border:1px solid rgba(155,208,255,.28);
+  border-radius:999px;
+  color:#dff2ff;
+  background:rgba(255,255,255,.06);
+  font-size:.75rem;
+  font-weight:900;
+}
+.challenge-tab.active{
+  color:#062141;
+  background:linear-gradient(145deg,#8bedff,#45d9ff);
+}
+.challenge-panel{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:16px;
+  background:#071e3d;
+  border:1px solid rgba(155,208,255,.18);
+}
+.challenge-panel.active{display:block}
+.challenge-title{
+  margin:0 0 10px;
+  color:#fff;
+  font-size:.98rem;
+}
+.challenge-actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.challenge-actions button,
+.challenge-primary{
+  min-height:44px;
+  border:0;
+  border-radius:13px;
+  color:#062141;
+  background:linear-gradient(145deg,#8bedff,#45d9ff);
+  font-weight:950;
+}
+.challenge-result{
+  margin-top:11px;
+  min-height:52px;
+  padding:12px;
+  border-radius:13px;
+  color:#10223c;
+  background:#fff;
+  line-height:1.6;
+  font-size:.84rem;
+  font-weight:800;
+}
+.quiz-options{
+  display:grid;
+  gap:8px;
+}
+.quiz-options button{
+  min-height:42px;
+  border:1px solid rgba(155,208,255,.25);
+  border-radius:12px;
+  color:#fff;
+  background:rgba(255,255,255,.06);
+  font-weight:850;
+}
+.drone-mini-field{
+  position:relative;
+  height:180px;
+  overflow:hidden;
+  border-radius:15px;
+  background:
+    linear-gradient(#75c9ff,#dff4ff 66%,#6bc36b 67%,#328445);
+}
+.drone-mini{
+  position:absolute;
+  left:14%;
+  top:74%;
+  transform:translate(-50%,-50%);
+  font-size:2.2rem;
+  transition:left .2s ease,top .2s ease;
+}
+.drone-target{
+  position:absolute;
+  right:8%;
+  top:18%;
+  width:56px;
+  height:56px;
+  display:grid;
+  place-items:center;
+  border:3px dashed #fff;
+  border-radius:14px;
+  color:#fff;
+  font-size:.65rem;
+  font-weight:950;
+  background:rgba(255,255,255,.12);
+}
+.drone-pad{
+  display:grid;
+  grid-template-columns:repeat(3,48px);
+  justify-content:center;
+  gap:7px;
+  margin-top:10px;
+}
+.drone-pad button{
+  min-height:44px;
+  border:1px solid rgba(155,208,255,.24);
+  border-radius:11px;
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  font-weight:950;
+}
+.drone-pad .empty{visibility:hidden}
+@media(max-width:360px){
+  .challenge-actions{grid-template-columns:1fr}
+}
+
+
+/* ===== Ver3 6機能タップ画面 ===== */
+.feature-screen{
+  position:fixed; inset:0; z-index:50000; display:none; overflow:auto;
+  background:linear-gradient(160deg,#061426 0%,#082b53 55%,#07172b 100%);
+  color:#fff; padding:18px 14px 36px;
+}
+.feature-screen.open{display:block;animation:fsSlide .28s ease-out}
+@keyframes fsSlide{from{opacity:0;transform:translateX(35px)}to{opacity:1;transform:none}}
+.feature-shell{max-width:760px;margin:0 auto}
+.feature-top{display:flex;align-items:center;gap:12px;margin-bottom:18px;position:sticky;top:0;
+  background:rgba(6,20,38,.94);backdrop-filter:blur(12px);padding:10px 0;z-index:2}
+.feature-back{width:44px;height:44px;border-radius:50%;border:1px solid #65b9ff;background:#0b3158;color:#fff;
+  font-size:25px;font-weight:900;cursor:pointer;touch-action:manipulation}
+.feature-title{font-size:22px;font-weight:950}.feature-sub{font-size:12px;color:#a8d7ff;margin-top:2px}
+.feature-card{background:rgba(255,255,255,.075);border:1px solid rgba(120,195,255,.28);
+  border-radius:20px;padding:17px;margin:12px 0;box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.feature-card h3{margin:0 0 10px;font-size:18px}.feature-card p{line-height:1.7;margin:7px 0;color:#dcecff}
+.feature-chip{display:inline-block;border:1px solid #4faeff;border-radius:999px;padding:6px 10px;margin:3px;
+  font-size:12px;background:#0b3158}
+.feature-action{width:100%;min-height:48px;border:0;border-radius:14px;margin-top:10px;padding:12px;
+  font-weight:900;font-size:15px;color:#fff;background:linear-gradient(90deg,#e84c98,#2879ed);cursor:pointer}
+.feature-action:active,.feature-launch:active{transform:scale(.97)}
+.demo-note{font-size:12px;color:#9fc5e8;line-height:1.6}
+.pitch-demo{height:210px;border:2px solid rgba(255,255,255,.65);border-radius:12px;position:relative;overflow:hidden;
+ background:
+ radial-gradient(circle at 48% 52%,rgba(255,235,80,.52),transparent 10%),
+ radial-gradient(circle at 35% 55%,rgba(255,95,70,.42),transparent 18%),
+ radial-gradient(circle at 62% 45%,rgba(44,162,255,.46),transparent 22%),
+ linear-gradient(90deg,#18723e,#1d8a4b)}
+.pitch-demo:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:2px solid rgba(255,255,255,.65)}
+.pitch-demo:after{content:"";position:absolute;width:76px;height:76px;border:2px solid rgba(255,255,255,.65);
+ border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.metric{padding:12px 8px;border-radius:13px;background:#071c35;text-align:center}.metric b{display:block;font-size:18px}
+.growth-bars{display:grid;gap:12px}.growth-row{display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:center}
+.growth-track{height:12px;border-radius:99px;background:#07182d;overflow:hidden}.growth-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#36a4ff,#65f1bd)}
+.coach-face{font-size:52px;text-align:center}.parent-lock{font-size:42px;text-align:center}
+@media(max-width:520px){.metric-grid{grid-template-columns:1fr}.feature-title{font-size:19px}}
+
+
+/* ===== F Soccer Production Ver1 契約者専用デモ ===== */
+.production-gate{
+  position:fixed; inset:0; z-index:90000; display:flex; align-items:center; justify-content:center;
+  padding:22px; background:
+  radial-gradient(circle at 50% 15%,rgba(58,184,255,.28),transparent 34%),
+  linear-gradient(160deg,#061426,#082b53 55%,#07172b);
+  color:#fff;
+}
+.production-gate.is-hidden{display:none}
+.production-card{
+  width:min(560px,94vw); border:1px solid rgba(140,210,255,.34); border-radius:28px;
+  padding:28px; background:rgba(5,24,47,.92); box-shadow:0 24px 70px rgba(0,0,0,.42);
+  text-align:center; backdrop-filter:blur(12px)
+}
+.production-mark{
+  width:86px;height:86px;margin:0 auto 18px;border-radius:24px;display:grid;place-items:center;
+  font-size:52px;font-weight:1000;font-style:italic;background:linear-gradient(145deg,#22c8ff,#1767e8 65%,#ff7b27);
+  box-shadow:0 0 28px rgba(34,200,255,.3)
+}
+.production-card h1{margin:6px 0 6px;font-size:28px}
+.production-card .sub{color:#a9ddff;font-size:13px;letter-spacing:.08em}
+.contract-box{
+  margin:20px 0;padding:16px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff22;text-align:left
+}
+.contract-row{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px solid #ffffff13}
+.contract-row:last-child{border-bottom:0}
+.contract-row span:first-child{color:#9fc5e8}.contract-row strong{color:#fff}
+.demo-badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#fff1c7;color:#705400;font-size:11px;font-weight:950}
+.production-enter{
+  width:100%;border:0;border-radius:15px;padding:16px;font-size:17px;font-weight:950;color:#fff;
+  background:linear-gradient(90deg,#e84c98,#2879ed);cursor:pointer
+}
+.production-enter:active{transform:scale(.985)}
+.member-strip{
+  margin:10px 0 14px;padding:12px 14px;border-radius:15px;border:1px solid rgba(99,187,255,.25);
+  background:linear-gradient(90deg,rgba(22,103,232,.14),rgba(232,76,152,.10));
+  display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center
+}
+.member-main{font-size:13px;color:#cfe9ff}.member-main b{display:block;color:#fff;font-size:15px}
+.member-status{font-size:11px;font-weight:950;padding:6px 9px;border-radius:999px;background:#173f65;color:#9fe9ff}
+.production-note{font-size:11px;color:#8fb4d4;margin-top:8px;line-height:1.6}
+
+
+/* ===== Production Ver1: 外部メディア参照 ===== */
+.challenge-media{
+  margin:10px 0 13px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(155,208,255,.28);
+  background:#020913;
+  box-shadow:0 10px 28px rgba(0,0,0,.22);
+}
+.challenge-media video,
+.challenge-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:520px;
+  object-fit:contain;
+  background:#020913;
+}
+.challenge-media-label{
+  padding:8px 11px;
+  font-size:.74rem;
+  font-weight:900;
+  color:#dff7ff;
+  border-top:1px solid rgba(255,255,255,.1);
+  background:#071b35;
+}
+.pk-reference{
+  margin:10px 0 12px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(89,220,255,.3);
+  background:#020913;
+}
+.pk-reference img{
+  display:block;
+  width:100%;
+  height:auto;
+  transition:opacity .15s ease;
+}
+.challenge-actions button.pk-selected{
+  outline:3px solid #59e5ff;
+  box-shadow:0 0 20px rgba(89,229,255,.45);
+}
+.production-media-note{
+  font-size:.72rem;
+  color:#9fc8e8;
+  line-height:1.55;
+  margin:7px 0 10px;
+}
+
+
+/* ===== 販売前最終点検: Challenge操作安定化 ===== */
+.challenge-tabs,.challenge-tab,.challenge-actions,.challenge-actions button,.quiz-options,.quiz-options button,.drone-pad,.drone-pad button{position:relative;z-index:20;pointer-events:auto!important;cursor:pointer;touch-action:manipulation}
+.challenge-media,.challenge-media img,.challenge-media video,.pk-reference,.pk-reference img{position:relative;z-index:1}
+.dribble-two{grid-template-columns:repeat(2,1fr)}
+.tactics-media img{max-height:460px;object-fit:contain}
+.quiz-options button.correct{border-color:#67f0b3;background:rgba(63,208,145,.18)}
+.quiz-options button.wrong{border-color:#ff8a9e;background:rgba(255,90,120,.12)}
+@media(max-width:360px){.dribble-two{grid-template-columns:1fr}}
+
+/* ===== F Soccer Challenge 2026 decision/game upgrade ===== */
+.decision-banner{margin:10px 0;padding:12px;border-radius:12px;background:linear-gradient(135deg,#092c54,#0d4b78);border:1px solid rgba(85,231,255,.35);font-weight:800;line-height:1.55}
+.next-challenge-btn{width:100%;margin-top:10px;padding:11px;border:1px solid rgba(85,231,255,.5);border-radius:12px;background:#0b315a;color:#e9fbff;font-weight:800;cursor:pointer}
+.tile-crop{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:14px;border:1px solid rgba(85,231,255,.45);background:#03101f;margin:8px 0 10px}
+.tile-crop>img{position:absolute;max-width:none;height:auto;user-select:none;pointer-events:none}
+.pass-crop>img{width:500%;height:300%;object-fit:fill}
+.drone-crop>img{width:300%;height:200%;object-fit:fill}
+.drone-marker,.drone-target{position:absolute;transform:translate(-50%,-50%);z-index:4;transition:left .22s ease,top .22s ease;font-size:28px;filter:drop-shadow(0 2px 4px #000)}
+.drone-target{font-size:34px;color:#a7ff55;font-weight:900;text-shadow:0 0 10px #000}
+.drone-pad{text-align:center;margin:10px 0}
+.drone-pad button{width:54px;height:44px;margin:3px;border-radius:10px;border:1px solid #4ccfff;background:#0c315b;color:#fff;font-size:20px;font-weight:900;cursor:pointer}
+.quiz-options{display:grid;gap:8px;margin-top:10px}
+.quiz-options button{padding:11px;border-radius:10px;border:1px solid #4ccfff;background:#092d51;color:#fff;font-weight:800;text-align:left;cursor:pointer}
+.quiz-options button.correct{background:#176b45;border-color:#6dffb0}.quiz-options button.wrong{background:#6b2440;border-color:#ff7aa9}
+.quiz-progress{margin-top:8px;font-size:12px;color:#bfefff;font-weight:700}
+.xp-pop{animation:xpPop .55s ease}@keyframes xpPop{0%{transform:scale(1)}40%{transform:scale(1.05);filter:brightness(1.5)}100%{transform:scale(1)}}
+
+
+/* ===== Final Challenge polish ===== */
+#dribbleOptions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#dribbleOptions button{min-height:48px;line-height:1.25}
+.tactic-visual{position:relative;overflow:hidden}
+.tactic-visual img{width:100%;height:100%;object-fit:cover;transition:opacity .25s ease,transform .45s ease}
+.tactic-visual.swap img{opacity:.25;transform:scale(1.035)}
+.tactic-scanline{position:absolute;left:0;right:0;height:2px;background:rgba(72,225,255,.8);box-shadow:0 0 12px #54dfff;animation:tacticScan 3s linear infinite;pointer-events:none}
+.tactic-moving-arrow{position:absolute;left:12%;top:52%;font-size:42px;color:#ff4f9d;text-shadow:0 0 12px #ff4f9d;animation:tacticArrow 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes tacticScan{0%{top:8%}100%{top:92%}}
+@keyframes tacticArrow{0%,100%{transform:translateX(0);opacity:.55}50%{transform:translateX(150px);opacity:1}}
+@media(max-width:520px){#dribbleOptions{grid-template-columns:1fr}.tactic-moving-arrow{font-size:30px}}
+
+</style>
+</head>
+<body>
+
+<div class="production-gate" id="productionGate">
+  <div class="production-card">
+    <div class="production-mark">F</div>
+    <div class="sub">F SOCCER MEMBER ACCESS</div>
+    <h1>契約者専用 F Soccer</h1>
+    <p>決済・会員登録が完了した利用者が、ここから正式版へ移行するイメージです。</p>
+    <div class="contract-box">
+      <div class="contract-row"><span>User ID</span><strong>DEMO-0001</strong></div>
+      <div class="contract-row"><span>プラン</span><strong>個人プラン ¥980/月</strong></div>
+      <div class="contract-row"><span>契約状態</span><strong><span class="demo-badge">テスト表示</span></strong></div>
+      <div class="contract-row"><span>データ</span><strong>DB接続後に本人専用で保存</strong></div>
+    </div>
+    <button class="production-enter" id="enterProduction" type="button">正式版 F Soccer を開く</button>
+    <div class="production-note">※ 現在は決済・認証未接続のデモです。実際のお金や個人情報は扱いません。</div>
+  </div>
+</div>
+
+<!-- F Soccer Production Ver1 契約者画面デモ / β版UI継承 / 6機能タップ画面搭載 -->
+<main class="app">
+  <header class="topbar">
+    <a class="back" href="./index.html" aria-label="ホームページに戻る">‹</a>
+    <div class="brand">
+      <img class="brand-logo" src="fs_asset_01.jpg" alt="Forgeation Fロゴ">
+      <div class="brand-title">
+        <strong>F Soccer</strong>
+        <small>あなたの専属AIコーチ</small><span class="api-state" id="apiState"><span class="api-dot"></span><span id="apiStateText">API確認中</span></span>
+      </div>
+    </div>
+    <button class="settings" id="resetButton" type="button" aria-label="最初から">↻</button>
+  </header>
+
+  <section class="member-strip" aria-label="契約者情報">
+    <div class="member-main">
+      <b>F Soccer Member</b>
+      User ID：DEMO-0001 ／ 個人プラン（月額980円）※デモ表示
+    </div>
+    <div class="member-status">契約者専用</div>
+  </section>
+  <div class="production-note">本画面は契約後の正式版イメージです。実際のUser ID・契約状態・利用履歴はDB接続後に本人の情報だけを表示します。</div>
+
+
+  <section class="coach-message">
+    <div class="coach-avatar">⚽</div>
+    <p>
+      こんにちは！<br>
+      私はあなた専属のAIサッカーコーチです。<br>
+      一緒に成長していきましょう！
+    </p>
+  </section>
+
+  <section class="profile">
+    <div class="profile-head">
+      <h2>あなたのプロフィール</h2>
+      <button class="profile-edit" id="profileEditButton" type="button">✏️ 編集</button>
+    </div>
+    <div id="profileDbStatus" style="margin:0 0 14px;padding:10px 12px;border-radius:10px;background:#ffffff10;border:1px solid #ffffff22;font-size:13px;line-height:1.6;">DBプロフィール確認中…</div>
+    <dl class="profile-grid">
+      <dt>学年</dt><dd id="profileGradeText">中学2年生</dd>
+      <dt>ポジション</dt><dd id="profilePositionText">MF</dd>
+      <dt>得意</dt><dd id="profileStrengthText">ドリブル</dd>
+      <dt>目標</dt><dd id="profileGoalText">レギュラーになる</dd>
+    </dl>
+    <div class="profile-editor" id="profileEditor">
+      <div class="profile-field"><label for="profileGrade">学年</label><input id="profileGrade" value="中学2年生"></div>
+      <div class="profile-field"><label for="profilePosition">ポジション</label>
+        <select id="profilePosition"><option>FW</option><option selected>MF</option><option>DF</option><option>GK</option><option>複数・未定</option></select>
+      </div>
+      <div class="profile-field"><label for="profileStrength">得意</label><input id="profileStrength" value="ドリブル"></div>
+      <div class="profile-field"><label for="profileGoal">目標</label><input id="profileGoal" value="レギュラーになる"></div>
+      <button class="profile-save" id="profileSaveButton" type="button">プロフィールを保存</button>
+    </div>
+  </section>
+
+  <section class="menu-grid feature-menu-grid" aria-label="F Soccer 6機能メニュー">
+    <button class="menu-item feature-launch" type="button" data-feature="training">
+      <span class="icon-circle">📅</span><span class="menu-label">練習メニュー</span>
+    </button>
+    <button class="menu-item feature-launch" type="button" data-feature="analysis">
+      <span class="icon-circle">📊</span><span class="menu-label">試合分析</span>
+    </button>
+    <button class="menu-item feature-launch" type="button" data-feature="growth">
+      <span class="icon-circle">📈</span><span class="menu-label">成長レポート</span>
+    </button>
+    <button class="menu-item feature-launch" type="button" data-feature="advice">
+      <span class="icon-circle">💡</span><span class="menu-label">アドバイス</span>
+    </button>
+    <button class="menu-item feature-launch" type="button" data-feature="coach">
+      <span class="icon-circle">🎙️</span><span class="menu-label">コーチ相談</span>
+    </button>
+    <button class="menu-item feature-launch" type="button" data-feature="parent">
+      <span class="icon-circle">👨‍👩‍👦</span><span class="menu-label">保護者連携</span>
+    </button>
+  </section>
+  <div class="menu-hint">6つのボタンをタップすると、F Soccerの各機能画面を体験できます。</div>
+
+
+  <section class="challenge-card" id="challengeCard">
+    <div class="challenge-head">
+      <h2>🏆 F Soccer Challenge</h2>
+      <span class="app-only-badge">APP限定</span>
+    </div>
+
+    <div class="coach-level">
+      <div class="coach-level-row">
+        <span id="coachLevelName">Lv.1 新人コーチ</span>
+        <span id="coachXpText">0 / 100 XP</span>
+      </div>
+      <div class="level-meter"><span id="coachXpBar"></span></div>
+    </div>
+
+    <div class="challenge-tabs">
+      <button class="challenge-tab active" type="button" data-challenge="pk">⚽ PK</button>
+      <button class="challenge-tab" type="button" data-challenge="dribble">🏃 ドリブル</button>
+      <button class="challenge-tab" type="button" data-challenge="pass">🎯 パス</button>
+      <button class="challenge-tab" type="button" data-challenge="quiz">🧠 戦術</button>
+      <button class="challenge-tab" type="button" data-challenge="drone">🚁 Fドローン</button>
+    </div>
+
+
+    <div class="challenge-panel active" data-challenge-panel="pk">
+      <h3 class="challenge-title">PKチャレンジ</h3>
+      <div class="pk-reference"><img id="pkSceneImage" src="f-soccer-pk-center.png" alt="PKコース"></div>
+      <p class="production-media-note">AIキーパーの読みは毎回変化。コースを選び、ゴールならXP獲得。</p>
+      <div class="challenge-actions">
+        <button type="button" data-pk="左">← 左へ蹴る</button>
+        <button type="button" data-pk="中央">↑ 中央へ蹴る</button>
+        <button type="button" data-pk="右">右へ蹴る →</button>
+      </div>
+      <div class="challenge-result" id="pkResult">コースを選んで、AIキーパーと勝負しよう。</div>
+    </div>
+
+    <div class="challenge-panel" data-challenge-panel="dribble">
+      <h3 class="challenge-title">判断型ドリブルチャレンジ</h3>
+      <div class="decision-banner" id="dribbleSituation">AIディフェンダーの動きを読もう。</div>
+      <div class="challenge-actions dribble-two" id="dribbleOptions"></div>
+      <div class="challenge-media" id="dribbleVideoWrap" hidden>
+        <video id="dribbleChoiceVideo" controls playsinline preload="metadata"></video>
+        <div class="challenge-media-label" id="dribbleVideoLabel">DRIBBLE PLAY</div>
+      </div>
+      <div class="challenge-result" id="dribbleResult">DFが寄せた方向と逆を選んで突破しよう。正しい判断でXP獲得。</div>
+      <button class="next-challenge-btn" type="button" id="nextDribble">次のDF判断 ▶</button>
+    </div>
+
+    <div class="challenge-panel" data-challenge-panel="pass">
+      <h3 class="challenge-title">AIパス判断クイズ</h3>
+      <div class="tile-crop pass-crop" id="passCrop">
+        <img id="passPlaySheet" src="fs_asset_02.jpg" alt="PASS PLAY 15シーン">
+      </div>
+      <div class="decision-banner" id="passQuestion">この場面で最も有効なプレーは？</div>
+      <div class="challenge-actions">
+        <button type="button" data-pass-choice="安全">安全なパス</button>
+        <button type="button" data-pass-choice="縦">縦パス</button>
+        <button type="button" data-pass-choice="サイド">サイドチェンジ</button>
+      </div>
+      <div class="challenge-result" id="passResult">画像を見て判断しよう。正解でXP獲得。</div>
+      <button class="next-challenge-btn" type="button" id="nextPass">次のパス問題 ▶</button>
+    </div>
+
+    <div class="challenge-panel" data-challenge-panel="quiz">
+      <h3 class="challenge-title">戦術クイズ 300</h3>
+      <div class="challenge-media tactics-media tactic-visual">
+        <img id="tacticSceneImage" src="fs_asset_03.jpg" alt="AI戦術シーン">
+        <div class="tactic-scanline"></div>
+        <div class="tactic-moving-arrow">➜</div>
+        <div class="challenge-media-label">TACTICS / AI SOCCER ACADEMY</div>
+      </div>
+      <div class="challenge-result" id="quizQuestion">問題を準備中...</div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-progress" id="quizProgress">問題 1 / 100</div>
+    </div>
+
+    <div class="challenge-panel" data-challenge-panel="drone">
+      <h3 class="challenge-title">Fドローン・リアルミッション</h3>
+      <div class="tile-crop drone-crop" id="droneCrop">
+        <img id="droneMissionSheet" src="fs_asset_04.jpg" alt="DRONE CHALLENGE 6ミッション">
+        <span class="drone-marker" id="realDroneMarker">🚁</span>
+        <span class="drone-target" id="realDroneTarget">◎</span>
+      </div>
+      <div class="decision-banner" id="droneMissionText">街・海岸・スタジアム・森林・工場・渓谷を舞台にミッションへ挑戦。</div>
+      <div class="drone-pad">
+        <button type="button" data-real-drone="up">↑</button>
+        <div><button type="button" data-real-drone="left">←</button><button type="button" data-real-drone="reset">●</button><button type="button" data-real-drone="right">→</button></div>
+        <button type="button" data-real-drone="down">↓</button>
+      </div>
+      <div class="challenge-result" id="droneResult">ターゲット「◎」へドローンを移動しよう。ミッションクリアでXP獲得。</div>
+      <button class="next-challenge-btn" type="button" id="nextDrone">次のドローンミッション ▶</button>
+    </div>
+  </section>
+
+  <section id="conversation" class="conversation" aria-live="polite">
+    <div class="message coach-message-small">
+      相談したいメニューを選ぶか、下の入力欄から自由に質問してください。
+    </div>
+  </section>
+
+  <form class="chat-box" id="chatForm">
+    <textarea id="messageInput" placeholder="メッセージを入力..." aria-label="AIコーチへの相談"></textarea>
+    <button class="send" id="sendButton" type="submit" aria-label="送信">➤</button>
+  </form>
+
+  <div class="status">F Soccer Production Ver1／Forgeation AI Coach・Forgeation Cloud接続版</div>
+</main>
+
+<div class="feature-screen" id="fs-training" aria-hidden="true"><div class="feature-shell">
+ <div class="feature-top"><button class="feature-back" type="button">‹</button><div><div class="feature-title">📅 練習メニュー</div><div class="feature-sub">今日の自分に合ったトレーニング</div></div></div>
+ <div class="feature-card"><h3>今日のおすすめ</h3><p>プロフィールと目標をもとに、AIコーチへ練習メニューを相談できます。</p>
+ <span class="feature-chip">⚽ ボールタッチ</span><span class="feature-chip">🎯 パス</span><span class="feature-chip">🥅 シュート</span>
+ <button class="feature-action" data-coach-prompt="今日30分でできる練習メニューを、ウォームアップ・技術・仕上げの順で提案してください。">ジッピーコーチに今日のメニューを作ってもらう</button></div>
+ <div class="feature-card"><h3>🎬 お手本ムービー</h3><p>ここにドリブル・パス・シュートなどの短い練習動画を追加できます。</p><div class="demo-note">動画素材は後から差し替え可能です。</div></div>
+</div></div>
+
+<div class="feature-screen" id="fs-analysis" aria-hidden="true"><div class="feature-shell">
+ <div class="feature-top"><button class="feature-back" type="button">‹</button><div><div class="feature-title">📊 試合分析</div><div class="feature-sub">プレーを見える化する</div></div></div>
+ <div class="feature-card"><h3>試合ヒートマップ</h3><div class="pitch-demo"></div>
+ <div class="metric-grid"><div class="metric"><b>— km</b>走行距離</div><div class="metric"><b>— km/h</b>最高速度</div><div class="metric"><b>— 回</b>スプリント</div></div>
+ <p class="demo-note">実測データ未接続のため数値は表示していません。DB・計測データ接続後に反映します。</p></div>
+ <button class="feature-action" data-coach-prompt="試合を振り返りたいです。良かった点、改善点、次の練習課題を整理する質問をしてください。">AIと試合を振り返る</button>
+</div></div>
+
+<div class="feature-screen" id="fs-growth" aria-hidden="true"><div class="feature-shell">
+ <div class="feature-top"><button class="feature-back" type="button">‹</button><div><div class="feature-title">📈 成長レポート</div><div class="feature-sub">積み重ねを見える力へ</div></div></div>
+ <div class="feature-card"><h3>成長ステータス</h3><div class="growth-bars">
+ <div class="growth-row"><span>テクニック</span><div class="growth-track"><div class="growth-fill" style="width:0%"></div></div></div>
+ <div class="growth-row"><span>フィジカル</span><div class="growth-track"><div class="growth-fill" style="width:0%"></div></div></div>
+ <div class="growth-row"><span>メンタル</span><div class="growth-track"><div class="growth-fill" style="width:0%"></div></div></div></div>
+ <p class="demo-note">現在はDB未接続です。利用開始後の記録から実測値を表示する設計です。</p></div>
+ <button class="feature-action" data-coach-prompt="今週のサッカーの成長を記録したいです。テクニック、フィジカル、メンタルの3つで振り返る質問をしてください。">今週の成長を記録する</button>
+</div></div>
+
+<div class="feature-screen" id="fs-advice" aria-hidden="true"><div class="feature-shell">
+ <div class="feature-top"><button class="feature-back" type="button">‹</button><div><div class="feature-title">💡 アドバイス</div><div class="feature-sub">ジッピーコーチから一人ひとりへ</div></div></div>
+ <div class="feature-card"><div class="coach-face">🤖⚽</div><h3>今日は何を伸ばしたい？</h3><p>下からテーマを選ぶとAIコーチへ相談します。</p>
+ <button class="feature-action" data-coach-prompt="今日はシュートを伸ばしたいです。意識するポイントを3つ教えてください。">🥅 シュート</button>
+ <button class="feature-action" data-coach-prompt="今日はパスを伸ばしたいです。意識するポイントを3つ教えてください。">🎯 パス</button>
+ <button class="feature-action" data-coach-prompt="今日はドリブルを伸ばしたいです。意識するポイントを3つ教えてください。">🏃 ドリブル</button></div>
+</div></div>
+
+<div class="feature-screen" id="fs-coach" aria-hidden="true"><div class="feature-shell">
+ <div class="feature-top"><button class="feature-back" type="button">‹</button><div><div class="feature-title">🎙️ コーチ相談</div><div class="feature-sub">24時間、AIコーチへ相談</div></div></div>
+ <div class="feature-card"><div class="coach-face">🤖💬</div><h3>ジッピーコーチに相談しよう</h3><p>ホーム画面のAIコーチ会話欄へ移動して、そのまま相談できます。</p>
+ <button class="feature-action" id="openCoachChat" type="button">AIコーチとの会話を開く</button></div>
+</div></div>
+
+<div class="feature-screen" id="fs-parent" aria-hidden="true"><div class="feature-shell">
+ <div class="feature-top"><button class="feature-back" type="button">‹</button><div><div class="feature-title">👨‍👩‍👦 保護者連携</div><div class="feature-sub">成長を一緒に見守る</div></div></div>
+ <div class="feature-card"><div class="parent-lock">🔐</div><h3>保護者向け共有</h3><p>選手の成長記録、取り組んだ練習、コーチからのコメントを保護者と共有するための画面です。</p>
+ <p class="demo-note">現在はβデモ表示です。本番では本人・保護者の認証と閲覧権限を設定し、他の利用者の情報が見えない設計にします。</p></div>
+ <div class="feature-card"><h3>今週の共有内容</h3><p>練習記録：DB接続後に表示</p><p>成長レポート：DB接続後に表示</p><p>コーチコメント：記録後に表示</p></div>
+</div></div>
+
+
+<script>
+const safeLocalStorage={
+  get(key,fallback=null){
+    try{
+      const value=window.localStorage.getItem(key);
+      return value===null?fallback:value;
+    }catch(_){
+      return fallback;
+    }
+  },
+  set(key,value){
+    try{window.localStorage.setItem(key,value)}catch(_){}
+  }
+};
+const API_URL = "https://forgeation-api.eru12121221.workers.dev";
+const chatForm = document.getElementById("chatForm");
+const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+const conversation = document.getElementById("conversation");
+const resetButton = document.getElementById("resetButton");
+const apiState = document.getElementById("apiState");
+const apiStateText = document.getElementById("apiStateText");
+
+let conversationHistory = [];
+let busy = false;
+
+const profileDefaults = {
+  grade: "中学2年生",
+  position: "MF",
+  strength: "ドリブル",
+  goal: "レギュラーになる"
+};
+
+function loadProfile() {
+  try {
+    return {...profileDefaults, ...JSON.parse(safeLocalStorage.get("fSoccerProfileV3","{}"))};
+  } catch {
+    return {...profileDefaults};
+  }
+}
+
+let playerProfile = loadProfile();
+
+function renderProfile() {
+  document.getElementById("profileGradeText").textContent = playerProfile.grade;
+  document.getElementById("profilePositionText").textContent = playerProfile.position;
+  document.getElementById("profileStrengthText").textContent = playerProfile.strength;
+  document.getElementById("profileGoalText").textContent = playerProfile.goal;
+  document.getElementById("profileGrade").value = playerProfile.grade;
+  document.getElementById("profilePosition").value = playerProfile.position;
+  document.getElementById("profileStrength").value = playerProfile.strength;
+  document.getElementById("profileGoal").value = playerProfile.goal;
+}
+
+function profileContext() {
+  return `選手プロフィール：${playerProfile.grade}、ポジションは${playerProfile.position}、得意は${playerProfile.strength}、目標は「${playerProfile.goal}」です。`;
+}
+
+
+function getExistingFSoccerUserId() {
+  try {
+    const fromSession = sessionStorage.getItem("fSoccerUserId");
+    if (fromSession) return fromSession.trim();
+  } catch (_) {}
+  try {
+    const fromLocal = localStorage.getItem("fSoccerUserId");
+    if (fromLocal) return fromLocal.trim();
+  } catch (_) {}
+  const params = new URLSearchParams(location.search);
+  return (params.get("user_id") || "").trim();
+}
+
+async function loadProfileFromDb() {
+  const status = document.getElementById("profileDbStatus");
+  const userId = getExistingFSoccerUserId();
+
+  if (!userId) {
+    if (status) {
+      status.textContent = "既存User IDが見つかりません。昨日の登録時と同じブラウザで開くか、URL末尾に ?user_id=USER_ID を付けて確認してください。";
+    }
+    return;
+  }
+
+  if (status) status.textContent = `DBからプロフィール読込中… User ID：${userId}`;
+
+  try {
+    const response = await fetch(`${API_URL}/profile?user_id=${encodeURIComponent(userId)}`, {
+      method: "GET",
+      headers: {"Accept":"application/json"},
+      cache: "no-store"
+    });
+
+    let data = null;
+    try { data = await response.json(); } catch (_) {}
+
+    if (!response.ok) {
+      throw new Error(data?.error || `プロフィール取得エラー (${response.status})`);
+    }
+
+    const user = data?.user || data || {};
+    const dbProfile = user.profile || {};
+
+    playerProfile = {
+      ...playerProfile,
+      grade: user.grade || dbProfile.grade || playerProfile.grade,
+      position: user.position || dbProfile.position || playerProfile.position,
+      strength: user.strength || dbProfile.strength || playerProfile.strength,
+      goal: user.goal || dbProfile.goal || playerProfile.goal
+    };
+
+    renderProfile();
+    safeLocalStorage.set("fSoccerProfileV3", JSON.stringify(playerProfile));
+
+    const nickname = user.nickname || dbProfile.nickname || "未設定";
+    const plan = user.plan || dbProfile.plan || "未設定";
+    if (status) {
+      status.textContent = `✅ DBプロフィール読込済み｜User ID：${userId}｜ニックネーム：${nickname}｜プラン：${plan}`;
+    }
+
+    const memberMain = document.querySelector(".member-main");
+    if (memberMain) {
+      memberMain.innerHTML = `<b>F Soccer Member</b>User ID：${userId} ／ ${plan}`;
+    }
+  } catch (error) {
+    if (status) {
+      status.textContent = `⚠️ DBプロフィールを読み込めませんでした｜User ID：${userId}｜${error.message}`;
+    }
+    console.error("F Soccer profile load error:", error);
+  }
+}
+
+
+function setApiState(state, text) {
+  apiState.classList.remove("online", "error");
+  if (state) apiState.classList.add(state);
+  apiStateText.textContent = text;
+}
+
+function timeText() {
+  return new Date().toLocaleTimeString("ja-JP", {hour:"2-digit", minute:"2-digit"});
+}
+
+function addMessage(text, type, save = true) {
+  const div = document.createElement("div");
+  div.className = "message " + type;
+  const body = document.createElement("span");
+  body.textContent = text;
+  div.appendChild(body);
+  const time = document.createElement("small");
+  time.className = "message-time";
+  time.textContent = timeText();
+  div.appendChild(time);
+  conversation.appendChild(div);
+  conversation.scrollTop = conversation.scrollHeight;
+
+  if (save && (type === "user" || type === "ai")) {
+    conversationHistory.push({role:type === "user" ? "user" : "assistant", content:text});
+    conversationHistory = conversationHistory.slice(-10);
+  }
+  return div;
+}
+
+function addTyping() {
+  const div = document.createElement("div");
+  div.className = "message ai";
+  div.id = "typingMessage";
+  div.innerHTML = '<span class="typing" aria-label="AIコーチが考えています"><i></i><i></i><i></i></span>';
+  conversation.appendChild(div);
+  conversation.scrollTop = conversation.scrollHeight;
+}
+
+function removeTyping() {
+  document.getElementById("typingMessage")?.remove();
+}
+
+function buildMenuMessage(basePrompt) {
+  return `${profileContext()}
+
+${basePrompt}
+
+年齢に合う安全な内容で、具体的かつ励ます言葉で答えてください。`;
+}
+
+async function sendToCoach(message, sourceButton = null) {
+  if (busy || !message.trim()) return;
+  busy = true;
+  addMessage(message, "user");
+  messageInput.value = "";
+  sendButton.disabled = true;
+  sendButton.textContent = "…";
+  sourceButton?.classList.add("loading");
+  addTyping();
+  setApiState("", "AIコーチ思考中");
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        message,
+        profile: playerProfile,
+        history: conversationHistory.slice(-8),
+        app: "F Soccer β Ver3"
+      })
+    });
+
+    let data;
+    try {
+      data = await response.json();
+    } catch {
+      throw new Error("APIから正しい形式の回答を受け取れませんでした。");
+    }
+
+    if (!response.ok) {
+      throw new Error(data.error || "AIとの通信に失敗しました。");
+    }
+
+    removeTyping();
+    addMessage(data.reply || data.answer || "回答を取得できませんでした。", "ai");
+    setApiState("online", "API接続中");
+  } catch (error) {
+    removeTyping();
+    addMessage(
+      "申し訳ありません。AIコーチと通信できませんでした。少し時間を置いて、もう一度お試しください。",
+      "error",
+      false
+    );
+    setApiState("error", "API接続エラー");
+    console.error(error);
+  } finally {
+    busy = false;
+    sendButton.disabled = false;
+    sendButton.textContent = "➤";
+    sourceButton?.classList.remove("loading");
+    messageInput.focus();
+  }
+}
+
+document.querySelectorAll("[data-prompt]").forEach(button => {
+  button.addEventListener("click", () => {
+    sendToCoach(buildMenuMessage(button.dataset.prompt), button);
+  });
+});
+
+document.getElementById("profileEditButton").addEventListener("click", () => {
+  document.getElementById("profileEditor").classList.toggle("open");
+});
+
+document.getElementById("profileSaveButton").addEventListener("click", () => {
+  playerProfile = {
+    grade: document.getElementById("profileGrade").value.trim() || profileDefaults.grade,
+    position: document.getElementById("profilePosition").value,
+    strength: document.getElementById("profileStrength").value.trim() || profileDefaults.strength,
+    goal: document.getElementById("profileGoal").value.trim() || profileDefaults.goal
+  };
+  safeLocalStorage.set("fSoccerProfileV3", JSON.stringify(playerProfile));
+  renderProfile();
+  document.getElementById("profileEditor").classList.remove("open");
+  addMessage("プロフィールを保存しました。次の相談から内容に反映します。", "ai");
+});
+
+resetButton.addEventListener("click", () => {
+  conversation.innerHTML = "";
+  conversationHistory = [];
+  addMessage("相談したいメニューを選ぶか、下の入力欄から自由に質問してください。", "ai");
+  messageInput.value = "";
+  messageInput.focus();
+});
+
+chatForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const message = messageInput.value.trim();
+  if (!message) return;
+  await sendToCoach(`${profileContext()}
+
+相談内容：${message}`);
+});
+
+messageInput.addEventListener("keydown", event => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    chatForm.requestSubmit();
+  }
+});
+
+async function checkApi() {
+  setApiState("", "API確認中");
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({message:"接続確認です。「接続OK」と短く答えてください。", app:"F Soccer β Ver3"})
+    });
+    if (!response.ok) throw new Error();
+    setApiState("online", "API接続中");
+  } catch {
+    setApiState("error", "API未接続");
+  }
+}
+
+renderProfile();
+loadProfileFromDb();
+checkApi();
+
+
+/* ===== F Soccer Challenge / AI Coach Decision Game ===== */
+const challengeTabs=[...document.querySelectorAll(".challenge-tab")];
+const challengePanels=[...document.querySelectorAll("[data-challenge-panel]")];
+const PROD_XP_KEY="fSoccerCoachXpProductionV3";
+let coachXp=Math.max(0,Number(safeLocalStorage.get(PROD_XP_KEY,"0"))||0);
+
+function coachLevelInfo(xp){
+  const lv=Math.floor(xp/100)+1;
+  const floor=(lv-1)*100, next=lv*100;
+  let rank="新人コーチ";
+  if(lv>=10)rank="地区コーチ";
+  if(lv>=30)rank="全国コーチ";
+  if(lv>=50)rank="プロアカデミーコーチ";
+  if(lv>=100)rank="世界トップコーチ 🌍";
+  if(lv>=150)rank="ワールドエリートコーチ ⭐";
+  if(lv>=200)rank="レジェンドAIコーチ 👑";
+  return {name:`Lv.${lv} ${rank}`,floor,next};
+}
+function renderCoachLevel(){
+  const info=coachLevelInfo(coachXp), span=info.next-info.floor;
+  const progress=Math.max(0,Math.min(100,((coachXp-info.floor)/span)*100));
+  const name=document.getElementById("coachLevelName"), text=document.getElementById("coachXpText"), bar=document.getElementById("coachXpBar");
+  if(name)name.textContent=info.name;
+  if(text)text.textContent=`${coachXp-info.floor} / ${span} XP  (TOTAL ${coachXp})`;
+  if(bar){bar.style.width=`${progress}%`;bar.parentElement?.classList.remove("xp-pop");void bar.offsetWidth;bar.parentElement?.classList.add("xp-pop");}
+}
+function awardXp(value,reason){
+  coachXp+=value;
+  safeLocalStorage.set(PROD_XP_KEY,String(coachXp));
+  renderCoachLevel();
+  addMessage(`🏆 ${reason}！ +${value}XP　TOTAL ${coachXp}XP`,"ai");
+}
+challengeTabs.forEach(button=>button.addEventListener("click",()=>{
+  const id=button.dataset.challenge;
+  challengeTabs.forEach(tab=>tab.classList.toggle("active",tab===button));
+  challengePanels.forEach(panel=>panel.classList.toggle("active",panel.dataset.challengePanel===id));
+}));
+
+// PK: each successful goal always awards XP; keeper direction changes every attempt.
+const pkSceneImages={"左":"f-soccer-pk-left.png","中央":"f-soccer-pk-center.png","右":"f-soccer-pk-right.png"};
+document.querySelectorAll("[data-pk]").forEach(button=>button.addEventListener("click",()=>{
+  const shot=button.dataset.pk, scene=document.getElementById("pkSceneImage");
+  if(scene&&pkSceneImages[shot])scene.src=pkSceneImages[shot];
+  const choices=["左","中央","右"],keeper=choices[Math.floor(Math.random()*3)],success=shot!==keeper;
+  document.getElementById("pkResult").textContent=success?`GOAL！ ${shot}へ決めた！ AIキーパーは${keeper}。+10XP`:`SAVE！ AIキーパーが${shot}を読んだ。次の1本へ！`;
+  if(success)awardXp(10,"PK成功");
+}));
+
+// Dribble: 50 AI-coach decision patterns.
+const dribbleSources={left:"f-soccer-dribble-right.mp4",right:"f-soccer-dribble-left.mp4"};
+const dribblePatterns=[{"q": "DFが左側から強く寄せてきた。空いたコースは？", "o": ["左へ突破", "右へ突破", "いったん止まる"], "a": 1, "e": "相手の逆を取って右のスペースへ。", "v": "right", "xp": 15}, {"q": "DFが右側から強く寄せてきた。空いたコースは？", "o": ["左へ突破", "右へ突破", "後ろへ戻る"], "a": 0, "e": "相手の逆を取って左のスペースへ。", "v": "left", "xp": 15}, {"q": "DFが正面で足を止めて構えている。最初の一手は？", "o": ["スピードだけで突っ込む", "フェイントで重心を動かす", "後ろを向く"], "a": 1, "e": "相手の重心を動かしてから突破する。", "v": "right", "xp": 20}, {"q": "DFが飛び込んできた。どう外す？", "o": ["一度ボールを引いてかわす", "そのまま直進", "ボールを止めて待つ"], "a": 0, "e": "飛び込みを利用して逆を取る。", "v": "left", "xp": 20}, {"q": "縦のコースを切られた。次は？", "o": ["縦へ強引に行く", "内側へ切り返す", "ライン外へ蹴る"], "a": 1, "e": "切られた縦ではなく内側の空間を使う。", "v": "left", "xp": 15}, {"q": "中央へのコースを切られた。次は？", "o": ["外側へ運ぶ", "中央へ突っ込む", "止まる"], "a": 0, "e": "守備者が消した逆側を使う。", "v": "right", "xp": 15}, {"q": "タッチライン際でDFが縦を警戒。どうする？", "o": ["内側へカットイン", "ライン外へ出す", "縦へ直進"], "a": 0, "e": "相手の意識の逆、内側を使う。", "v": "left", "xp": 20}, {"q": "タッチライン際でDFが中を切っている。どうする？", "o": ["縦へ加速", "中央へ突っ込む", "後ろだけを見る"], "a": 0, "e": "中を消されたら縦のスペースを使う。", "v": "right", "xp": 20}, {"q": "DFとの距離が3mあり、前にスペース。どうする？", "o": ["スピードに乗る", "立ち止まる", "バックパスだけ"], "a": 0, "e": "距離があるうちに加速して主導権を取る。", "v": "right", "xp": 15}, {"q": "DFが密着してきた。まず何をする？", "o": ["ボールを体で守る", "大きく前へ蹴る", "足元から離す"], "a": 0, "e": "体を入れてボールを失わない。", "v": "left", "xp": 15}, {"q": "背後からDFが追ってきた。どうする？", "o": ["進行方向に体を入れてキープ", "急に止まって背を向けない", "ボールを放置"], "a": 0, "e": "相手とボールの間に体を置く。", "v": "right", "xp": 20}, {"q": "2人のDFに挟まれそう。最優先は？", "o": ["狭い間へ突っ込む", "味方を使って逃がす", "目を閉じる"], "a": 1, "e": "数的不利では無理をせず連携する。", "v": "left", "xp": 20}, {"q": "1人目を抜いた直後、2人目が来た。どうする？", "o": ["タッチを小さく次の判断", "そのまま全力だけ", "止まって喜ぶ"], "a": 0, "e": "抜いた後こそ次の相手を見る。", "v": "right", "xp": 20}, {"q": "ゴール前、DFがシュートを警戒して飛び込めない。どうする？", "o": ["シュートフェイントから持ち出す", "遠くへ戻す", "何もしない"], "a": 0, "e": "シュートを意識させて足を止める。", "v": "left", "xp": 25}, {"q": "ペナルティエリア内でDFが不用意に足を出した。どうする？", "o": ["ボールをずらしてかわす", "相手の足へ蹴る", "止まる"], "a": 0, "e": "小さなタッチで相手の足を外す。", "v": "right", "xp": 25}, {"q": "カウンターで前方に広いスペース。最適なのは？", "o": ["大きめのタッチで加速", "細かく止まり続ける", "後ろへ戻る"], "a": 0, "e": "スペースがある時はスピードを最大化する。", "v": "right", "xp": 20}, {"q": "密集地帯で3人に囲まれた。どうする？", "o": ["細かいタッチで出口を探す", "大きく蹴り出す", "足元を見ない"], "a": 0, "e": "狭い場所ではボールを体から離さない。", "v": "left", "xp": 20}, {"q": "味方が右からオーバーラップ。DFが味方を気にした。どうする？", "o": ["自分で左へ持ち出す", "必ず味方へ出す", "止まる"], "a": 0, "e": "味方の動きをおとりにして逆を取る。", "v": "left", "xp": 20}, {"q": "味方が左からオーバーラップ。DFが味方を気にした。どうする？", "o": ["自分で右へ持ち出す", "必ず味方へ出す", "後ろを見る"], "a": 0, "e": "味方の動きで生まれた逆側を使う。", "v": "right", "xp": 20}, {"q": "DFが片足を前に出して構えている。狙うのは？", "o": ["前足側を一気に外す", "真正面", "止まる"], "a": 0, "e": "前足側は切り返しに弱い瞬間がある。", "v": "right", "xp": 20}, {"q": "DFの重心が左足に乗った。突破方向は？", "o": ["左", "右", "後ろ"], "a": 1, "e": "重心と逆の右へ。", "v": "right", "xp": 15}, {"q": "DFの重心が右足に乗った。突破方向は？", "o": ["左", "右", "止まる"], "a": 0, "e": "重心と逆の左へ。", "v": "left", "xp": 15}, {"q": "相手が身体を半身にして縦へ誘導している。どうする？", "o": ["中へ切り返す", "誘導どおり縦だけ", "止まる"], "a": 0, "e": "相手が誘う方向の逆を選ぶ。", "v": "left", "xp": 20}, {"q": "相手が中央へ誘導している。どうする？", "o": ["外へ逃げる", "中央へそのまま", "後退のみ"], "a": 0, "e": "誘導の逆を取り安全な外へ。", "v": "right", "xp": 20}, {"q": "ボールを受けた瞬間、DFが背中側から来る。最初に？", "o": ["ファーストタッチで離れる", "足元に止めるだけ", "後ろを見るだけ"], "a": 0, "e": "最初のタッチでプレッシャーから逃げる。", "v": "right", "xp": 20}, {"q": "前を向けない状態でDFが密着。どうする？", "o": ["ターンせず味方へ預ける", "無理に反転", "ボールを捨てる"], "a": 0, "e": "状況によってはドリブルしない判断も正解。", "v": "left", "xp": 20}, {"q": "中央で1対1、左右どちらも空いている。何を見る？", "o": ["DFの腰と重心", "観客席", "自分の足だけ"], "a": 0, "e": "腰と重心から逆方向を選ぶ。", "v": "right", "xp": 15}, {"q": "DFが後ろ向きに下がっている。どうする？", "o": ["スピード変化で間合いを詰める", "自分も下がる", "止まる"], "a": 0, "e": "守備者が下がる時は速度変化が効く。", "v": "right", "xp": 20}, {"q": "DFが急に間合いを詰めた。どうする？", "o": ["ワンタッチで方向転換", "さらに近づく", "足を止める"], "a": 0, "e": "寄せの勢いを利用して逆へ。", "v": "left", "xp": 20}, {"q": "相手がボールだけ見ている。狙いは？", "o": ["身体フェイント", "何もしない", "後ろへ蹴る"], "a": 0, "e": "視線を利用して身体の動きで逆を取る。", "v": "right", "xp": 20}, {"q": "相手がこちらの身体だけ見ている。狙いは？", "o": ["ボールタッチの変化", "立ち止まる", "大きく外へ蹴る"], "a": 0, "e": "タッチの変化で予測を外す。", "v": "left", "xp": 20}, {"q": "ゴールライン付近、縦へ行く余地がない。どうする？", "o": ["切り返して内側", "さらにラインへ", "外へ出す"], "a": 0, "e": "スペースのある内側へ切り返す。", "v": "left", "xp": 20}, {"q": "中央で味方FWがDFを引っ張った。どうする？", "o": ["空いたスペースへ運ぶ", "FWと同じ場所へ", "止まる"], "a": 0, "e": "味方が作ったスペースを使う。", "v": "right", "xp": 20}, {"q": "味方が足元で受けに来た。DFもついてきた。どうする？", "o": ["味方をおとりに逆へ運ぶ", "必ず足元へパス", "止まる"], "a": 0, "e": "相手が動いた逆の空間を使う。", "v": "left", "xp": 20}, {"q": "相手が疲れて足が止まっている。どうする？", "o": ["テンポを上げて仕掛ける", "ゆっくり止まる", "後ろへ戻る"], "a": 0, "e": "相手の反応速度が落ちた時は仕掛け時。", "v": "right", "xp": 20}, {"q": "自分も疲れてボールコントロールが乱れそう。どうする？", "o": ["タッチ数を減らして確実に", "無理に連続フェイント", "大きく蹴る"], "a": 0, "e": "疲労時はシンプルな判断が重要。", "v": "left", "xp": 15}, {"q": "雨でピッチが滑る。ドリブルで意識するのは？", "o": ["タッチを少し小さく", "大きく蹴り続ける", "速度だけ上げる"], "a": 0, "e": "滑る条件ではボールを近くに置く。", "v": "right", "xp": 15}, {"q": "芝が深くボールが止まりやすい。どうする？", "o": ["少し強めのタッチ", "弱いタッチだけ", "止まる"], "a": 0, "e": "ピッチ条件に合わせてタッチ強度を変える。", "v": "right", "xp": 15}, {"q": "逆足側へボールが流れた。どうする？", "o": ["体勢を整えて安全な側へ", "無理に利き足へ戻す", "その場で止まる"], "a": 0, "e": "体勢を崩さず次のプレーへつなぐ。", "v": "left", "xp": 15}, {"q": "利き足側を完全に切られた。どうする？", "o": ["逆足で前進を続ける", "利き足だけに固執", "後ろを見る"], "a": 0, "e": "両足を使えると選択肢が増える。", "v": "right", "xp": 20}, {"q": "ペナルティエリア角、味方が中央へ走る。DFがパスコースを切った。どうする？", "o": ["自分で縦へ運ぶ", "無理に中央へパス", "止まる"], "a": 0, "e": "相手がパスを消した分、自分の突破路が空く。", "v": "right", "xp": 20}, {"q": "ペナルティエリア角、DFが自分の縦を切った。味方が中央にいる。どうする？", "o": ["味方を使う", "縦へ強引に", "外へ出す"], "a": 0, "e": "自分を止めた相手の背後をパスで使う。", "v": "left", "xp": 20}, {"q": "コーナー付近で時間を使いたい。どうする？", "o": ["身体を使ってキープ", "中央へ無理に突進", "すぐ失う"], "a": 0, "e": "試合状況によっては保持も重要。", "v": "left", "xp": 15}, {"q": "終盤、1点負け。前方に1対1。どうする？", "o": ["積極的に仕掛ける", "時間を使う", "後ろへ戻し続ける"], "a": 0, "e": "必要なリスクを取る時間帯。", "v": "right", "xp": 20}, {"q": "終盤、1点リード。自陣サイドで1対1。どうする？", "o": ["無理せず安全に運ぶ", "必ず抜き切る", "中央へ強引に"], "a": 0, "e": "スコアを考えたリスク管理。", "v": "left", "xp": 20}, {"q": "自陣ゴール前で相手2人。どうする？", "o": ["ドリブルをやめ安全に逃がす", "2人抜きを狙う", "止まる"], "a": 0, "e": "場所によってリスク許容度を変える。", "v": "left", "xp": 20}, {"q": "中盤で前方に大きな空間。DFが横から追う。どうする？", "o": ["DFから遠い足で運ぶ", "DF側の足で運ぶ", "止まる"], "a": 0, "e": "相手から遠い側にボールを置く。", "v": "right", "xp": 20}, {"q": "ゴール前1対1、GKも前に出てきた。どうする？", "o": ["GKとDFの間を見てタッチ", "DFだけを見る", "ボールだけ見る"], "a": 0, "e": "複数の相手を同時に認知する。", "v": "right", "xp": 25}, {"q": "DFが一度抜かれて追い直している。どうする？", "o": ["進路を変えて体を入れる", "同じ直線だけ", "止まる"], "a": 0, "e": "追走ラインを外しながらボールを守る。", "v": "left", "xp": 20}, {"q": "味方が前方でDFをブロックしてスペースができた。どうする？", "o": ["空いたレーンへ加速", "味方に近づきすぎる", "止まる"], "a": 0, "e": "味方が作ったレーンを素早く使う。", "v": "right", "xp": 20}];
+let dribbleOrder=[...Array(dribblePatterns.length).keys()].sort(()=>Math.random()-.5),dribblePos=0,currentDribble=null;
+function newDribbleSituation(){
+  if(dribblePos>=dribbleOrder.length){dribbleOrder.sort(()=>Math.random()-.5);dribblePos=0;}
+  currentDribble=dribblePatterns[dribbleOrder[dribblePos++]];
+  document.getElementById("dribbleSituation").textContent=`問題 ${dribblePos}/50：${currentDribble.q}`;
+  document.getElementById("dribbleResult").textContent="状況を読んで、最適な判断を選ぼう。";
+  const box=document.getElementById("dribbleOptions"); box.innerHTML="";
+  currentDribble.o.forEach((label,i)=>{const b=document.createElement("button");b.type="button";b.textContent=label;b.dataset.dribbleAnswer=String(i);box.appendChild(b);});
+}
+document.getElementById("dribbleOptions")?.addEventListener("click",async e=>{
+  const b=e.target.closest("button[data-dribble-answer]"); if(!b||!currentDribble)return;
+  const ans=Number(b.dataset.dribbleAnswer),correct=ans===currentDribble.a;
+  const video=document.getElementById("dribbleChoiceVideo"),wrap=document.getElementById("dribbleVideoWrap");
+  if(currentDribble.v&&dribbleSources[currentDribble.v]){wrap.hidden=false;video.src=dribbleSources[currentDribble.v];video.load();document.getElementById("dribbleVideoLabel").textContent=`${currentDribble.v==="left"?"左":"右"} DRIBBLE / 判断イメージ`;try{await video.play();}catch(_){}}
+  if(correct){document.getElementById("dribbleResult").textContent=`BREAK！ ${currentDribble.e} +${currentDribble.xp}XP`;awardXp(currentDribble.xp,"ドリブル判断正解");}
+  else document.getElementById("dribbleResult").textContent=`TRY AGAIN！ ${currentDribble.e}`;
+});
+document.getElementById("nextDribble")?.addEventListener("click",newDribbleSituation);
+newDribbleSituation();
+
+// PASS PLAY: use the supplied 15-scene sheet as a visual question bank.
+const passScenes=[
+ {n:1,label:"味方を確認",a:"安全",q:"まず顔を上げて味方を確認。最初の判断は？"},
+ {n:2,label:"パスを出す",a:"縦",q:"前方の味方へ正確に通せる。狙うなら？"},
+ {n:3,label:"味方が受ける",a:"安全",q:"味方が確実に受けられる選択は？"},
+ {n:4,label:"攻撃につなげる",a:"縦",q:"次の攻撃へ一気につなげたい。選ぶなら？"},
+ {n:5,label:"ワンタッチパス",a:"安全",q:"素早くシンプルにつなぐ場面。選ぶなら？"},
+ {n:6,label:"ダイレクトパス",a:"縦",q:"テンポを上げて前進する。選ぶなら？"},
+ {n:7,label:"スルーパス",a:"縦",q:"相手DFの背後にスペース。最適なのは？"},
+ {n:8,label:"サイドチェンジ",a:"サイド",q:"逆サイドに大きなスペース。最適なのは？"},
+ {n:9,label:"斜めのパス",a:"縦",q:"角度をつけて前進できる。選ぶなら？"},
+ {n:10,label:"連続パス",a:"安全",q:"テンポよくつなぎ続けたい。選ぶなら？"},
+ {n:11,label:"2人で崩す",a:"安全",q:"近い味方との交換で相手を動かす。選ぶなら？"},
+ {n:12,label:"3人の連携",a:"安全",q:"3人で確実につないで前進。選ぶなら？"},
+ {n:13,label:"フリースペースへ",a:"縦",q:"前方の空いたスペースを使う。選ぶなら？"},
+ {n:14,label:"逆サイドへ展開",a:"サイド",q:"守備を横に動かして厚みを作る。選ぶなら？"},
+ {n:15,label:"最後はゴールへ",a:"縦",q:"ゴールへ直結する前進パス。選ぶなら？"}
+];
+let passIndex=0;
+function renderPass(){
+  const p=passScenes[passIndex],col=passIndex%5,row=Math.floor(passIndex/5),img=document.getElementById("passPlaySheet");
+  img.style.left=`-${col*100}%`;img.style.top=`-${row*100}%`;
+  document.getElementById("passQuestion").textContent=`Q${p.n}. ${p.label} — ${p.q}`;
+  document.getElementById("passResult").textContent="画像を見て判断しよう。";
+}
+document.querySelectorAll("[data-pass-choice]").forEach(b=>b.addEventListener("click",()=>{
+  const p=passScenes[passIndex],choice=b.dataset.passChoice;
+  if(choice===p.a){document.getElementById("passResult").textContent=`GOOD！ ${p.label}の判断正解。+10XP`;awardXp(10,"パス判断正解");}
+  else document.getElementById("passResult").textContent=`TRY AGAIN！ この場面は「${p.a==="安全"?"安全なパス":p.a==="縦"?"縦パス":"サイドチェンジ"}」を優先。`;
+}));
+document.getElementById("nextPass")?.addEventListener("click",()=>{passIndex=(passIndex+1)%passScenes.length;renderPass();});
+renderPass();
+
+// 300 tactical questions with rotating visuals and shuffled answers.
+const tacticBases=[{"q": "中央が密集し、逆サイドが空いている。", "c": "逆サイドへ展開する", "w1": "密集へ突っ込む", "w2": "その場に止まる", "e": "幅を使って守備を広げる。"}, {"q": "相手最終ラインが高い。FWが背後を狙っている。", "c": "タイミングを見て背後へ通す", "w1": "足元だけで回す", "w2": "自陣へ戻すだけ", "e": "高いラインの背後は大きなスペース。"}, {"q": "相手が低いブロックを作っている。", "c": "幅を使って揺さぶる", "w1": "中央に集まる", "w2": "全員同じ場所へ", "e": "守備ブロックを横に動かす。"}, {"q": "ボールを失った直後。", "c": "近い選手で即時奪回", "w1": "全員歩いて戻る", "w2": "攻撃方向だけを見る", "e": "切り替え直後が奪回チャンス。"}, {"q": "カウンターで3対2。", "c": "相手を引きつけてフリーを使う", "w1": "すぐ遠くからシュート", "w2": "立ち止まる", "e": "数的優位を使って確率を上げる。"}, {"q": "自陣でGKからビルドアップ。相手が前から来る。", "c": "受ける角度を作る", "w1": "GKの後ろに隠れる", "w2": "全員前へ走る", "e": "出口を複数作る。"}, {"q": "サイドで1対2。", "c": "サポートを使って作り直す", "w1": "2人へ突っ込む", "w2": "ライン外へ蹴る", "e": "数的不利では無理をしない。"}, {"q": "味方SBがオーバーラップ。", "c": "相手の反応を見て使い分ける", "w1": "必ずSBへ出す", "w2": "必ず無視する", "e": "味方の動きを選択肢にする。"}, {"q": "中央で前を向いた。FWが足元と背後を狙う。", "c": "DFの重心を見て選ぶ", "w1": "毎回足元", "w2": "毎回背後", "e": "相手を見てプレーを変える。"}, {"q": "CKのこぼれ球が外へ。", "c": "周囲を確認して次を選ぶ", "w1": "目を閉じて蹴る", "w2": "必ずバックパス", "e": "セカンドボールでも認知が重要。"}, {"q": "守備で相手が縦パスを狙う。", "c": "コースを切りながら寄せる", "w1": "ボールだけ追う", "w2": "味方から離れる", "e": "寄せとコース制限を同時に。"}, {"q": "相手WGがサイドで前向き。", "c": "内側と縦の優先順位を共有", "w1": "1人で飛び込む", "w2": "中央を完全に空ける", "e": "守備は味方との連動が重要。"}, {"q": "ペナルティエリア内で相手が背を向けた。", "c": "前を向かせない", "w1": "すぐ足を出す", "w2": "離れて見る", "e": "危険地域ではターンを防ぐ。"}, {"q": "相手のカウンターを受ける。", "c": "中央を締めて遅らせる", "w1": "全員ボールへ", "w2": "サイドを空けて中央も空ける", "e": "まず中央の危険を消す。"}, {"q": "味方がワンタッチで返せる位置。", "c": "壁パスを使う", "w1": "長く持ち続ける", "w2": "味方から離れる", "e": "短い連携で守備者の向きを変える。"}, {"q": "終盤、1点リード。", "c": "安全な保持と前進を使い分ける", "w1": "毎回無理な縦パス", "w2": "全員ゴール前へ", "e": "時間とリスクを管理する。"}, {"q": "終盤、1点ビハインド。", "c": "リスクを上げて前進人数を増やす", "w1": "時間を使い続ける", "w2": "自陣だけで回す", "e": "スコアに応じてリスクを変える。"}, {"q": "相手が10人になった。", "c": "幅とテンポで数的優位を使う", "w1": "中央だけで混雑させる", "w2": "守備人数を増やし続ける", "e": "人数差をピッチ全体で使う。"}, {"q": "自チームが10人になった。", "c": "中央を締めて役割を整理", "w1": "全員前へ出る", "w2": "マークを捨てる", "e": "数的不利ではコンパクトさが重要。"}, {"q": "相手がハイプレス。", "c": "背後と中間ポジションを使う", "w1": "足元だけで止める", "w2": "GKを使わない", "e": "プレスの背後にはスペースがある。"}, {"q": "相手がマンツーマン気味。", "c": "動き直しでマークをずらす", "w1": "同じ位置に立つ", "w2": "全員ボールへ寄る", "e": "位置交換でマークを外す。"}, {"q": "相手がゾーン守備。", "c": "ライン間に立つ", "w1": "DFの正面に立つ", "w2": "全員外へ出る", "e": "ゾーン間の隙間を使う。"}, {"q": "自陣深くでFKを得た。", "c": "安全に再開して陣形を整える", "w1": "中央へ無理に蹴る", "w2": "急いで失う", "e": "危険地域ではリスクを抑える。"}, {"q": "敵陣深くでFK。", "c": "相手配置とGK位置を確認", "w1": "すぐ適当に蹴る", "w2": "後方へ大きく戻す", "e": "セットプレーは準備が重要。"}, {"q": "相手CKを守る。", "c": "ゾーンとマークの役割確認", "w1": "全員ボールだけ見る", "w2": "こぼれ球を無視", "e": "一次守備と二次対応を準備。"}, {"q": "自チームCK。", "c": "ニア・中央・ファーの狙いを共有", "w1": "全員同じ場所へ", "w2": "蹴る人だけ考える", "e": "役割を分けて確率を上げる。"}, {"q": "相手がサイドチェンジを多用。", "c": "逆サイドのスライドを早める", "w1": "ボール側だけに全員寄る", "w2": "逆サイドを捨てる", "e": "移動中に陣形を整える。"}, {"q": "中央突破が続けて止められている。", "c": "外を使って相手を広げる", "w1": "同じ中央突破を繰り返す", "w2": "攻撃をやめる", "e": "違うルートで守備を動かす。"}, {"q": "サイド攻撃が読まれている。", "c": "内側の選手と連携して変化", "w1": "同じクロスだけ", "w2": "後ろへ下げ続ける", "e": "攻撃に変化をつける。"}, {"q": "相手GKのキックが長い。", "c": "セカンドボールの位置を準備", "w1": "全員最終ラインへ", "w2": "落下点を見ない", "e": "次のボールまで予測する。"}];
+const tacticContexts=["前半10分・0-0", "前半35分・0-0", "後半5分・1点リード", "後半20分・1点ビハインド", "後半35分・同点", "後半40分・1点リード", "延長前半・同点", "雨天・ピッチが滑る", "相手が疲れてきた時間帯", "自チームが押し込まれている時間帯"];
+const tacticImages=["fs_asset_03.jpg", "fs_asset_06.png", "fs_asset_07.png", "fs_asset_09.png", "fs_asset_10.png"];
+const tacticsQuestions=[];
+tacticContexts.forEach((ctx,ci)=>tacticBases.forEach((b,bi)=>{
+  const correctIndex=(ci+bi)%3,opts=[null,null,null],wrongs=[b.w1,b.w2];
+  opts[correctIndex]=b.c;for(let i=0;i<3;i++)if(opts[i]===null)opts[i]=wrongs.shift();
+  tacticsQuestions.push({q:`${b.q}（${ctx}）`,o:opts,a:correctIndex,e:b.e,img:(ci*3+bi)%tacticImages.length});
+}));
+let tacticOrder=[...Array(tacticsQuestions.length).keys()].sort(()=>Math.random()-.5), tacticPos=0;
+function renderTacticQuestion(){
+  const idx=tacticOrder[tacticPos],item=tacticsQuestions[idx],box=document.getElementById("quizQuestion"),opts=document.getElementById("quizOptions");
+  box.textContent=item.q;opts.innerHTML="";
+  const visual=document.querySelector(".tactic-visual"),img=document.getElementById("tacticSceneImage");
+  if(img&&tacticImages.length){visual?.classList.add("swap");setTimeout(()=>{img.src=tacticImages[item.img%tacticImages.length];visual?.classList.remove("swap");},120);}
+  item.o.forEach((label,i)=>{const b=document.createElement("button");b.type="button";b.textContent=`${["A","B","C"][i]}：${label}`;b.dataset.answer=String(i);opts.appendChild(b);});
+  document.getElementById("quizProgress").textContent=`問題 ${tacticPos+1} / 300`;
+}
+document.getElementById("quizOptions")?.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-answer]");if(!b)return;
+  const idx=tacticOrder[tacticPos],item=tacticsQuestions[idx],ans=Number(b.dataset.answer),box=document.getElementById("quizQuestion");
+  if(ans===item.a){
+    b.classList.add("correct");box.textContent=`正解！ ${item.e} +12XP`;awardXp(12,"戦術クイズ正解");
+    setTimeout(()=>{tacticPos++;if(tacticPos>=300){tacticPos=0;tacticOrder.sort(()=>Math.random()-.5);}renderTacticQuestion();},650);
+  }else{b.classList.add("wrong");box.textContent=`NG。AIコーチ：${item.e}`;}
+});
+renderTacticQuestion();
+
+// Real drone: supplied six-scene DRONE CHALLENGE image + directional control.
+const droneMissions=[
+ "山の展望台を撮影せよ","海岸線を追跡せよ","スタジアムを俯瞰せよ",
+ "森林エリアを探索せよ","夜の工場地帯を監視せよ","川の上流を調査せよ"
+];
+let droneMission=0,dx=18,dy=76,tx=80,ty=24;
+function renderDroneScene(){
+  const img=document.getElementById("droneMissionSheet"),col=droneMission%3,row=Math.floor(droneMission/3);
+  img.style.left=`-${col*100}%`;img.style.top=`-${row*100}%`;
+  document.getElementById("droneMissionText").textContent=`MISSION ${droneMission+1}/6：${droneMissions[droneMission]}　◎地点へ移動しよう。`;
+  const marker=document.getElementById("realDroneMarker"),target=document.getElementById("realDroneTarget");
+  marker.style.left=dx+"%";marker.style.top=dy+"%";target.style.left=tx+"%";target.style.top=ty+"%";
+  if(Math.abs(dx-tx)<=9&&Math.abs(dy-ty)<=9){
+    document.getElementById("droneResult").textContent=`MISSION CLEAR！ ${droneMissions[droneMission]} +20XP`;
+    awardXp(20,"Fドローンミッション");
+    tx=12+Math.floor(Math.random()*76);ty=15+Math.floor(Math.random()*65);
+  }
+}
+document.querySelectorAll("[data-real-drone]").forEach(b=>b.addEventListener("click",()=>{
+  const d=b.dataset.realDrone;
+  if(d==="up")dy=Math.max(8,dy-10);if(d==="down")dy=Math.min(90,dy+10);
+  if(d==="left")dx=Math.max(8,dx-10);if(d==="right")dx=Math.min(92,dx+10);
+  if(d==="reset"){dx=18;dy=76;document.getElementById("droneResult").textContent="スタート位置へ戻りました。";}
+  renderDroneScene();
+}));
+document.getElementById("nextDrone")?.addEventListener("click",()=>{
+  droneMission=(droneMission+1)%6;dx=18;dy=76;tx=65+Math.floor(Math.random()*22);ty=15+Math.floor(Math.random()*30);renderDroneScene();
+});
+renderDroneScene();renderCoachLevel();
+
+
+/* ===== 6機能画面ナビゲーション ===== */
+const featureMap = {
+  training:"fs-training", analysis:"fs-analysis", growth:"fs-growth",
+  advice:"fs-advice", coach:"fs-coach", parent:"fs-parent"
+};
+function openFeature(name){
+  const el=document.getElementById(featureMap[name]);
+  if(!el)return;
+  el.classList.add("open"); el.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+}
+function closeFeature(el){
+  el.classList.remove("open"); el.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+document.querySelectorAll(".feature-launch").forEach(btn=>{
+  btn.addEventListener("click",()=>openFeature(btn.dataset.feature));
+});
+document.querySelectorAll(".feature-back").forEach(btn=>{
+  btn.addEventListener("click",()=>closeFeature(btn.closest(".feature-screen")));
+});
+document.querySelectorAll("[data-coach-prompt]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const screen=btn.closest(".feature-screen");
+    if(screen) closeFeature(screen);
+    const prompt=btn.dataset.coachPrompt;
+    messageInput.value=prompt;
+    chatForm.scrollIntoView({behavior:"smooth",block:"center"});
+    setTimeout(()=>chatForm.requestSubmit(),300);
+  });
+});
+document.getElementById("openCoachChat")?.addEventListener("click",()=>{
+  const screen=document.getElementById("fs-coach"); closeFeature(screen);
+  chatForm.scrollIntoView({behavior:"smooth",block:"center"});
+  setTimeout(()=>messageInput.focus(),350);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    const open=document.querySelector(".feature-screen.open");
+    if(open)closeFeature(open);
+  }
+});
+
+
+/* ===== Production member gate ===== */
+document.getElementById("enterProduction")?.addEventListener("click",()=>{
+  document.getElementById("productionGate")?.classList.add("is-hidden");
+  try{ sessionStorage.setItem("fSoccerProductionDemoEntered","1"); }catch(e){}
+});
+try{
+  if(sessionStorage.getItem("fSoccerProductionDemoEntered")==="1"){
+    document.getElementById("productionGate")?.classList.add("is-hidden");
+  }
+}catch(e){}
+
+
+/* ===== Media fallback diagnostics (API code untouched) ===== */
+document.querySelectorAll("video").forEach(v=>{
+  v.addEventListener("error",()=>{
+    const label=v.closest(".challenge-media")?.querySelector(".challenge-media-label");
+    if(label) label.textContent += " / 読み込みエラー";
+  });
+});
+document.querySelectorAll(".challenge-media img, .pk-reference img").forEach(img=>{
+  img.addEventListener("error",()=>{
+    img.alt = (img.alt || "画像") + "（読み込みエラー）";
+  });
+});
+
+</script>
+
+</body>
+</html>
 
