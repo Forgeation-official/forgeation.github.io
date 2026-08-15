@@ -250,7 +250,7 @@ footer{text-align:center;color:#8dafca;font-size:11px;padding-top:24px}
 
       <div class="actions">
         <button class="secondary prev" data-back="3">登録内容を戻る</button>
-        <a class="btn primary" href="./F_Soccer_Production_Ver1_契約者画面デモ.htmll">正式版 F Soccer をはじめる</a>
+        <a class="btn primary" href="./F_Soccer_Production_Ver1_契約者画面デモ.html">正式版 F Soccer をはじめる</a>
       </div>
 
       <div class="note">
@@ -286,7 +286,9 @@ function showStep(n){
 
 async function api(path, options={}){
   const res = await fetch(API_BASE + path, {
-    credentials:"include",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
     headers:{"Content-Type":"application/json", ...(options.headers||{})},
     ...options
   });
@@ -413,5 +415,3 @@ document.getElementById("checkExistingProfile").addEventListener("click", async(
 verifyContract();
 </script>
 </body>
-</html>
-
