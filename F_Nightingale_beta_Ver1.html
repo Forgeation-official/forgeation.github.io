@@ -254,6 +254,8 @@ async function sendAppUsage(event,data={}){
       visitorId:getForgeationVisitorId(),
       userId:getForgeationUserId(),
       page:APP_PAGE,
+      appId:APP_PAGE,
+      app_id:APP_PAGE,
       app:APP_PAGE,
       product:"f-nightingale",
       event:String(event||"usage"),
@@ -374,13 +376,117 @@ const NIGHTINGALE_CHAPTERS={
   ]}
 };
 
-function jpChapter(n){return ['零','一','二','三','四','五','六','七','八','九','十'][n]||String(n)}
+/* ===== NIGHTINGALE STORY Chapters 11-30 ===== */
+Object.assign(NIGHTINGALE_CHAPTERS,{
+11:{title:"声にならないサイン",subtitle:"言葉だけではない変化を観察する。",image:0,steps:[
+{title:"沈黙の午後",text:"患者さんは返事をするが、視線が合わず動作も遅い。言葉にならない変化をミライは見逃さない。",xp:30},
+{title:"観察を深める",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["表情・動作・普段との違いを確認する", "返事があるので問題なしとする", "忙しいので観察をやめる"],correct:0},
+{title:"小さなサインを共有する",text:"気づきを具体的に記録し共有することで、次のケアにつながった。",xp:60}
+]},
+12:{title:"痛みを聴く",subtitle:"数字にできない苦痛を丁寧に捉える。",image:1,steps:[
+{title:"痛みの表現",text:"同じ「痛い」でも感じ方は一人ひとり違う。ミライは強さだけでなく場所や性質を確かめる。",xp:30},
+{title:"尋ね方を選ぶ",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["いつ・どこが・どんなふうに痛むか確認する", "我慢できるかだけ聞く", "表情だけで決める"],correct:0},
+{title:"変化を追う",text:"対応の前後を比べ、痛みの変化を継続して見守った。",xp:60}
+]},
+13:{title:"眠れない夜",subtitle:"睡眠を妨げる理由を一緒に探す。",image:2,steps:[
+{title:"消えない灯り",text:"夜中になっても患者さんは眠れない。環境、不安、痛み。原因は一つとは限らない。",xp:30},
+{title:"まず聴く",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["眠れない理由や困りごとを確認する", "すぐに会話を終える", "朝まで我慢してもらう"],correct:0},
+{title:"休息を支える",text:"環境と不安の両方に目を向け、休める方法を一緒に考えた。",xp:60}
+]},
+14:{title:"食べる力",subtitle:"食事の中にある健康のサインを読む。",image:3,steps:[
+{title:"残った食事",text:"いつも完食する患者さんのトレーに食事が多く残っている。ミライは変化の理由を考える。",xp:30},
+{title:"安全に確認",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["食欲・嚥下・吐き気などを確認する", "好みの問題と決めつける", "記録せず片づける"],correct:0},
+{title:"食べるを支える",text:"観察結果を共有し、その人に合った食事支援へつないだ。",xp:60}
+]},
+15:{title:"転ばないために",subtitle:"事故が起きる前に環境と行動を見る。",image:4,steps:[
+{title:"夜の足音",text:"暗い廊下で一人で立ち上がろうとする患者さん。ミライはすぐに安全を確保する。",xp:30},
+{title:"予防の判断",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["そばへ行き安全を確保し理由を確認する", "遠くから注意するだけ", "歩けそうなので任せる"],correct:0},
+{title:"環境を整える",text:"動線や照明、呼び出し方法を見直し、転倒を予防する環境を整えた。",xp:60}
+]},
+16:{title:"薬の向こう側",subtitle:"服薬を生活と理解につなげる。",image:0,steps:[
+{title:"一錠の疑問",text:"患者さんが薬を見つめ「これは何の薬？」と尋ねた。疑問は安全なケアの入口になる。",xp:30},
+{title:"確認して伝える",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["処方内容を確認し分かる言葉で説明する", "色だけで薬を判断する", "質問を後回しにする"],correct:0},
+{title:"理解を確かめる",text:"説明しただけで終わらず、患者さん自身の理解を確かめた。",xp:60}
+]},
+17:{title:"感染を防ぐ手",subtitle:"見えないリスクから患者さんを守る。",image:1,steps:[
+{title:"静かなリスク",text:"病室を移るたび、手指衛生の一つひとつが患者さんを守る。",xp:30},
+{title:"基本を守る",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["必要なタイミングで手指衛生を確実に行う", "手袋があれば手指衛生は不要と考える", "急いでいるので省略する"],correct:0},
+{title:"チームで守る",text:"基本動作を互いに確認し、病棟全体で感染予防を続けた。",xp:60}
+]},
+18:{title:"心の体温",subtitle:"不安や孤独にも目を向ける。",image:2,steps:[
+{title:"窓辺の患者",text:"患者さんが窓の外を見つめ「迷惑ばかりかけている」とつぶやいた。",xp:30},
+{title:"受け止める",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["気持ちを否定せず、何を感じているか聴く", "そんなことないとすぐ打ち消す", "話題を変える"],correct:0},
+{title:"必要な支援へ",text:"気持ちを共有し、必要に応じてチームや専門職につないだ。",xp:60}
+]},
+19:{title:"伝わる言葉",subtitle:"専門用語を患者さんの言葉へ翻訳する。",image:3,steps:[
+{title:"説明のあと",text:"説明を聞いた患者さんはうなずくが、表情には戸惑いが残っている。",xp:30},
+{title:"理解を確かめる",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["本人の言葉で理解を確認する", "うなずいたので理解したと判断する", "資料だけ渡す"],correct:0},
+{title:"言葉を合わせる",text:"相手の理解度に合わせて言葉を選び直し、納得につなげた。",xp:60}
+]},
+20:{title:"災害の灯",subtitle:"非常時にも安全と優先順位を守る。",image:4,steps:[
+{title:"揺れる病棟",text:"突然の大きな揺れ。病棟の灯りが一瞬消え、複数の患者さんが不安を訴える。",xp:30},
+{title:"非常時の判断",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["自分と患者の安全を確保し、指示系統に沿って行動する", "一人で全員を移動させる", "状況確認せず外へ出る"],correct:0},
+{title:"備えを力に",text:"日頃の訓練と役割確認が、非常時の落ち着いた連携につながった。",xp:60}
+]},
+21:{title:"命をつなぐ報告",subtitle:"短く正確な報告でチームを動かす。",image:0,steps:[
+{title:"変化の瞬間",text:"患者さんの状態が変化した。ミライは観察した事実を整理する。",xp:30},
+{title:"報告する",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["重要な変化・現在の状態・必要な対応を簡潔に伝える", "経緯を思いつくまま長く話す", "記録だけ残す"],correct:0},
+{title:"共通認識",text:"正確な報告でチームが同じ状況を共有し、素早く動き出した。",xp:60}
+]},
+22:{title:"尊厳を守るカーテン",subtitle:"ケアの一つひとつに尊厳を込める。",image:1,steps:[
+{title:"小さな配慮",text:"処置の前、患者さんは周囲の視線を気にしている。",xp:30},
+{title:"尊厳を守る",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["説明しプライバシーを確保してから行う", "急いでそのまま始める", "本人の希望を確認しない"],correct:0},
+{title:"その人らしさ",text:"安全だけでなく、恥ずかしさや希望にも配慮するケアを続けた。",xp:60}
+]},
+23:{title:"認知症の世界",subtitle:"見えている世界を否定せず安心へ導く。",image:2,steps:[
+{title:"帰りたい",text:"患者さんが「家に帰らなきゃ」と落ち着かない様子で歩き始めた。",xp:30},
+{title:"安心をつくる",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["気持ちを受け止め安全を確保し背景を探る", "間違いだと強く訂正する", "一人で歩かせ続ける"],correct:0},
+{title:"理由を知る",text:"言葉の奥にある不安や習慣を知ることで、穏やかな支援につながった。",xp:60}
+]},
+24:{title:"子どもの勇気",subtitle:"年齢に合った説明と安心を届ける。",image:3,steps:[
+{title:"小さな手",text:"検査を前に子どもが保護者の手を強く握っている。",xp:30},
+{title:"分かる言葉で",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["年齢に合わせて短く説明し安心できる方法を一緒に考える", "大人向けの専門用語で説明する", "怖くないと言い切る"],correct:0},
+{title:"できたを残す",text:"小さな成功を一緒に喜び、次の医療体験への自信につなげた。",xp:60}
+]},
+25:{title:"高齢者の一日",subtitle:"生活のリズムを守る看護を考える。",image:4,steps:[
+{title:"朝の時間",text:"入院で生活リズムが変わり、患者さんは昼夜逆転気味になっている。",xp:30},
+{title:"暮らしを見る",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["普段の生活習慣を確認し日中の活動と休息を整える", "眠るたびそのままにする", "病院の都合だけで決める"],correct:0},
+{title:"生活を支える",text:"治療とその人らしい生活の両方を考え、無理のないリズムを整えた。",xp:60}
+]},
+26:{title:"最期までその人らしく",subtitle:"本人と家族の思いを大切にする。",image:0,steps:[
+{title:"静かな希望",text:"患者さんが「最後まで好きな音楽を聴きたい」と話した。",xp:30},
+{title:"希望を聴く",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["本人の希望を確認しチームと共有する", "治療以外の希望は扱わない", "家族だけで決めてもらう"],correct:0},
+{title:"大切な時間",text:"苦痛を和らげながら、その人が大切にする時間を支えた。",xp:60}
+]},
+27:{title:"地域へつなぐ橋",subtitle:"病院と地域の支援を結ぶ。",image:1,steps:[
+{title:"退院前会議",text:"退院後も医療と生活支援が必要な患者さん。多職種が集まった。",xp:30},
+{title:"つなぐ視点",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["本人の希望と生活課題を共有し地域支援につなぐ", "病院での情報だけ伝える", "退院後は本人に任せる"],correct:0},
+{title:"橋を架ける",text:"病院から地域へ情報と支援が途切れないよう、チームで橋を架けた。",xp:60}
+]},
+28:{title:"新人のランプ",subtitle:"教えることで自分の看護を見つめ直す。",image:2,steps:[
+{title:"隣に立つ新人",text:"新人看護師が観察の優先順位に迷っている。ミライは一緒に考える。",xp:30},
+{title:"育てる関わり",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["根拠を問いかけ、一緒に確認する", "答えだけ伝えて終える", "失敗するまで放置する"],correct:0},
+{title:"学びを渡す",text:"自分の判断を言葉にすることで、ミライ自身の看護も深まった。",xp:60}
+]},
+29:{title:"未来の病棟",subtitle:"AIと人が協働する看護を考える。",image:3,steps:[
+{title:"新しい支援",text:"AIが患者データの変化を知らせた。便利な情報だが、最終的に患者さんを見るのは人だ。",xp:30},
+{title:"AIを活かす",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["AIの示唆を参考にしつつ患者を直接観察して判断する", "AIの結果だけで決める", "AIの情報をすべて無視する"],correct:0},
+{title:"人にしかできないこと",text:"技術を使いながら、表情、声、触れ合い、対話を大切にする看護を選んだ。",xp:60}
+]},
+30:{title:"未来へ渡す灯",subtitle:"30章の学びを一つの看護へ。",image:4,steps:[
+{title:"夜明け前",text:"長い物語を歩いたミライは、最初のランプを思い出す。観察、判断、対話、連携。そのすべてが一つにつながっている。",xp:30},
+{title:"最後の選択",text:"患者さんの安全と、その人らしさの両方を考える。今、どの行動を選ぶ？",xp:40,choices:["患者さんを中心に、根拠と対話とチームで最善を考える", "一人の経験だけで決める", "数字だけを見て判断する"],correct:0},
+{title:"NIGHTINGALE",text:"夜が明ける。受け取った灯りは次の誰かへ。看護の未来をつくる物語は、ここから続いていく。",xp:60}
+]}
+});
+
+function jpChapter(n){const a=['零','一','二','三','四','五','六','七','八','九','十'];return a[n]||String(n)}
 function chapterImageSources(){return [...document.querySelectorAll('.book-page .story-art img')].map(x=>x.src).filter(Boolean)}
 function renderChapterNav(){
  const nav=document.getElementById('chapterNav'); if(!nav)return;
  const unlocked=Number(storyState.unlockedChapter||1);
  nav.innerHTML='';
- for(let n=1;n<=10;n++){
+ for(let n=1;n<=30;n++){
   const b=document.createElement('button');b.type='button';b.className='chapter-pill'+(n>unlocked?' locked':'')+(Number(storyState.currentChapter||1)===n?' active':'');
   b.textContent='第'+jpChapter(n)+'章';b.disabled=n>unlocked;
   b.addEventListener('click',()=>n===1?openFirstChapter():openLaterChapter(n));nav.appendChild(b);
@@ -420,11 +526,11 @@ function completeLaterStep(ch,step){
  sendAppUsage('story_progress',{chapter:ch,step:step+1,xpAwarded:item.xp,totalXp:storyState.xp||0});
  if(step<data.steps.length-1){p.step=step+1;saveStory();renderStoryXP();renderLaterChapter();document.querySelector('.story-shell').scrollTo({top:0,behavior:'smooth'});return;}
  p.done=true;p.step=step;storyState.completedChapters=storyState.completedChapters||[];if(!storyState.completedChapters.includes(ch))storyState.completedChapters.push(ch);
- if(ch<10)storyState.unlockedChapter=Math.max(Number(storyState.unlockedChapter||1),ch+1);saveStory();renderStoryXP();renderChapterNav();renderLaterSummary(ch);
- sendAppUsage('chapter_clear',{chapter:ch,title:data.title,chapterXp:data.steps.reduce((a,b)=>a+b.xp,0),totalXp:storyState.xp||0,nextChapter:ch<10?ch+1:null});
+ if(ch<30)storyState.unlockedChapter=Math.max(Number(storyState.unlockedChapter||1),ch+1);saveStory();renderStoryXP();renderChapterNav();renderLaterSummary(ch);
+ sendAppUsage('chapter_clear',{chapter:ch,title:data.title,chapterXp:data.steps.reduce((a,b)=>a+b.xp,0),totalXp:storyState.xp||0,nextChapter:ch<30?ch+1:null});
 }
 function renderLaterSummary(ch){
- const data=NIGHTINGALE_CHAPTERS[ch],summary=document.getElementById('laterSummary');summary.hidden=false;summary.innerHTML='<h3>CHAPTER '+ch+' COMPLETE</h3><div>「'+data.title+'」</div><div class="reward">TOTAL +130 XP</div>'+(ch<10?'<div class="unlock"><strong>🔓 第'+jpChapter(ch+1)+'章 解放</strong>物語はさらに続きます。</div><button class="chapter-action" type="button" onclick="openLaterChapter('+(ch+1)+')">第'+jpChapter(ch+1)+'章へ進む</button>':'<div class="unlock"><strong>🌅 NIGHTINGALE STORY COMPLETE</strong>第一章から第十章まで、すべての物語を完走しました。</div><button class="chapter-action secondary" type="button" onclick="openFirstChapter()">第一章を振り返る</button>');
+ const data=NIGHTINGALE_CHAPTERS[ch],summary=document.getElementById('laterSummary');summary.hidden=false;summary.innerHTML='<h3>CHAPTER '+ch+' COMPLETE</h3><div>「'+data.title+'」</div><div class="reward">TOTAL +130 XP</div>'+(ch<30?'<div class="unlock"><strong>🔓 第'+jpChapter(ch+1)+'章 解放</strong>物語はさらに続きます。</div><button class="chapter-action" type="button" onclick="openLaterChapter('+(ch+1)+')">第'+jpChapter(ch+1)+'章へ進む</button>':'<div class="unlock"><strong>🌅 NIGHTINGALE STORY COMPLETE</strong>第一章から第三十章まで、すべての物語を完走しました。</div><button class="chapter-action secondary" type="button" onclick="openFirstChapter()">第一章を振り返る</button>');
  document.getElementById('laterNext').disabled=true;document.getElementById('laterNext').style.display='none';
 }
 function esc(x){return x.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
