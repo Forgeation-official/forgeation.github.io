@@ -364,7 +364,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&historyModal.classL
    Worker側の公開用 GET /academy-stats を使用する。
    API URLは window.FORGEATION_PUBLIC_API_BASE で指定可能。
    ======================================== */
-const FORGEATION_PUBLIC_API_BASE = String(window.FORGEATION_PUBLIC_API_BASE || "").replace(/\/$/,"");
+const FORGEATION_PUBLIC_API_BASE = "https://forgeation-api.eru12121221.workers.dev";
 
 function setAcademyStat(key, value){
   const num=document.getElementById(`stat-${key}`);
