@@ -6,21 +6,14 @@ function forgeBack(){
   else { location.href='index.html#f-series'; }
 }
 
-const FORGE_API='/api/forgeation-ai';
-async function forgeAI(payload){
-  const r=await fetch(FORGE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-  const d=await r.json().catch(()=>({}));
-  if(!r.ok) throw new Error(d.error||('API '+r.status));
-  return d.reply||d.answer||d.message||d.text||'応答を受信しました。';
-}
-
 // ========================================
-// Forgeation 共通API送信 / F Mind
+// Forgeation 8アプリ共通API仕様 / F Mind
+// 正式Worker URLはここ1か所だけで管理
 // ========================================
-const FORGEATION_API_BASE='https://forgeation-api.eru12121221.workers.dev';
+const FORGEATION_WORKER_URL='https://forgeation-api.eru12121221.workers.dev';
+const APP_USAGE_URL=FORGEATION_WORKER_URL+'/app-usage';
+const AI_URL=FORGEATION_WORKER_URL;
 const APP_PAGE='f-mind';
-const MIND_PRODUCT='f-mind';
-const MIND_APP_ID='mind-academy';
 const MIND_XP_KEY='forgeation_f_mind_xp';
 let xp=Number(localStorage.getItem(MIND_XP_KEY)||0);
 
@@ -33,58 +26,47 @@ function getForgeationVisitorId(){
   return visitorId;
 }
 
-function mindUserId(){
-  return localStorage.getItem('forgeation_user_id')
-    || localStorage.getItem('user_id')
-    || localStorage.getItem('userId')
-    || '';
-}
-
-async function sendAppEvent(event,data={}){
+// 利用記録は全て /app-usage に統一
+async function sendAppUsage(event,data={}){
   try{
-    const r=await fetch(FORGEATION_API_BASE+'/api/app-event',{
-      method:'POST',mode:'cors',cache:'no-store',credentials:'omit',keepalive:true,
+    const r=await fetch(APP_USAGE_URL,{
+      method:'POST',
+      mode:'cors',
+      cache:'no-store',
+      credentials:'omit',
+      keepalive:true,
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         visitorId:getForgeationVisitorId(),
+        visitor_id:getForgeationVisitorId(),
+        appId:APP_PAGE,
+        app_id:APP_PAGE,
         page:APP_PAGE,
         event,
+        action:event,
         timestamp:new Date().toISOString(),
         ...data
       })
     });
-    if(!r.ok) console.warn('F Mind 共通API応答:',r.status);
+    if(!r.ok) console.warn('F Mind /app-usage 応答:',r.status);
   }catch(error){
-    console.warn('F Mind 共通API送信エラー:',error);
+    console.warn('F Mind /app-usage 送信エラー:',error);
   }
 }
 
-function recordMindVisit(){
-  return fetch(FORGEATION_API_BASE+'/visit',{
-    method:'POST',mode:'cors',cache:'no-store',credentials:'omit',keepalive:true,
+// AI会話も同じ正式Workerの完全URLへ直接送信
+async function forgeAI(payload){
+  const r=await fetch(AI_URL,{
+    method:'POST',
+    mode:'cors',
+    cache:'no-store',
+    credentials:'omit',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({visitorId:getForgeationVisitorId(),page:APP_PAGE})
-  }).catch(error=>console.warn('F Mind 利用記録に失敗しました。',error));
-}
-
-async function saveMindProgress(storyStage=1){
-  const userId=mindUserId();
-  if(!userId) return;
-  try{
-    await fetch(FORGEATION_API_BASE+'/progress',{
-      method:'POST',mode:'cors',cache:'no-store',credentials:'omit',keepalive:true,
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        user_id:userId,
-        app_id:MIND_APP_ID,
-        xp,
-        level:Math.floor(xp/100)+1,
-        story_stage:Number(storyStage)||1
-      })
-    });
-  }catch(error){
-    console.warn('F Mind XP保存エラー:',error);
-  }
+    body:JSON.stringify(payload)
+  });
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(d.error||('API '+r.status));
+  return d.reply||d.answer||d.message||d.text||'応答を受信しました。';
 }
 
 function renderXp(){
@@ -99,19 +81,17 @@ function addXp(v,eventName='xp',extra={}){
   xp+=added;
   localStorage.setItem(MIND_XP_KEY,String(xp));
   renderXp();
-  sendAppEvent(eventName,{xp,xpAdded:added,...extra});
-  saveMindProgress(extra.storyStage||1);
+  sendAppUsage(eventName,{xp,xpAdded:added,...extra});
 }
 
 renderXp();
-recordMindVisit();
-sendAppEvent('visit',{xp});
+sendAppUsage('visit',{xp});
 
 // 6機能を開いたとき
 document.querySelectorAll('.menu-item').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.feature-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===b.dataset.feature));
   document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'center'});
-  sendAppEvent('feature_open',{feature:b.dataset.feature,xp});
+  sendAppUsage('feature_open',{feature:b.dataset.feature,xp});
 });
 
 // 気配り・目配り・心配り・ケース判断・支援記録の体験完了
@@ -132,7 +112,7 @@ document.querySelectorAll('.choice-btn').forEach(b=>b.onclick=()=>{
   document.getElementById('result').textContent=fb[n]+' ＋'+v+' XP';
 });
 
-// AI相談：既存AI APIは維持し、利用イベントだけ共通APIへ送る
+// AI相談：AI本体も利用記録も正式Workerへ統一
 const mindSend=document.getElementById('mindSend');
 mindSend.onclick=async()=>{
   const q=document.getElementById('mindQ').value.trim();
@@ -140,13 +120,13 @@ mindSend.onclick=async()=>{
   if(!q){a.textContent='相談内容を入力してください。';return}
   mindSend.disabled=true;
   a.textContent='AIに相談中…';
-  sendAppEvent('ai_consult_start',{messageLength:q.length,xp});
+  sendAppUsage('ai_consult_start',{messageLength:q.length,xp});
   try{
     a.textContent=await forgeAI({message:q,product:'f-mind',mode:'care-learning'});
     addXp(10,'ai_consult_complete',{messageLength:q.length});
   }catch(e){
     a.textContent='API接続を確認してください：'+e.message;
-    sendAppEvent('ai_consult_error',{error:String(e.message||e),xp});
+    sendAppUsage('ai_consult_error',{error:String(e.message||e),xp});
   }finally{
     mindSend.disabled=false;
   }
