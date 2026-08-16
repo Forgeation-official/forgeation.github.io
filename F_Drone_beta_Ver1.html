@@ -30,7 +30,9 @@ button:active{transform:scale(.96);background:#16495d}#hover{color:#75ff96}#home
  .controller{height:190px;padding:12px 14px;border-radius:28px 28px 18px 18px}
  .stick{width:112px;height:112px}.mid{min-width:90px}.buttons button{font-size:9px;padding:7px 3px}.help{bottom:205px;font-size:9px}
 }
-.forge-nav{position:fixed;top:max(10px,env(safe-area-inset-top));left:12px;z-index:99;display:flex;gap:7px}.forge-nav button{background:#07111ddd;border:1px solid #4fdfff66;color:#fff;border-radius:12px;padding:8px 11px;font-weight:900}</style>
+.forge-nav{position:fixed;top:max(10px,env(safe-area-inset-top));left:12px;z-index:99;display:flex;gap:7px}.forge-nav button{background:#07111ddd;border:1px solid #4fdfff66;color:#fff;border-radius:12px;padding:8px 11px;font-weight:900}
+.stagebar{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:7px}.stagebar button{min-width:42px;padding:6px 8px}.stagebar .stage-label{min-width:78px;font-size:11px;font-weight:900;letter-spacing:1px;color:#dffaff}.stage-list{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:120;width:min(560px,90vw);max-height:72vh;overflow:auto;background:#07111df2;border:1px solid #4fdfff88;border-radius:18px;padding:14px;box-shadow:0 18px 50px #000b;display:none}.stage-list.open{display:block}.stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stage-grid button{padding:10px 6px}.stage-grid button.active{border-color:#75ff96;box-shadow:0 0 0 1px #75ff96 inset}.stage-list-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.stage-list-head b{font-size:15px}.stage-close{padding:6px 10px!important}@media(max-width:600px){.stage-grid{grid-template-columns:repeat(3,1fr)}.stagebar .stage-label{min-width:68px;font-size:10px}}
+</style>
 </head>
 <body><div class="forge-nav"><button onclick="forgeBack()">← 戻る</button><button onclick="location.href='index.html#f-series'">🏫 ホーム</button></div>
 <div id="app">
@@ -39,7 +41,7 @@ button:active{transform:scale(.96);background:#16495d}#hover{color:#75ff96}#home
    <div class="brand">F DRONE ∞<br><small>AI ROBOTICS LAB</small></div>
    <div class="telemetry"><span id="gps">GPS ▮▮▮▮</span><span id="bat">BAT 98%</span><span id="alt">ALT 40m</span><span id="spd">SPD 0km/h</span></div>
  </div>
- <div class="center"><h1>SINGAPORE FOOTBALL</h1><div>MARINA BAY / LIVE FPV CAMERA</div></div>
+ <div class="center"><h1 id="sceneTitle">F DRONE STAGE 001</h1><div>LIVE FPV CAMERA</div></div>
  <div class="cross"></div>
  <div class="help">PC：← ↑ ↓ →　／　スマホ：左右スティックをドラッグ</div>
  <div class="controller">
@@ -60,6 +62,65 @@ function forgeBack(){
 
 const scene=document.getElementById('scene'), spd=document.getElementById('spd'), alt=document.getElementById('alt'), statusEl=document.getElementById('status');
 let x=0,y=0,z=40,speed=0,yaw=0;
+const STAGE_COUNT=31;
+const STAGES=[
+  "F_Drone_Stage_001.png",
+  "F_Drone_Stage_002.png",
+  "F_Drone_Stage_003.png",
+  "F_Drone_Stage_004.png",
+  "F_Drone_Stage_005.png",
+  "F_Drone_Stage_006.png",
+  "F_Drone_Stage_007.png",
+  "F_Drone_Stage_008.png",
+  "F_Drone_Stage_009.png",
+  "F_Drone_Stage_010.png",
+  "F_Drone_Stage_011.png",
+  "F_Drone_Stage_012.png",
+  "F_Drone_Stage_013.png",
+  "F_Drone_Stage_014.png",
+  "F_Drone_Stage_015.png",
+  "F_Drone_Stage_016.png",
+  "F_Drone_Stage_017.png",
+  "F_Drone_Stage_018.png",
+  "F_Drone_Stage_019.png",
+  "F_Drone_Stage_020.png",
+  "F_Drone_Stage_021.png",
+  "F_Drone_Stage_022.png",
+  "F_Drone_Stage_023.png",
+  "F_Drone_Stage_024.png",
+  "F_Drone_Stage_025.png",
+  "F_Drone_Stage_026.png",
+  "F_Drone_Stage_027.png",
+  "F_Drone_Stage_028.png",
+  "F_Drone_Stage_029.png",
+  "F_Drone_Stage_030.png",
+  "F_Drone_Stage_031.png"
+];
+let currentStage=0;
+const stageLabel=document.getElementById('stageLabel');
+const sceneTitle=document.getElementById('sceneTitle');
+const stageList=document.getElementById('stageList');
+const stageGrid=document.getElementById('stageGrid');
+function resetFlight(){x=0;y=0;z=40;speed=0;yaw=0;statusEl.textContent='LIVE FPV / HOVER';}
+function loadStage(index){
+  currentStage=(index+STAGE_COUNT)%STAGE_COUNT;
+  scene.style.backgroundImage=`url("${STAGES[currentStage]}")`;
+  stageLabel.textContent=`STAGE ${String(currentStage+1).padStart(3,'0')}`;
+  sceneTitle.textContent=`F DRONE STAGE ${String(currentStage+1).padStart(3,'0')}`;
+  resetFlight();
+  render();
+  [...stageGrid.children].forEach((b,i)=>b.classList.toggle('active',i===currentStage));
+}
+for(let i=0;i<STAGE_COUNT;i++){
+  const b=document.createElement('button');
+  b.textContent=String(i+1).padStart(3,'0');
+  b.onclick=()=>{loadStage(i);stageList.classList.remove('open');};
+  stageGrid.appendChild(b);
+}
+document.getElementById('stagePrev').onclick=()=>loadStage(currentStage-1);
+document.getElementById('stageNext').onclick=()=>loadStage(currentStage+1);
+document.getElementById('stageOpen').onclick=()=>stageList.classList.add('open');
+document.getElementById('stageClose').onclick=()=>stageList.classList.remove('open');
 function render(){
   x=Math.max(-6,Math.min(6,x)); y=Math.max(-4,Math.min(4,y));
   scene.style.transform=`scale(1.10) translate(${x}%,${y}%) rotate(${yaw}deg)`;
@@ -87,9 +148,9 @@ function stick(el,type){
 }
 stick(document.getElementById('leftStick'),'left');stick(document.getElementById('rightStick'),'right');
 document.getElementById('hover').onclick=()=>{speed=0;y=0;yaw=0;statusEl.textContent='LIVE FPV / HOVER';render()};
-document.getElementById('home').onclick=()=>{x=0;y=0;z=40;speed=0;yaw=0;statusEl.textContent='RETURN HOME / READY';render()};
+document.getElementById('home').onclick=()=>{resetFlight();statusEl.textContent='RETURN HOME / READY';render()};
 document.getElementById('camera').onclick=()=>{scene.style.filter='brightness(1.18) saturate(1.08)';statusEl.textContent='PHOTO CAPTURED';setTimeout(()=>scene.style.filter='',250)};
-render();
+loadStage(0);
 </script>
 </body>
 </html>
