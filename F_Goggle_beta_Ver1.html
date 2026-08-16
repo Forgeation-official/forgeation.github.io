@@ -230,7 +230,7 @@ function forgeBack(){
   else { location.href='index.html#f-series'; }
 }
 
-const API_ENDPOINT="/api/forgeation-ai"; // AI会話用。APIキーはHTMLに置かない。
+const API_ENDPOINT="https://forgeation-api.eru12121221.workers.dev/chat"; // AI会話用。APIキーはHTMLに置かない。
 const FORGEATION_API_BASE="https://forgeation-api.eru12121221.workers.dev";
 const APP_PAGE="f-goggle";
 
@@ -245,21 +245,21 @@ function getForgeationVisitorId(){
 }
 async function sendAppEvent(event,data={}){
   try{
-    await fetch(FORGEATION_API_BASE+"/api/app-event",{
+    await fetch(FORGEATION_API_BASE+"/app-usage",{
       method:"POST",mode:"cors",cache:"no-store",credentials:"omit",keepalive:true,
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        visitorId:getForgeationVisitorId(),page:APP_PAGE,event,
-        timestamp:new Date().toISOString(),...data
+        visitorId:getForgeationVisitorId(),visitor_id:getForgeationVisitorId(),appId:APP_PAGE,app_id:APP_PAGE,event,action:event,
+        used_at:new Date().toISOString(),...data
       })
     });
   }catch(error){console.warn("F GOGGLE 共通API送信エラー:",error);}
 }
 function recordGoggleVisit(){
-  return fetch(FORGEATION_API_BASE+"/visit",{
+  return fetch(FORGEATION_API_BASE+"/app-usage",{
     method:"POST",mode:"cors",cache:"no-store",credentials:"omit",keepalive:true,
     headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({visitorId:getForgeationVisitorId(),page:APP_PAGE})
+    body:JSON.stringify({visitorId:getForgeationVisitorId(),visitor_id:getForgeationVisitorId(),appId:APP_PAGE,app_id:APP_PAGE,event:"open",action:"open",used_at:new Date().toISOString()})
   }).catch(error=>console.warn("F GOGGLE 利用記録に失敗しました。",error));
 }
 recordGoggleVisit();
