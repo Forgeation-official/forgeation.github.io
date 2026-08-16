@@ -33,13 +33,45 @@ function forgeBack(){
 }
 
 const FORGE_API='/api/forgeation-ai';
+const FORGE_ACTIVITY_API='/api/forgeation-activity';
+const FORGE_PRODUCT='f-teacher';
+
+function getForgeVisitorId(){
+  let id=localStorage.getItem('ForgeationVisitorId');
+  if(!id){
+    id=(crypto.randomUUID?.()||('fv_'+Date.now()+'_'+Math.random().toString(36).slice(2)));
+    localStorage.setItem('ForgeationVisitorId',id);
+  }
+  return id;
+}
+
 async function forgeAI(payload){
   const r=await fetch(FORGE_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
   const d=await r.json().catch(()=>({}));
   if(!r.ok) throw new Error(d.error||('API '+r.status));
   return d.reply||d.answer||d.message||d.text||'応答を受信しました。';
 }
-let x=+localStorage.FTeacherXP||0;let currentMode='授業づくり';function r(){xp.textContent=x+' XP';fill.style.width=(x%100)+'%'}r();document.querySelectorAll('.a').forEach(b=>b.onclick=()=>{x+=+b.dataset.n;localStorage.FTeacherXP=x;r();fb.textContent=b.textContent+' ＋'+b.dataset.n+' XP'});const tips={'授業づくり':'学年・教科・ねらいを入力すると授業案を一緒に整理します。','声かけ練習':'子どもの様子に合わせた声かけをAIと練習します。','ケース判断':'教室場面の対応を考え、選択肢と振り返りを行います。','教材づくり':'教材・ワーク・SST案を作る相談ができます。','AI相談室':'先生として困っていることを自由に相談できます。','成長記録':'今日の振り返りや次の目標を言語化します。'};document.querySelectorAll('.m').forEach(b=>b.onclick=()=>{currentMode=b.dataset.mode;panel.classList.add('show');panelTitle.textContent=currentMode;panelText.textContent=tips[currentMode];teacherQ.value='';teacherAnswer.textContent='内容を入力してAI先生に送ってください。';panel.scrollIntoView({behavior:'smooth',block:'center'})});teacherSend.onclick=async()=>{const q=teacherQ.value.trim();if(!q){teacherAnswer.textContent='相談内容を入力してください。';return}teacherSend.disabled=true;teacherAnswer.textContent='AI先生が考えています…';try{teacherAnswer.textContent=await forgeAI({message:q,product:'f-teacher',mode:currentMode});x+=10;localStorage.FTeacherXP=x;r()}catch(e){teacherAnswer.textContent='API接続を確認してください：'+e.message}finally{teacherSend.disabled=false}};</script>
+
+async function recordForgeActivity(action,extra={}){
+  try{
+    await fetch(FORGE_ACTIVITY_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        visitorId:getForgeVisitorId(),
+        product:FORGE_PRODUCT,
+        action,
+        xp:Number(localStorage.FTeacherXP||0),
+        ...extra
+      })
+    });
+  }catch(e){
+    console.warn('activity log skipped',e);
+  }
+}
+
+recordForgeActivity('open');
+let x=+localStorage.FTeacherXP||0;let currentMode='授業づくり';function r(){xp.textContent=x+' XP';fill.style.width=(x%100)+'%'}r();document.querySelectorAll('.a').forEach(b=>b.onclick=()=>{x+=+b.dataset.n;localStorage.FTeacherXP=x;r();fb.textContent=b.textContent+' ＋'+b.dataset.n+' XP';recordForgeActivity('challenge',{mode:currentMode,deltaXp:+b.dataset.n,totalXp:x})});const tips={'授業づくり':'学年・教科・ねらいを入力すると授業案を一緒に整理します。','声かけ練習':'子どもの様子に合わせた声かけをAIと練習します。','ケース判断':'教室場面の対応を考え、選択肢と振り返りを行います。','教材づくり':'教材・ワーク・SST案を作る相談ができます。','AI相談室':'先生として困っていることを自由に相談できます。','成長記録':'今日の振り返りや次の目標を言語化します。'};document.querySelectorAll('.m').forEach(b=>b.onclick=()=>{currentMode=b.dataset.mode;panel.classList.add('show');panelTitle.textContent=currentMode;panelText.textContent=tips[currentMode];teacherQ.value='';teacherAnswer.textContent='内容を入力してAI先生に送ってください。';recordForgeActivity('mode_open',{mode:currentMode});panel.scrollIntoView({behavior:'smooth',block:'center'})});teacherSend.onclick=async()=>{const q=teacherQ.value.trim();if(!q){teacherAnswer.textContent='相談内容を入力してください。';return}teacherSend.disabled=true;teacherAnswer.textContent='AI先生が考えています…';try{teacherAnswer.textContent=await forgeAI({message:q,product:'f-teacher',mode:currentMode,visitorId:getForgeVisitorId()});x+=10;localStorage.FTeacherXP=x;r();recordForgeActivity('ai_success',{mode:currentMode,deltaXp:10,totalXp:x})}catch(e){teacherAnswer.textContent='API接続を確認してください：'+e.message;recordForgeActivity('ai_error',{mode:currentMode,error:String(e.message||e)})}finally{teacherSend.disabled=false}};</script>
 <script id="f-teacher-ver11-fix-script">
 document.addEventListener('DOMContentLoaded',()=>{
   const navBack=document.querySelector('.nav button:first-child');
