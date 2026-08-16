@@ -44,7 +44,38 @@ function forgeBack(){
 }
 
 const API_URL="/api/forgeation-ai"; const LEGACY_API_URL="/api/f-python";
-let xp=0;
+const PROGRESS_API_URL="/api/progress";
+const PRODUCT_ID="f-python";
+const XP_STORAGE_KEY="forgeation_f_python_xp";
+let xp=Number(localStorage.getItem(XP_STORAGE_KEY)||0);
+
+document.getElementById('xp').textContent=xp;
+
+function getUserId(){
+  return localStorage.getItem('forgeation_user_id') || localStorage.getItem('user_id') || localStorage.getItem('visitorId') || '';
+}
+
+function addXP(amount, action){
+  xp += Number(amount||0);
+  localStorage.setItem(XP_STORAGE_KEY,String(xp));
+  document.getElementById('xp').textContent=xp;
+  saveProgress(action||'play').catch(()=>{});
+}
+
+async function saveProgress(action){
+  const userId=getUserId();
+  try{
+    const r=await fetch(PROGRESS_API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      userId,
+      user_id:userId,
+      product:PRODUCT_ID,
+      action:action||'play',
+      xp,
+      playedAt:new Date().toISOString()
+    })});
+    if(r.ok)setApi(true);
+  }catch(e){/* ローカルXPは維持 */}
+}
 const data=[
 ["コードを書く","変数 name を作って、自分だけのプログラムを書いてみよう。",`<span class="n">01</span>  name = <span class="str">"F Python"</span>\n<span class="n">02</span>  <span class="kw">print</span>(name)`],
 ["実行する","プログラムを実行しました。XP +10！",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Hello, Future!"</span>)`],
@@ -58,7 +89,7 @@ document.querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));b.cla
 document.getElementById('code').innerHTML=data[i][2];document.getElementById('msg').textContent=data[i][1];
 document.getElementById('console').innerHTML='TERMINAL<br><strong>▶ '+data[i][0]+'</strong><br>'+data[i][1];
 document.getElementById('aiPanel').classList.toggle('show',i===4);
-if(i===1)xp+=10;if(i===5)xp+=30;document.getElementById('xp').textContent=xp;
+if(i===1)addXP(10,'run');if(i===5)addXP(30,'code-mission');else saveProgress('mode-'+i).catch(()=>{});
 }
 async function askAI(){
 const q=document.getElementById('question').value.trim(),answer=document.getElementById('answer'),btn=document.getElementById('sendBtn');
@@ -69,9 +100,10 @@ let r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/js
 let d=await r.json().catch(()=>({}));
 if(!r.ok){r=await fetch(LEGACY_API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q,code:document.getElementById('code').innerText})});d=await r.json().catch(()=>({}));}
 if(!r.ok)throw new Error(d.error||"API接続エラー");
-answer.textContent=d.reply||d.answer||d.message||"返答を取得できませんでした。";xp+=10;document.getElementById('xp').textContent=xp;setApi(true);
+answer.textContent=d.reply||d.answer||d.message||"返答を取得できませんでした。";addXP(10,'ai-teacher');setApi(true);
 }catch(e){answer.textContent="接続できませんでした："+e.message;setApi(false)}finally{btn.disabled=false}
 }
 function setApi(ok){const e=document.getElementById('apiState');e.textContent=ok?"API 接続OK":"API 未接続";e.className="api "+(ok?"ok":"ng")}
 document.getElementById('apiState').textContent='API 接続準備OK';
+saveProgress('open').catch(()=>{});
 </script></body></html>
