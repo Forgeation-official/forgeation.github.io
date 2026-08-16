@@ -27,7 +27,7 @@ function forgeBack(){
 window.FM_CONFIG = {
   API_BASE: "https://forgeation-api.eru12121221.workers.dev", // Forgeation production Worker
   APP_ID: "f-motion",
-  VERSION: "beta-Ver1.3"
+  VERSION: "beta-Ver1.4"
 };
 async function fmApi(path, options={}) {
   const base = window.FM_CONFIG.API_BASE;
@@ -39,18 +39,6 @@ async function fmApi(path, options={}) {
   if (!res.ok) throw new Error("API " + res.status);
   return await res.json();
 }
-async function syncMotionProgress(payload){
-  try{
-    return await fmApi("/api/f-motion/progress", {
-      method:"POST",
-      body:JSON.stringify(payload)
-    });
-  }catch(e){
-    console.warn("F Motion sync pending:", e);
-    return {ok:false, pending:true};
-  }
-}
-
 function fmVisitorId(){
   let id = localStorage.getItem("forgeation_visitor_id");
   if(!id){
@@ -134,7 +122,7 @@ function trackMotionUsage(eventName="open", extra={}){
     <div class="actions"><button class="btn secondary" onclick="closeGame()">戻る</button><button class="btn" id="retry" onclick="retryGame()">もう一度</button></div>
   </section>
 
-  <div class="footer">Forgeation · FUTURE MANAGEMENT<br>F Motion beta Ver1.2 — DB usage tracking / API-ready<br><span id="apiState"></span></div>
+  <div class="footer">Forgeation · FUTURE MANAGEMENT<br>F Motion beta Ver1.4 — 8 Apps Common API<br><span id="apiState"></span></div>
 </div>
 <script>
 let xp=Number(localStorage.getItem('fm_xp')||0), best=Number(localStorage.getItem('fm_best')||0);
@@ -145,12 +133,10 @@ function save(){
  localStorage.setItem('fm_xp',xp);
  localStorage.setItem('fm_best',best);
  refresh();
- syncMotionProgress({
-   user_id: localStorage.getItem('forgeation_user_id') || null,
+ trackMotionUsage('progress',{
    xp: xp,
    best_reaction_ms: best || null,
-   level: Math.floor(xp/100)+1,
-   updated_at: new Date().toISOString()
+   level: Math.floor(xp/100)+1
  });
 }
 function show(name,hint){$('game').style.display='block';$('gameName').textContent=name;$('hint').textContent=hint;$('result').textContent='';$('retry').style.visibility='visible';$('game').scrollIntoView({behavior:'smooth'});}
