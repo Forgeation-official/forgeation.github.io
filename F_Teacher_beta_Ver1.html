@@ -32,16 +32,20 @@ function forgeBack(){
   else { location.href='index.html#f-series'; }
 }
 
+const FORGEATION_API_BASE='https://forgeation-api.eru12121221.workers.dev';
 const FORGE_API='/api/forgeation-ai';
-const FORGE_ACTIVITY_API='/api/forgeation-activity';
 const FORGE_PRODUCT='f-teacher';
+const FORGE_VERSION='beta-Ver1';
 
 function getForgeVisitorId(){
-  let id=localStorage.getItem('ForgeationVisitorId');
+  let id=localStorage.getItem('forgeation_visitor_id') ||
+         localStorage.getItem('visitorId') ||
+         localStorage.getItem('ForgeationVisitorId');
   if(!id){
-    id=(crypto.randomUUID?.()||('fv_'+Date.now()+'_'+Math.random().toString(36).slice(2)));
-    localStorage.setItem('ForgeationVisitorId',id);
+    id=(crypto.randomUUID?.()||('visitor-'+Date.now()+'-'+Math.random().toString(36).slice(2)));
   }
+  localStorage.setItem('forgeation_visitor_id',id);
+  localStorage.setItem('visitorId',id);
   return id;
 }
 
@@ -52,25 +56,49 @@ async function forgeAI(payload){
   return d.reply||d.answer||d.message||d.text||'応答を受信しました。';
 }
 
+// ========================================
+// Forgeation 8アプリ共通API送信
+// Worker側の共通受付: POST /app-usage
+// ========================================
 async function recordForgeActivity(action,extra={}){
+  const visitorId=getForgeVisitorId();
+  const userId=localStorage.getItem('forgeation_user_id') ||
+               localStorage.getItem('user_id') || null;
   try{
-    await fetch(FORGE_ACTIVITY_API,{
+    const res=await fetch(FORGEATION_API_BASE+'/app-usage',{
       method:'POST',
+      mode:'cors',
+      cache:'no-store',
+      credentials:'omit',
+      keepalive:true,
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        visitorId:getForgeVisitorId(),
-        product:FORGE_PRODUCT,
-        action,
+        app_id:FORGE_PRODUCT,
+        appId:FORGE_PRODUCT,
+        visitor_id:visitorId,
+        visitorId:visitorId,
+        user_id:userId,
+        userId:userId,
+        event:action||'open',
+        action:action||'open',
         xp:Number(localStorage.FTeacherXP||0),
+        used_at:new Date().toISOString(),
+        version:FORGE_VERSION,
         ...extra
       })
     });
+    if(!res.ok) throw new Error('API '+res.status);
+    return await res.json().catch(()=>({ok:true}));
   }catch(e){
-    console.warn('activity log skipped',e);
+    console.warn('F Teacher 共通API送信エラー:',e);
+    return {ok:false,pending:true};
   }
 }
 
 recordForgeActivity('open');
+window.addEventListener('pagehide',()=>{
+  recordForgeActivity('close');
+});
 let x=+localStorage.FTeacherXP||0;let currentMode='授業づくり';function r(){xp.textContent=x+' XP';fill.style.width=(x%100)+'%'}r();document.querySelectorAll('.a').forEach(b=>b.onclick=()=>{x+=+b.dataset.n;localStorage.FTeacherXP=x;r();fb.textContent=b.textContent+' ＋'+b.dataset.n+' XP';recordForgeActivity('challenge',{mode:currentMode,deltaXp:+b.dataset.n,totalXp:x})});const tips={'授業づくり':'学年・教科・ねらいを入力すると授業案を一緒に整理します。','声かけ練習':'子どもの様子に合わせた声かけをAIと練習します。','ケース判断':'教室場面の対応を考え、選択肢と振り返りを行います。','教材づくり':'教材・ワーク・SST案を作る相談ができます。','AI相談室':'先生として困っていることを自由に相談できます。','成長記録':'今日の振り返りや次の目標を言語化します。'};document.querySelectorAll('.m').forEach(b=>b.onclick=()=>{currentMode=b.dataset.mode;panel.classList.add('show');panelTitle.textContent=currentMode;panelText.textContent=tips[currentMode];teacherQ.value='';teacherAnswer.textContent='内容を入力してAI先生に送ってください。';recordForgeActivity('mode_open',{mode:currentMode});panel.scrollIntoView({behavior:'smooth',block:'center'})});teacherSend.onclick=async()=>{const q=teacherQ.value.trim();if(!q){teacherAnswer.textContent='相談内容を入力してください。';return}teacherSend.disabled=true;teacherAnswer.textContent='AI先生が考えています…';try{teacherAnswer.textContent=await forgeAI({message:q,product:'f-teacher',mode:currentMode,visitorId:getForgeVisitorId()});x+=10;localStorage.FTeacherXP=x;r();recordForgeActivity('ai_success',{mode:currentMode,deltaXp:10,totalXp:x})}catch(e){teacherAnswer.textContent='API接続を確認してください：'+e.message;recordForgeActivity('ai_error',{mode:currentMode,error:String(e.message||e)})}finally{teacherSend.disabled=false}};</script>
 <script id="f-teacher-ver11-fix-script">
 document.addEventListener('DOMContentLoaded',()=>{
