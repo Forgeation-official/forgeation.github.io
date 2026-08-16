@@ -44,6 +44,15 @@ button:active{transform:scale(.96);background:#16495d}#hover{color:#75ff96}#home
  <div class="center"><h1 id="sceneTitle">F DRONE STAGE 001</h1><div>LIVE FPV CAMERA</div></div>
  <div class="cross"></div>
  <div class="help">PC：← ↑ ↓ →　／　スマホ：左右スティックをドラッグ</div>
+ <div class="stagebar" style="position:absolute;left:50%;bottom:calc(max(8px,env(safe-area-inset-bottom)) + clamp(150px,28vh,260px) + 42px);transform:translateX(-50%);z-index:90;background:#07111dcc;border:1px solid #4fdfff66;padding:6px 8px;border-radius:12px;">
+   <button id="stagePrev" type="button">◀</button>
+   <button id="stageOpen" type="button" class="stage-label">STAGE <span id="stageLabel">001</span></button>
+   <button id="stageNext" type="button">▶</button>
+ </div>
+ <div class="stage-list" id="stageList">
+   <div class="stage-list-head"><b>F DRONE STAGE SELECT</b><button class="stage-close" id="stageClose" type="button">✕</button></div>
+   <div class="stage-grid" id="stageGrid"></div>
+ </div>
  <div class="controller">
    <div class="stick" id="leftStick"><div class="knob"></div></div>
    <div class="mid">
@@ -58,6 +67,32 @@ button:active{transform:scale(.96);background:#16495d}#hover{color:#75ff96}#home
 function forgeBack(){
   if(document.referrer && document.referrer!==location.href){ history.back(); }
   else { location.href='index.html#f-series'; }
+}
+
+// ========================================
+// Forgeation 共通API送信（F DRONE）
+// ========================================
+const FORGEATION_API_BASE='https://forgeation-api.eru12121221.workers.dev';
+function getForgeationVisitorId(){
+  const key='forgeation_visitor_id';
+  let id=localStorage.getItem(key);
+  if(!id){
+    id=(crypto.randomUUID?.() || ('visitor-'+Date.now()+'-'+Math.random().toString(16).slice(2)));
+    localStorage.setItem(key,id);
+  }
+  return id;
+}
+async function sendForgeationVisit(){
+  try{
+    await fetch(FORGEATION_API_BASE+'/visit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({visitorId:getForgeationVisitorId(),page:'f-drone'}),
+      keepalive:true
+    });
+  }catch(err){
+    console.warn('F DRONE API送信をスキップしました:',err);
+  }
 }
 
 const scene=document.getElementById('scene'), spd=document.getElementById('spd'), alt=document.getElementById('alt'), statusEl=document.getElementById('status');
@@ -105,7 +140,7 @@ function resetFlight(){x=0;y=0;z=40;speed=0;yaw=0;statusEl.textContent='LIVE FPV
 function loadStage(index){
   currentStage=(index+STAGE_COUNT)%STAGE_COUNT;
   scene.style.backgroundImage=`url("${STAGES[currentStage]}")`;
-  stageLabel.textContent=`STAGE ${String(currentStage+1).padStart(3,'0')}`;
+  stageLabel.textContent=String(currentStage+1).padStart(3,'0');
   sceneTitle.textContent=`F DRONE STAGE ${String(currentStage+1).padStart(3,'0')}`;
   resetFlight();
   render();
@@ -151,6 +186,7 @@ document.getElementById('hover').onclick=()=>{speed=0;y=0;yaw=0;statusEl.textCon
 document.getElementById('home').onclick=()=>{resetFlight();statusEl.textContent='RETURN HOME / READY';render()};
 document.getElementById('camera').onclick=()=>{scene.style.filter='brightness(1.18) saturate(1.08)';statusEl.textContent='PHOTO CAPTURED';setTimeout(()=>scene.style.filter='',250)};
 loadStage(0);
+sendForgeationVisit();
 </script>
 </body>
 </html>
