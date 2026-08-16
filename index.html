@@ -1291,6 +1291,24 @@ section{padding:68px 0}
 .f-soccer-pricing-button{display:inline-block;margin-top:15px;padding:13px 18px;border-radius:12px;background:linear-gradient(90deg,#e64b98,#266ee2);color:#fff!important;text-decoration:none;font-weight:900}
 @media(max-width:650px){.f-soccer-plan-row{grid-template-columns:1fr}}
 
+
+/* ===== 学校の賑わい DBリアルタイム表示 ===== */
+.school-buzz-section{padding:42px 0 68px;background:linear-gradient(180deg,#f7fbff,#eef6ff)}
+.school-buzz-head{text-align:center;margin-bottom:24px}
+.school-buzz-head h2{margin:8px 0;color:#071a3a;font-size:clamp(1.8rem,4vw,3rem)}
+.school-buzz-head p{margin:0;color:#526079;line-height:1.75}
+.school-buzz-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.school-buzz-card{padding:22px 18px;border:1px solid rgba(10,87,213,.14);border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(7,26,58,.08);text-align:center}
+.school-buzz-icon{font-size:1.7rem;line-height:1}
+.school-buzz-label{margin-top:10px;color:#526079;font-size:.9rem;font-weight:800}
+.school-buzz-value{display:block;margin-top:6px;color:#071a3a;font-size:clamp(2rem,5vw,3.2rem);font-weight:950;line-height:1}
+.school-buzz-unit{margin-left:4px;font-size:.9rem;font-weight:800;color:#526079}
+.school-buzz-status{min-height:1.4em;margin:14px 0 0;text-align:center;color:#607089;font-size:.82rem}
+.school-buzz-exit-wrap{display:flex;justify-content:center;margin-top:18px}
+.forgeation-exit-button{min-height:46px;padding:0 20px;border:1px solid rgba(7,26,58,.16);border-radius:999px;color:#071a3a;background:#fff;font-weight:900;cursor:pointer;box-shadow:0 8px 22px rgba(7,26,58,.08)}
+.forgeation-exit-button.is-exited{color:#486070;background:#eef4f8;cursor:default}
+@media(max-width:900px){.school-buzz-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.school-buzz-grid{grid-template-columns:1fr 1fr;gap:10px}.school-buzz-card{padding:18px 10px}.school-buzz-label{font-size:.78rem}.school-buzz-value{font-size:2rem}}
 </style>
 
 <style id="forgeation-ver323-patch">
@@ -1705,6 +1723,25 @@ section{padding:68px 0}
 <article class="slide slide-3"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">PROJECT PHOENIX</div><h1>挑戦が未来を創る。<br>炎は道を照らす。</h1><p>フォージは、挑戦する心を燃やし、未来への道を切り拓く存在。</p></div></div></article>
 <article class="slide slide-4"><div class="hero-content"><div class="hero-copy"><div class="eyebrow">FORGEATION SKY</div><h1>空の先へ。<br>未来は、どこまでも広がる。</h1><p>Design the Future. Forge the Future.</p></div></div></article>
 <div class="slider-controls"><button class="dot is-active"></button><button class="dot"></button><button class="dot"></button><button class="dot"></button><button class="pause" id="pauseButton">一時停止</button></div></section>
+
+
+<section class="school-buzz-section" id="school-buzz" aria-labelledby="schoolBuzzTitle">
+  <div class="container">
+    <div class="school-buzz-head">
+      <div class="section-kicker">SCHOOL ACTIVITY</div>
+      <h2 id="schoolBuzzTitle">🏫 学校の賑わい</h2>
+      <p>Forgeation Schoolを訪れている人の動きを、DBの実数で表示します。</p>
+    </div>
+    <div class="school-buzz-grid" aria-live="polite">
+      <div class="school-buzz-card"><div class="school-buzz-icon">🟢</div><div class="school-buzz-label">現在の来校者</div><strong class="school-buzz-value" id="buzzCurrentVisitors">--</strong><span class="school-buzz-unit">人</span></div>
+      <div class="school-buzz-card"><div class="school-buzz-icon">👥</div><div class="school-buzz-label">本日の来校者</div><strong class="school-buzz-value" id="buzzTodayVisitors">--</strong><span class="school-buzz-unit">人</span></div>
+      <div class="school-buzz-card"><div class="school-buzz-icon">👀</div><div class="school-buzz-label">本日の閲覧数</div><strong class="school-buzz-value" id="buzzTodayViews">--</strong><span class="school-buzz-unit">回</span></div>
+      <div class="school-buzz-card"><div class="school-buzz-icon">🌱</div><div class="school-buzz-label">累計来校者</div><strong class="school-buzz-value" id="buzzTotalVisitors">--</strong><span class="school-buzz-unit">人</span></div>
+    </div>
+    <p class="school-buzz-status" id="schoolBuzzStatus">DBから最新状況を読み込んでいます…</p>
+    <div class="school-buzz-exit-wrap"><button class="forgeation-exit-button" id="forgeationExitButton" type="button">🚪 Forgeation Schoolから退出する</button></div>
+  </div>
+</section>
 
 <section class="school-map-section" id="forgeation-school">
   <div class="container">
@@ -2233,7 +2270,8 @@ section{padding:68px 0}
   <h3>🐍 Python 1分授業</h3>
   <p>授業を選び、「実行する」を押してみよう。リセットで最初からやり直せます。</p>
 
-  <div class="lesson-switcher" aria-label="Python授業を選ぶ">
+  <div class="lesson-switcher" aria-label="Python授業を
+選ぶ">
     <button type="button" class="active" data-python-lesson="1">Lesson 1</button>
     <button type="button" data-python-lesson="2">Lesson 2</button>
     <button type="button" data-python-lesson="3">Lesson 3</button>
@@ -2734,50 +2772,131 @@ if(schoolMapZoom && schoolMapImage){
 
 /* Forgeation全体 来訪者記録 */
 const FORGEATION_API_BASE="https://forgeation-api.eru12121221.workers.dev";
+const FORGEATION_HOME_PAGE="forgeation-home";
+let forgeationPresenceActive=true;
+
 function getForgeationVisitorId(){
   let visitorId=null;
   try{visitorId=window.localStorage.getItem("forgeation_visitor_id")}catch(_){}
   if(!visitorId){
-    visitorId=(crypto.randomUUID?.() ||
-      "visitor-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+    visitorId=(crypto.randomUUID?.() || "visitor-"+Date.now()+"-"+Math.random().toString(36).slice(2));
     try{window.localStorage.setItem("forgeation_visitor_id",visitorId)}catch(_){}
   }
   return visitorId;
 }
+
 function recordForgeationVisit(page){
   return fetch(FORGEATION_API_BASE+"/visit",{
     method:"POST",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({visitorId:getForgeationVisitorId(),page})
-  }).catch(error=>console.warn("来訪記録に失敗しました。",error));
+  }).then(r=>r.ok?r.json():null).catch(error=>{
+    console.warn("来訪記録に失敗しました。",error);
+    return null;
+  });
 }
-recordForgeationVisit("forgeation-home");
 
-// ホームページを現在見ている人数のためのheartbeat。
-// 画面が表示中の間だけ30秒ごとに最終接続時刻を更新する。
 function sendForgeationPresence(){
-  if(document.visibilityState !== "visible") return;
+  if(!forgeationPresenceActive || document.visibilityState!=="visible") return;
   fetch(FORGEATION_API_BASE+"/presence",{
     method:"POST",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
       visitorId:getForgeationVisitorId(),
-      page:"forgeation-home"
+      page:FORGEATION_HOME_PAGE,
+      action:"heartbeat"
     }),
     keepalive:true
   }).catch(error=>console.warn("現在閲覧中の更新に失敗しました。",error));
 }
+
+function leaveForgeationHome(){
+  if(!forgeationPresenceActive) return Promise.resolve();
+  forgeationPresenceActive=false;
+  return fetch(FORGEATION_API_BASE+"/presence",{
+    method:"POST",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      visitorId:getForgeationVisitorId(),
+      page:FORGEATION_HOME_PAGE,
+      action:"leave"
+    }),
+    keepalive:true
+  }).catch(error=>console.warn("退出通知に失敗しました。",error));
+}
+
+async function loadSchoolBuzz(){
+  const status=document.getElementById("schoolBuzzStatus");
+  try{
+    const response=await fetch(
+      FORGEATION_API_BASE+"/public-stats?page="+encodeURIComponent(FORGEATION_HOME_PAGE),
+      {method:"GET",mode:"cors",cache:"no-store",credentials:"omit"}
+    );
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error || "HTTP "+response.status);
+
+    const values={
+      buzzCurrentVisitors:data.currentVisitors,
+      buzzTodayVisitors:data.todayVisitors,
+      buzzTodayViews:data.todayViews,
+      buzzTotalVisitors:data.totalVisitors
+    };
+    Object.entries(values).forEach(([id,value])=>{
+      const el=document.getElementById(id);
+      if(el) el.textContent=Number(value || 0).toLocaleString("ja-JP");
+    });
+    if(status){
+      const now=new Date();
+      status.textContent="DB実数を表示中｜最終更新 "+now.toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    }
+  }catch(error){
+    console.warn("学校の賑わい取得に失敗しました。",error);
+    if(status) status.textContent="DBとの接続を確認しています。";
+  }
+}
+
+recordForgeationVisit(FORGEATION_HOME_PAGE).finally(()=>loadSchoolBuzz());
 sendForgeationPresence();
 setInterval(sendForgeationPresence,30000);
-document.addEventListener("visibilitychange",sendForgeationPresence);
+setInterval(loadSchoolBuzz,15000);
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible"){
+    sendForgeationPresence();
+    loadSchoolBuzz();
+  }
+});
+window.addEventListener("pagehide",leaveForgeationHome,{once:true});
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadSchoolBuzz();
+  const exitButton=document.getElementById("forgeationExitButton");
+  if(exitButton){
+    exitButton.addEventListener("click",async()=>{
+      exitButton.disabled=true;
+      exitButton.textContent="退出処理中…";
+      await leaveForgeationHome();
+      await loadSchoolBuzz();
+      exitButton.textContent="✓ 退出しました";
+      exitButton.classList.add("is-exited");
+      exitButton.setAttribute("aria-label","Forgeation Schoolから退出済み");
+    });
+  }
+});
 
 document.querySelectorAll(".visitor-track").forEach(link=>{
   link.addEventListener("click",()=>{
     recordForgeationVisit(link.dataset.page || "unknown");
   });
 });
-
-
 
 
 
