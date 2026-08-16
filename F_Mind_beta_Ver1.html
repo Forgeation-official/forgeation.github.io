@@ -14,6 +14,97 @@ async function forgeAI(payload){
   return d.reply||d.answer||d.message||d.text||'応答を受信しました。';
 }
 
-let xp=0;function addXp(v){xp+=v;document.getElementById('xpText').textContent=(xp%100)+' / 100 XP';document.getElementById('xpBar').style.width=(xp%100)+'%';document.getElementById('levelName').textContent='Lv.'+(Math.floor(xp/100)+1)}document.querySelectorAll('.menu-item').forEach(b=>b.onclick=()=>{document.querySelectorAll('.feature-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===b.dataset.feature));document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'center'})});document.querySelectorAll('.action-btn').forEach(b=>b.onclick=()=>{addXp(10);b.textContent='体験完了 ✓ ＋10 XP'});const fb=['良い判断です。まず相手の様子を見て、安心できる関わりから始めましょう。','状況確認をもう一段入れると、さらに丁寧な対応になります。','相手の気持ちを確かめる視点を加えると、より良い対応になります。'];document.querySelectorAll('.choice-btn').forEach(b=>b.onclick=()=>{let n=+b.dataset.choice,v=n===0?20:10;addXp(v);document.getElementById('result').textContent=fb[n]+' ＋'+v+' XP'});
-const mindSend=document.getElementById('mindSend'); mindSend.onclick=async()=>{const q=document.getElementById('mindQ').value.trim();const a=document.getElementById('mindAnswer');if(!q){a.textContent='相談内容を入力してください。';return} mindSend.disabled=true;a.textContent='AIに相談中…';try{a.textContent=await forgeAI({message:q,product:'f-mind',mode:'care-learning'});addXp(10)}catch(e){a.textContent='API接続を確認してください：'+e.message}finally{mindSend.disabled=false}};
+// ========================================
+// F Mind XP / DB progress
+// 画面デザインは変えず、XPを端末保存し、利用状況をDBへ送る
+// ========================================
+const MIND_PRODUCT='f-mind';
+const MIND_XP_KEY='forgeation_f_mind_xp';
+const PROGRESS_API='/api/progress';
+let xp=Number(localStorage.getItem(MIND_XP_KEY)||0);
+
+function mindUserId(){
+  return localStorage.getItem('forgeation_user_id')
+    || localStorage.getItem('user_id')
+    || localStorage.getItem('userId')
+    || '';
+}
+
+function renderXp(){
+  const inLevel=xp%100;
+  document.getElementById('xpText').textContent=xp+' XP';
+  document.getElementById('xpBar').style.width=inLevel+'%';
+  document.getElementById('levelName').textContent='Lv.'+(Math.floor(xp/100)+1);
+}
+
+async function sendMindProgress(eventName,extra={}){
+  const payload={
+    product:MIND_PRODUCT,
+    event:eventName,
+    xp,
+    user_id:mindUserId(),
+    page:location.pathname,
+    occurred_at:new Date().toISOString(),
+    ...extra
+  };
+  try{
+    await fetch(PROGRESS_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload),
+      keepalive:true
+    });
+  }catch(e){
+    console.warn('F Mind progress sync skipped:',e);
+  }
+}
+
+function addXp(v,eventName='xp',extra={}){
+  xp+=Number(v)||0;
+  localStorage.setItem(MIND_XP_KEY,String(xp));
+  renderXp();
+  sendMindProgress(eventName,{xp_added:Number(v)||0,...extra});
+}
+
+renderXp();
+sendMindProgress('app_open');
+
+document.querySelectorAll('.menu-item').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.feature-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===b.dataset.feature));
+  document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'center'});
+  sendMindProgress('feature_open',{mode:b.dataset.feature});
+});
+
+document.querySelectorAll('.action-btn[data-xp]').forEach(b=>b.onclick=()=>{
+  const panel=b.closest('.feature-panel');
+  const mode=panel?.dataset.panel||'experience';
+  addXp(Number(b.dataset.xp||10),'experience_complete',{mode});
+  b.textContent='体験完了 ✓ ＋'+Number(b.dataset.xp||10)+' XP';
+});
+
+const fb=['良い判断です。まず相手の様子を見て、安心できる関わりから始めましょう。','状況確認をもう一段入れると、さらに丁寧な対応になります。','相手の気持ちを確かめる視点を加えると、より良い対応になります。'];
+document.querySelectorAll('.choice-btn').forEach(b=>b.onclick=()=>{
+  let n=+b.dataset.choice,v=n===0?20:10;
+  addXp(v,'challenge_answer',{choice:n,correct:n===0});
+  document.getElementById('result').textContent=fb[n]+' ＋'+v+' XP';
+});
+
+const mindSend=document.getElementById('mindSend');
+mindSend.onclick=async()=>{
+  const q=document.getElementById('mindQ').value.trim();
+  const a=document.getElementById('mindAnswer');
+  if(!q){a.textContent='相談内容を入力してください。';return}
+  mindSend.disabled=true;
+  a.textContent='AIに相談中…';
+  sendMindProgress('ai_consult_start',{mode:'care-learning'});
+  try{
+    a.textContent=await forgeAI({message:q,product:'f-mind',mode:'care-learning'});
+    addXp(10,'ai_consult_complete',{mode:'care-learning'});
+  }catch(e){
+    a.textContent='API接続を確認してください：'+e.message;
+    sendMindProgress('ai_consult_error',{mode:'care-learning',error:String(e.message||e)});
+  }finally{
+    mindSend.disabled=false;
+  }
+};
 </script></body></html>
