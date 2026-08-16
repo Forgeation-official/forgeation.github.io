@@ -3736,5 +3736,83 @@ const inside=document.getElementById('staffRoomInside');
 
 <!-- Ver3.25.1: ユーザー提供のクリーン校舎マップへ差替。画像キャッシュ対策のみ追加。既存構成・リンク・機能は維持。 -->
 
+
+<script>
+// ========================================
+// Forgeation 各アカデミー利用記録
+// 既存デザイン・既存導線は変更せず、利用開始時だけ /visit へ送信
+// ========================================
+(function(){
+  const API_BASE = "https://forgeation-api.eru12121221.workers.dev";
+
+  function getVisitorId(){
+    const key="forgeation_visitor_id";
+    try{
+      let id=localStorage.getItem(key);
+      if(!id){
+        id=(crypto.randomUUID ? crypto.randomUUID() : ("v-"+Date.now()+"-"+Math.random().toString(16).slice(2)));
+        localStorage.setItem(key,id);
+      }
+      return id;
+    }catch(e){
+      return "session-"+Date.now()+"-"+Math.random().toString(16).slice(2);
+    }
+  }
+
+  const visitorId=getVisitorId();
+
+  const academyByHref = [
+    ["ai-academy-web.html","ai-academy"],
+    ["nursing-academy-web.html","nursing-medical"],
+    ["care-academy-web.html","care-welfare"],
+    ["construction-academy-web.html","construction"],
+    ["education-academy-web.html","education"],
+    ["robotics-academy-web.html","ai-robotics"],
+    ["F_Soccer_beta_Ver3_Challenge搭載版.html","f-soccer"]
+  ];
+
+  const academyByHash = {
+    "#ai-academy-detail":"ai-academy",
+    "#nursing-academy-detail":"nursing-medical",
+    "#care-academy-detail":"care-welfare",
+    "#construction-academy-detail":"construction",
+    "#education-academy-detail":"education",
+    "#robotics-academy-detail":"ai-robotics",
+    "#soccer-product":"f-soccer"
+  };
+
+  function recordAcademy(page){
+    if(!page) return;
+    fetch(API_BASE+"/visit",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({visitorId,page})
+    }).catch(()=>{});
+  }
+
+  document.addEventListener("click",function(e){
+    const el=e.target.closest("a,button");
+    if(!el) return;
+
+    const href=el.getAttribute("href") || el.dataset?.href || "";
+    if(academyByHash[href]){
+      recordAcademy(academyByHash[href]);
+      return;
+    }
+
+    for(const [file,page] of academyByHref){
+      if(href.includes(file)){
+        recordAcademy(page);
+        return;
+      }
+    }
+  },true);
+
+  // 校舎マップの data-href は button 自体にあるため上記clickで拾える。
+})();
+</script>
+
 </body>
 </html>
