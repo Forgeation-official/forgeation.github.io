@@ -76,7 +76,7 @@ function forgeBack(){
 // ========================================
 const FORGEATION_API_BASE='https://forgeation-api.eru12121221.workers.dev';
 const FORGE_PRODUCT='f-drone';
-const FORGE_VERSION='beta-Ver1-stage031';
+const FORGE_VERSION='beta-Ver1-stage100-auto';
 
 function getForgeationVisitorId(){
   const key='forgeation_visitor_id';
@@ -130,54 +130,33 @@ async function sendAppUsage(action='open', extra={}){
 const scene=document.getElementById('scene'), spd=document.getElementById('spd'), alt=document.getElementById('alt'), statusEl=document.getElementById('status');
 let x=0,y=0,z=40,speed=0,yaw=0;
 const STAGE_COUNT=31;
-const STAGES=[
-  "F_Drone_Stage_001.png",
-  "F_Drone_Stage_002.png",
-  "F_Drone_Stage_003.png",
-  "F_Drone_Stage_004.png",
-  "F_Drone_Stage_005.png",
-  "F_Drone_Stage_006.png",
-  "F_Drone_Stage_007.png",
-  "F_Drone_Stage_008.png",
-  "F_Drone_Stage_009.png",
-  "F_Drone_Stage_010.png",
-  "F_Drone_Stage_011.png",
-  "F_Drone_Stage_012.png",
-  "F_Drone_Stage_013.png",
-  "F_Drone_Stage_014.png",
-  "F_Drone_Stage_015.png",
-  "F_Drone_Stage_016.png",
-  "F_Drone_Stage_017.png",
-  "F_Drone_Stage_018.png",
-  "F_Drone_Stage_019.png",
-  "F_Drone_Stage_020.png",
-  "F_Drone_Stage_021.png",
-  "F_Drone_Stage_022.png",
-  "F_Drone_Stage_023.png",
-  "F_Drone_Stage_024.png",
-  "F_Drone_Stage_025.png",
-  "F_Drone_Stage_026.png",
-  "F_Drone_Stage_027.png",
-  "F_Drone_Stage_028.png",
-  "F_Drone_Stage_029.png",
-  "F_Drone_Stage_030.png",
-  "F_Drone_Stage_031.png"
-];
+const MAX_STAGE=100;
+// 001〜100のファイル名を自動生成。今後はPNGを追加するだけでHTMLの書き換え不要。
+const STAGES=Array.from({length:MAX_STAGE},(_,i)=>`F_Drone_Stage_${String(i+1).padStart(3,'0')}.png`);
 let currentStage=0;
 const stageLabel=document.getElementById('stageLabel');
 const sceneTitle=document.getElementById('sceneTitle');
 const stageList=document.getElementById('stageList');
 const stageGrid=document.getElementById('stageGrid');
 function resetFlight(){x=0;y=0;z=40;speed=0;yaw=0;statusEl.textContent='LIVE FPV / HOVER';}
-function loadStage(index){
+function loadStage(index, direction=1, checked=0){
   currentStage=(index+STAGE_COUNT)%STAGE_COUNT;
-  scene.style.backgroundImage=`url("${STAGES[currentStage]}")`;
-  stageLabel.textContent=String(currentStage+1).padStart(3,'0');
-  sceneTitle.textContent=`F DRONE STAGE ${String(currentStage+1).padStart(3,'0')}`;
-  resetFlight();
-  render();
-  [...stageGrid.children].forEach((b,i)=>b.classList.toggle('active',i===currentStage));
-  sendAppUsage('stage_select',{stage:currentStage+1,image:STAGES[currentStage]});
+  const img=new Image();
+  img.onload=()=>{
+    scene.style.backgroundImage=`url("${STAGES[currentStage]}")`;
+    stageLabel.textContent=String(currentStage+1).padStart(3,'0');
+    sceneTitle.textContent=`F DRONE STAGE ${String(currentStage+1).padStart(3,'0')}`;
+    sceneSub.textContent='LIVE FPV CAMERA';
+    resetFlight();
+    render();
+    [...stageGrid.children].forEach((b,i)=>b.classList.toggle('active',i===currentStage));
+    sendAppUsage('stage_select',{stage:currentStage+1,image:STAGES[currentStage]});
+  };
+  img.onerror=()=>{
+    if(checked<STAGE_COUNT-1) loadStage(currentStage+direction,direction,checked+1);
+  };
+  img.src=STAGES[currentStage];
+  return;
 }
 for(let i=0;i<STAGE_COUNT;i++){
   const b=document.createElement('button');
@@ -185,8 +164,8 @@ for(let i=0;i<STAGE_COUNT;i++){
   b.onclick=()=>{loadStage(i);stageList.classList.remove('open');};
   stageGrid.appendChild(b);
 }
-document.getElementById('stagePrev').onclick=()=>loadStage(currentStage-1);
-document.getElementById('stageNext').onclick=()=>loadStage(currentStage+1);
+document.getElementById('stagePrev').onclick=()=>loadStage(currentStage-1,-1);
+document.getElementById('stageNext').onclick=()=>loadStage(currentStage+1,1);
 document.getElementById('stageOpen').onclick=()=>stageList.classList.add('open');
 document.getElementById('stageClose').onclick=()=>stageList.classList.remove('open');
 function render(){
