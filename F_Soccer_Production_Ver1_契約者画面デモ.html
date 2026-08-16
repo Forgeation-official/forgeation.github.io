@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>F Soccer Production Ver1｜動画付き・API接続版</title>
+<title>F Soccer Production Ver1｜本番利用カウント・API接続版</title>
 <style>
 :root{
   --navy:#06162f;
@@ -948,6 +948,50 @@ const safeLocalStorage={
   }
 };
 const API_URL = "https://forgeation-api.eru12121221.workers.dev";
+
+// ===== F Soccer Production 利用カウント =====
+const F_SOCCER_USAGE_URL = API_URL + "/app-usage";
+const F_SOCCER_PRODUCTION_APP_ID = "f-soccer";
+const F_SOCCER_PRODUCTION_APP_NAME = "F Soccer Production Ver1";
+
+async function sendProductionUsage(eventName = "visit", extra = {}) {
+  const userId = (typeof getFSoccerUserId === "function" ? getFSoccerUserId() : "").trim();
+  // 本番利用者数は契約者User ID単位で数える。User ID不明時は誤カウント防止のため送信しない。
+  if (!userId) return null;
+
+  try {
+    const response = await fetch(F_SOCCER_USAGE_URL, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-store",
+      credentials: "omit",
+      keepalive: true,
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        visitorId: userId,
+        visitor_id: userId,
+        userId: userId,
+        user_id: userId,
+        appId: F_SOCCER_PRODUCTION_APP_ID,
+        app_id: F_SOCCER_PRODUCTION_APP_ID,
+        page: F_SOCCER_PRODUCTION_APP_ID,
+        app: F_SOCCER_PRODUCTION_APP_ID,
+        product: F_SOCCER_PRODUCTION_APP_ID,
+        event: String(eventName || "usage"),
+        action: String(eventName || "usage"),
+        timestamp: new Date().toISOString(),
+        ...extra
+      })
+    });
+    if (!response.ok) {
+      console.warn("F Soccer Production /app-usage 応答:", response.status);
+    }
+    return response;
+  } catch (error) {
+    console.warn("F Soccer Production /app-usage 送信エラー:", error);
+    return null;
+  }
+}
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const sendButton = document.getElementById("sendButton");
@@ -1061,7 +1105,7 @@ async function sendToCoach(message, sourceButton = null) {
         message,
         profile: playerProfile,
         history: conversationHistory.slice(-8),
-        app: "F Soccer β Ver3"
+        app: F_SOCCER_PRODUCTION_APP_NAME
       })
     });
 
@@ -1132,6 +1176,7 @@ chatForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const message = messageInput.value.trim();
   if (!message) return;
+  sendProductionUsage("ai_message", {messageLength: message.length});
   await sendToCoach(`${profileContext()}
 
 相談内容：${message}`);
@@ -1150,7 +1195,7 @@ async function checkApi() {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({message:"接続確認です。「接続OK」と短く答えてください。", app:"F Soccer β Ver3"})
+      body: JSON.stringify({message:"接続確認です。「接続OK」と短く答えてください。", app:F_SOCCER_PRODUCTION_APP_NAME})
     });
     if (!response.ok) throw new Error();
     setApiState("online", "API接続中");
@@ -1459,6 +1504,9 @@ async function loadProductionMemberProfile(){
     if(statusEl){
       statusEl.textContent = `✅ DBプロフィール読込済み｜User ID：${user.user_id || userId}｜${displayName}`;
     }
+
+    // 契約者User IDで本日のF Soccer本番利用を1件記録
+    sendProductionUsage("visit", {plan: planText, memberStatus: user.status || "active"});
   }catch(err){
     if(statusEl){
       statusEl.textContent = `⚠️ DBプロフィールを読み込めませんでした｜${err.message}`;
@@ -1472,6 +1520,7 @@ loadProductionMemberProfile();
 /* ===== Production member gate ===== */
 document.getElementById("enterProduction")?.addEventListener("click",()=>{
   document.getElementById("productionGate")?.classList.add("is-hidden");
+  sendProductionUsage("enter_production");
   try{ sessionStorage.setItem("fSoccerProductionDemoEntered","1"); }catch(e){}
 });
 try{
