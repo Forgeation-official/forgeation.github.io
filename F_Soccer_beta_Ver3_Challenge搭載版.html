@@ -1086,20 +1086,30 @@ const challengePanels = [...document.querySelectorAll("[data-challenge-panel]")]
 let coachXp = Number(safeLocalStorage.get("fSoccerCoachXpV3","0"));
 
 function coachLevelInfo(xp) {
-  if (xp >= 1000) return {name:"Lv.100 世界トップコーチ 🌍", next:1000};
-  if (xp >= 500) return {name:"Lv.50 プロアカデミーコーチ", next:1000};
-  if (xp >= 300) return {name:"Lv.30 全国コーチ", next:500};
-  if (xp >= 100) return {name:"Lv.10 地区コーチ", next:300};
-  return {name:"Lv.1 新人コーチ", next:100};
+  // 1000XP以降も上限なしでレベルアップし続ける。
+  // 1000XP = Lv.100、以降は10XPごとにLv.1上昇。
+  if (xp >= 1000) {
+    const level = Math.max(100, Math.floor(xp / 10));
+    const base = level * 10;
+    const next = (level + 1) * 10;
+    return {name:`Lv.${level} 世界トップコーチ 🌍`, base, next};
+  }
+  if (xp >= 500) return {name:"Lv.50 プロアカデミーコーチ", base:500, next:1000};
+  if (xp >= 300) return {name:"Lv.30 全国コーチ", base:300, next:500};
+  if (xp >= 100) return {name:"Lv.10 地区コーチ", base:100, next:300};
+  return {name:"Lv.1 新人コーチ", base:0, next:100};
 }
 
 function renderCoachLevel() {
+  if (!Number.isFinite(coachXp) || coachXp < 0) coachXp = 0;
+
   const info = coachLevelInfo(coachXp);
+  const span = Math.max(1, info.next - info.base);
+  const progress = Math.max(0, Math.min(100, ((coachXp - info.base) / span) * 100));
+
   document.getElementById("coachLevelName").textContent = info.name;
-  document.getElementById("coachXpText").textContent =
-    info.next === 1000 && coachXp >= 1000 ? `${coachXp} XP` : `${coachXp} / ${info.next} XP`;
-  document.getElementById("coachXpBar").style.width =
-    `${Math.min(100, (coachXp / info.next) * 100)}%`;
+  document.getElementById("coachXpText").textContent = `${coachXp} / ${info.next} XP`;
+  document.getElementById("coachXpBar").style.width = `${progress}%`;
 }
 
 function addCoachXp(value, reason) {
