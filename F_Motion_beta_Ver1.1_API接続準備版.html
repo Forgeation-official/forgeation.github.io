@@ -25,9 +25,9 @@ function forgeBack(){
    Production: set API_BASE to your Worker/API endpoint.
    No API key is embedded in this HTML. Keep secrets server-side. */
 window.FM_CONFIG = {
-  API_BASE: location.origin, // same-origin Cloudflare Pages/Worker
+  API_BASE: "https://forgeation-api.eru12121221.workers.dev", // Forgeation production Worker
   APP_ID: "f-motion",
-  VERSION: "beta-Ver1.1"
+  VERSION: "beta-Ver1.2"
 };
 async function fmApi(path, options={}) {
   const base = window.FM_CONFIG.API_BASE;
@@ -47,6 +47,35 @@ async function syncMotionProgress(payload){
     });
   }catch(e){
     console.warn("F Motion sync pending:", e);
+    return {ok:false, pending:true};
+  }
+}
+
+function fmVisitorId(){
+  let id = localStorage.getItem("forgeation_visitor_id");
+  if(!id){
+    id = (crypto.randomUUID ? crypto.randomUUID() : "v-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+    localStorage.setItem("forgeation_visitor_id", id);
+  }
+  return id;
+}
+
+async function trackMotionUsage(eventName="open"){
+  const visitorId = fmVisitorId();
+  const userId = localStorage.getItem("forgeation_user_id") || null;
+  try{
+    return await fmApi("/app-usage", {
+      method:"POST",
+      body:JSON.stringify({
+        app_id:"f-motion", appId:"f-motion",
+        visitor_id:visitorId, visitorId:visitorId,
+        user_id:userId, userId:userId,
+        event:eventName,
+        used_at:new Date().toISOString()
+      })
+    });
+  }catch(e){
+    console.warn("F Motion usage sync pending:", e);
     return {ok:false, pending:true};
   }
 }
@@ -90,7 +119,7 @@ async function syncMotionProgress(payload){
     <div class="actions"><button class="btn secondary" onclick="closeGame()">戻る</button><button class="btn" id="retry" onclick="retryGame()">もう一度</button></div>
   </section>
 
-  <div class="footer">Forgeation · FUTURE MANAGEMENT<br>F Motion beta Ver1.1 — API-ready / Local fallback<br><span id="apiState"></span></div>
+  <div class="footer">Forgeation · FUTURE MANAGEMENT<br>F Motion beta Ver1.2 — DB usage tracking / API-ready<br><span id="apiState"></span></div>
 </div>
 <script>
 let xp=Number(localStorage.getItem('fm_xp')||0), best=Number(localStorage.getItem('fm_best')||0);
@@ -111,18 +140,19 @@ function save(){
 }
 function show(name,hint){$('game').style.display='block';$('gameName').textContent=name;$('hint').textContent=hint;$('result').textContent='';$('retry').style.visibility='visible';$('game').scrollIntoView({behavior:'smooth'});}
 function clear(){clearTimeout(timer);active=false;$('target').className='target';$('target').innerHTML='<div id="targetContent" class="big"></div>'}
-function startReaction(){mode='reaction';clear();show('F REACTION','白く光るまで待ってください。早押しは失敗です。');$('targetContent').textContent='WAIT';$('target').classList.add('ready');timer=setTimeout(()=>{active=true;started=performance.now();$('target').className='target go';$('targetContent').textContent='TAP!'},1200+Math.random()*2200)}
-function startVision(){mode='vision';clear();show('F VISION','一瞬だけ出る矢印の方向を覚えてください。');const dirs=[['←','左'],['→','右'],['↑','上'],['↓','下']];let d=dirs[Math.floor(Math.random()*dirs.length)];visionAnswer=d[1];$('targetContent').textContent=d[0];setTimeout(()=>{$('target').innerHTML='<div><button class="btn" onclick="answerVision(\'左\',event)">← 左</button> <button class="btn" onclick="answerVision(\'右\',event)">右 →</button><br><br><button class="btn" onclick="answerVision(\'上\',event)">↑ 上</button> <button class="btn" onclick="answerVision(\'下\',event)">↓ 下</button></div>';active=true},650)}
+function startReaction(){trackMotionUsage('reaction');mode='reaction';clear();show('F REACTION','白く光るまで待ってください。早押しは失敗です。');$('targetContent').textContent='WAIT';$('target').classList.add('ready');timer=setTimeout(()=>{active=true;started=performance.now();$('target').className='target go';$('targetContent').textContent='TAP!'},1200+Math.random()*2200)}
+function startVision(){trackMotionUsage('vision');mode='vision';clear();show('F VISION','一瞬だけ出る矢印の方向を覚えてください。');const dirs=[['←','左'],['→','右'],['↑','上'],['↓','下']];let d=dirs[Math.floor(Math.random()*dirs.length)];visionAnswer=d[1];$('targetContent').textContent=d[0];setTimeout(()=>{$('target').innerHTML='<div><button class="btn" onclick="answerVision(\'左\',event)">← 左</button> <button class="btn" onclick="answerVision(\'右\',event)">右 →</button><br><br><button class="btn" onclick="answerVision(\'上\',event)">↑ 上</button> <button class="btn" onclick="answerVision(\'下\',event)">↓ 下</button></div>';active=true},650)}
 function answerVision(a,e){e.stopPropagation();if(!active)return;active=false;if(a===visionAnswer){xp+=20;$('result').textContent='正解！ +20 XP'}else{$('result').textContent='惜しい！ 正解は「'+visionAnswer+'」'}save()}
-function startJudge(){mode='judge';clear();show('F JUDGE','文字の意味ではなく「矢印の向き」を選んでください。');const dirs=[['←','LEFT','左'],['→','RIGHT','右'],['↑','UP','上'],['↓','DOWN','下']];let d=dirs[Math.floor(Math.random()*dirs.length)];judgeAnswer=d[2];started=performance.now();$('target').innerHTML='<div><div class="big">'+d[0]+' '+d[1]+'</div><br><button class="btn" onclick="answerJudge(\'左\',event)">左</button> <button class="btn" onclick="answerJudge(\'右\',event)">右</button> <button class="btn" onclick="answerJudge(\'上\',event)">上</button> <button class="btn" onclick="answerJudge(\'下\',event)">下</button></div>';active=true}
+function startJudge(){trackMotionUsage('judge');mode='judge';clear();show('F JUDGE','文字の意味ではなく「矢印の向き」を選んでください。');const dirs=[['←','LEFT','左'],['→','RIGHT','右'],['↑','UP','上'],['↓','DOWN','下']];let d=dirs[Math.floor(Math.random()*dirs.length)];judgeAnswer=d[2];started=performance.now();$('target').innerHTML='<div><div class="big">'+d[0]+' '+d[1]+'</div><br><button class="btn" onclick="answerJudge(\'左\',event)">左</button> <button class="btn" onclick="answerJudge(\'右\',event)">右</button> <button class="btn" onclick="answerJudge(\'上\',event)">上</button> <button class="btn" onclick="answerJudge(\'下\',event)">下</button></div>';active=true}
 function answerJudge(a,e){e.stopPropagation();if(!active)return;active=false;let ms=Math.round(performance.now()-started);if(a===judgeAnswer){xp+=25;$('result').textContent='正解 '+ms+'ms · +25 XP'}else{$('result').textContent='不正解 · 正解は「'+judgeAnswer+'」'}save()}
-function startAccuracy(){mode='accuracy';clear();show('F ACCURACY','10秒間、現れる●をできるだけ正確にタップ！');accuracyHits=0;accuracyStart=performance.now();active=true;spawnDot();timer=setTimeout(()=>{active=false;$('target').innerHTML='<div class="big">FINISH</div>';xp+=accuracyHits*3;$('result').textContent=accuracyHits+' HIT · +'+(accuracyHits*3)+' XP';save()},10000)}
+function startAccuracy(){trackMotionUsage('accuracy');mode='accuracy';clear();show('F ACCURACY','10秒間、現れる●をできるだけ正確にタップ！');accuracyHits=0;accuracyStart=performance.now();active=true;spawnDot();timer=setTimeout(()=>{active=false;$('target').innerHTML='<div class="big">FINISH</div>';xp+=accuracyHits*3;$('result').textContent=accuracyHits+' HIT · +'+(accuracyHits*3)+' XP';save()},10000)}
 function spawnDot(){if(!active)return;let x=10+Math.random()*80,y=10+Math.random()*75;$('target').innerHTML='<div onclick="hitDot(event)" style="position:absolute;left:'+x+'%;top:'+y+'%;width:58px;height:58px;border-radius:50%;background:white;box-shadow:0 0 28px #7cecff;transform:translate(-50%,-50%);"></div>';$('target').style.position='relative'}
 function hitDot(e){e.stopPropagation();if(!active)return;accuracyHits++;$('result').textContent=accuracyHits+' HIT';spawnDot()}
 function targetTap(){if(mode==='reaction'){if(active){active=false;let ms=Math.round(performance.now()-started);xp+=20;if(!best||ms<best)best=ms;$('result').textContent=ms+' ms · +20 XP';$('targetContent').textContent='NICE!';save()}else if(timer){clearTimeout(timer);timer=null;$('result').textContent='早すぎ！ もう一度挑戦';$('targetContent').textContent='FALSE START'}}}
 function retryGame(){({reaction:startReaction,vision:startVision,judge:startJudge,accuracy:startAccuracy}[mode]||startReaction)()}
 function closeGame(){clear();$('game').style.display='none';window.scrollTo({top:0,behavior:'smooth'})}
 refresh();
+trackMotionUsage('open');
 $('apiState').textContent = window.FM_CONFIG.API_BASE ? 'API接続設定あり' : '現在は端末保存（API接続先を設定すると同期可能）';
 </script>
 </body>
