@@ -1,197 +1,72 @@
 <!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>F Python β API</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F Python β Ver2｜50 Quiz + 30 Mission</title>
 <style>
-:root{--bg:#07111d;--cyan:#57d9ff;--green:#7dffb2;--text:#f4f8ff;--line:#28405a}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#183b59 0,#07111d 45%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
-.app{max-width:1100px;margin:auto;padding:16px}.nav{display:flex;gap:8px;margin-bottom:10px}.nav button{border:1px solid var(--line);border-radius:12px;background:#0b1c2b;color:#fff;padding:9px 12px;font-weight:850;cursor:pointer}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}.logo{font-weight:950;letter-spacing:.08em;font-size:20px}.logo b{color:var(--cyan)}.topright{display:flex;gap:8px}.xp,.api{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#091827;font-weight:800;font-size:12px}.api.ok{color:var(--green)}.api.ng{color:#ff8b8b}
-.monitor{background:#10151b;border:10px solid #202a34;border-bottom-width:18px;border-radius:22px;box-shadow:0 25px 60px #0008;overflow:hidden}.monitorbar{height:38px;background:#17222d;display:flex;align-items:center;gap:7px;padding:0 12px;color:#93a9bd;font-size:12px}.dot{width:10px;height:10px;border-radius:50%;background:#536576}.dot:first-child{background:#ff6b6b}.dot:nth-child(2){background:#ffd166}.dot:nth-child(3){background:#62df9a}
-.screen{min-height:420px;display:grid;grid-template-columns:52px 1fr;background:#071018}.side{border-right:1px solid #1d3448;padding:12px 8px;text-align:center;color:#61798f;line-height:2.2}.editor{padding:18px;overflow:auto}.tab{display:inline-block;background:#102538;border-top:2px solid var(--cyan);padding:8px 14px;font-size:12px;margin-bottom:12px}pre{margin:0;font:15px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.n{color:#516c83}.kw{color:#ff8bd5}.fn{color:#75dfff}.str{color:#a8e879}
-.console{margin-top:22px;border-top:1px solid #1e374d;padding-top:14px;color:#b8c9d8;font:13px/1.7 ui-monospace,monospace}.console strong{color:var(--green)}.ai-panel{display:none;margin-top:15px;padding:14px;border:1px solid #28405a;border-radius:14px;background:#0b1825}.ai-panel.show{display:block}.ai-panel textarea{width:100%;min-height:95px;background:#071018;color:#fff;border:1px solid #28405a;border-radius:10px;padding:12px;font:13px/1.5 ui-monospace,monospace;resize:vertical}.send{margin-top:9px;border:0;border-radius:10px;padding:11px 16px;background:linear-gradient(90deg,#57d9ff,#7dffb2);color:#06101a;font-weight:950;cursor:pointer}.send:disabled{opacity:.5}.answer{margin-top:12px;padding:12px;border-radius:10px;background:#06101a;border:1px solid #1e374d;white-space:pre-wrap;line-height:1.7;color:#dce8f4}
-.stand{width:170px;height:18px;margin:0 auto;background:#202a34;clip-path:polygon(35% 0,65% 0,78% 100%,22% 100%)}.base{width:240px;height:12px;margin:0 auto 16px;border-radius:10px;background:#293640}.buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.btn{border:1px solid var(--line);border-radius:16px;background:linear-gradient(#12263a,#0c1b2a);color:#fff;padding:15px 8px;min-height:72px;font-weight:850;font-size:14px;cursor:pointer;box-shadow:0 7px 16px #0004}.btn.active{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan) inset}.ico{display:block;font-size:22px;margin-bottom:5px}.msg{margin:14px 0 4px;padding:12px 14px;background:#0d1c2b;border:1px solid var(--line);border-radius:13px;color:#c6d5e5;font-size:13px}
-@media(max-width:650px){.app{padding:10px}.monitor{border-width:6px;border-bottom-width:12px}.screen{min-height:350px;grid-template-columns:38px 1fr}.editor{padding:12px}pre{font-size:12px}.buttons{grid-template-columns:repeat(2,1fr)}.btn{min-height:68px;font-size:12px}.stand{width:120px}.base{width:180px}}
-</style></head>
-<body>
+:root{--bg:#07111d;--cyan:#57d9ff;--green:#7dffb2;--text:#f4f8ff;--line:#28405a;--panel:#0b1825}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% -10%,#183b59 0,#07111d 45%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
+.app{max-width:1100px;margin:auto;padding:16px} .nav{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap} button{font-family:inherit}
+.nav button,.btn,.small{border:1px solid var(--line);border-radius:12px;background:#0b1c2b;color:#fff;padding:9px 12px;font-weight:850;cursor:pointer}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap} .logo{font-weight:950;letter-spacing:.08em;font-size:20px} .logo b{color:var(--cyan)} .topright{display:flex;gap:8px;flex-wrap:wrap} .xp,.api,.counter{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#091827;font-weight:800;font-size:12px} .api.ok{color:var(--green)} .api.ng{color:#ff8b8b}
+.monitor{background:#10151b;border:10px solid #202a34;border-bottom-width:18px;border-radius:22px;box-shadow:0 25px 60px #0008;overflow:hidden} .monitorbar{height:38px;background:#17222d;display:flex;align-items:center;gap:7px;padding:0 12px;color:#93a9bd;font-size:12px} .dot{width:10px;height:10px;border-radius:50%;background:#536576} .dot:first-child{background:#ff6b6b} .dot:nth-child(2){background:#ffd166} .dot:nth-child(3){background:#62df9a}
+.screen{min-height:470px;display:grid;grid-template-columns:52px 1fr;background:#071018} .side{border-right:1px solid #1d3448;padding:12px 8px;text-align:center;color:#61798f;line-height:2.2} .editor{padding:18px;overflow:auto} .tab{display:inline-block;background:#102538;border-top:2px solid var(--cyan);padding:8px 14px;font-size:12px;margin-bottom:10px}
+#codeEditor{width:100%;min-height:190px;background:#06101a;color:#d9f6ff;border:1px solid #1e374d;border-radius:10px;padding:14px;font:14px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;resize:vertical} .console{margin-top:12px;border-top:1px solid #1e374d;padding-top:12px;color:#b8c9d8;font:13px/1.7 ui-monospace,monospace} .console strong{color:var(--green)}
+.stand{width:170px;height:18px;margin:0 auto;background:#202a34;clip-path:polygon(35% 0,65% 0,78% 100%,22% 100%)} .base{width:240px;height:12px;margin:0 auto 16px;border-radius:10px;background:#293640} .buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px} .btn{border-radius:16px;background:linear-gradient(#12263a,#0c1b2a);padding:15px 8px;min-height:72px;font-size:14px;box-shadow:0 7px 16px #0004} .btn.active{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan) inset} .ico{display:block;font-size:22px;margin-bottom:5px}
+.panel{display:none;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)} .panel.show{display:block} .panel h3{margin:0 0 10px} .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center} .choice{display:block;width:100%;text-align:left;margin:7px 0;padding:10px;border:1px solid #2b4761;border-radius:10px;background:#0b1c2b;color:#fff;cursor:pointer} .choice.good{border-color:#7dffb2} .choice.bad{border-color:#ff8b8b} .result{margin-top:10px;padding:10px;border-radius:10px;background:#06101a;min-height:42px;white-space:pre-wrap} select{background:#071018;color:#fff;border:1px solid var(--line);border-radius:10px;padding:10px} textarea.chat{width:100%;min-height:82px;background:#071018;color:#fff;border:1px solid var(--line);border-radius:10px;padding:11px;resize:vertical} .send{border:0;border-radius:10px;padding:10px 15px;background:linear-gradient(90deg,#57d9ff,#7dffb2);color:#06101a;font-weight:950;cursor:pointer} .msg{margin:14px 0 4px;padding:12px 14px;background:#0d1c2b;border:1px solid var(--line);border-radius:13px;color:#c6d5e5;font-size:13px} .hint{color:#93a9bd;font-size:12px}
+@media(max-width:650px){.app{padding:10px}.monitor{border-width:6px;border-bottom-width:12px}.screen{min-height:400px;grid-template-columns:38px 1fr}.editor{padding:12px}.buttons{grid-template-columns:repeat(2,1fr)}.btn{min-height:68px;font-size:12px}.stand{width:120px}.base{width:180px}}
+</style></head><body>
 <div class="app"><div class="nav"><button onclick="forgeBack()">← 戻る</button><button onclick="location.href='index.html#f-series'">🏫 Forgeationホームへ</button></div>
-<div class="top"><div class="logo">FORGEATION <b>F PYTHON</b></div><div class="topright"><div id="apiState" class="api">API 未確認</div><div class="xp">XP <span id="xp">0</span></div></div></div>
-<div class="monitor">
-<div class="monitorbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>F Python Studio — main.py</span></div>
-<div class="screen"><div class="side">⌘<br>⌕<br>⑂<br>▷<br>▦</div><div class="editor">
-<div class="tab">main.py</div>
-<pre id="code"><span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Hello, Forgeation!"</span>)
-<span class="n">02</span>
-<span class="n">03</span>  future = <span class="str">"つくる"</span>
-<span class="n">04</span>  <span class="kw">print</span>(<span class="str">"Pythonで未来を"</span> + future)</pre>
-<div class="console" id="console">TERMINAL<br><strong>▶ Ready.</strong><br>下の6つのボタンからミッションを選択してください。</div>
-<div id="aiPanel" class="ai-panel"><b>🤖 AI先生に質問</b><textarea id="question" placeholder="例：このエラーの原因をヒントで教えて。"></textarea><button id="sendBtn" class="send" onclick="askAI()">AI先生に送る</button><div id="answer" class="answer">ここにAI先生の返答が表示されます。</div></div>
+<div class="top"><div class="logo">FORGEATION <b>F PYTHON</b></div><div class="topright"><div id="apiState" class="api">API確認中</div><div class="counter">Quiz <span id="quizDone">0</span>/50</div><div class="counter">Mission <span id="missionDone">0</span>/30</div><div class="xp">XP <span id="xp">0</span></div></div></div>
+<div class="monitor"><div class="monitorbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>F Python Studio — main.py</span></div>
+<div class="screen"><div class="side">⌘<br>⌕<br>⑂<br>▷<br>▦</div><div class="editor"><div class="tab">main.py</div>
+<textarea id="codeEditor" spellcheck="false">print("Hello, Forgeation!")
+
+future = "つくる"
+print("Pythonで未来を" + future)</textarea>
+<div class="console" id="console">TERMINAL<br><strong>▶ Ready.</strong><br>下の6つのボタンからモードを選んでください。</div>
+<div id="quizPanel" class="panel"><h3>🧠 Pythonクイズ <span id="quizNo"></span></h3><div id="quizQ"></div><div id="quizChoices"></div><div id="quizResult" class="result">答えを選んでください。</div><div class="row" style="margin-top:10px"><button class="small" onclick="prevQuiz()">← 前</button><button class="small" onclick="nextQuiz()">次 →</button></div></div>
+<div id="missionPanel" class="panel"><h3>🏆 コードミッション <span id="missionNo"></span></h3><div class="row"><select id="missionSelect" onchange="selectMission(Number(this.value))"></select></div><p id="missionTask"></p><div class="row"><button class="small" onclick="loadMissionStarter()">課題をエディタへ</button><button class="small" onclick="showMissionSample()">お手本を見る</button><button class="send" onclick="completeMission()">クリア！XP獲得</button></div><div id="missionResult" class="result">コードを書いて挑戦してください。</div></div>
+<div id="aiPanel" class="panel"><h3>🤖 AIペアプログラマー</h3><p class="hint">「○○を作りたい」「このエラーを直して」「次に何を書けばいい？」のように会話できます。現在のコードも一緒にAIへ送ります。</p><textarea id="question" class="chat" placeholder="例：サッカーの得点を集計するプログラムを一緒に作って。"></textarea><div class="row" style="margin-top:8px"><button id="sendBtn" class="send" onclick="askAI()">AI先生に送る</button><button class="small" onclick="applyAIcode()">AIのコードをエディタへ反映</button></div><div id="answer" class="result">ここにAI先生の返答が表示されます。</div></div>
 </div></div></div><div class="stand"></div><div class="base"></div>
-<div class="buttons">
-<button class="btn" onclick="mode(this,0)"><span class="ico">⌨️</span>コードを書く</button>
-<button class="btn" onclick="mode(this,1)"><span class="ico">▶️</span>実行する</button>
-<button class="btn" onclick="mode(this,2)"><span class="ico">🐞</span>バグを直す</button>
-<button class="btn" onclick="mode(this,3)"><span class="ico">🧠</span>Pythonクイズ</button>
-<button class="btn" onclick="mode(this,4)"><span class="ico">🤖</span>AI先生</button>
-<button class="btn" onclick="mode(this,5)"><span class="ico">🏆</span>コードミッション</button>
-</div>
-<div class="msg" id="msg">API接続対応版。AI先生はCloudflare Worker経由でOpenAI APIへ接続します。</div>
-</div>
+<div class="buttons"><button class="btn" onclick="mode(this,0)"><span class="ico">⌨️</span>コードを書く</button><button class="btn" onclick="mode(this,1)"><span class="ico">▶️</span>実行する</button><button class="btn" onclick="mode(this,2)"><span class="ico">🐞</span>バグを直す</button><button class="btn" onclick="mode(this,3)"><span class="ico">🧠</span>Pythonクイズ 50</button><button class="btn" onclick="mode(this,4)"><span class="ico">🤖</span>AI先生</button><button class="btn" onclick="mode(this,5)"><span class="ico">🏆</span>コードミッション 30</button></div>
+<div class="msg" id="msg">50問クイズ・30ミッション・AIペアプログラミング搭載。API障害時もクイズとミッションは遊べます。</div></div>
 <script>
-function forgeBack(){
-  if(document.referrer && document.referrer!==location.href){ history.back(); }
-  else { location.href='index.html#f-series'; }
-}
-
-const API_URL="/api/forgeation-ai";
-const LEGACY_API_URL="/api/f-python";
-
-// ========================================
-// Forgeation 8アプリ共通API送信
-// Worker側の共通受付: POST /api/progress
-// ========================================
-const COMMON_API_URL="/api/progress";
-const PRODUCT_ID="f-python";
-const XP_STORAGE_KEY="forgeation_f_python_xp";
-const VISITOR_STORAGE_KEY="forgeation_visitor_id";
-const SESSION_ID=(crypto.randomUUID ? crypto.randomUUID() : 'session-'+Date.now()+'-'+Math.random().toString(36).slice(2));
-let xp=Number(localStorage.getItem(XP_STORAGE_KEY)||0);
-
-document.getElementById('xp').textContent=xp;
-
-function getUserId(){
-  return localStorage.getItem('forgeation_user_id') ||
-         localStorage.getItem('user_id') ||
-         localStorage.getItem('visitorId') ||
-         localStorage.getItem(VISITOR_STORAGE_KEY) || '';
-}
-
-function getOrCreateVisitorId(){
-  let id=getUserId();
-  if(id) return id;
-  id='visitor-'+Date.now()+'-'+Math.random().toString(36).slice(2,10);
-  localStorage.setItem(VISITOR_STORAGE_KEY,id);
-  localStorage.setItem('visitorId',id);
-  return id;
-}
-
-async function sendCommonApi(action, extra={}){
-  const userId=getOrCreateVisitorId();
-  const payload={
-    userId,
-    user_id:userId,
-    visitorId:userId,
-    product:PRODUCT_ID,
-    app:PRODUCT_ID,
-    action:action||'play',
-    event:action||'play',
-    xp:Number(xp||0),
-    sessionId:SESSION_ID,
-    page:location.pathname,
-    url:location.href,
-    userAgent:navigator.userAgent,
-    playedAt:new Date().toISOString(),
-    ...extra
-  };
-
-  try{
-    const r=await fetch(COMMON_API_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload),
-      keepalive:true
-    });
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    setApi(true);
-    return true;
-  }catch(e){
-    // アプリ本体は止めず、API送信だけ失敗扱いにする
-    setApi(false);
-    return false;
-  }
-}
-
-function addXP(amount, action){
-  xp += Number(amount||0);
-  localStorage.setItem(XP_STORAGE_KEY,String(xp));
-  document.getElementById('xp').textContent=xp;
-  sendCommonApi(action||'xp-add',{xpAdded:Number(amount||0)});
-}
-
-const data=[
-["コードを書く","変数 name を作って、自分だけのプログラムを書いてみよう。",`<span class="n">01</span>  name = <span class="str">"F Python"</span>\n<span class="n">02</span>  <span class="kw">print</span>(name)`],
-["実行する","プログラムを実行しました。XP +10！",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Hello, Future!"</span>)`],
-["バグを直す","エラーを探そう：カッコが1つ足りません。直せたらクリア！",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Find the bug!"</span>`],
-["Pythonクイズ","Q. print() は何をする命令？ ①表示する ②消す ③保存する",`<span class="n">01</span>  <span class="kw">print</span>(<span class="str">"Quiz Time!"</span>)`],
-["AI先生","下の入力欄から、Pythonの質問やエラー内容をAI先生へ送れます。",`<span class="n">01</span>  <span class="fn">AI_Teacher</span> = <span class="str">"一緒に考えよう"</span>`],
-["コードミッション","指定された課題をPythonで解いて、XPを獲得する実践モード。XP +30！",`<span class="n">01</span>  <span class="kw">for</span> level <span class="kw">in</span> <span class="fn">range</span>(1, 6):\n<span class="n">02</span>      <span class="kw">print</span>(level)`]
-];
-
-function mode(b,i){
-  document.querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  document.getElementById('code').innerHTML=data[i][2];
-  document.getElementById('msg').textContent=data[i][1];
-  document.getElementById('console').innerHTML='TERMINAL<br><strong>▶ '+data[i][0]+'</strong><br>'+data[i][1];
-  document.getElementById('aiPanel').classList.toggle('show',i===4);
-
-  // すべてのボタン操作を共通APIへ送信
-  sendCommonApi('mode-select',{modeIndex:i,modeName:data[i][0]});
-  if(i===1) addXP(10,'run');
-  if(i===5) addXP(30,'code-mission');
-}
-
-async function askAI(){
-  const q=document.getElementById('question').value.trim(),answer=document.getElementById('answer'),btn=document.getElementById('sendBtn');
-  if(!q){answer.textContent="質問を入力してください。";return}
-  btn.disabled=true;
-  answer.textContent="AI先生が考えています…";
-  sendCommonApi('ai-question',{questionLength:q.length});
-  try{
-    let r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q,question:q,code:document.getElementById('code').innerText,product:'f-python',mode:'ai-teacher'})});
-    let d=await r.json().catch(()=>({}));
-    if(!r.ok){
-      r=await fetch(LEGACY_API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:q,code:document.getElementById('code').innerText})});
-      d=await r.json().catch(()=>({}));
-    }
-    if(!r.ok) throw new Error(d.error||"API接続エラー");
-    answer.textContent=d.reply||d.answer||d.message||"返答を取得できませんでした。";
-    addXP(10,'ai-teacher-success');
-    setApi(true);
-  }catch(e){
-    answer.textContent="接続できませんでした："+e.message;
-    sendCommonApi('ai-teacher-error',{error:String(e.message||e)});
-    setApi(false);
-  }finally{
-    btn.disabled=false;
-  }
-}
-
-function setApi(ok){
-  const e=document.getElementById('apiState');
-  e.textContent=ok?"API 接続OK":"API 未接続";
-  e.className="api "+(ok?"ok":"ng");
-}
-
-document.getElementById('apiState').textContent='API 接続準備OK';
-
-// 起動を共通APIへ送信
-sendCommonApi('open');
-
-// ページ離脱も可能な範囲で共通APIへ送信
-window.addEventListener('pagehide',()=>{
-  const userId=getOrCreateVisitorId();
-  const body=JSON.stringify({
-    userId,user_id:userId,visitorId:userId,
-    product:PRODUCT_ID,app:PRODUCT_ID,
-    action:'close',event:'close',xp:Number(xp||0),
-    sessionId:SESSION_ID,page:location.pathname,url:location.href,
-    playedAt:new Date().toISOString()
-  });
-  try{
-    if(navigator.sendBeacon){
-      navigator.sendBeacon(COMMON_API_URL,new Blob([body],{type:'application/json'}));
-    }
-  }catch(e){}
-});
+const FORGEATION_API_BASE='https://forgeation-api.eru12121221.workers.dev';
+const APP_USAGE_ENDPOINT=FORGEATION_API_BASE+'/app-usage';
+const AI_ENDPOINT=FORGEATION_API_BASE+'/chat';
+const APP_ID='f-python';
+const Q=[{"q": "print() の役割は？", "choices": ["画面に表示する", "ファイルを消す", "PCを終了する"], "a": 0, "why": "print() は値や文字列を画面に表示します。"}, {"q": "文字列を表す正しい例は？", "choices": ["hello", "\"hello\"", "<hello>"], "a": 1, "why": "文字列はクォートで囲みます。"}, {"q": "変数 x に 10 を代入する書き方は？", "choices": ["x = 10", "10 = x", "x == 10"], "a": 0, "why": "代入には = を使います。"}, {"q": "コメントを書く記号は？", "choices": ["//", "#", "<!--"], "a": 1, "why": "Pythonの1行コメントは # です。"}, {"q": "リストの例は？", "choices": ["[1,2,3]", "(1;2;3)", "{1=2=3}"], "a": 0, "why": "角括弧 [] でリストを作れます。"}, {"q": "len([1,2,3]) の結果は？", "choices": ["2", "3", "4"], "a": 1, "why": "要素数は3です。"}, {"q": "条件分岐に使うキーワードは？", "choices": ["if", "loop", "switch"], "a": 0, "why": "Pythonでは if を使います。"}, {"q": "繰り返しに使うキーワードは？", "choices": ["for", "repeat", "cycle"], "a": 0, "why": "for は代表的な繰り返し構文です。"}, {"q": "関数を定義するキーワードは？", "choices": ["func", "def", "function"], "a": 1, "why": "Pythonでは def を使います。"}, {"q": "True と False の型は？", "choices": ["bool", "str", "list"], "a": 0, "why": "真偽値は bool 型です。"}, {"q": "整数 7 の型は？", "choices": ["int", "float", "str"], "a": 0, "why": "整数は int 型です。"}, {"q": "3.14 の型は？", "choices": ["int", "float", "bool"], "a": 1, "why": "小数は float 型です。"}, {"q": "input() は何をする？", "choices": ["入力を受け取る", "画像を表示する", "終了する"], "a": 0, "why": "input() はキーボード入力を受け取ります。"}, {"q": "int(\"12\") の結果は？", "choices": ["文字列12", "整数12", "エラー"], "a": 1, "why": "数字文字列は int() で整数に変換できます。"}, {"q": "文字列をつなぐ演算子は？", "choices": ["+", "%", "//"], "a": 0, "why": "文字列同士は + で連結できます。"}, {"q": "2 ** 3 の結果は？", "choices": ["6", "8", "9"], "a": 1, "why": "** はべき乗です。"}, {"q": "7 // 2 の結果は？", "choices": ["3", "3.5", "4"], "a": 0, "why": "// は切り捨て除算です。"}, {"q": "7 % 2 の結果は？", "choices": ["0", "1", "2"], "a": 1, "why": "% は余りを求めます。"}, {"q": "range(3) で作られる値は？", "choices": ["0,1,2", "1,2,3", "0,1,2,3"], "a": 0, "why": "range(3) は0から2までです。"}, {"q": "リスト末尾に追加するメソッドは？", "choices": ["push()", "append()", "addLast()"], "a": 1, "why": "list.append() を使います。"}, {"q": "辞書の例は？", "choices": ["{\"name\":\"Nogu\"}", "[\"name\",\"Nogu\"]", "(\"name\"=\"Nogu\")"], "a": 0, "why": "辞書は key:value を {} に入れます。"}, {"q": "辞書 d のキー name の値を取る基本形は？", "choices": ["d[\"name\"]", "d(name)", "d->name"], "a": 0, "why": "角括弧でキーを指定できます。"}, {"q": "タプルの例は？", "choices": ["(1,2,3)", "[1,2,3]", "{1,2,3}"], "a": 0, "why": "丸括弧は代表的なタプル表記です。"}, {"q": "集合(set)の特徴は？", "choices": ["重複を持たない", "必ず順番固定", "文字列だけ保存"], "a": 0, "why": "set は重複要素を持ちません。"}, {"q": "== の意味は？", "choices": ["代入", "等しいか比較", "以上"], "a": 1, "why": "== は値が等しいか比較します。"}, {"q": "!= の意味は？", "choices": ["等しくない", "代入", "小さい"], "a": 0, "why": "!= は不一致の比較です。"}, {"q": "and の意味は？", "choices": ["両方の条件が真", "どちらか一方が真", "条件を反転"], "a": 0, "why": "and は論理積です。"}, {"q": "or の意味は？", "choices": ["両方必須", "どちらかが真なら真", "常に偽"], "a": 1, "why": "or は論理和です。"}, {"q": "not True の結果は？", "choices": ["True", "False", "None"], "a": 1, "why": "not は真偽を反転します。"}, {"q": "None は何を表す？", "choices": ["値がないこと", "0だけ", "空文字だけ"], "a": 0, "why": "None は値がないことを表す特別な値です。"}, {"q": "例外処理に使う組み合わせは？", "choices": ["try / except", "if / else", "for / while"], "a": 0, "why": "try と except で例外を処理できます。"}, {"q": "ファイルを開く関数は？", "choices": ["open()", "file()", "readfile()"], "a": 0, "why": "open() でファイルを開きます。"}, {"q": "with open(...) の利点は？", "choices": ["自動で閉じやすい", "必ず高速化", "ネット接続する"], "a": 0, "why": "with を使うと終了時のクローズ管理が容易です。"}, {"q": "モジュールを読み込むキーワードは？", "choices": ["import", "include", "load"], "a": 0, "why": "import を使います。"}, {"q": "math.sqrt(9) の結果は？", "choices": ["3", "9", "81"], "a": 0, "why": "平方根は3です。"}, {"q": "ランダム機能を使う代表的モジュールは？", "choices": ["random", "chance", "dice"], "a": 0, "why": "random モジュールを使います。"}, {"q": "リスト内包表記 [x*x for x in range(3)] の結果は？", "choices": ["[0,1,4]", "[1,4,9]", "[0,1,2]"], "a": 0, "why": "0²,1²,2²です。"}, {"q": "文字列 \"Python\"[0] は？", "choices": ["P", "y", "Python"], "a": 0, "why": "インデックス0は先頭文字です。"}, {"q": "文字列 \"abc\".upper() は？", "choices": ["ABC", "abc", "Abc"], "a": 0, "why": "upper() は大文字化します。"}, {"q": "\" A \".strip() の結果は？", "choices": ["A", " A ", "AA"], "a": 0, "why": "strip() は前後の空白を除きます。"}, {"q": "\"a,b,c\".split(\",\") の結果は？", "choices": ["[\"a\",\"b\",\"c\"]", "\"abc\"", "(\"a,b,c\")"], "a": 0, "why": "split() は区切り文字で分割します。"}, {"q": "[1,2,3][1] は？", "choices": ["1", "2", "3"], "a": 1, "why": "インデックス1は2番目の要素です。"}, {"q": "for i in range(1,4) の i は？", "choices": ["1,2,3", "0,1,2,3", "1,2,3,4"], "a": 0, "why": "開始1、終了4未満です。"}, {"q": "while 文は主に何をする？", "choices": ["条件が真の間繰り返す", "関数を作る", "型を変換する"], "a": 0, "why": "while は条件付き反復です。"}, {"q": "break の役割は？", "choices": ["ループを抜ける", "次の周回へ行く", "変数を削除"], "a": 0, "why": "break はループを終了します。"}, {"q": "continue の役割は？", "choices": ["プログラム終了", "次の周回へ進む", "関数終了"], "a": 1, "why": "continue は残りを飛ばして次の周回へ進みます。"}, {"q": "return の役割は？", "choices": ["関数から値を返す", "画面を消す", "importする"], "a": 0, "why": "return は関数の戻り値を返します。"}, {"q": "class は何を定義する？", "choices": ["クラス", "コメント", "ファイル"], "a": 0, "why": "class でクラスを定義します。"}, {"q": "__init__ は主にいつ呼ばれる？", "choices": ["インスタンス生成時", "import時だけ", "print時"], "a": 0, "why": "インスタンス初期化で呼ばれます。"}, {"q": "Pythonでインデントが重要なのはなぜ？", "choices": ["処理のまとまりを表す", "文字を大きくする", "速度を上げる"], "a": 0, "why": "インデントでブロック構造を表します。"}];
+const M=[{"title": "Hello Forgeation", "task": "Forgeationへようこそ！ と表示しよう。", "sample": "print(\"Forgeationへようこそ！\")", "xp": 10}, {"title": "名前を表示", "task": "name に好きな名前を入れて表示しよう。", "sample": "name = \"Nogu\"\nprint(name)", "xp": 10}, {"title": "足し算", "task": "a=7, b=5 を足して表示しよう。", "sample": "a = 7\nb = 5\nprint(a + b)", "xp": 10}, {"title": "面積計算", "task": "縦4、横6の長方形の面積を表示しよう。", "sample": "h = 4\nw = 6\nprint(h * w)", "xp": 15}, {"title": "偶数判定", "task": "n=8 が偶数なら「偶数」と表示しよう。", "sample": "n = 8\nif n % 2 == 0:\n    print(\"偶数\")", "xp": 15}, {"title": "年齢判定", "task": "age=18 以上なら「OK」と表示しよう。", "sample": "age = 18\nif age >= 18:\n    print(\"OK\")", "xp": 15}, {"title": "3回表示", "task": "for文で「Python」を3回表示しよう。", "sample": "for i in range(3):\n    print(\"Python\")", "xp": 20}, {"title": "1から5", "task": "1〜5を順番に表示しよう。", "sample": "for i in range(1, 6):\n    print(i)", "xp": 20}, {"title": "合計を求める", "task": "1〜10の合計を求めよう。", "sample": "total = 0\nfor i in range(1, 11):\n    total += i\nprint(total)", "xp": 25}, {"title": "リスト平均", "task": "scores=[80,90,70] の平均を表示しよう。", "sample": "scores = [80, 90, 70]\nprint(sum(scores) / len(scores))", "xp": 25}, {"title": "最大値", "task": "numbers=[3,9,4,7] の最大値を表示しよう。", "sample": "numbers = [3, 9, 4, 7]\nprint(max(numbers))", "xp": 20}, {"title": "文字数", "task": "message='future' の文字数を表示しよう。", "sample": "message = \"future\"\nprint(len(message))", "xp": 15}, {"title": "大文字変換", "task": "forgeation を大文字にしよう。", "sample": "word = \"forgeation\"\nprint(word.upper())", "xp": 15}, {"title": "関数 greet", "task": "名前を受け取って挨拶する関数を作ろう。", "sample": "def greet(name):\n    return \"こんにちは、\" + name + \"！\"\n\nprint(greet(\"Nogu\"))", "xp": 30}, {"title": "二乗関数", "task": "数値を二乗して返す square 関数を作ろう。", "sample": "def square(x):\n    return x * x\n\nprint(square(6))", "xp": 30}, {"title": "FizzBuzz 1", "task": "3の倍数ならFizzを表示しよう。", "sample": "n = 9\nif n % 3 == 0:\n    print(\"Fizz\")", "xp": 25}, {"title": "辞書プロフィール", "task": "name と goal を辞書に入れて表示しよう。", "sample": "profile = {\"name\":\"Nogu\", \"goal\":\"未来をつくる\"}\nprint(profile[\"goal\"])", "xp": 30}, {"title": "買い物合計", "task": "prices=[120,250,80] の合計を表示しよう。", "sample": "prices = [120, 250, 80]\nprint(sum(prices))", "xp": 20}, {"title": "重複削除", "task": "[1,1,2,3,3] の重複をsetで取り除こう。", "sample": "nums = [1, 1, 2, 3, 3]\nprint(set(nums))", "xp": 25}, {"title": "逆順", "task": "文字列 Python を逆順に表示しよう。", "sample": "word = \"Python\"\nprint(word[::-1])", "xp": 30}, {"title": "カウントダウン", "task": "5から1まで表示しよう。", "sample": "for i in range(5, 0, -1):\n    print(i)", "xp": 25}, {"title": "九九の3段", "task": "3×1〜3×9を表示しよう。", "sample": "for i in range(1, 10):\n    print(3, \"x\", i, \"=\", 3*i)", "xp": 30}, {"title": "素数チェック入門", "task": "n=7 が2〜n-1で割り切れるか調べよう。", "sample": "n = 7\nis_prime = True\nfor i in range(2, n):\n    if n % i == 0:\n        is_prime = False\nprint(is_prime)", "xp": 40}, {"title": "パスワード長", "task": "8文字以上ならOKと表示しよう。", "sample": "password = \"future88\"\nif len(password) >= 8:\n    print(\"OK\")", "xp": 25}, {"title": "温度変換", "task": "摂氏25度を華氏に変換しよう。", "sample": "c = 25\nf = c * 9 / 5 + 32\nprint(f)", "xp": 25}, {"title": "BMI計算", "task": "体重60kg、身長1.7mでBMIを計算しよう。", "sample": "weight = 60\nheight = 1.7\nbmi = weight / (height ** 2)\nprint(round(bmi, 1))", "xp": 35}, {"title": "CSV風分割", "task": "'soccer,python,drone' をカンマで分割しよう。", "sample": "text = \"soccer,python,drone\"\nprint(text.split(\",\"))", "xp": 25}, {"title": "ランキング", "task": "scoresを降順に並べよう。", "sample": "scores = [82, 95, 71, 88]\nprint(sorted(scores, reverse=True))", "xp": 30}, {"title": "例外処理", "task": "0除算をtry/exceptで安全に処理しよう。", "sample": "try:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print(\"0では割れません\")", "xp": 40}, {"title": "クラス入門", "task": "Playerクラスを作り、nameを表示しよう。", "sample": "class Player:\n    def __init__(self, name):\n        self.name = name\n\np = Player(\"Nogu\")\nprint(p.name)", "xp": 50}];
+const XP_KEY='forgeation_f_python_xp',VISITOR_KEY='forgeation_visitor_id',QUIZ_KEY='forgeation_f_python_quiz_done',MISSION_KEY='forgeation_f_python_mission_done';
+let xp=Number(localStorage.getItem(XP_KEY)||0),quizIndex=0,missionIndex=0,lastAIcode='';
+let quizDone=new Set(JSON.parse(localStorage.getItem(QUIZ_KEY)||'[]')),missionDone=new Set(JSON.parse(localStorage.getItem(MISSION_KEY)||'[]'));
+function forgeBack(){if(document.referrer&&document.referrer!==location.href)history.back();else location.href='index.html#f-series'}
+function visitorId(){let v=localStorage.getItem(VISITOR_KEY);if(!v){v=crypto.randomUUID?.()||'visitor-'+Date.now()+'-'+Math.random().toString(36).slice(2);localStorage.setItem(VISITOR_KEY,v)}return v}
+function userId(){return localStorage.getItem('forgeation_user_id')||localStorage.getItem('user_id')||localStorage.getItem('userId')||''}
+function setApi(ok){const e=document.getElementById('apiState');e.textContent=ok?'API 接続OK':'API 未接続';e.className='api '+(ok?'ok':'ng')}
+async function sendUsage(event,extra={}){try{const r=await fetch(APP_USAGE_ENDPOINT,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({visitorId:visitorId(),visitor_id:visitorId(),userId:userId(),user_id:userId(),appId:APP_ID,app_id:APP_ID,event,action:event,used_at:new Date().toISOString(),xp,...extra})});if(!r.ok)throw Error('HTTP '+r.status);setApi(true);return true}catch(e){console.warn(e);setApi(false);return false}}
+function save(){localStorage.setItem(XP_KEY,String(xp));localStorage.setItem(QUIZ_KEY,JSON.stringify([...quizDone]));localStorage.setItem(MISSION_KEY,JSON.stringify([...missionDone]));renderStats()}
+function addXP(n,event,extra={}){xp+=n;save();sendUsage(event,{xpAdded:n,...extra})}
+function renderStats(){document.getElementById('xp').textContent=xp;document.getElementById('quizDone').textContent=quizDone.size;document.getElementById('missionDone').textContent=missionDone.size}
+function hidePanels(){['quizPanel','missionPanel','aiPanel'].forEach(id=>document.getElementById(id).classList.remove('show'))}
+function mode(b,i){document.querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');hidePanels();const c=document.getElementById('console'),msg=document.getElementById('msg');
+ if(i===0){c.innerHTML='TERMINAL<br><strong>▶ CODE</strong><br>上のエディタに自由にPythonを書いてください。';msg.textContent='自由コードモード。AI先生と相談しながら作ることもできます。'}
+ if(i===1){c.innerHTML='TERMINAL<br><strong>▶ RUN</strong><br>このβ版はブラウザ内でPython自体は実行せず、コード作成・学習・AI添削を行います。';addXP(5,'run-click')}
+ if(i===2){document.getElementById('codeEditor').value='print("Find the bug!"\n';c.innerHTML='TERMINAL<br><strong>▶ DEBUG</strong><br>カッコが1つ足りません。直してみよう。';msg.textContent='バグ修正練習。AI先生にヒントを聞いてもOKです。'}
+ if(i===3){document.getElementById('quizPanel').classList.add('show');renderQuiz();msg.textContent='全50問。正解でXP +10。何度でも復習できます。'}
+ if(i===4){document.getElementById('aiPanel').classList.add('show');msg.textContent='AIと会話しながらコードを設計・修正できます。'}
+ if(i===5){document.getElementById('missionPanel').classList.add('show');renderMission();msg.textContent='全30ミッション。コードを書いて段階的にレベルアップ。'}
+ sendUsage('mode-select',{modeIndex:i})}
+function renderQuiz(){const q=Q[quizIndex];document.getElementById('quizNo').textContent=(quizIndex+1)+'/50';document.getElementById('quizQ').innerHTML='<b>Q. '+q.q+'</b>';const box=document.getElementById('quizChoices');box.innerHTML='';q.choices.forEach((c,i)=>{const bt=document.createElement('button');bt.className='choice';bt.textContent=(i+1)+'. '+c;bt.onclick=()=>answerQuiz(i,bt);box.appendChild(bt)});document.getElementById('quizResult').textContent=quizDone.has(quizIndex)?'✅ クリア済み。もう一度答えて復習できます。':'答えを選んでください。'}
+function answerQuiz(i,bt){const q=Q[quizIndex],buttons=[...document.querySelectorAll('#quizChoices .choice')];buttons.forEach(x=>x.disabled=true);if(i===q.a){bt.classList.add('good');document.getElementById('quizResult').textContent='✅ 正解！ '+q.why;if(!quizDone.has(quizIndex)){quizDone.add(quizIndex);addXP(10,'quiz-correct',{quiz:quizIndex+1})}}else{bt.classList.add('bad');buttons[q.a].classList.add('good');document.getElementById('quizResult').textContent='❌ 惜しい！ '+q.why;sendUsage('quiz-wrong',{quiz:quizIndex+1})}}
+function nextQuiz(){quizIndex=(quizIndex+1)%Q.length;renderQuiz()} function prevQuiz(){quizIndex=(quizIndex-1+Q.length)%Q.length;renderQuiz()}
+function initMissions(){const s=document.getElementById('missionSelect');M.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=(i+1)+'. '+m.title;s.appendChild(o)})}
+function selectMission(i){missionIndex=i;renderMission()}
+function renderMission(){const m=M[missionIndex];document.getElementById('missionSelect').value=missionIndex;document.getElementById('missionNo').textContent=(missionIndex+1)+'/30';document.getElementById('missionTask').innerHTML='<b>'+m.title+'</b><br>'+m.task+' <span class="hint">（+'+m.xp+' XP）</span>';document.getElementById('missionResult').textContent=missionDone.has(missionIndex)?'✅ クリア済み。コードを書き換えて何度でも練習できます。':'コードを書いて挑戦してください。'}
+function loadMissionStarter(){document.getElementById('codeEditor').value='# Mission '+(missionIndex+1)+'\n# '+M[missionIndex].task+'\n\n';document.getElementById('codeEditor').focus()}
+function showMissionSample(){document.getElementById('missionResult').textContent='お手本：\n'+M[missionIndex].sample}
+function completeMission(){if(!document.getElementById('codeEditor').value.trim()){document.getElementById('missionResult').textContent='まずコードを書いてみよう。';return}const m=M[missionIndex];if(!missionDone.has(missionIndex)){missionDone.add(missionIndex);addXP(m.xp,'mission-clear',{mission:missionIndex+1});document.getElementById('missionResult').textContent='🏆 クリア！ +'+m.xp+' XP'}else document.getElementById('missionResult').textContent='✅ クリア済みです。次のミッションへ進もう。'}
+async function askAI(){const q=document.getElementById('question').value.trim(),a=document.getElementById('answer'),btn=document.getElementById('sendBtn'),code=document.getElementById('codeEditor').value;if(!q){a.textContent='質問を入力してください。';return}btn.disabled=true;a.textContent='AI先生が考えています…';sendUsage('ai-message',{messageLength:q.length});try{const r=await fetch(AI_ENDPOINT,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'あなたはF PythonのAI先生です。初心者にも分かる日本語で、会話しながらPythonコード作成を支援してください。ユーザーの依頼: '+q+'\n\n現在のコード:\n'+code,app:APP_ID,appId:APP_ID,app_id:APP_ID,product:APP_ID,mode:'pair-programming',visitorId:visitorId(),userId:userId()})});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||('API '+r.status));const text=d.reply||d.answer||d.message||d.text||'返答を取得できませんでした。';a.textContent=text;const m=text.match(/```(?:python)?\s*([\s\S]*?)```/i);lastAIcode=m?m[1].trim():'';addXP(10,'ai-success');setApi(true)}catch(e){a.textContent='AI接続は現在使えません。クイズ50問とミッション30問はそのまま遊べます。\n\n接続エラー: '+e.message;setApi(false)}finally{btn.disabled=false}}
+function applyAIcode(){if(!lastAIcode){document.getElementById('answer').textContent+='\n\n※ AI返答内に ```python ... ``` のコードブロックが見つかりませんでした。';return}document.getElementById('codeEditor').value=lastAIcode;sendUsage('ai-code-apply')}
+initMissions();renderStats();sendUsage('open');
+window.addEventListener('pagehide',()=>{try{navigator.sendBeacon?.(APP_USAGE_ENDPOINT,new Blob([JSON.stringify({visitorId:visitorId(),visitor_id:visitorId(),appId:APP_ID,app_id:APP_ID,event:'close',action:'close',used_at:new Date().toISOString(),xp})],{type:'application/json'}))}catch(e){}});
 </script></body></html>
