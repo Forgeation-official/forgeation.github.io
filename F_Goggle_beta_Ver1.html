@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>F GOGGLE 2026 β｜HERO 拓（ヒロ）</title>
+<title>F GOGGLE 2026 β｜TRANSFORMER EXPERIENCE</title>
 <style>:root{--accent1:#0059a8;--accent2:#74d7ff;--accent:#18a9ff;--badgeText:#fff;--markText:#06213a;--xp:64%;}
 :root{
   --navy:#071629; --deep:#10263d; --text:#f8fbff; --muted:#d5e4f2;
@@ -113,36 +113,36 @@ button{cursor:pointer}
 </style></head>
 <body><main class="app">
 <header class="topbar"><button class="back" type="button" aria-label="戻る" onclick="forgeBack()">‹</button>
-<div class="brand"><div class="brand-mark">F</div><div class="brand-title"><strong>F GOGGLE</strong><small>Forgeation Construction Academy</small></div></div>
+<div class="brand"><div class="brand-mark">F</div><div class="brand-title"><strong>F GOGGLE</strong><small>Forgeation Immersive Experience</small></div></div>
 <button class="settings" type="button" aria-label="設定" onclick="document.getElementById('status').textContent='設定：APIはCloudflare Worker経由／画像は外部参照'">⚙</button></header>
 
 <section class="visual">
-<img src="F_GOGGLE_2026_HERO_拓ヒロ.png" alt="F GOGGLE 拓（ヒロ）の建築設計体験">
-<div class="visual-copy"><span class="badge">HERO</span><h1>拓（ヒロ）</h1><p>建築士見習い｜AIと設計し、未来の空間をつくる。</p></div>
+<img src="F_GOGGLE_2026_HERO_拓ヒロ.png" alt="F GOGGLE 時空・世界没入体験">
+<div class="visual-copy"><span class="badge">TRANSFORMER</span><h1>世界が、変わる。</h1><p>ゴーグルをかけて、時代・都市・物語・未来空間へ。</p></div>
 </section>
 
 <section class="profile">
-<div class="profile-head"><div class="name"><strong>HERO 拓（ヒロ）</strong><br><small>建築士見習い</small></div><div class="level">LEVEL 12<br>2,450 / 3,000 XP</div></div>
+<div class="profile-head"><div class="name"><strong>F GOGGLE EXPLORER</strong><br><small>時空体験者</small></div><div class="level">LEVEL <span id="levelValue">12</span><br><span id="xpValue">2,450</span> XP</div></div>
 <div class="xpbar"><i></i></div>
-<div class="stats"><div class="stat"><b>8件</b><span>設計実績</span></div><div class="stat"><b>92%</b><span>安全スコア</span></div><div class="stat"><b>12.5h</b><span>体験時間</span></div></div>
+<div class="stats"><div class="stat"><b id="journeyCount">8</b><span>体験世界</span></div><div class="stat"><b id="transformCount">12</b><span>TRANSFORM</span></div><div class="stat"><b id="experienceTime">12.5h</b><span>体験時間</span></div></div>
 </section>
 
-<div class="section-title">6つの体験モード</div>
+<div class="section-title">6つの没入体験モード</div>
 <section class="menu-grid">
-<button class="menu-item" data-mode="設計"><span class="icon-circle">📐</span><span class="menu-label">設計</span></button>
-<button class="menu-item" data-mode="施工"><span class="icon-circle">🏗️</span><span class="menu-label">施工</span></button>
-<button class="menu-item" data-mode="安全"><span class="icon-circle">🦺</span><span class="menu-label">安全</span></button>
-<button class="menu-item" data-mode="重機"><span class="icon-circle">🚜</span><span class="menu-label">重機</span></button>
-<button class="menu-item" data-mode="完成評価"><span class="icon-circle">🏠</span><span class="menu-label">完成評価</span></button>
-<button class="menu-item" data-mode="AI設計士"><span class="icon-circle">🤖</span><span class="menu-label">AI設計士</span></button>
+<button class="menu-item" data-mode="TIME TRAVEL"><span class="icon-circle">⏳</span><span class="menu-label">TIME TRAVEL</span></button>
+<button class="menu-item" data-mode="WORLD"><span class="icon-circle">🌍</span><span class="menu-label">WORLD</span></button>
+<button class="menu-item" data-mode="STORY"><span class="icon-circle">🎬</span><span class="menu-label">STORY</span></button>
+<button class="menu-item" data-mode="TRANSFORMER"><span class="icon-circle">⚙️</span><span class="menu-label">TRANSFORMER</span></button>
+<button class="menu-item" data-mode="FUTURE"><span class="icon-circle">🚀</span><span class="menu-label">FUTURE</span></button>
+<button class="menu-item" data-mode="AI GUIDE"><span class="icon-circle">🤖</span><span class="menu-label">AI GUIDE</span></button>
 </section>
 
-<section class="mission"><div class="mission-top"><h3>今日の設計ミッション</h3><span class="tag">+120 XP</span></div>
-<p>3人家族・南向きLDK・収納重視。予算を意識しながら、暮らしやすさと安全性を両立したプランを考えよう。</p></section>
+<section class="mission"><div class="mission-top"><h3>今日のTRANSFORMミッション</h3><span class="tag">+120 XP</span></div>
+<p>ゴーグルを装着し、ひとつの時代・都市・物語を選ぼう。景色・音・ガイドが切り替わり、世界そのものが変形していくForgeation独自の没入体験です。</p></section>
 
-<section id="chat" class="chat-wrap"><div class="chat-title">AI設計士｜<span id="selected">設計 を選択中</span></div>
-<div id="messages" class="messages"><div class="msg ai">F設計士：こんにちは、拓！ 今日はどんな建物を設計してみたい？ 用途・予算・希望から一緒に整理しよう。</div></div>
-<form id="chatForm" class="chat-box"><textarea id="q" placeholder="AI設計士に相談..." aria-label="AI設計士への相談"></textarea><button class="send" type="submit" aria-label="送信">➤</button></form>
+<section id="chat" class="chat-wrap"><div class="chat-title">AI GUIDE｜<span id="selected">TIME TRAVEL を選択中</span></div>
+<div id="messages" class="messages"><div class="msg ai">F GUIDE：ようこそ、F GOGGLEへ。行ってみたい時代、都市、物語、未来を教えてください。あなた専用の没入体験を案内します。</div></div>
+<form id="chatForm" class="chat-box"><textarea id="q" placeholder="AI GUIDEに行き先や体験を相談..." aria-label="AI GUIDEへの相談"></textarea><button class="send" type="submit" aria-label="送信">➤</button></form>
 <div id="status" class="status">F GOGGLE β 2026｜API接続版｜サーバー側キー管理</div></section>
 </main>
 <script>
@@ -152,11 +152,23 @@ function forgeBack(){
 }
 
 const API_ENDPOINT="/api/forgeation-ai"; // Forgeation共通サーバーAPI。OpenAI APIキーはHTMLに置かない。
+const STORAGE_KEY='forgeation_f_goggle_progress_v1';
+let progress=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{"xp":2450,"journeys":8,"transforms":12}');
+function renderProgress(){
+ document.getElementById('xpValue').textContent=progress.xp.toLocaleString();
+ document.getElementById('levelValue').textContent=Math.floor(progress.xp/250)+1;
+ document.getElementById('journeyCount').textContent=progress.journeys;
+ document.getElementById('transformCount').textContent=progress.transforms;
+ document.documentElement.style.setProperty('--xp',((progress.xp%250)/250*100)+'%');
+}
+function addXP(amount){progress.xp+=amount;progress.transforms+=1;localStorage.setItem(STORAGE_KEY,JSON.stringify(progress));renderProgress();}
+renderProgress();
 const items=[...document.querySelectorAll('.menu-item')];
 items.forEach(btn=>btn.addEventListener('click',()=>{
   items.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
   document.getElementById('selected').textContent=btn.dataset.mode+' を選択中';
-  document.getElementById('chat').scrollIntoView({behavior:'smooth',block:'start'});
+  progress.journeys+=1; addXP(120);
+   document.getElementById('chat').scrollIntoView({behavior:'smooth',block:'start'});
 }));
 document.getElementById('chatForm').addEventListener('submit',async(e)=>{
  e.preventDefault(); const ta=document.getElementById('q'); const text=ta.value.trim(); if(!text)return;
@@ -164,7 +176,7 @@ document.getElementById('chatForm').addEventListener('submit',async(e)=>{
  if(!API_ENDPOINT){box.insertAdjacentHTML('beforeend','<div class="msg ai">F設計士（デモ）：いいね。まず『誰が使う建物か』『絶対に譲れない条件』『予算』の3つから設計条件を整理しよう。</div>');box.scrollTop=box.scrollHeight;return;}
  document.getElementById('status').textContent='APIへ接続中…';
  try{
-  const r=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,product:'f-goggle',mode:document.getElementById('selected').textContent})});
+  const r=await fetch(API_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,product:'f-goggle',mode:document.getElementById('selected').textContent,xp:progress.xp,experience:'immersive-transformer'})});
   const d=await r.json(); box.insertAdjacentHTML('beforeend','<div class="msg ai">'+esc(d.reply||'応答を取得できませんでした。')+'</div>');
   document.getElementById('status').textContent='API CONNECTED';
  }catch(err){document.getElementById('status').textContent='API接続を確認してください。';}
