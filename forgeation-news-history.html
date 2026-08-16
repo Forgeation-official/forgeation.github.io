@@ -148,19 +148,19 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 </div>
 </section>
 
-<section class="panel">
-<div class="head"><h2>📊 学校のにぎわい速報（本日）</h2><span>実測待ち</span></div>
+<section class="panel" id="academyStatsPanel">
+<div class="head"><h2>📊 学校のにぎわい速報（本日）</h2><span id="academyStatsStatus">DB接続中…</span></div>
 <div class="stats">
-<div class="stat"><b>⚽ F Soccer</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>🏢 建設</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>🧠 AI</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>📖 教育</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>🤖 AI・ロボティクス</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>💗 看護・医療</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>🌱 介護・福祉</b><div class="num">—</div><div class="note">実測待ち</div></div>
-<div class="stat"><b>👥 合計</b><div class="num">—</div><div class="note">実測待ち</div></div>
+<div class="stat"><b>⚽ F Soccer</b><div class="num" id="stat-f-soccer">—</div><div class="note" id="note-f-soccer">DB確認中</div></div>
+<div class="stat"><b>🏢 建設</b><div class="num" id="stat-construction">—</div><div class="note" id="note-construction">DB確認中</div></div>
+<div class="stat"><b>🧠 AI</b><div class="num" id="stat-ai">—</div><div class="note" id="note-ai">DB確認中</div></div>
+<div class="stat"><b>📖 教育</b><div class="num" id="stat-education">—</div><div class="note" id="note-education">DB確認中</div></div>
+<div class="stat"><b>🤖 AI・ロボティクス</b><div class="num" id="stat-robotics">—</div><div class="note" id="note-robotics">DB確認中</div></div>
+<div class="stat"><b>💗 看護・医療</b><div class="num" id="stat-medical">—</div><div class="note" id="note-medical">DB確認中</div></div>
+<div class="stat"><b>🌱 介護・福祉</b><div class="num" id="stat-care">—</div><div class="note" id="note-care">DB確認中</div></div>
+<div class="stat"><b>👥 合計</b><div class="num" id="stat-total">—</div><div class="note" id="note-total">DB確認中</div></div>
 </div>
-<div class="truth">仮数字は表示しません。「—」は未計測・未接続。実測で0の場合だけ「0人」と表示します。</div>
+<div class="truth">仮数字は表示しません。DBから取得できた実測値だけを表示します。取得できない場合は「—」のままです。</div>
 </section>
 </div>
 
@@ -356,6 +356,88 @@ const historyModal=document.getElementById("historyModal");
 document.getElementById("modalClose").onclick=()=>{historyModal.classList.remove("open");historyModal.setAttribute("aria-hidden","true")};
 historyModal.addEventListener("click",e=>{if(e.target===historyModal)document.getElementById("modalClose").click()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&historyModal.classList.contains("open"))document.getElementById("modalClose").click()});
+
+
+/* ========================================
+   学校のにぎわい速報：公開DB集計API連動
+   管理者トークンは公開HTMLへ入れない。
+   Worker側の公開用 GET /academy-stats を使用する。
+   API URLは window.FORGEATION_PUBLIC_API_BASE で指定可能。
+   ======================================== */
+const FORGEATION_PUBLIC_API_BASE = String(window.FORGEATION_PUBLIC_API_BASE || "").replace(/\/$/,"");
+
+function setAcademyStat(key, value){
+  const num=document.getElementById(`stat-${key}`);
+  const note=document.getElementById(`note-${key}`);
+  if(!num||!note) return;
+  if(Number.isFinite(Number(value))){
+    num.textContent=`${Number(value)}人`;
+    note.textContent="DB実測値";
+  }else{
+    num.textContent="—";
+    note.textContent="未接続";
+  }
+}
+
+function pickStat(data, names){
+  for(const name of names){
+    if(data && data[name] !== undefined && data[name] !== null) return data[name];
+  }
+  return null;
+}
+
+async function loadAcademyStats(){
+  const status=document.getElementById("academyStatsStatus");
+  const keys=["f-soccer","construction","ai","education","robotics","medical","care","total"];
+  if(!FORGEATION_PUBLIC_API_BASE){
+    if(status) status.textContent="API URL未設定";
+    keys.forEach(k=>setAcademyStat(k,null));
+    return;
+  }
+  try{
+    if(status) status.textContent="DB接続中…";
+    const res=await fetch(`${FORGEATION_PUBLIC_API_BASE}/academy-stats`,{
+      method:"GET",
+      headers:{"Accept":"application/json"},
+      cache:"no-store"
+    });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data=await res.json();
+    const source=(data && data.academies) ? data.academies : data;
+
+    const fs=pickStat(source,["fSoccer","f_soccer","f-soccer","soccer","fsoccer"]);
+    const construction=pickStat(source,["construction","building","kensetsu"]);
+    const ai=pickStat(source,["ai"]);
+    const education=pickStat(source,["education","edu"]);
+    const robotics=pickStat(source,["robotics","aiRobotics","ai_robotics"]);
+    const medical=pickStat(source,["medical","nursing","nursingMedical"]);
+    const care=pickStat(source,["care","welfare","careWelfare"]);
+
+    setAcademyStat("f-soccer",fs);
+    setAcademyStat("construction",construction);
+    setAcademyStat("ai",ai);
+    setAcademyStat("education",education);
+    setAcademyStat("robotics",robotics);
+    setAcademyStat("medical",medical);
+    setAcademyStat("care",care);
+
+    let total=pickStat(source,["total","all","sum"]);
+    if(total===null){
+      const vals=[fs,construction,ai,education,robotics,medical,care]
+        .map(Number).filter(Number.isFinite);
+      total=vals.length===7 ? vals.reduce((a,b)=>a+b,0) : null;
+    }
+    setAcademyStat("total",total);
+    if(status) status.textContent="DB実測値";
+  }catch(err){
+    console.warn("Forgeation academy stats fetch failed:",err);
+    if(status) status.textContent="DB未接続";
+    keys.forEach(k=>setAcademyStat(k,null));
+  }
+}
+
+loadAcademyStats();
+setInterval(loadAcademyStats,60000);
 
 function tick(){const n=new Date();document.getElementById("clock").textContent=n.toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"});document.getElementById("date").textContent=n.toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"})}tick();setInterval(tick,30000);
 </script>
