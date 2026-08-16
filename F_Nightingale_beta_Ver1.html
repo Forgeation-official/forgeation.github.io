@@ -110,6 +110,13 @@ button{cursor:pointer}
  body{display:grid;place-items:center;padding:20px}
  .app{min-height:auto;border-radius:34px;border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 80px rgba(0,0,0,.35)}
 }
+
+/* ===== F NIGHTINGALE STORY MODE ===== */
+.story-entry{margin-top:18px;padding:16px;border-radius:20px;background:linear-gradient(145deg,rgba(42,18,57,.94),rgba(92,28,76,.88));color:#fff;border:1px solid rgba(255,220,244,.3);box-shadow:0 14px 32px rgba(77,23,61,.24)}
+.story-entry .eyebrow{font-size:.68rem;font-weight:950;letter-spacing:.12em;color:#ffd9eb}.story-entry h3{margin:6px 0 5px;font-size:1.18rem}.story-entry p{margin:0;color:#ffeaf4;font-size:.78rem;line-height:1.55}.story-start{width:100%;margin-top:12px;border:0;border-radius:15px;padding:13px 16px;background:linear-gradient(145deg,#ffd1e3,#ef5b92);color:#52152f;font-weight:950;box-shadow:0 10px 22px rgba(0,0,0,.18)}
+.story-overlay{position:fixed;inset:0;z-index:9999;background:#080a14;color:#fff;display:none;overflow:auto}.story-overlay.open{display:block}.story-shell{width:min(760px,100%);min-height:100vh;margin:auto;background:radial-gradient(circle at 50% 0%,#39203e 0,#151225 38%,#080a14 75%);padding:18px 16px calc(34px + env(safe-area-inset-bottom))}.story-top{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:10px;padding:8px 0 12px;background:linear-gradient(180deg,rgba(8,10,20,.98),rgba(8,10,20,.78),transparent)}.story-close{width:42px;height:42px;border:1px solid #ffffff33;border-radius:50%;background:#ffffff12;color:#fff;font-size:1.2rem}.story-title small{display:block;color:#d7a8d7;font-size:.67rem;letter-spacing:.1em}.story-title strong{display:block;font-size:1rem}.story-xp{padding:8px 10px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff22;font-size:.74rem;font-weight:900;color:#ffd682}.chapter-banner{text-align:center;margin:9px 0 15px}.chapter-banner span{display:inline-block;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#6f2f83,#ad3e97);font-size:.7rem;font-weight:950;letter-spacing:.12em}.chapter-banner h2{margin:10px 0 4px;font-size:1.65rem;font-family:Georgia,'Noto Serif JP',serif;color:#ffe29d;text-shadow:0 2px 16px #8c5d31}.chapter-banner p{margin:0;color:#c7b5c8;font-size:.75rem}.book-page{display:none;animation:storyFade .28s ease}.book-page.active{display:block}@keyframes storyFade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}.story-art{position:relative;height:310px;border-radius:22px;overflow:hidden;border:1px solid #ffffff24;box-shadow:0 18px 45px #0009;background:#12121c}.story-art svg{width:100%;height:100%;display:block}.story-text{margin-top:14px;padding:16px;border-radius:18px;background:#ffffff0e;border:1px solid #ffffff18}.story-text .page-no{font-size:.68rem;color:#caa6cd;font-weight:900;letter-spacing:.1em}.story-text h3{margin:5px 0 8px;font-size:1.18rem}.story-text p{margin:0;color:#e7dfe8;font-size:.84rem;line-height:1.72}.story-actions{display:grid;gap:9px;margin-top:13px}.story-choice{border:1px solid #ffffff26;border-radius:14px;background:#ffffff10;color:#fff;padding:12px;text-align:left;font-weight:800}.story-choice.good{border-color:#ffd37880}.story-choice:disabled{opacity:.55}.story-next{width:100%;border:0;border-radius:15px;padding:13px;background:linear-gradient(145deg,#dca6ff,#8e3eaa);color:#fff;font-weight:950}.story-next[disabled]{opacity:.4}.story-hint{min-height:22px;margin-top:8px;color:#ffd990;font-size:.74rem;font-weight:800}.hotspots{position:absolute;inset:0}.hotspot{position:absolute;width:52px;height:52px;border-radius:50%;border:2px solid #ffe19f;background:#ffe19f22;box-shadow:0 0 0 7px #ffe19f12,0 0 28px #ffd36b;animation:pulse 1.3s infinite}.hotspot.found{background:#ffe19f88;animation:none}.hotspot:after{content:'?';color:#fff;font-weight:950;font-size:1.15rem}@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 0 13px #ffe19f05,0 0 36px #ffd36b}}.story-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:14px 0}.story-dot{height:6px;border-radius:999px;background:#ffffff1a}.story-dot.done{background:linear-gradient(90deg,#c15fd4,#ffd27a)}.chapter-complete{display:none;margin-top:17px;padding:20px;border-radius:20px;text-align:center;background:linear-gradient(145deg,#2b193b,#171326);border:1px solid #f2caff3b}.chapter-complete.show{display:block}.chapter-complete .big{font-size:1.38rem;font-weight:950}.chapter-complete .total{margin-top:8px;color:#ffd474;font-size:1.28rem;font-weight:950}.unlock{margin-top:14px;padding:13px;border-radius:15px;background:#ffffff0d;color:#eadceb}.unlock strong{display:block;color:#f1cfff;margin-bottom:4px}.story-restart{margin-top:12px;border:1px solid #ffffff25;border-radius:13px;background:transparent;color:#ddd;padding:9px 14px}
+@media(max-width:480px){.story-art{height:270px}.chapter-banner h2{font-size:1.45rem}}
+
 </style></head>
 <body><main class="app">
 <header class="topbar"><button class="back" type="button" aria-label="戻る" onclick="forgeBack()">‹</button>
@@ -140,6 +147,84 @@ button{cursor:pointer}
 <section class="mission"><div class="mission-top"><h3>今日の症例ミッション</h3><span class="tag">+120 XP</span></div>
 <p>「少し息苦しい」と話す患者さん。まず何を聞き、何を観察し、いつ報告するか。AI患者との会話で考えよう。</p></section>
 
+
+<section class="story-entry" id="storyEntry">
+  <div class="eyebrow">F NIGHTINGALE STORY</div>
+  <h3>🕯️ 第一章「ランプの灯る夜 — 1854」</h3>
+  <p>19世紀の夜の病院へ。読む → 探す → 選ぶ → XPを獲得し、次の章を解放する物語体験。</p>
+  <button class="story-start" type="button" onclick="openStory()">📖 ストーリーを読む</button>
+</section>
+
+<div class="story-overlay" id="storyOverlay" aria-hidden="true">
+ <div class="story-shell">
+  <div class="story-top">
+   <button class="story-close" type="button" onclick="closeStory()" aria-label="ストーリーを閉じる">×</button>
+   <div class="story-title"><small>NIGHTINGALE STORY</small><strong>第一章｜ランプの灯る夜</strong></div>
+   <div class="story-xp">XP <span id="storyXp">0</span></div>
+  </div>
+  <div class="chapter-banner"><span>第一章</span><h2>ランプの灯る夜 — 1854</h2><p>史実を土台にしたForgeationオリジナル空想世界</p></div>
+  <div class="story-progress" id="storyProgress"><i class="story-dot"></i><i class="story-dot"></i><i class="story-dot"></i><i class="story-dot"></i><i class="story-dot"></i></div>
+
+  <section class="book-page active" data-page="0">
+   <div class="story-art">
+    <svg viewBox="0 0 800 500" role="img" aria-label="月明かりの病院へ向かう夜">
+      <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#0d1531"/><stop offset="1" stop-color="#40304b"/></linearGradient><radialGradient id="moon1"><stop stop-color="#fff7c7"/><stop offset="1" stop-color="#ffe6a1" stop-opacity="0"/></radialGradient></defs>
+      <rect width="800" height="500" fill="url(#sky1)"/><circle cx="650" cy="92" r="78" fill="url(#moon1)"/><circle cx="650" cy="92" r="32" fill="#fff2c5"/>
+      <path d="M80 370V190h640v180" fill="#171a28" stroke="#776574" stroke-width="4"/><path d="M50 190L400 70l350 120" fill="#262436" stroke="#776574" stroke-width="5"/>
+      <g fill="#ffc96b"><rect x="145" y="230" width="65" height="72" rx="4"/><rect x="285" y="230" width="65" height="72" rx="4"/><rect x="450" y="230" width="65" height="72" rx="4"/><rect x="590" y="230" width="65" height="72" rx="4"/></g>
+      <path d="M0 420 Q190 365 400 420 T800 410V500H0Z" fill="#10131e"/><path d="M335 500L385 340h30l50 160" fill="#342e35"/>
+      <g transform="translate(380 355)"><circle cx="20" cy="0" r="13" fill="#d7b1a0"/><path d="M3 15h34l12 70H-8z" fill="#20222b"/><path d="M-2 28l-32 45M42 28l37 40" stroke="#d7b1a0" stroke-width="8"/><rect x="70" y="57" width="26" height="36" rx="5" fill="#c47a2b"/><circle cx="83" cy="74" r="24" fill="#ffdc79" opacity=".25"/></g>
+    </svg>
+   </div>
+   <div class="story-text"><div class="page-no">1 / 5｜+10 XP</div><h3>夜の病院へ</h3><p>1854年。遠くの街に夜が降りた。ミライは小さなランプを受け取り、静かな病院の扉の前に立つ。中では、助けを待つ人たちの気配がする。</p><div class="story-actions"><button class="story-next" type="button" onclick="completeSimplePage(0,10)">扉を開けて物語を読む　+10 XP</button></div></div>
+  </section>
+
+  <section class="book-page" data-page="1">
+   <div class="story-art">
+    <svg viewBox="0 0 800 500" role="img" aria-label="ランプが連なる長い病院の廊下">
+      <defs><linearGradient id="hall" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#171929"/><stop offset="1" stop-color="#32252f"/></linearGradient></defs><rect width="800" height="500" fill="url(#hall)"/><path d="M0 0l275 120v380H0zM800 0L525 120v380h275z" fill="#222232"/><path d="M275 120h250v380H275z" fill="#12131d"/><path d="M0 500L300 290h200l300 210" fill="#41343a"/>
+      <g fill="#f0c263"><circle cx="330" cy="160" r="15"/><circle cx="470" cy="160" r="15"/><circle cx="350" cy="245" r="12"/><circle cx="450" cy="245" r="12"/></g><g stroke="#f0c263" stroke-width="3"><path d="M330 50v110M470 50v110M350 170v75M450 170v75"/></g>
+      <g fill="#4b3744"><rect x="36" y="200" width="190" height="55" rx="10"/><rect x="574" y="210" width="190" height="55" rx="10"/><rect x="50" y="330" width="175" height="50" rx="10"/><rect x="575" y="340" width="170" height="50" rx="10"/></g>
+    </svg>
+    <div class="hotspots"><button class="hotspot" id="hot1" style="left:15%;top:43%" onclick="findHotspot(this,1)"></button><button class="hotspot" id="hot2" style="right:15%;top:47%" onclick="findHotspot(this,2)"></button></div>
+   </div>
+   <div class="story-text"><div class="page-no">2 / 5｜+20 XP</div><h3>長い廊下を進む</h3><p>廊下には小さな変化が隠れている。絵の中から、気になる場所を2か所見つけて観察しよう。</p><div class="story-hint" id="hotHint">光っている場所をタップ：0 / 2</div><button class="story-next" id="page2Next" disabled type="button" onclick="completeSimplePage(1,20)">観察を終える　+20 XP</button></div>
+  </section>
+
+  <section class="book-page" data-page="2">
+   <div class="story-art">
+    <svg viewBox="0 0 800 500" role="img" aria-label="病室の机に水、布、薬瓶、ランプが並ぶ">
+      <rect width="800" height="500" fill="#171727"/><rect y="310" width="800" height="190" fill="#392c32"/><rect x="110" y="110" width="580" height="230" rx="14" fill="#272537" stroke="#675064" stroke-width="5"/><circle cx="670" cy="76" r="42" fill="#eed690" opacity=".17"/>
+      <g transform="translate(180 260)"><rect x="0" y="0" width="440" height="28" rx="8" fill="#6f523f"/><path d="M55 0v90M385 0v90" stroke="#6f523f" stroke-width="18"/>
+      <path d="M70 -100h70l-10 95H80z" fill="#94b8bf"/><path d="M170 -65q42-35 84 0v60h-84z" fill="#e6e0d8"/><g fill="#79556d"><rect x="300" y="-92" width="38" height="87" rx="8"/><rect x="350" y="-72" width="33" height="67" rx="8"/></g><g fill="#ffcf68"><rect x="242" y="-120" width="34" height="95" rx="8"/><circle cx="259" cy="-114" r="34" opacity=".17"/></g></g>
+    </svg>
+   </div>
+   <div class="story-text"><div class="page-no">3 / 5｜+30 XP</div><h3>何が必要だろう？</h3><p>患者さんは「喉が渇いて、少し寒い」と話している。まず何をする？ 3つの選択肢から行動を選ぼう。</p><div class="story-actions"><button class="story-choice good" type="button" onclick="chooseStory(this,true)">A｜状態を確かめ、必要なら水分と保温を準備する</button><button class="story-choice" type="button" onclick="chooseStory(this,false)">B｜何も聞かずに薬瓶を渡す</button><button class="story-choice" type="button" onclick="chooseStory(this,false)">C｜すぐに部屋を離れる</button></div><div class="story-hint" id="choiceHint"></div><button class="story-next" id="page3Next" disabled type="button" onclick="completeSimplePage(2,30)">判断を記録する　+30 XP</button></div>
+  </section>
+
+  <section class="book-page" data-page="3">
+   <div class="story-art" id="patrolArt" onclick="discoverPatrol(event)">
+    <svg viewBox="0 0 800 500" role="img" aria-label="ランプを持って夜の病棟を巡回する看護師">
+      <defs><linearGradient id="night4" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1427"/><stop offset="1" stop-color="#302031"/></linearGradient></defs><rect width="800" height="500" fill="url(#night4)"/><g fill="#252536"><rect x="20" y="110" width="210" height="285"/><rect x="570" y="110" width="210" height="285"/></g><g fill="#d2a65b"><rect x="65" y="160" width="100" height="85"/><rect x="635" y="160" width="100" height="85"/></g><path d="M250 500L340 160h120l90 340" fill="#1a1822"/>
+      <g transform="translate(386 250)"><circle cx="0" cy="0" r="25" fill="#d9b7a6"/><path d="M-32 25h64l22 150h-108z" fill="#24252c"/><path d="M-22 53l-68 76M28 53l80 70" stroke="#d9b7a6" stroke-width="14"/><rect x="95" y="105" width="42" height="60" rx="7" fill="#a8652d"/><circle cx="116" cy="132" r="52" fill="#ffd56f" opacity=".2"/></g><g id="patrolSpark" opacity="0"><circle cx="635" cy="346" r="42" fill="#ffdc82" opacity=".3"/><path d="M625 345h20M635 335v20" stroke="#fff" stroke-width="6"/></g>
+    </svg>
+   </div>
+   <div class="story-text"><div class="page-no">4 / 5｜+20 XP</div><h3>ランプを持って巡回する夜</h3><p>病棟を巡り、小さな変化を見逃さない。画面をタップして、夜の病室に隠れた「気づき」を見つけよう。</p><div class="story-hint" id="patrolHint">画面のどこかをタップして探索してください。</div><button class="story-next" id="page4Next" disabled type="button" onclick="completeSimplePage(3,20)">発見を記録する　+20 XP</button></div>
+  </section>
+
+  <section class="book-page" data-page="4">
+   <div class="story-art">
+    <svg viewBox="0 0 800 500" role="img" aria-label="夜明けの丘と病院">
+      <defs><linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#76577c"/><stop offset=".5" stop-color="#efaa8c"/><stop offset="1" stop-color="#ffd98c"/></linearGradient></defs><rect width="800" height="500" fill="url(#dawn)"/><circle cx="615" cy="285" r="85" fill="#fff3b3" opacity=".9"/><path d="M0 350Q170 290 315 350T620 340T800 360V500H0z" fill="#4d4a4d"/><path d="M0 410Q210 350 400 415T800 390V500H0z" fill="#2b3232"/><g fill="#3f3c42"><rect x="80" y="235" width="220" height="120"/><path d="M60 235l130-80 130 80z"/></g><g fill="#f5d37d"><rect x="120" y="270" width="44" height="48"/><rect x="215" y="270" width="44" height="48"/></g><path d="M500 500q-40-105 0-175q40 70 0 175" fill="#1f2423"/></svg>
+   </div>
+   <div class="story-text"><div class="page-no">5 / 5｜+50 XP</div><h3>夜明け</h3><p>長い夜が明ける。ランプの光は消えても、観察し、考え、寄り添う力は残る。ミライの最初の夜勤が終わった。</p><div class="story-actions"><button class="story-next" type="button" onclick="finishChapter()">第一章を完了する　+50 XP</button></div></div>
+  </section>
+
+  <section class="chapter-complete" id="chapterComplete"><div class="big">CHAPTER 1 COMPLETE</div><div>🕯️「ランプの灯る夜」</div><div class="total">TOTAL +130 XP</div><div class="unlock"><strong>🔓 第二章「数字が語り始める」解放</strong>観察したことを、数字と記録から読み解く次の物語へ。</div><button class="story-restart" type="button" onclick="restartStory()">第一章をもう一度読む</button></section>
+ </div>
+</div>
+
+
 <section id="chat" class="chat-wrap"><div class="chat-title">AI患者｜<span id="selected">問診 を選択中</span></div>
 <div id="messages" class="messages"><div class="msg ai">AI患者：「少し息苦しい感じがします……。」ミライさんなら、まずどんな声をかけますか？</div></div>
 <form id="chatForm" class="chat-box"><textarea id="q" placeholder="AI患者に話しかける..." aria-label="AI患者への声かけ"></textarea><button class="send" type="submit" aria-label="送信">➤</button></form>
@@ -152,6 +237,33 @@ function forgeBack(){
 }
 
 const API_ENDPOINT="/api/forgeation-ai"; // Forgeation共通サーバーAPI。OpenAI APIキーはHTMLに置かない。
+
+/* Forgeation DB利用記録：F NIGHTINGALE */
+const FORGEATION_API_BASE="https://forgeation-api.eru12121221.workers.dev";
+function getForgeationVisitorId(){
+  let visitorId=localStorage.getItem("forgeation_visitor_id");
+  if(!visitorId){
+    visitorId=(crypto.randomUUID?.() ||
+      "visitor-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+    localStorage.setItem("forgeation_visitor_id",visitorId);
+  }
+  return visitorId;
+}
+function recordNightingaleVisit(){
+  return fetch(FORGEATION_API_BASE+"/visit",{
+    method:"POST",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      visitorId:getForgeationVisitorId(),
+      page:"f-nightingale"
+    }),
+    keepalive:true
+  }).catch(error=>console.warn("F NIGHTINGALE 利用記録に失敗しました。",error));
+}
+recordNightingaleVisit();
 const items=[...document.querySelectorAll('.menu-item')];
 items.forEach(btn=>btn.addEventListener('click',()=>{
   items.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
@@ -170,6 +282,30 @@ document.getElementById('chatForm').addEventListener('submit',async(e)=>{
  }catch(err){document.getElementById('status').textContent='API接続を確認してください。';}
  box.scrollTop=box.scrollHeight;
 });
+
+/* ===== Story Mode Logic ===== */
+const STORY_KEY="f_nightingale_story_v1";
+let storyState={page:0,xp:0,completed:[],chapter1:false};
+try{storyState={...storyState,...JSON.parse(localStorage.getItem(STORY_KEY)||"{}")};}catch(_){ }
+let hotspotFound=new Set();
+function saveStory(){try{localStorage.setItem(STORY_KEY,JSON.stringify(storyState));}catch(_){}}
+function openStory(){
+ document.getElementById('storyOverlay').classList.add('open'); document.getElementById('storyOverlay').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+ if(storyState.chapter1){showChapterComplete();}else{showStoryPage(Math.min(storyState.page||0,4));}
+ renderStoryXP();
+}
+function closeStory(){document.getElementById('storyOverlay').classList.remove('open');document.getElementById('storyOverlay').setAttribute('aria-hidden','true');document.body.style.overflow='';}
+function renderStoryXP(){document.getElementById('storyXp').textContent=String(storyState.xp||0);document.querySelectorAll('.story-dot').forEach((d,i)=>d.classList.toggle('done',(storyState.completed||[]).includes(i)));}
+function showStoryPage(n){document.getElementById('chapterComplete').classList.remove('show');document.querySelectorAll('.book-page').forEach((p,i)=>p.classList.toggle('active',i===n));storyState.page=n;saveStory();renderStoryXP();document.querySelector('.story-shell').scrollTo({top:0,behavior:'smooth'});}
+function awardPage(page,xp){if(!(storyState.completed||[]).includes(page)){storyState.completed=[...(storyState.completed||[]),page];storyState.xp=(storyState.xp||0)+xp;saveStory();renderStoryXP();}}
+function completeSimplePage(page,xp){awardPage(page,xp); if(page<4)showStoryPage(page+1);}
+function findHotspot(el,n){el.classList.add('found');hotspotFound.add(n);document.getElementById('hotHint').textContent='気になる場所を発見：'+hotspotFound.size+' / 2';if(hotspotFound.size>=2)document.getElementById('page2Next').disabled=false;}
+function chooseStory(btn,correct){document.querySelectorAll('[data-page="2"] .story-choice').forEach(x=>x.disabled=true);if(correct){document.getElementById('choiceHint').textContent='✓ まず状態を確かめる判断。観察と安全確認を優先できました。';document.getElementById('page3Next').disabled=false;}else{document.getElementById('choiceHint').textContent='もう一度考えてみよう。まず患者さんの状態を確かめることが大切です。';setTimeout(()=>document.querySelectorAll('[data-page="2"] .story-choice').forEach(x=>x.disabled=false),700);}}
+function discoverPatrol(e){const art=e.currentTarget,r=art.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;if(x>.63&&y>.48){const spark=document.getElementById('patrolSpark');spark.setAttribute('opacity','1');document.getElementById('patrolHint').textContent='✓ 発見：奥の病室に変化。近づいて状態を確認しよう。';document.getElementById('page4Next').disabled=false;}else{document.getElementById('patrolHint').textContent='ランプの光が届く先を、もう少し探してみよう。';}}
+function finishChapter(){awardPage(4,50);storyState.chapter1=true;saveStory();showChapterComplete();}
+function showChapterComplete(){document.querySelectorAll('.book-page').forEach(p=>p.classList.remove('active'));document.getElementById('chapterComplete').classList.add('show');renderStoryXP();document.querySelector('.story-shell').scrollTo({top:0,behavior:'smooth'});}
+function restartStory(){storyState={page:0,xp:0,completed:[],chapter1:false};hotspotFound.clear();saveStory();document.querySelectorAll('.hotspot').forEach(x=>x.classList.remove('found'));document.getElementById('hotHint').textContent='光っている場所をタップ：0 / 2';document.getElementById('page2Next').disabled=true;document.getElementById('page3Next').disabled=true;document.getElementById('page4Next').disabled=true;document.getElementById('choiceHint').textContent='';document.getElementById('patrolHint').textContent='画面のどこかをタップして探索してください。';document.querySelectorAll('[data-page="2"] .story-choice').forEach(x=>x.disabled=false);showStoryPage(0);}
+
 function esc(x){return x.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 </script>
 </body></html>
