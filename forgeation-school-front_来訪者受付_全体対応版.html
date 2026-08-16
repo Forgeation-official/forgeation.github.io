@@ -222,13 +222,13 @@ button{font:inherit}
         <div class="live-presence" aria-live="polite">
           <div class="live-presence-label">
             <span class="live-dot"></span>
-            <span>現在ホームページを見ている人</span>
+            <span>現在の来校者</span>
           </div>
-          <div class="live-presence-count"><strong id="homepageLiveCount">--</strong> 人</div>
+          <div class="live-presence-count"><strong id="schoolLiveCount">--</strong> 人</div>
         </div>
         <div class="status-list">
           <div class="status"><span class="light"></span><div><strong>AI受付社員</strong><small>待ち時間：なし</small></div><span class="tag">受付中</span></div>
-          <div class="status"><span class="light"></span><div><strong>AI Soccer Academy Coach</strong><small>専属AIコーチを体験できます</small></div><span class="tag">利用可</span></div>
+          <div class="status"><span class="light"></span><div><strong>F Soccer 利用者数</strong><small>現在利用中：<b id="fSoccerLiveCount">--</b> 人</small></div><span class="tag">LIVE</span></div>
           <div class="status"><span class="light"></span><div><strong>AIアカデミー課</strong><small>AI基礎・生成AI・開発・安全</small></div><span class="tag">開講中</span></div>
           <div class="status"><span class="light"></span><div><strong>Forgeation Bakery</strong><small>未来の学食・店舗構想</small></div><span class="tag">公開中</span></div>
           <div class="status"><span class="light"></span><div><strong>来訪者受付</strong><small>校内マップ・各教室をご案内</small></div><span class="tag">受付中</span></div>
@@ -247,9 +247,9 @@ button{font:inherit}
           <div class="icon">🤖</div><h3>AI社員を体験する</h3>
           <p>受付、広報、システム、看護、建設などのAI社員を体験できます。</p><span>AI社員フロアへ →</span>
         </a>
-        <a class="card track-link" data-destination="f-soccer" href="./F_Soccer_beta_Ver2.html">
+        <a class="card track-link" data-destination="f-soccer" href="./F_Soccer_beta_Ver3_Challenge搭載版.html">
           <div class="icon">⚽</div><h3>専属AIコーチ</h3>
-          <p>F Soccer β版で、練習・振り返り・目標設定を体験します。</p><span>コーチに会う →</span>
+          <p>F Soccerで、練習・振り返り・目標設定・F Challengeを体験します。</p><span>コーチに会う →</span>
         </a>
         <a class="card track-link" data-destination="school-map" href="./index.html#future">
           <div class="icon">🏫</div><h3>校内マップを見る</h3>
@@ -271,7 +271,7 @@ button{font:inherit}
       <div class="notice-box">
         <div class="notice-item"><strong>🏫 Forgeation校舎プロジェクト</strong><small>各フロアをクリックして探検できる校舎マップを開発中です。</small></div>
         <div class="notice-item"><strong>🤖 AIアカデミー課</strong><small>AIの基礎から生成AI・開発・安全な活用まで学べる教室を準備しています。</small></div>
-        <div class="notice-item"><strong>⚽ F Soccer β版</strong><small>選手一人ひとりに寄り添う専属AIコーチを公開しています。</small></div>
+        <div class="notice-item"><strong>⚽ F Soccer</strong><small>選手一人ひとりに寄り添う専属AIコーチとF Challengeを公開しています。</small></div>
         <div class="notice-item"><strong>🥐 Forgeation Bakery</strong><small>未来の学食、そして実店舗を目指す新しい挑戦です。</small></div>
       </div>
     </section>
@@ -333,14 +333,49 @@ async function recordVisit(page){
 // 1階フロントへの来訪を本番DBへ記録
 recordVisit("forgeation-school-front");
 
-// ホームページを「今」見ている人数を表示
-async function loadHomepageLiveCount(){
-  const countEl=document.getElementById("homepageLiveCount");
+// ========================================
+// 学校フロントのリアルタイム来校者
+// POST /presence で30秒ごとにheartbeat
+// GET /presence で現在人数を取得
+// ========================================
+const SCHOOL_PRESENCE_PAGE = "forgeation-school-front";
+const F_SOCCER_PRESENCE_PAGE = "f-soccer";
+
+async function sendPresence(page, action="heartbeat"){
+  const payload={
+    visitorId:getVisitorId(),
+    page:String(page),
+    action:String(action)
+  };
+
+  try{
+    const response=await fetch(API_BASE + "/presence",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      credentials:"omit",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload),
+      keepalive:true
+    });
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+    return await response.json();
+  }catch(error){
+    console.warn("在校状況の更新に失敗しました。",error);
+    return null;
+  }
+}
+
+async function loadPresenceCount(page, elementId){
+  const countEl=document.getElementById(elementId);
   if(!countEl) return;
 
   try{
     const response=await fetch(
-      API_BASE + "/presence?page=forgeation-home",
+      API_BASE + "/presence?page=" + encodeURIComponent(page),
       {method:"GET",mode:"cors",cache:"no-store",credentials:"omit"}
     );
 
@@ -351,13 +386,46 @@ async function loadHomepageLiveCount(){
     const data=await response.json();
     countEl.textContent=String(Number(data.activeVisitors || 0));
   }catch(error){
-    console.warn("現在閲覧中人数の取得に失敗しました。",error);
+    console.warn("現在利用人数の取得に失敗しました。",error);
     countEl.textContent="--";
   }
 }
 
-loadHomepageLiveCount();
-setInterval(loadHomepageLiveCount,15000);
+async function refreshLiveCounts(){
+  await Promise.all([
+    loadPresenceCount(SCHOOL_PRESENCE_PAGE,"schoolLiveCount"),
+    loadPresenceCount(F_SOCCER_PRESENCE_PAGE,"fSoccerLiveCount")
+  ]);
+}
+
+// 受付ページを開いた端末を「現在の来校者」として登録
+sendPresence(SCHOOL_PRESENCE_PAGE);
+refreshLiveCounts();
+
+// Worker側の想定に合わせ、30秒ごとにheartbeatを更新
+setInterval(()=>sendPresence(SCHOOL_PRESENCE_PAGE),30000);
+setInterval(refreshLiveCounts,15000);
+
+// ページ離脱時は可能な限り即時にpresenceを削除
+function leaveSchoolPresence(){
+  const payload=JSON.stringify({
+    visitorId:getVisitorId(),
+    page:SCHOOL_PRESENCE_PAGE,
+    action:"leave"
+  });
+
+  fetch(API_BASE + "/presence",{
+    method:"POST",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
+    headers:{"Content-Type":"application/json"},
+    body:payload,
+    keepalive:true
+  }).catch(()=>{});
+}
+
+window.addEventListener("pagehide",leaveSchoolPresence,{once:true});
 
 // 各案内先のクリックも記録
 document.querySelectorAll(".track-link").forEach(link=>{
