@@ -159,6 +159,8 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 <div class="head"><h2>📊 学校のにぎわい速報（本日）</h2><span id="academyStatsStatus">DB接続中…</span></div>
 <div class="stats">
 <div class="stat"><b>⚽ F Soccer</b><div class="num" id="stat-f-soccer">—</div><div class="note" id="note-f-soccer">DB確認中</div></div>
+<div class="stat"><b>⚽ サッカーアカデミー課</b><div class="num" id="stat-soccer-academy">—</div><div class="note" id="note-soccer-academy">DB確認中</div></div>
+<div class="stat"><b>🏃 スポーツアカデミー課</b><div class="num" id="stat-sports-academy">—</div><div class="note" id="note-sports-academy">DB確認中</div></div>
 <div class="stat"><b>🏢 建設</b><div class="num" id="stat-construction">—</div><div class="note" id="note-construction">DB確認中</div></div>
 <div class="stat"><b>🧠 AI</b><div class="num" id="stat-ai">—</div><div class="note" id="note-ai">DB確認中</div></div>
 <div class="stat"><b>📖 教育</b><div class="num" id="stat-education">—</div><div class="note" id="note-education">DB確認中</div></div>
@@ -401,7 +403,7 @@ function pickStat(data, names){
 
 async function loadAcademyStats(){
   const status=document.getElementById("academyStatsStatus");
-  const keys=["f-soccer","construction","ai","education","robotics","medical","care","total"];
+  const keys=["f-soccer","soccer-academy","sports-academy","construction","ai","education","robotics","medical","care","total"];
   if(!FORGEATION_PUBLIC_API_BASE){
     if(status) status.textContent="API URL未設定";
     keys.forEach(k=>setAcademyStat(k,null));
@@ -419,6 +421,8 @@ async function loadAcademyStats(){
     const source=(data && data.academies) ? data.academies : data;
 
     const fs=pickStat(source,["fSoccer","f_soccer","f-soccer","soccer","fsoccer"]);
+    const soccerAcademy=pickStat(source,["soccerAcademy","soccer_academy","soccer-academy","academySoccer","academy_soccer","サッカーアカデミー課","サッカーアカデミー"]);
+    const sportsAcademy=pickStat(source,["sportsAcademy","sports_academy","sports-academy","academySports","academy_sports","sports","sport","スポーツアカデミー課","スポーツアカデミー"]);
     const construction=pickStat(source,["construction","building","kensetsu"]);
     const ai=pickStat(source,["ai"]);
     const education=pickStat(source,["education","edu"]);
@@ -427,6 +431,8 @@ async function loadAcademyStats(){
     const care=pickStat(source,["care","welfare","careWelfare"]);
 
     setAcademyStat("f-soccer",fs);
+    setAcademyStat("soccer-academy",soccerAcademy);
+    setAcademyStat("sports-academy",sportsAcademy);
     setAcademyStat("construction",construction);
     setAcademyStat("ai",ai);
     setAcademyStat("education",education);
@@ -436,9 +442,9 @@ async function loadAcademyStats(){
 
     let total=pickStat(source,["total","all","sum"]);
     if(total===null){
-      const vals=[fs,construction,ai,education,robotics,medical,care]
+      const vals=[fs,soccerAcademy,sportsAcademy,construction,ai,education,robotics,medical,care]
         .map(Number).filter(Number.isFinite);
-      total=vals.length===7 ? vals.reduce((a,b)=>a+b,0) : null;
+      total=vals.length===9 ? vals.reduce((a,b)=>a+b,0) : null;
     }
     setAcademyStat("total",total);
     if(status) status.textContent="DB実測値";
