@@ -1421,6 +1421,10 @@ document.addEventListener("keydown",e=>{
 const F_SOCCER_API_BASE = "https://forgeation-api.eru12121221.workers.dev";
 
 function getFSoccerUserId(){
+  // 前画面から明示的に渡されたUser IDを最優先する。
+  // 保存済みの古いIDによる誤判定を防ぐため、URL → sessionStorage → localStorage の順で確認。
+  const q = new URLSearchParams(location.search).get("user_id");
+  if(q && q.trim()) return q.trim();
   try{
     const s = sessionStorage.getItem("fSoccerUserId");
     if(s) return s.trim();
@@ -1429,8 +1433,7 @@ function getFSoccerUserId(){
     const l = localStorage.getItem("fSoccerUserId");
     if(l) return l.trim();
   }catch(e){}
-  const q = new URLSearchParams(location.search).get("user_id");
-  return (q || "").trim();
+  return "";
 }
 
 async function loadProductionMemberProfile(){
@@ -1505,8 +1508,8 @@ async function loadProductionMemberProfile(){
       statusEl.textContent = `✅ DBプロフィール読込済み｜User ID：${user.user_id || userId}｜${displayName}`;
     }
 
-    // 契約者User IDで本日のF Soccer本番利用を1件記録
-    sendProductionUsage("visit", {plan: planText, memberStatus: user.status || "active"});
+    // ここでは利用カウントを送信しない。
+    // ページ読込・タブ復元・プロフィール確認だけで本番利用者に計上されるのを防ぐ。
   }catch(err){
     if(statusEl){
       statusEl.textContent = `⚠️ DBプロフィールを読み込めませんでした｜${err.message}`;
@@ -1520,7 +1523,8 @@ loadProductionMemberProfile();
 /* ===== Production member gate ===== */
 document.getElementById("enterProduction")?.addEventListener("click",()=>{
   document.getElementById("productionGate")?.classList.add("is-hidden");
-  sendProductionUsage("enter_production");
+  // 本番利用カウントは、利用者が「正式版 F Soccer を開く」を明示的に押した時だけ送信する。
+  sendProductionUsage("visit", {source:"enter_production_button"});
   try{ sessionStorage.setItem("fSoccerProductionDemoEntered","1"); }catch(e){}
 });
 try{
