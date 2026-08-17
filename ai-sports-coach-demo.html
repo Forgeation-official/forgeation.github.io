@@ -386,10 +386,12 @@ button{cursor:pointer}
 <script>
 const API_URL = "https://forgeation-api.eru12121221.workers.dev/";
 
-// ===== サッカーアカデミー利用カウント =====
-// AI Soccer Academy Coach を実際に利用（メッセージ送信）した人を
-// F Soccer本番/β版とは分離して「サッカーアカデミー」として記録します。
+// ===== スポーツアカデミー課／サッカーアカデミー課 利用カウント =====
+// AI Soccer Academy Coach を実際に利用（メッセージ送信）した人を、
+// F Soccer本番/β版とは分離しつつ、
+// 「スポーツアカデミー課」と「サッカーアカデミー課」の両方へ記録します。
 const APP_USAGE_URL = "https://forgeation-api.eru12121221.workers.dev/app-usage";
+const SPORTS_ACADEMY_APP_ID = "sports-academy";
 const SOCCER_ACADEMY_APP_ID = "soccer-academy";
 
 function getForgeationVisitorId(){
@@ -407,7 +409,7 @@ function getForgeationUserId(){
          localStorage.getItem("userId") || "";
 }
 
-async function sendSoccerAcademyUsage(eventName = "ai_message", extra = {}){
+async function sendAcademyUsage(appId, eventName = "ai_message", extra = {}){
   try{
     const visitorId = getForgeationVisitorId();
     const userId = getForgeationUserId();
@@ -423,11 +425,11 @@ async function sendSoccerAcademyUsage(eventName = "ai_message", extra = {}){
         visitor_id:visitorId,
         userId,
         user_id:userId,
-        appId:SOCCER_ACADEMY_APP_ID,
-        app_id:SOCCER_ACADEMY_APP_ID,
-        page:SOCCER_ACADEMY_APP_ID,
-        app:SOCCER_ACADEMY_APP_ID,
-        product:SOCCER_ACADEMY_APP_ID,
+        appId,
+        app_id:appId,
+        page:appId,
+        app:appId,
+        product:appId,
         event:String(eventName || "ai_message"),
         action:String(eventName || "ai_message"),
         timestamp:new Date().toISOString(),
@@ -435,13 +437,22 @@ async function sendSoccerAcademyUsage(eventName = "ai_message", extra = {}){
       })
     });
     if(!response.ok){
-      console.warn("Soccer Academy /app-usage 応答:", response.status);
+      console.warn(appId + " /app-usage 応答:", response.status);
     }
     return response;
   }catch(error){
-    console.warn("Soccer Academy /app-usage 送信エラー:", error);
+    console.warn(appId + " /app-usage 送信エラー:", error);
     return null;
   }
+}
+
+function sendSportsAndSoccerAcademyUsage(eventName = "ai_message", extra = {}){
+  // 同じAIコーチの利用を、所属する2課へそれぞれ1件ずつ送信。
+  // Worker側の visitorId × appId × 日付の重複排除により、各課ごとに日次1人として集計されます。
+  return Promise.allSettled([
+    sendAcademyUsage(SPORTS_ACADEMY_APP_ID, eventName, extra),
+    sendAcademyUsage(SOCCER_ACADEMY_APP_ID, eventName, extra)
+  ]);
 }
 
 const chatBody = document.getElementById("chatBody");
@@ -506,9 +517,9 @@ async function sendMessage(rawMessage){
   conversation.push({role:"user", text:message});
   messageInput.value = "";
 
-  // 実際にAIコーチへ相談した時点で、サッカーアカデミー利用として記録。
+  // 実際にAIコーチへ相談した時点で、スポーツアカデミー課／サッカーアカデミー課の両方へ記録。
   // Worker側では visitorId × appId × 日付で重複排除する前提です。
-  sendSoccerAcademyUsage("ai_message", { messageLength: message.length });
+  sendSportsAndSoccerAcademyUsage("ai_message", { messageLength: message.length });
 
   addTyping();
 
