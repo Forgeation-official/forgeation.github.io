@@ -28,6 +28,13 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 @media(max-width:900px){header,.grid{grid-template-columns:1fr}header h1{text-align:left}.clock{text-align:left}.hero{grid-template-columns:1fr}.hero img{max-height:360px}}
 @media(max-width:600px){.mini-grid,.stats{grid-template-columns:1fr}.event{flex-basis:84vw}.hhead{align-items:flex-start}}
 
+/* 校舎内ランキング案内：順位そのものは公開ページに出さない */
+.rank-teaser{margin:0 14px 14px;padding:16px 17px;border:1px solid #f4c85a;border-radius:14px;background:linear-gradient(135deg,#071f43,#0d3e78);color:#fff;box-shadow:inset 0 0 24px #22c8ff12}
+.rank-teaser-top{display:flex;align-items:center;gap:10px;font-weight:1000;font-size:16px;color:#ffe39a}
+.rank-teaser p{margin:8px 0 0;color:#d7eaff;font-size:13px;line-height:1.75}
+.rank-teaser strong{color:#fff}
+.rank-teaser .rank-note{display:inline-block;margin-top:8px;padding:5px 9px;border-radius:999px;background:#ffffff14;border:1px solid #ffffff26;color:#aee9ff;font-size:11px;font-weight:900}
+
 .modal{position:fixed;inset:0;background:#020b18d9;display:none;align-items:center;justify-content:center;padding:22px;z-index:9999;backdrop-filter:blur(8px)}
 .modal.open{display:flex}
 .modal-card{width:min(760px,96vw);max-height:86vh;overflow:auto;background:linear-gradient(160deg,#0b3769,#061d3f);border:1px solid #f4c85a;border-radius:22px;box-shadow:0 25px 80px #000b;padding:28px;position:relative}
@@ -161,6 +168,12 @@ footer{text-align:center;padding:24px 8px;color:#9db7d0}
 <div class="stat"><b>👥 合計</b><div class="num" id="stat-total">—</div><div class="note" id="note-total">DB確認中</div></div>
 </div>
 <div class="truth">仮数字は表示しません。DBから取得できた実測値だけを表示します。取得できない場合は「—」のままです。</div>
+
+<div class="rank-teaser" aria-label="アプリ利用ランキングのご案内">
+  <div class="rank-teaser-top">🏆 アプリ利用ランキングは、校舎内で発表中。</div>
+  <p>ここでは順位をまだ公開しません。<strong>実際のランキングは、Forgeation School 校舎内の電光掲示板でご覧ください。</strong></p>
+  <span class="rank-note">順位は校舎内限定公開</span>
+</div>
 </section>
 </div>
 
