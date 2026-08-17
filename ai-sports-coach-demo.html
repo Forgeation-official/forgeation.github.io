@@ -386,6 +386,64 @@ button{cursor:pointer}
 <script>
 const API_URL = "https://forgeation-api.eru12121221.workers.dev/";
 
+// ===== サッカーアカデミー利用カウント =====
+// AI Soccer Academy Coach を実際に利用（メッセージ送信）した人を
+// F Soccer本番/β版とは分離して「サッカーアカデミー」として記録します。
+const APP_USAGE_URL = "https://forgeation-api.eru12121221.workers.dev/app-usage";
+const SOCCER_ACADEMY_APP_ID = "soccer-academy";
+
+function getForgeationVisitorId(){
+  let visitorId = localStorage.getItem("forgeation_visitor_id");
+  if(!visitorId){
+    visitorId = (crypto.randomUUID?.() || "visitor-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+    localStorage.setItem("forgeation_visitor_id", visitorId);
+  }
+  return visitorId;
+}
+
+function getForgeationUserId(){
+  return localStorage.getItem("forgeation_user_id") ||
+         localStorage.getItem("user_id") ||
+         localStorage.getItem("userId") || "";
+}
+
+async function sendSoccerAcademyUsage(eventName = "ai_message", extra = {}){
+  try{
+    const visitorId = getForgeationVisitorId();
+    const userId = getForgeationUserId();
+    const response = await fetch(APP_USAGE_URL,{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      credentials:"omit",
+      keepalive:true,
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        visitorId,
+        visitor_id:visitorId,
+        userId,
+        user_id:userId,
+        appId:SOCCER_ACADEMY_APP_ID,
+        app_id:SOCCER_ACADEMY_APP_ID,
+        page:SOCCER_ACADEMY_APP_ID,
+        app:SOCCER_ACADEMY_APP_ID,
+        product:SOCCER_ACADEMY_APP_ID,
+        event:String(eventName || "ai_message"),
+        action:String(eventName || "ai_message"),
+        timestamp:new Date().toISOString(),
+        ...extra
+      })
+    });
+    if(!response.ok){
+      console.warn("Soccer Academy /app-usage 応答:", response.status);
+    }
+    return response;
+  }catch(error){
+    console.warn("Soccer Academy /app-usage 送信エラー:", error);
+    return null;
+  }
+}
+
 const chatBody = document.getElementById("chatBody");
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
@@ -447,6 +505,11 @@ async function sendMessage(rawMessage){
   addMessage(message, "user");
   conversation.push({role:"user", text:message});
   messageInput.value = "";
+
+  // 実際にAIコーチへ相談した時点で、サッカーアカデミー利用として記録。
+  // Worker側では visitorId × appId × 日付で重複排除する前提です。
+  sendSoccerAcademyUsage("ai_message", { messageLength: message.length });
+
   addTyping();
 
   try{
