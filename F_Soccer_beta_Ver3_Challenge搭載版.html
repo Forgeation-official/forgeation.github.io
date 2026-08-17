@@ -786,6 +786,40 @@ const safeLocalStorage={
   }
 };
 const API_URL = "https://forgeation-api.eru12121221.workers.dev";
+
+// ===== F Soccer β 利用数カウント（本番版とは完全分離） =====
+const F_SOCCER_BETA_APP_ID = "f-soccer-beta";
+const F_SOCCER_BETA_VISITOR_KEY = "forgeationVisitorId";
+
+function getFSoccerBetaVisitorId(){
+  let id = String(safeLocalStorage.get(F_SOCCER_BETA_VISITOR_KEY, "") || "").trim();
+  if (!id) {
+    id = (window.crypto && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : `visitor-${Date.now()}-${Math.random().toString(36).slice(2,10)}`;
+    safeLocalStorage.set(F_SOCCER_BETA_VISITOR_KEY, id);
+  }
+  return id;
+}
+
+async function recordFSoccerBetaUsage(eventName="open"){
+  try {
+    await fetch(`${API_URL}/app-usage`, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        visitorId:getFSoccerBetaVisitorId(),
+        appId:F_SOCCER_BETA_APP_ID,
+        event:eventName
+      }),
+      keepalive:true
+    });
+  } catch (error) {
+    console.warn("F Soccer β 利用数記録:", error);
+  }
+}
+
+recordFSoccerBetaUsage("open");
 const PRODUCTION_USER_ID_KEYS = ["fSoccerUserId", "f_soccer_user_id", "user_id", "forgeation_f_soccer_user_id"];
 let productionUserId = "";
 let productionDbReady = false;
