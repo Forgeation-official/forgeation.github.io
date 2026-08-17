@@ -175,6 +175,37 @@ button{font:inherit}
   color:#9fffd0;
 }
 
+/* 1F未来掲示板：DB実数アプリ利用ランキング */
+.electric-board{
+  padding:22px;border-radius:20px;
+  background:linear-gradient(160deg,rgba(1,10,26,.92),rgba(5,33,72,.88));
+  border:1px solid rgba(53,213,255,.28);
+  box-shadow:inset 0 0 32px rgba(53,213,255,.05);
+}
+.electric-board-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px}
+.electric-board-kicker{color:#77e7ff;font-size:.76rem;font-weight:950;letter-spacing:.16em}
+.electric-board-title{margin:5px 0 0;font-size:clamp(1.25rem,3vw,1.75rem)}
+.electric-board-lead{margin:6px 0 0;color:#bcdcff;line-height:1.65;font-size:.9rem}
+.electric-board-date{flex:0 0 auto;color:#9fe9ff;font-size:.78rem;font-weight:900}
+.app-ranking-list{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.app-ranking-item{display:grid;grid-template-columns:50px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 14px;border:1px solid rgba(255,255,255,.11);border-radius:14px;background:rgba(255,255,255,.065)}
+.app-ranking-rank{display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:rgba(53,213,255,.13);color:#bff5ff;font-weight:950}
+.app-ranking-item:nth-child(1) .app-ranking-rank{background:rgba(245,202,97,.22);color:#ffe59b;box-shadow:0 0 20px rgba(245,202,97,.12)}
+.app-ranking-item:nth-child(2) .app-ranking-rank{background:rgba(225,233,242,.16);color:#f1f5f9}
+.app-ranking-item:nth-child(3) .app-ranking-rank{background:rgba(206,135,82,.18);color:#ffc99f}
+.app-ranking-name{min-width:0;font-weight:900;color:#fff}
+.app-ranking-count{white-space:nowrap;color:#9fffd0;font-weight:950;font-size:1.06rem}
+.app-ranking-empty{padding:18px;text-align:center;color:#bcdcff;border-radius:14px;background:rgba(255,255,255,.06)}
+.electric-board-note{margin:14px 0 0;color:#9fbddc;font-size:.78rem;line-height:1.6}
+@media(max-width:620px){
+  .electric-board{padding:18px 12px}
+  .electric-board-head{display:block}
+  .electric-board-date{margin-top:8px}
+  .app-ranking-item{grid-template-columns:42px minmax(0,1fr) auto;gap:8px;padding:10px}
+  .app-ranking-rank{width:33px;height:33px}
+  .app-ranking-count{font-size:.94rem}
+}
+
 @media(max-width:900px){
   .hero{grid-template-columns:1fr}
   .quick-grid{grid-template-columns:repeat(2,1fr)}
@@ -266,13 +297,21 @@ button{font:inherit}
       </div>
     </section>
 
-    <section class="section notice">
+    <section class="section notice" id="future-board">
       <h2>📢 未来掲示板</h2>
-      <div class="notice-box">
-        <div class="notice-item"><strong>🏫 Forgeation校舎プロジェクト</strong><small>各フロアをクリックして探検できる校舎マップを開発中です。</small></div>
-        <div class="notice-item"><strong>🤖 AIアカデミー課</strong><small>AIの基礎から生成AI・開発・安全な活用まで学べる教室を準備しています。</small></div>
-        <div class="notice-item"><strong>⚽ F Soccer</strong><small>選手一人ひとりに寄り添う専属AIコーチとF Challengeを公開しています。</small></div>
-        <div class="notice-item"><strong>🥐 Forgeation Bakery</strong><small>未来の学食、そして実店舗を目指す新しい挑戦です。</small></div>
+      <div class="electric-board" aria-labelledby="frontAppRankingTitle">
+        <div class="electric-board-head">
+          <div>
+            <div class="electric-board-kicker">1F / SCHOOL ELECTRIC BOARD</div>
+            <h3 class="electric-board-title" id="frontAppRankingTitle">🏆 本日のアプリ利用ランキング</h3>
+            <p class="electric-board-lead">校舎まで来てくれた方だけに公開。DBに記録された本日の利用実数を、リアルタイムで順位表示します。</p>
+          </div>
+          <div class="electric-board-date" id="frontAppRankingDate">DBから読込中…</div>
+        </div>
+        <ol class="app-ranking-list" id="frontAppRankingList" aria-live="polite">
+          <li class="app-ranking-empty">本日のランキングを読み込んでいます…</li>
+        </ol>
+        <p class="electric-board-note">※ このランキングはホームページ表側には表示せず、校舎内1F「未来掲示板」で公開しています。</p>
       </div>
     </section>
   </main>
@@ -426,6 +465,64 @@ function leaveSchoolPresence(){
 }
 
 window.addEventListener("pagehide",leaveSchoolPresence,{once:true});
+
+// ========================================
+// 1F未来掲示板：本日のアプリ利用ランキング
+// Worker GET /app-usage のDB実数を15秒ごとに更新
+// ========================================
+const FRONT_APP_NAMES = {
+  fSoccerBeta: "F Soccer β",
+  fSoccerProduction: "F Soccer 本番",
+  fChallenge: "F Challenge",
+  fDrone: "F Drone",
+  fMotion: "F Motion",
+  fGoggle: "F Goggle",
+  fNightingale: "F Nightingale",
+  fMind: "F Mind",
+  fPython: "F Python",
+  fTeacher: "F Teacher"
+};
+
+async function loadFrontAppRanking(){
+  const list=document.getElementById("frontAppRankingList");
+  const dateEl=document.getElementById("frontAppRankingDate");
+  if(!list) return;
+
+  try{
+    const response=await fetch(API_BASE + "/app-usage",{
+      method:"GET",mode:"cors",cache:"no-store",credentials:"omit"
+    });
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error || "HTTP " + response.status);
+
+    const appUsers=data.appUsers || {};
+    const ranking=Object.entries(FRONT_APP_NAMES)
+      .map(([key,name],order)=>({name,count:Number(appUsers[key] || 0),order}))
+      .sort((a,b)=>b.count-a.count || a.order-b.order);
+
+    list.innerHTML=ranking.map((item,index)=>
+      '<li class="app-ranking-item">'+
+        '<span class="app-ranking-rank">'+(index+1)+'</span>'+ 
+        '<span class="app-ranking-name">'+item.name+'</span>'+ 
+        '<span class="app-ranking-count">'+item.count.toLocaleString("ja-JP")+' 人</span>'+ 
+      '</li>'
+    ).join("");
+
+    if(dateEl){
+      dateEl.textContent=(data.date ? data.date.replaceAll("-","/") : "本日") + "｜DB実数";
+    }
+  }catch(error){
+    console.warn("1F未来掲示板ランキング取得に失敗しました。",error);
+    list.innerHTML='<li class="app-ranking-empty">DBとの接続を確認しています。</li>';
+    if(dateEl) dateEl.textContent="DB接続確認中";
+  }
+}
+
+loadFrontAppRanking();
+setInterval(loadFrontAppRanking,15000);
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible") loadFrontAppRanking();
+});
 
 // 各案内先のクリックも記録
 document.querySelectorAll(".track-link").forEach(link=>{
