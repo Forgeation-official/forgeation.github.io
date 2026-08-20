@@ -1122,10 +1122,11 @@ let coachXp = Number(safeLocalStorage.get("fSoccerCoachXpV3","0"));
 function coachLevelInfo(xp) {
   // 1000XP以降も上限なしでレベルアップし続ける。
   // 1000XP = Lv.100、以降は10XPごとにLv.1上昇。
+  // ゲージは100XP単位で表示し、10XP獲得時にも進行が見えるようにする。
   if (xp >= 1000) {
     const level = Math.max(100, Math.floor(xp / 10));
-    const base = level * 10;
-    const next = (level + 1) * 10;
+    const base = Math.floor(xp / 100) * 100;
+    const next = base + 100;
     return {name:`Lv.${level} 世界トップコーチ 🌍`, base, next};
   }
   if (xp >= 500) return {name:"Lv.50 プロアカデミーコーチ", base:500, next:1000};
