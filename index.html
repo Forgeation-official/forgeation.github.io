@@ -471,7 +471,11 @@ section{padding:68px 0}
 .school-room-modal.open{display:flex}
 .school-room-card{
   width:min(520px,94vw);
-  overflow:hidden;
+  max-height:calc(100dvh - 44px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
   border:1px solid #ffffff35;
   border-radius:25px;
   color:#fff;
@@ -3071,6 +3075,8 @@ function leaveForgeationHome(){
 }
 
 const FORGEATION_APP_NAMES={
+  fSoccerBeta:"F Soccer β",
+  fSoccerProduction:"F Soccer本番",
   fChallenge:"F Challenge",
   fDrone:"F Drone",
   fMotion:"F Motion",
@@ -3095,6 +3101,7 @@ async function loadSchoolAppRanking(){
     const appUsers=data.appUsers || {};
     const ranking=Object.entries(FORGEATION_APP_NAMES)
       .map(([key,name],index)=>({name,count:Number(appUsers[key] || 0),order:index}))
+      .filter(item=>item.name!=="スポーツアカデミー課" && item.name!=="サッカーアカデミー課")
       .sort((a,b)=>b.count-a.count || a.order-b.order);
 
     list.innerHTML=ranking.map((item,index)=>
