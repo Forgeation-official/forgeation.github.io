@@ -11,6 +11,7 @@
 .scene{position:absolute;inset:0;background:center/cover no-repeat;transition:opacity .7s ease,transform 5s ease;transform:scale(1.015)}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,4,10,.72) 0%,rgba(0,4,10,.04) 36%,rgba(0,5,12,.35) 58%,rgba(0,4,10,.95) 100%)}
 .hud{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;padding:clamp(18px,3vw,42px)}
+.home-link{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;padding:8px 12px;width:max-content;border:1px solid rgba(83,216,255,.48);background:rgba(3,10,19,.76);color:#dff8ff;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.06em;backdrop-filter:blur(8px);transition:.2s}.home-link:hover,.home-link:focus{border-color:#fff;background:#0b3b58;transform:translateY(-1px)}
 .top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}.eyebrow{color:var(--blue);letter-spacing:.22em;font-size:12px;font-weight:800}.title{font-weight:950;font-size:clamp(28px,5vw,64px);letter-spacing:.06em;text-shadow:0 3px 24px #000}.subtitle{color:#bfd0df;letter-spacing:.17em;font-size:12px;margin-top:4px}
 .status{display:grid;grid-template-columns:repeat(5,minmax(72px,112px));gap:7px}.stat{background:rgba(3,10,19,.68);border:1px solid rgba(116,211,255,.28);padding:9px 11px;backdrop-filter:blur(8px)}.stat b{display:block;font-size:9px;letter-spacing:.1em;color:#9fb4c7}.stat span{font-weight:900;font-size:18px}.bar{height:3px;background:#223141;margin-top:7px}.fill{height:100%;background:linear-gradient(90deg,var(--blue),#fff);transition:width .5s}
 .spacer{flex:1}.panel{max-width:980px;background:linear-gradient(90deg,rgba(3,9,18,.94),rgba(3,9,18,.69));border-left:3px solid var(--blue);padding:clamp(18px,3vw,32px);box-shadow:0 18px 70px #000;backdrop-filter:blur(10px)}
@@ -18,8 +19,8 @@
 .pulse{animation:pulse 1.5s infinite}@keyframes pulse{50%{filter:drop-shadow(0 0 12px var(--blue))}}
 @media(max-width:800px){
   .stage{min-height:100svh;overflow:hidden}
-  .scene{inset:0;background-size:100% auto;background-position:center 220px;background-repeat:no-repeat;transform:none}
-  .shade{background:linear-gradient(180deg,rgba(0,4,10,.88) 0,rgba(0,4,10,.42) 220px,rgba(0,4,10,.08) calc(220px + 30vw),rgba(0,4,10,.96) calc(220px + 56.25vw),#02050a calc(220px + 56.25vw + 2px))}
+  .scene{inset:0;background-size:100% auto;background-position:center 260px;background-repeat:no-repeat;transform:none}
+  .shade{background:linear-gradient(180deg,rgba(0,4,10,.88) 0,rgba(0,4,10,.42) 260px,rgba(0,4,10,.08) calc(260px + 30vw),rgba(0,4,10,.96) calc(260px + 56.25vw),#02050a calc(260px + 56.25vw + 2px))}
   .hud{min-height:100svh;padding:14px}
   .top{display:block}
   .title{font-size:31px}
@@ -37,7 +38,7 @@
   <div id="scene" class="scene"></div><div class="shade"></div>
   <section class="hud">
     <header class="top">
-      <div><div class="eyebrow">FORGEATION / F-SERIES</div><div class="title">F PHOENIXing</div><div class="subtitle">CHALLENGER IS FOREVER</div></div>
+      <div><a class="home-link" href="https://forgeation-official.github.io/forgeation.github.io/" aria-label="Forgeation公式ホームページへ戻る">← Forgeationへ戻る</a><div class="eyebrow">FORGEATION / F-SERIES</div><div class="title">F PHOENIXing</div><div class="subtitle">CHALLENGER IS FOREVER</div></div>
       <div class="status">
         <div class="stat"><b>TEAM BOND</b><span id="bond">12</span><div class="bar"><div id="bondBar" class="fill"></div></div></div>
         <div class="stat"><b>AI TRUST</b><span id="trust">03</span><div class="bar"><div id="trustBar" class="fill"></div></div></div>
