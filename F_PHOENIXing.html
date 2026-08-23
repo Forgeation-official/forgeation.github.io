@@ -16,7 +16,20 @@
 .spacer{flex:1}.panel{max-width:980px;background:linear-gradient(90deg,rgba(3,9,18,.94),rgba(3,9,18,.69));border-left:3px solid var(--blue);padding:clamp(18px,3vw,32px);box-shadow:0 18px 70px #000;backdrop-filter:blur(10px)}
 .chapter{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:.23em}.panel h2{font-size:clamp(25px,4vw,46px);margin:8px 0 10px}.story{line-height:1.8;color:#d7e4ee;min-height:3.6em}.quote{margin:12px 0;color:#fff;font-weight:800}.choices{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.choice{border:1px solid rgba(108,211,255,.43);color:#eaf9ff;background:rgba(4,19,33,.83);padding:12px 17px;cursor:pointer;transition:.2s}.choice:hover,.choice:focus{border-color:#fff;background:#0b3b58;transform:translateY(-2px)}.choice small{display:block;color:#91a9ba;margin-top:3px}.footer{display:flex;justify-content:space-between;margin-top:12px;color:#71869a;font-size:10px;letter-spacing:.12em}.reset{border:0;background:none;color:#8aa3b7;cursor:pointer}
 .pulse{animation:pulse 1.5s infinite}@keyframes pulse{50%{filter:drop-shadow(0 0 12px var(--blue))}}
-@media(max-width:800px){.top{display:block}.status{margin-top:14px;grid-template-columns:repeat(2,1fr)}.hud{padding:16px}.panel{margin-top:160px}.choice{width:100%;text-align:left}.title{font-size:31px}}
+@media(max-width:800px){
+  .stage{min-height:100svh;overflow:hidden}
+  .scene{inset:0;background-size:100% auto;background-position:center 220px;background-repeat:no-repeat;transform:none}
+  .shade{background:linear-gradient(180deg,rgba(0,4,10,.88) 0,rgba(0,4,10,.42) 220px,rgba(0,4,10,.08) calc(220px + 30vw),rgba(0,4,10,.96) calc(220px + 56.25vw),#02050a calc(220px + 56.25vw + 2px))}
+  .hud{min-height:100svh;padding:14px}
+  .top{display:block}
+  .title{font-size:31px}
+  .status{margin-top:12px;grid-template-columns:repeat(3,1fr);gap:6px}
+  .stat{padding:7px 8px}
+  .stat span{font-size:16px}
+  .spacer{display:none}
+  .panel{margin-top:calc(56.25vw + 24px);padding:20px 18px}
+  .choice{width:100%;text-align:left}
+}
 </style>
 </head>
 <body>
