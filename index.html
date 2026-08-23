@@ -3086,6 +3086,20 @@ const FORGEATION_APP_NAMES={
   fPython:"F Python",
   fTeacher:"F Teacher"
 };
+const FORGEATION_RANKING_EXCLUDED_KEYS=new Set(["sportsAcademy","soccerAcademy"]);
+const FORGEATION_RANKING_EXCLUDED_NAMES=new Set(["スポーツアカデミー課","サッカーアカデミー課"]);
+
+function removeAcademyDepartmentsFromRanking(list){
+  if(!list) return;
+  Array.from(list.querySelectorAll(".school-app-ranking-item")).forEach(item=>{
+    const name=item.querySelector(".school-app-ranking-name")?.textContent.trim();
+    if(FORGEATION_RANKING_EXCLUDED_NAMES.has(name)) item.remove();
+  });
+  Array.from(list.querySelectorAll(".school-app-ranking-item")).forEach((item,index)=>{
+    const rank=item.querySelector(".school-app-ranking-rank");
+    if(rank) rank.textContent=String(index+1);
+  });
+}
 
 async function loadSchoolAppRanking(){
   const list=document.getElementById("schoolAppRankingList");
@@ -3100,8 +3114,9 @@ async function loadSchoolAppRanking(){
 
     const appUsers=data.appUsers || {};
     const ranking=Object.entries(FORGEATION_APP_NAMES)
+      .filter(([key])=>!FORGEATION_RANKING_EXCLUDED_KEYS.has(key))
       .map(([key,name],index)=>({name,count:Number(appUsers[key] || 0),order:index}))
-      .filter(item=>item.name!=="スポーツアカデミー課" && item.name!=="サッカーアカデミー課")
+      .filter(item=>!FORGEATION_RANKING_EXCLUDED_NAMES.has(item.name))
       .sort((a,b)=>b.count-a.count || a.order-b.order);
 
     list.innerHTML=ranking.map((item,index)=>
@@ -3111,6 +3126,7 @@ async function loadSchoolAppRanking(){
         '<span class="school-app-ranking-count">'+item.count.toLocaleString("ja-JP")+' 人</span>'+
       '</li>'
     ).join("");
+    removeAcademyDepartmentsFromRanking(list);
 
     if(dateEl){
       dateEl.textContent=(data.date ? data.date.replaceAll("-","/") : "本日")+"｜DB実数";
@@ -3167,6 +3183,12 @@ document.addEventListener("visibilitychange",()=>{
 window.addEventListener("pagehide",leaveForgeationHome,{once:true});
 
 document.addEventListener("DOMContentLoaded",()=>{
+  const rankingList=document.getElementById("schoolAppRankingList");
+  if(rankingList){
+    removeAcademyDepartmentsFromRanking(rankingList);
+    new MutationObserver(()=>removeAcademyDepartmentsFromRanking(rankingList))
+      .observe(rankingList,{childList:true});
+  }
   loadSchoolBuzz();
   loadSchoolAppRanking();
   const exitButton=document.getElementById("forgeationExitButton");
