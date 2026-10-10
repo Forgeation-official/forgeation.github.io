@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1961,7 +1960,7 @@ section{padding:68px 0}
 .fg-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
 .fg-support-card{display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:16px;border:1px solid #0a57d522;background:#fff}
 .fg-support-card h4{margin:0;font-size:1.18rem}.fg-support-card p{margin:0;line-height:1.7}.fg-support-card a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:auto;padding:12px 18px;border-radius:999px;background:#0a57d5;color:#fff;font-weight:800}.fg-support-card a:hover{background:#071a3a}.fg-support-card a:focus-visible{outline:3px solid #ed53a2;outline-offset:4px}
-#schoolRoomSupport{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}#schoolRoomSupport[hidden]{display:none}#schoolRoomSupport a{padding:13px 16px;border-radius:12px;background:#fff3f9;color:#071a3a;font-weight:800;border:1px solid #ed53a2}
+#schoolRoomSupport{display:flex;flex-direction:column;gap:12px;margin:20px 0}#schoolRoomSupport[hidden]{display:none}#schoolRoomSupport a{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;min-height:52px;padding:13px 16px;border-radius:12px;background:#fff3f9;color:#071a3a;font-weight:800;text-align:center;line-height:1.45;border:1px solid #ed53a2}
 @media(max-width:700px){.fg-support-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -2256,7 +2255,7 @@ section{padding:68px 0}
       data-floor="2F"
       data-title="スポーツアカデミー課"
       data-description="データとAIを使い、選手とコーチの成長を支える教室です。"
-      data-features="トレーニング|分析|コーチング|セパタクロー応援学習室|F 🏈アメフト"
+      data-features="トレーニング|分析|コーチング"
       data-href="./sports-academy-web.html"
       aria-label="スポーツアカデミー課の詳細を表示">i</button>
 <button class="school-map-hotspot" type="button" onclick="openForgeationRoom(this); return false;"
@@ -2389,14 +2388,21 @@ section{padding:68px 0}
 <figure><img src="soccer-recruitment.webp" alt="サッカーアカデミー 募集案内"><figcaption>募集案内</figcaption></figure>
 </div></div></section>
 
-<section id="sports-academy-detail" data-academy="sports"><div class="container"><div class="fg-support-projects" id="sports-support-projects"><h3>スポーツ応援プロジェクト</h3><p>物語を読み、AIコーチと話して、スポーツを楽しもう！ Forgeationが自主制作するオリジナルの応援・学習企画です。</p><div class="fg-support-grid"><article class="fg-support-card" id="f-sepak-entry"><h4>F Sky Kick｜セパタクロー応援</h4><strong>空へつなぐ、３タッチ</strong><p>足でボールをつなぐ楽しさを、物語とクイズで発見。ジッピーコーチに気軽に聞いてみよう。</p><a href="https://forgeation-sepaktakraw-academy.eru12121221.chatgpt.site" target="_blank" rel="noopener">学習室へ入る ↗</a></article><article class="fg-support-card" id="f-field-goal-entry"><h4>F Field Goal｜Fアメフト</h4><strong>背番号88と、次の一歩。</strong><p>全30話のオリジナル物語と全10ステージのゲーム。背番号88のキックも、ジッピーAIコーチと楽しもう。</p><a href="https://forgeation-f-american-football.eru12121221.chatgpt.site" target="_blank" rel="noopener">物語とゲームへ ↗</a></article><article class="fg-support-card" id="f-green-entry"><h4>F Green｜ゴルフ</h4><strong>一打ずつ、カップへ。</strong><p>風と傾斜を読んでパターに挑戦。10話のオリジナル物語とゲーム、ジッピーAIコーチ。</p><a href="./F_Green_F_View_from_the_Top.html#golf">F Greenを開く ↗</a></article><article class="fg-support-card" id="f-view-top-entry"><h4>F View from the Top｜バレーボール</h4><strong>つないだ先に見える景色。</strong><p>仲間とラリーをつなぐ10話のオリジナル物語と判断ゲーム。ジッピーAIコーチ付き。</p><a href="./F_Green_F_View_from_the_Top.html#volley">F View from the Topを開く ↗</a></article></div></div><div class="section-head"><div class="section-kicker">Sports Academy Gallery</div><h2>スポーツアカデミー課</h2><p>AIとスポーツ科学で、選手一人ひとりの成長を見える化し、最適なトレーニングとコーチングにつなげます。画像をタップすると、大きく表示できます。</p></div>
+<section id="sports-academy-detail" data-academy="sports"><div class="container">
+<div class="section-head" id="sports-academy-gallery"><div class="section-kicker">Sports Academy Gallery</div><h2>スポーツアカデミー課</h2><p>AIとスポーツ科学で、選手一人ひとりの成長を見える化し、最適なトレーニングとコーチングにつなげます。画像をタップすると、大きく表示できます。</p></div>
 <div class="academy-detail-gallery">
 <figure><img src="sports-academy-overview.webp" data-candidates="sports-academy-overview.webp|sports-overview.webp|academy-sports.webp" alt="スポーツアカデミー 総合紹介"><figcaption>総合紹介</figcaption></figure>
 <figure><img src="sports-visualization.webp" alt="スポーツデータの見える化"><figcaption>見える化</figcaption></figure>
 <figure><img src="sports-training.webp" alt="個別トレーニング提案"><figcaption>トレーニング提案</figcaption></figure>
 <figure><img src="sports-feedback.webp" alt="選手へのフィードバック"><figcaption>フィードバック</figcaption></figure>
 <figure><img src="sports-coaching.webp" alt="AIと人によるコーチング"><figcaption>コーチング</figcaption></figure>
-</div></div></section>
+</div>
+<div class="fg-support-projects" id="sports-support-projects"><h3>スポーツ応援プロジェクト</h3><p>物語を読み、AIコーチと話して、スポーツを楽しもう！ Forgeationが自主制作するオリジナルの応援・学習企画です。</p><div class="fg-support-grid">
+<article class="fg-support-card" id="f-sepak-entry"><h4>F Sky Kick｜セパタクロー応援</h4><strong>空へつなぐ、３タッチ</strong><p>足でボールをつなぐ楽しさを、物語とクイズで発見。ジッピーコーチに気軽に聞いてみよう。</p><a href="https://forgeation-sepaktakraw-academy.eru12121221.chatgpt.site" target="_blank" rel="noopener">学習室へ入る ↗</a></article>
+<article class="fg-support-card" id="f-field-goal-entry"><h4>F Field Goal｜Fアメフト</h4><strong>背番号88と、次の一歩。</strong><p>全30話のオリジナル物語と全10ステージのゲーム。背番号88のキックも、ジッピーAIコーチと楽しもう。</p><a href="https://forgeation-f-american-football.eru12121221.chatgpt.site" target="_blank" rel="noopener">物語とゲームへ ↗</a></article>
+<article class="fg-support-card" id="f-green-entry"><h4>F Green｜ゴルフ</h4><strong>一打ずつ、カップへ。</strong><p>風と傾斜を読んでパターに挑戦。10話のオリジナル物語とゲーム、ジッピーAIコーチ。</p><a href="./F_Green_F_View_from_the_Top/#golf">F Greenを開く ↗</a></article>
+<article class="fg-support-card" id="f-view-top-entry"><h4>F View from the Top｜バレーボール</h4><strong>つないだ先に見える景色。</strong><p>仲間とラリーをつなぐ10話のオリジナル物語と判断ゲーム。ジッピーAIコーチ付き。</p><a href="./F_Green_F_View_from_the_Top/#volley">F View from the Topを開く ↗</a></article>
+</div></div></div></section>
 
 <section id="nursing-academy-detail" data-academy="nursing"><div class="container"><div class="section-head"><div class="section-kicker">Nursing & Medical Academy Gallery</div><h2>看護・医療アカデミー課</h2><p>やさしさ、科学、テクノロジーをつなぎ、未来の看護と医療を支える学びを創ります。画像をタップすると、大きく表示できます。</p></div>
 <div class="academy-detail-gallery">
@@ -2554,7 +2560,7 @@ section{padding:68px 0}
         <div class="future-icon">📊</div>
         <h3>データ分析</h3>
         <p>スポーツや学習のデータを見える化し、次の行動につなげます。</p>
-        <a href="#sports-academy-detail">分析授業を見る</a>
+        <a href="#sports-academy-gallery">分析授業を見る</a>
       </article>
       <article class="future-card">
         <div class="future-icon">🩺</div>
@@ -3548,7 +3554,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="school-room-body">
       <p class="school-room-description" id="schoolRoomDescription"></p>
       <ul class="school-room-features" id="schoolRoomFeatures"></ul>
-      <nav id="schoolRoomSupport" aria-label="自主応援プロジェクト" hidden><a data-sport="soccer" href="https://forgeation-funabashi-ladies.eru12121221.chatgpt.site" target="_blank" rel="noopener">女子サッカー応援学習室へ ↗</a><a data-sport="sports" href="https://forgeation-sepaktakraw-academy.eru12121221.chatgpt.site" target="_blank" rel="noopener">セパタクロー応援学習室へ ↗</a><a data-sport="sports" href="https://forgeation-f-american-football.eru12121221.chatgpt.site" target="_blank" rel="noopener">F Field Goalへ ↗</a></nav>
+      <nav id="schoolRoomSupport" aria-label="自主応援プロジェクト" hidden><a data-sport="soccer" href="https://forgeation-funabashi-ladies.eru12121221.chatgpt.site" target="_blank" rel="noopener">F WEleven｜女子サッカー ↗</a><a data-sport="sports" href="https://forgeation-sepaktakraw-academy.eru12121221.chatgpt.site" target="_blank" rel="noopener">F Sky Kick｜セパタクロー ↗</a><a data-sport="sports" href="https://forgeation-f-american-football.eru12121221.chatgpt.site" target="_blank" rel="noopener">F Field Goal｜アメフト ↗</a><a data-sport="sports" href="./F_Green_F_View_from_the_Top/#golf">F Green｜ゴルフ ↗</a><a data-sport="sports" href="./F_Green_F_View_from_the_Top/#volley">F View from the Top｜バレーボール ↗</a></nav>
 <div class="school-room-actions">
         <a class="school-room-enter" id="schoolRoomEnter" href="#">🚪 この部屋へ入る</a>
         <button class="school-room-cancel" id="schoolRoomCancel" type="button">校舎マップへ戻る</button>
@@ -3824,8 +3830,7 @@ document.addEventListener('DOMContentLoaded', () => {
       makeEmbedded(pythonCard, '建設アカデミー課を見る', [document.getElementById('construction-academy-detail')]);
     }
 
-    // データ分析：スポーツアカデミー課をその場に埋め込み
-    makeEmbedded(byTitle('データ分析'), '分析授業を見る', [document.getElementById('sports-academy-detail')]);
+    // スポーツアカデミー課は独立したセクションとして配置し、データ分析カードには移動しない
 
     // 看護アカデミー：旧AI倫理・安全カードの位置へ
     makeEmbedded(byTitle('看護アカデミー'), '看護アカデミーを見る', [document.getElementById('nursing-academy-detail')]);
