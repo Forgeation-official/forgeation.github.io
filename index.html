@@ -4654,7 +4654,7 @@ const m=location.hash.match(/^#experience-(football|golf|volley)$/);if(m)open(m[
       const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:decode(data.salt),iterations:data.iterations,hash:'SHA-256'},raw,{name:'AES-GCM',length:256},false,['decrypt']);
       const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(data.iv)},key,decode(data.ciphertext));
       if(ticket!==generation)return;
-      content.innerHTML=new TextDecoder().decode(plain).replaceAll('Forgeation 創設者・野口正治（ノグ）','Forgeation・野口正治（ノグ）');content.insertAdjacentHTML('beforeend',"<section class=\"cycling-private-recap\"><h3>🚴 2026.10.11｜サイクリングと行動の記録</h3><p>買い出しをきっかけに外へ出て、前輪の空気漏れに気づき、虫ゴムを強化版に交換。帰宅後は、前から気になっていた草取りまで終えた一日。</p><p><strong>「行動しないと、未来は変わらない。」</strong> 今日感じたことを、ここにも残しておきます。</p></section>");form.hidden=true;status.textContent='記事を開きました。閉じると再び鍵がかかります。';
+      content.innerHTML=new TextDecoder().decode(plain);content.insertAdjacentHTML('beforeend',"<section class=\"cycling-private-recap\"><h3>🚴 2026.10.11｜サイクリングと行動の記録</h3><p>買い出しをきっかけに外へ出て、前輪の空気漏れに気づき、虫ゴムを強化版に交換。帰宅後は、前から気になっていた草取りまで終えた一日。</p><p><strong>「行動しないと、未来は変わらない。」</strong> 今日感じたことを、ここにも残しておきます。</p></section>");form.hidden=true;status.textContent='記事を開きました。閉じると再び鍵がかかります。';
       const heading=content.querySelector('h3');heading.tabIndex=-1;heading.focus({preventScroll:true});content.scrollIntoView({block:'start',behavior:'smooth'});
     }catch{if(ticket===generation){status.textContent='パスワードが違うか、記事を開けませんでした。もう一度入力してください。';input.focus();}}
     finally{if(ticket===generation)submit.disabled=false;}
