@@ -2008,6 +2008,20 @@ section{padding:68px 0}
 #collectionComingSoon .luminous-extra-grid figcaption{padding:9px 10px;color:#214861;font-size:13px;font-weight:800}
 @media(max-width:600px){#collectionComingSoon .luminous-extra-grid{grid-template-columns:1fr}#collectionComingSoon .luminous-extra-grid img{height:auto;max-height:420px;object-fit:contain}}
 </style>
+
+<style id="nogu-glasses-isolation-20261014">
+/* メガネ作品の表示中は、サイクリングの表紙・作品選択UIを隠す。 */
+#collectionComingSoon.nogu-glasses-mode .coming-soon-door,
+#collectionComingSoon.nogu-glasses-mode .coming-soon-card > .section-kicker,
+#collectionComingSoon.nogu-glasses-mode #comingSoonTitle,
+#collectionComingSoon.nogu-glasses-mode .coming-soon-card > p,
+#collectionComingSoon.nogu-glasses-mode .collection-preview,
+#collectionComingSoon.nogu-glasses-mode .nogu-collection-buttons,
+#collectionComingSoon.nogu-glasses-mode #nogu-public-view,
+#collectionComingSoon.nogu-glasses-mode #nogu-private-view {display:none!important}
+#collectionComingSoon.nogu-glasses-mode #nogu-glasses-view {display:block!important;margin-top:0}
+#collectionComingSoon.nogu-glasses-mode .coming-soon-card{padding-top:58px}
+</style>
 </head>
 <body>
 <!-- Ver3.23.5: Ver3.23.4原本を維持し、スポーツアカデミー課 F Motion 導線のみ差分統合 -->
@@ -3155,11 +3169,12 @@ function openCollectionComingSoon(){
   collectionComingSoon.setAttribute('aria-hidden','false');
 }
 function closeCollectionComingSoon(){
+  collectionComingSoon.classList.remove('nogu-glasses-mode');
   collectionComingSoon.classList.remove('open');
   collectionComingSoon.setAttribute('aria-hidden','true');
 }
 collectionDoorButton?.addEventListener('click',openCollectionComingSoon);
-document.getElementById('noguCyclingEntry')?.addEventListener('click',()=>collectionDoorButton?.click());
+document.getElementById('noguCyclingEntry')?.addEventListener('click',()=>{collectionComingSoon?.classList.remove('nogu-glasses-mode');collectionDoorButton?.click();});
 collectionComingSoonClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoonTopClose?.addEventListener('click',closeCollectionComingSoon);
 collectionComingSoon?.addEventListener('click',e=>{if(e.target===collectionComingSoon)closeCollectionComingSoon()});
@@ -4682,12 +4697,12 @@ const m=location.hash.match(/^#experience-(football|golf|volley)$/);if(m)open(m[
   const submit=document.getElementById('nogu-unlock');
   let generation=0;
   function lock(){generation++;content.replaceChildren();input.value='';form.hidden=false;status.textContent='';submit.disabled=false;privateView.hidden=true;}
-  function showPrivate(){lock();publicView.hidden=true;glassesView.hidden=true;privateView.hidden=false;privateView.scrollIntoView({block:'start',behavior:'smooth'});input.focus({preventScroll:true});}
-  function showGlasses(){lock();publicView.hidden=true;privateView.hidden=true;glassesView.hidden=false;glassesView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-glasses-title').focus({preventScroll:true});}
+  function showPrivate(){modal.classList.remove('nogu-glasses-mode');lock();publicView.hidden=true;glassesView.hidden=true;privateView.hidden=false;privateView.scrollIntoView({block:'start',behavior:'smooth'});input.focus({preventScroll:true});}
+  function showGlasses(){lock();modal.classList.add('nogu-glasses-mode');publicView.hidden=true;privateView.hidden=true;glassesView.hidden=false;glassesView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-glasses-title').focus({preventScroll:true});}
   document.getElementById('nogu-private-open').onclick=showPrivate;
-  document.getElementById('nogu-public-open').onclick=()=>{lock();glassesView.hidden=true;publicView.hidden=false;publicView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-public-title').focus({preventScroll:true});};
+  document.getElementById('nogu-public-open').onclick=()=>{modal.classList.remove('nogu-glasses-mode');lock();glassesView.hidden=true;publicView.hidden=false;publicView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-public-title').focus({preventScroll:true});};
   document.querySelector('[data-nogu-close="public"]').onclick=()=>{publicView.hidden=true;document.getElementById('nogu-public-open').focus();};
-  document.querySelector('[data-nogu-close="glasses"]').onclick=()=>{glassesView.hidden=true;document.getElementById('noguGlassesEntry')?.focus();};
+  document.querySelector('[data-nogu-close="glasses"]').onclick=()=>{modal.classList.remove('nogu-glasses-mode');glassesView.hidden=true;document.getElementById('noguGlassesEntry')?.focus();};
   document.querySelector('[data-nogu-close="private"]').onclick=()=>{lock();document.getElementById('nogu-private-open').focus();};
   const decode=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
   form.onsubmit=async e=>{
