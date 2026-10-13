@@ -86,7 +86,7 @@ for(let h=0;h<3;h++){
 let yy=y-3.25+h*1.05;line([x,yy,z],[x,yy,z+8],'#d39a55',2);
 for(let k=0;k<21;k++){let zz=z+.23+k*.36,hh=.54+((k*17+z*3+h*9)%8)*.038;
 poly([[x-side*.07,yy,zz],[x-side*.07,yy+hh,zz],[x-side*.07,yy+hh,zz+.23],[x-side*.07,yy,zz+.23]],palettes[(k+h+Math.floor(z))%palettes.length],null);
-}}}
+}}
 line([x,-4,z],[x,12,z],'#c9a267',2.5);
 for(let yy of [-.2,3.7,7.6,11.4])line([x,yy,z],[x,yy,z+8],'#6ce7f766',1.2);
 }
