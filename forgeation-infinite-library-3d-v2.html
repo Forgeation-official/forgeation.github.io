@@ -4,6 +4,16 @@
 /* 写真ビュー：360°表示を維持したまま同じ画面で開閉 */
 #photoViewer{position:fixed;inset:0;z-index:20;background:#030916;display:none;flex-direction:column;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top) + 70px) 12px calc(env(safe-area-inset-bottom) + 20px)}
 #photoViewer.open{display:flex}#photoViewer img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}#photoBack{position:absolute;top:calc(env(safe-area-inset-top) + 12px);left:12px;border:1px solid #86b6d0;border-radius:13px;background:#09243e;color:white;padding:12px 16px;font-weight:800}#photoCaption{position:absolute;top:calc(env(safe-area-inset-top) + 21px);right:15px;left:175px;text-align:right;font-size:13px;font-weight:800;pointer-events:none}
+
+/* Area-specific book display: photographic wooden case stays unchanged. */
+#realShelf .shelfPhoto{filter:brightness(.72) saturate(1.05) blur(.4px)}
+#realShelf .shelfVignette{background:linear-gradient(180deg,#06101ba8 0%,#07111b44 43%,#060a13b5 100%)}
+#realShelf .woodCase{background:linear-gradient(90deg,#0c0908b8,#29190c83 45%,#120b08ba);border-color:#a47745}
+#realShelf .shelfDecor{display:flex;justify-content:center;align-items:flex-end;gap:3px;padding:15px 8px 8px;min-height:190px;border-bottom:17px solid #69411e;box-shadow:inset 0 -6px 10px #0009,0 5px 0 #b58a4d}
+#realShelf .shelfDecorBook{display:block;flex-shrink:0;max-width:5%;border-radius:2px 4px 2px 2px;border:1px solid #d9ad704d;background:linear-gradient(90deg,#0009 0%,transparent 24%,#ffffff24 36%,transparent 57%,#0009 100%),var(--areaBook1);box-shadow:inset 0 8px 0 #dfb96a28,inset 0 -9px 0 #cba86633,2px 3px 4px #0009}
+#realShelf .shelfDecorBook:nth-child(3n+2){background:linear-gradient(90deg,#0009,transparent 30%,#ffffff20 43%,#0009),var(--areaBook2)}
+#realShelf .shelfDecorBook:nth-child(3n){background:linear-gradient(90deg,#0009,transparent 30%,#ffffff20 43%,#0009),var(--areaBook3)}
+#realShelf .shelfRow{background:linear-gradient(180deg,#0002,#0005);border-bottom-color:#65401e}
 </style><style id="libraryBooksStyle">
 #bookFindTop{font-size:12px;white-space:nowrap}#bookHotspot{position:fixed;top:46%;left:50%;transform:translate(-50%,-50%);z-index:3;border:1px solid #ffe6ac;background:#061b31e0;color:#fff;border-radius:30px;padding:12px 18px;font-weight:800;box-shadow:0 4px 28px #0009}#bookFindBottom{background:linear-gradient(115deg,#ffdc92,#bfeeff);color:#061b31;border:0}#libraryPanel{position:fixed;inset:0;z-index:30;background:#06101fef;display:none;overflow-y:auto;overscroll-behavior:contain;color:#f6f4ec;padding:calc(env(safe-area-inset-top) + 12px) max(16px,calc((100vw - 950px)/2)) calc(env(safe-area-inset-bottom) + 30px)}#libraryPanel.open{display:block}#libraryPanel button{color:inherit}#libraryPanel .libHead{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;background:#06101ff7;padding:10px 0;z-index:2;border-bottom:1px solid #d4b97966}#libraryPanel .libHead strong{font:20px Georgia,serif;color:#f8db9a}#libClose,#libBack{border:1px solid #c9b678;background:#102a41;border-radius:12px;padding:10px 14px}#libSearch{width:100%;background:#fff;color:#12243b;border-radius:12px;border:2px solid #b5c8d7;padding:13px;font-size:16px;margin:16px 0}#libThemes{display:flex;gap:7px;overflow-x:auto;padding:3px 0 13px}#libThemes button{flex-shrink:0;border:1px solid #9da9ad;background:#16334c;border-radius:20px;padding:9px 12px;font-size:12px}#libThemes button.selected{background:#e7cb8c;color:#092039;font-weight:900}#libCount{font-size:12px;color:#c3d4dc;margin:10px 0}#libGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px}#libGrid button{text-align:left;border:1px solid #bdab7d;background:#112a42;border-radius:15px;padding:14px;min-height:195px}#libGrid .cover{display:grid;place-items:center;height:102px;border-radius:7px;background:linear-gradient(135deg,#9e7745,#e2c895 42%,#294b69);font:900 16px/1.5 Georgia,serif;text-align:center;color:#10243b;padding:9px;margin-bottom:12px}#libGrid small{display:block;color:#d3dfe7;margin-top:8px}#libReader{display:none;max-width:720px;margin:15px auto}#libReader.open{display:block}#libReader h2{font:clamp(26px,6vw,38px)/1.4 Georgia,serif;color:#f2d698}#libReader .paper{background:#f9f5e9;color:#1b2833;border-radius:12px;padding:clamp(18px,5vw,42px);line-height:2;font-size:17px;box-shadow:0 15px 60px #0007}#libReader .paper h3{color:#503c23}#libReader .paper p{white-space:pre-wrap}#libReader .readerNav{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:18px}#libReader .readerNav button{background:#163b55;border:1px solid #c6ad78;border-radius:12px;padding:12px}#libReader .readerNav button:disabled{opacity:.4}#libNotice{font-size:12px;color:#b5c5d1;line-height:1.7;margin-top:16px}@media(max-width:550px){#bookHotspot{top:40%;font-size:12px;padding:10px 12px}#bookFindTop{padding:8px}#libGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
@@ -111,13 +121,22 @@ function renderBooks(){const q=$('libSearch').value.trim().toLocaleLowerCase();c
  function closeShelf(){shelf.classList.remove('open');setTimeout(()=>{if(!shelf.classList.contains('open'))shelf.style.display='none'},660);document.body.style.overflow='';hotspot.focus()}
  $('shelfReturn').onclick=closeShelf;
  function approachShelf(areaFilter){
-   // 各エリア固有の既存360度パノラマ素材を背景に使う。中央ホールのみ実写風書架を使用。
-   const panoFiles=names.map((n,i)=>String(i+1).padStart(2,'0')+'_'+n+'.png');
-   const bg=areaFilter<0?'forgeation-library-shelf-realistic.webp':areaFilter===0?'forgeation-library-shelf-realistic.webp':panoFiles[areaFilter];
-   $('shelfPhoto').style.backgroundImage='url('+encodeURI(bg)+')';
-   $('shelfPhoto').style.backgroundPosition=areaFilter===0?'center center':'center center';
+   // 実写風の木製書架を全エリアで維持。背景の本の色・質感はエリアごとに変える。
+   $('shelfPhoto').style.backgroundImage='url("forgeation-library-shelf-realistic.webp")';
+   $('shelfPhoto').style.backgroundPosition='center center';
+   shelf.dataset.area=areaFilter<0?'all':String(areaFilter);
+   const palette=[['#2a4051','#7a3328','#8c673d'],['#102c4e','#274b76','#a18b60'],['#543426','#2b3946','#745139'],['#60452b','#46302b','#273d43'],['#152c41','#244e57','#70533e'],['#3b2d48','#243e45','#715445'],['#9d4d59','#43798a','#b28d4d'],['#692c32','#233752','#8a6237'],['#275348','#375d70','#776343'],['#4b344e','#3e5260','#85644c']];
+   const colors=palette[areaFilter<0?0:areaFilter];
+   shelf.style.setProperty('--areaBook1',colors[0]);
+   shelf.style.setProperty('--areaBook2',colors[1]);
+   shelf.style.setProperty('--areaBook3',colors[2]);
    $('shelfHeading').textContent=areaFilter<0?'全館の書架':names[areaFilter]+'の書架';
    const wood=$('shelfWood');wood.replaceChildren();
+   // 各エリアで装飾用の背表紙の色を変える。書名は付けず、蔵書数には含めない。
+   const decor=document.createElement('div');decor.className='shelfDecor';decor.setAttribute('aria-hidden','true');
+   for(let j=0;j<15;j++){const b=document.createElement('i');b.className='shelfDecorBook';b.style.setProperty('--n',j%3);b.style.height=(104+(j*17)%57)+'px';b.style.width=(13+(j*7)%13)+'px';decor.append(b)}
+   wood.append(decor);
+
    const areaBooks=BOOKS.filter(b=>areaFilter<0||b.area===areaFilter);
    $('shelfAreaCount').textContent=areaBooks.length+'冊の書誌情報';
    $('shelfAllBooks').onclick=()=>openLibrary(-1,true);
