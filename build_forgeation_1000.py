@@ -20,7 +20,7 @@ FETCH_TIMEOUT = 15
 MAX_ATTEMPTS = 3
 SKIP_AFTER_FAILED_RUNS = 2  # 記録した上で取得不能ページを飛ばす（無限停止防止）
 START_URL = 'https://gutendex.com/books/?languages=ja%2Cen&sort=popular'
-HEADERS = {'User-Agent': 'ForgeationLibraryCatalogBuilder/3.0 (metadata only)',
+HEADERS = {'User-Agent': 'ForgeationLibraryCatalogBuilder/4.0 (metadata only)',
            'Accept': 'application/json'}
 
 
@@ -76,6 +76,99 @@ def next_page_url(url):
     params['page'] = [str(page + 1)]
     return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path,
                                    urllib.parse.urlencode(params, doseq=True), parsed.fragment))
+
+
+# Open Library search is a secondary source for bibliographic metadata only.
+# It does not authorize displaying copyrighted book text or cover images.
+OL_QUERIES = [
+    'subject:fiction', 'subject:history', 'subject:science',
+    'subject:juvenile_fiction', 'subject:philosophy', 'subject:poetry',
+    'subject:biography', 'subject:mathematics', 'subject:art',
+    'subject:technology', 'subject:travel', 'subject:music',
+]
+OL_PAGE_SIZE = 50
+OL_MAX_PAGES_PER_RUN = 5
+
+
+def fetch_openlibrary(url):
+    for attempt in range(2):
+        try:
+            request = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(request, timeout=18) as response:
+                data = json.load(response)
+            if not isinstance(data, dict) or not isinstance(data.get('docs'), list):
+                raise ValueError('Unexpected Open Library response')
+            return data
+        except (OSError, ValueError, urllib.error.URLError) as error:
+            print(f'Open Library attempt {attempt + 1}/2 failed: {error}', flush=True)
+            if attempt == 0:
+                time.sleep(2)
+    return None
+
+
+def collect_openlibrary(books, seen, state):
+    """Incremental fallback; preserves existing entries and distinct progress."""
+    query_index = int(state.get('ol_query_index') or 0)
+    page = max(1, int(state.get('ol_page') or 1))
+    fetched = 0
+    added = 0
+    while len(books) < TARGET and fetched < OL_MAX_PAGES_PER_RUN and query_index < len(OL_QUERIES):
+        query = OL_QUERIES[query_index]
+        params = urllib.parse.urlencode({
+            'q': query, 'page': page, 'limit': OL_PAGE_SIZE,
+            'fields': 'key,title,author_name,subject,language,first_publish_year',
+        })
+        url = 'https://openlibrary.org/search.json?' + params
+        data = fetch_openlibrary(url)
+        if data is None:
+            print('Open Library unavailable; preserving fallback cursor.', flush=True)
+            break
+        docs = data['docs']
+        for item in docs:
+            if len(books) >= TARGET:
+                break
+            title = str(item.get('title') or '').strip()
+            authors = item.get('author_name') or []
+            author = ', '.join(str(a) for a in authors[:3]).strip() or '著者情報なし'
+            key = (title.casefold(), author.casefold())
+            work_key = str(item.get('key') or '')
+            if not title or key in seen or not work_key.startswith('/works/'):
+                continue
+            seen.add(key)
+            subjects = item.get('subject') or []
+            languages = item.get('language') or []
+            work_url = 'https://openlibrary.org' + work_key
+            books.append({
+                'id': 'ol:' + work_key.split('/')[-1],
+                'title': title, 'author': author,
+                'area': area_for(subjects, title),
+                'genre': ' / '.join(str(x) for x in subjects[:2]) if subjects else 'Open Library',
+                'desc': 'Open Libraryの書誌情報。館内に本文は収録していません。',
+                'availability': 'external_bibliography',
+                'fullTextIncluded': False,
+                'searchUrl': work_url,
+                'source': 'Open Library',
+                'sourceId': work_key,
+                'languages': languages,
+                'chapters': [
+                    {'title': '書誌情報（本文ではありません）',
+                     'text': f'書名：{title}\n著者：{author}\n提供元：Open Library\n※館内には本文を収録していません。'},
+                    {'title': '作品情報を見る',
+                     'text': f'書誌情報と利用可能な閲覧形式は作品ページで確認してください。\n{work_url}'}
+                ],
+            })
+            added += 1
+        fetched += 1
+        if len(docs) < OL_PAGE_SIZE or page * OL_PAGE_SIZE >= int(data.get('numFound') or data.get('num_found') or 0):
+            query_index += 1
+            page = 1
+        else:
+            page += 1
+        print(f'Open Library pages: {fetched}; added: {added}; total: {len(books)}', flush=True)
+        time.sleep(1)
+    state['ol_query_index'] = query_index
+    state['ol_page'] = page
+    return added
 
 
 def main():
@@ -152,22 +245,30 @@ def main():
         url = data.get('next')
         print(f'Fetched page this run {pages}; total books: {len(books)}', flush=True)
 
+    # Use Open Library if Gutendex is unavailable or yielded too few records.
+    # Source cursor is retained so either source can resume independently.
+    fallback_state = dict(state)
+    if len(books) < TARGET:
+        added = collect_openlibrary(books, seen, fallback_state)
+        print(f'Fallback added {added} bibliographic records.', flush=True)
+
     # Save BOTH catalog and cursor. GitHub Actions commits them together.
     catalog['books'] = books[:TARGET]
     catalog['description'] = f'実在書籍の書誌データ {len(catalog["books"])}件。本文の転載なし。'
     catalog['version'] = 2
     save_json(CATALOG, catalog)
-    save_json(STATE, {'next_url': url if len(books) < TARGET else None,
-                      'count': len(catalog['books']), 'target': TARGET,
-                      'failed_url': failed_url, 'failed_runs': failed_runs,
-                      'skipped_pages': skipped_pages})
+    fallback_state.update({'next_url': url if len(books) < TARGET else None,
+                           'count': len(catalog['books']), 'target': TARGET,
+                           'failed_url': failed_url, 'failed_runs': failed_runs,
+                           'skipped_pages': skipped_pages})
+    save_json(STATE, fallback_state)
     print(f'Saved {len(catalog["books"])}/{TARGET} books.', flush=True)
     if skipped_pages:
         print(f'WARNING: {len(skipped_pages)} page(s) skipped due to repeated timeouts.', flush=True)
     if len(catalog['books']) == TARGET:
         print('COMPLETE: 1000 real bibliographic records saved.', flush=True)
-    elif not url:
-        print('Source exhausted before 1000. Review language filters.', flush=True)
+    elif not url and fallback_state['ol_query_index'] >= len(OL_QUERIES):
+        print('Sources exhausted before 1000. Review source queries.', flush=True)
     else:
         print('PARTIAL: run this workflow again to continue.', flush=True)
 
