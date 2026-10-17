@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "description": "実在書籍の書誌データ 367件。本文の転載なし。",
+  "description": "実在書籍の書誌データ 401件。本文の転載なし。",
   "themes": [
     "総合案内・新着図書",
     "宇宙・天文学・科学",
@@ -9453,6 +9453,890 @@
         {
           "title": "正規の書籍を読む",
           "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/147\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101998,
+      "title": "Thus Spake Zarathustra: A Book for All and None",
+      "author": "Nietzsche, Friedrich Wilhelm",
+      "area": 5,
+      "genre": "Philosophy, German / Superman (Philosophical concept)",
+      "desc": "Project Gutenbergの実在書籍（ID: 1998）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1998",
+      "source": "Project Gutenberg",
+      "sourceId": 1998,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Thus Spake Zarathustra: A Book for All and None\n著者：Nietzsche, Friedrich Wilhelm\n提供元：Project Gutenberg\n作品番号：1998\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1998\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 157669,
+      "title": "The problem of Cell 13",
+      "author": "Futrelle, Jacques",
+      "area": 2,
+      "genre": "Boston (Mass.) -- Fiction / College teachers -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 57669）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/57669",
+      "source": "Project Gutenberg",
+      "sourceId": 57669,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The problem of Cell 13\n著者：Futrelle, Jacques\n提供元：Project Gutenberg\n作品番号：57669\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/57669\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 178029,
+      "title": "The dangerous game",
+      "author": "Le Queux, William",
+      "area": 2,
+      "genre": "Detective and mystery stories / English fiction -- 19th century",
+      "desc": "Project Gutenbergの実在書籍（ID: 78029）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/78029",
+      "source": "Project Gutenberg",
+      "sourceId": 78029,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The dangerous game\n著者：Le Queux, William\n提供元：Project Gutenberg\n作品番号：78029\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/78029\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 105827,
+      "title": "The Problems of Philosophy",
+      "author": "Russell, Bertrand",
+      "area": 1,
+      "genre": "Knowledge, Theory of / Metaphysics",
+      "desc": "Project Gutenbergの実在書籍（ID: 5827）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/5827",
+      "source": "Project Gutenberg",
+      "sourceId": 5827,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Problems of Philosophy\n著者：Russell, Bertrand\n提供元：Project Gutenberg\n作品番号：5827\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/5827\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 141775,
+      "title": "Cornish Characters and Strange Events",
+      "author": "Baring-Gould, S. (Sabine)",
+      "area": 3,
+      "genre": "Cornwall (England : County) -- Biography / Cornwall (England : County) -- History",
+      "desc": "Project Gutenbergの実在書籍（ID: 41775）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/41775",
+      "source": "Project Gutenberg",
+      "sourceId": 41775,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Cornish Characters and Strange Events\n著者：Baring-Gould, S. (Sabine)\n提供元：Project Gutenberg\n作品番号：41775\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/41775\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 119942,
+      "title": "Candide",
+      "author": "Voltaire",
+      "area": 2,
+      "genre": "Optimism -- Fiction / Satire",
+      "desc": "Project Gutenbergの実在書籍（ID: 19942）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/19942",
+      "source": "Project Gutenberg",
+      "sourceId": 19942,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Candide\n著者：Voltaire\n提供元：Project Gutenberg\n作品番号：19942\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/19942\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 107889,
+      "title": "Erotica Romana",
+      "author": "Goethe, Johann Wolfgang von",
+      "area": 2,
+      "genre": "German poetry -- Translations into English",
+      "desc": "Project Gutenbergの実在書籍（ID: 7889）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/7889",
+      "source": "Project Gutenberg",
+      "sourceId": 7889,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Erotica Romana\n著者：Goethe, Johann Wolfgang von\n提供元：Project Gutenberg\n作品番号：7889\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/7889\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101523,
+      "title": "As You Like It",
+      "author": "Shakespeare, William",
+      "area": 2,
+      "genre": "Comedy plays / Exiles -- Drama",
+      "desc": "Project Gutenbergの実在書籍（ID: 1523）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1523",
+      "source": "Project Gutenberg",
+      "sourceId": 1523,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：As You Like It\n著者：Shakespeare, William\n提供元：Project Gutenberg\n作品番号：1523\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1523\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 139634,
+      "title": "Sketches of Successful New Hampshire Men",
+      "author": "Various",
+      "area": 2,
+      "genre": "New Hampshire -- Biography",
+      "desc": "Project Gutenbergの実在書籍（ID: 39634）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/39634",
+      "source": "Project Gutenberg",
+      "sourceId": 39634,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Sketches of Successful New Hampshire Men\n著者：Various\n提供元：Project Gutenberg\n作品番号：39634\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/39634\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 114838,
+      "title": "The Tale of Peter Rabbit",
+      "author": "Potter, Beatrix",
+      "area": 6,
+      "genre": "Rabbits -- Juvenile fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 14838）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/14838",
+      "source": "Project Gutenberg",
+      "sourceId": 14838,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Tale of Peter Rabbit\n著者：Potter, Beatrix\n提供元：Project Gutenberg\n作品番号：14838\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/14838\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 138703,
+      "title": "The Black Moth: A Romance of the XVIIIth Century",
+      "author": "Heyer, Georgette",
+      "area": 2,
+      "genre": "Aristocracy (Social class) -- England -- Fiction / Historical fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 38703）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/38703",
+      "source": "Project Gutenberg",
+      "sourceId": 38703,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Black Moth: A Romance of the XVIIIth Century\n著者：Heyer, Georgette\n提供元：Project Gutenberg\n作品番号：38703\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/38703\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 102038,
+      "title": "The Lock and Key Library: Classic Mystery and Detective Stories: Modern English",
+      "author": "著者情報なし",
+      "area": 2,
+      "genre": "Detective and mystery stories, English / Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 2038）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/2038",
+      "source": "Project Gutenberg",
+      "sourceId": 2038,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Lock and Key Library: Classic Mystery and Detective Stories: Modern English\n著者：著者情報なし\n提供元：Project Gutenberg\n作品番号：2038\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/2038\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 102825,
+      "title": "Undine",
+      "author": "La Motte-Fouqué, Friedrich Heinrich Karl, Freiherr de",
+      "area": 6,
+      "genre": "Fairy tales -- Germany / Fantasy fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 2825）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/2825",
+      "source": "Project Gutenberg",
+      "sourceId": 2825,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Undine\n著者：La Motte-Fouqué, Friedrich Heinrich Karl, Freiherr de\n提供元：Project Gutenberg\n作品番号：2825\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/2825\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 176668,
+      "title": "Trial by water",
+      "author": "Wright, Sewell Peaslee",
+      "area": 2,
+      "genre": "Canoes and canoeing -- Fiction / Short stories",
+      "desc": "Project Gutenbergの実在書籍（ID: 76668）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/76668",
+      "source": "Project Gutenberg",
+      "sourceId": 76668,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Trial by water\n著者：Wright, Sewell Peaslee\n提供元：Project Gutenberg\n作品番号：76668\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/76668\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101872,
+      "title": "The Red House Mystery",
+      "author": "Milne, A. A. (Alan Alexander)",
+      "area": 2,
+      "genre": "Detective and mystery stories / England -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 1872）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1872",
+      "source": "Project Gutenberg",
+      "sourceId": 1872,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Red House Mystery\n著者：Milne, A. A. (Alan Alexander)\n提供元：Project Gutenberg\n作品番号：1872\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1872\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 100105,
+      "title": "Persuasion",
+      "author": "Austen, Jane",
+      "area": 5,
+      "genre": "Dysfunctional families -- Fiction / England -- Social life and customs -- 19th century -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 105）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/105",
+      "source": "Project Gutenberg",
+      "sourceId": 105,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Persuasion\n著者：Austen, Jane\n提供元：Project Gutenberg\n作品番号：105\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/105\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 104280,
+      "title": "The Critique of Pure Reason",
+      "author": "Kant, Immanuel",
+      "area": 5,
+      "genre": "Causation / Knowledge, Theory of",
+      "desc": "Project Gutenbergの実在書籍（ID: 4280）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/4280",
+      "source": "Project Gutenberg",
+      "sourceId": 4280,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Critique of Pure Reason\n著者：Kant, Immanuel\n提供元：Project Gutenberg\n作品番号：4280\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/4280\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101510,
+      "title": "Love's Labour's Lost",
+      "author": "Shakespeare, William",
+      "area": 2,
+      "genre": "Comedy plays / Courts and courtiers -- Drama",
+      "desc": "Project Gutenbergの実在書籍（ID: 1510）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1510",
+      "source": "Project Gutenberg",
+      "sourceId": 1510,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Love's Labour's Lost\n著者：Shakespeare, William\n提供元：Project Gutenberg\n作品番号：1510\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1510\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 118857,
+      "title": "A Journey to the Centre of the Earth",
+      "author": "Verne, Jules",
+      "area": 1,
+      "genre": "Adventure stories / Earth (Planet) -- Core -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 18857）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/18857",
+      "source": "Project Gutenberg",
+      "sourceId": 18857,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：A Journey to the Centre of the Earth\n著者：Verne, Jules\n提供元：Project Gutenberg\n作品番号：18857\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/18857\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 100203,
+      "title": "Uncle Tom's Cabin",
+      "author": "Stowe, Harriet Beecher",
+      "area": 3,
+      "genre": "African Americans -- Fiction / Didactic fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 203）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/203",
+      "source": "Project Gutenberg",
+      "sourceId": 203,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Uncle Tom's Cabin\n著者：Stowe, Harriet Beecher\n提供元：Project Gutenberg\n作品番号：203\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/203\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 103600,
+      "title": "Essays of Michel de Montaigne — Complete",
+      "author": "Montaigne, Michel de",
+      "area": 2,
+      "genre": "French essays -- Translations into English",
+      "desc": "Project Gutenbergの実在書籍（ID: 3600）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/3600",
+      "source": "Project Gutenberg",
+      "sourceId": 3600,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Essays of Michel de Montaigne — Complete\n著者：Montaigne, Michel de\n提供元：Project Gutenberg\n作品番号：3600\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/3600\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 111339,
+      "title": "Aesop's Fables; a new translation",
+      "author": "Aesop",
+      "area": 6,
+      "genre": "Fables, Greek -- Translations into English",
+      "desc": "Project Gutenbergの実在書籍（ID: 11339）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/11339",
+      "source": "Project Gutenberg",
+      "sourceId": 11339,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Aesop's Fables; a new translation\n著者：Aesop\n提供元：Project Gutenberg\n作品番号：11339\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/11339\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101608,
+      "title": "Camille (La Dame aux Camilias)",
+      "author": "Dumas, Alexandre",
+      "area": 2,
+      "genre": "Courtesans -- Fiction / Fathers and sons -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 1608）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1608",
+      "source": "Project Gutenberg",
+      "sourceId": 1608,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Camille (La Dame aux Camilias)\n著者：Dumas, Alexandre\n提供元：Project Gutenberg\n作品番号：1608\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1608\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101257,
+      "title": "The three musketeers",
+      "author": "Dumas, Alexandre, Maquet, Auguste",
+      "area": 3,
+      "genre": "Adventure and adventurers -- Fiction / France -- History -- Louis XIII, 1610-1643 -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 1257）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1257",
+      "source": "Project Gutenberg",
+      "sourceId": 1257,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The three musketeers\n著者：Dumas, Alexandre, Maquet, Auguste\n提供元：Project Gutenberg\n作品番号：1257\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1257\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 103530,
+      "title": "Love-at-arms : $b being a narrative excerpted from the chronicles of Urbino, during the dominion of the high and mighty Messer Guidobaldo da Montefeltro",
+      "author": "Sabatini, Rafael",
+      "area": 3,
+      "genre": "Arranged marriage -- Fiction / Borgia, Cesare, 1476?-1507 -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 3530）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/3530",
+      "source": "Project Gutenberg",
+      "sourceId": 3530,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Love-at-arms : $b being a narrative excerpted from the chronicles of Urbino, during the dominion of the high and mighty Messer Guidobaldo da Montefeltro\n著者：Sabatini, Rafael\n提供元：Project Gutenberg\n作品番号：3530\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/3530\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 145451,
+      "title": "The Man Who Did the Right Thing: A Romance",
+      "author": "Johnston, Harry",
+      "area": 2,
+      "genre": "British -- Africa, East -- Fiction / Missions -- Tanzania -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 45451）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/45451",
+      "source": "Project Gutenberg",
+      "sourceId": 45451,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Man Who Did the Right Thing: A Romance\n著者：Johnston, Harry\n提供元：Project Gutenberg\n作品番号：45451\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/45451\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 102806,
+      "title": "The Phantom 'Rickshaw, and Other Ghost Stories",
+      "author": "Kipling, Rudyard",
+      "area": 2,
+      "genre": "Ghost stories, English",
+      "desc": "Project Gutenbergの実在書籍（ID: 2806）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/2806",
+      "source": "Project Gutenberg",
+      "sourceId": 2806,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Phantom 'Rickshaw, and Other Ghost Stories\n著者：Kipling, Rudyard\n提供元：Project Gutenberg\n作品番号：2806\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/2806\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 147715,
+      "title": "The Works of William Shakespeare [Cambridge Edition] [Vol. 7 of 9]",
+      "author": "Shakespeare, William",
+      "area": 2,
+      "genre": "English drama",
+      "desc": "Project Gutenbergの実在書籍（ID: 47715）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/47715",
+      "source": "Project Gutenberg",
+      "sourceId": 47715,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Works of William Shakespeare [Cambridge Edition] [Vol. 7 of 9]\n著者：Shakespeare, William\n提供元：Project Gutenberg\n作品番号：47715\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/47715\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 100061,
+      "title": "The Communist Manifesto",
+      "author": "Marx, Karl, Engels, Friedrich",
+      "area": 2,
+      "genre": "Communism / Socialism",
+      "desc": "Project Gutenbergの実在書籍（ID: 61）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/61",
+      "source": "Project Gutenberg",
+      "sourceId": 61,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Communist Manifesto\n著者：Marx, Karl, Engels, Friedrich\n提供元：Project Gutenberg\n作品番号：61\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/61\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 142283,
+      "title": "The San Rosario Ranch",
+      "author": "Elliott, Maud Howe",
+      "area": 2,
+      "genre": "California -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 42283）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/42283",
+      "source": "Project Gutenberg",
+      "sourceId": 42283,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The San Rosario Ranch\n著者：Elliott, Maud Howe\n提供元：Project Gutenberg\n作品番号：42283\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/42283\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 100121,
+      "title": "Northanger Abbey",
+      "author": "Austen, Jane",
+      "area": 3,
+      "genre": "Books and reading -- Fiction / England -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 121）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/121",
+      "source": "Project Gutenberg",
+      "sourceId": 121,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Northanger Abbey\n著者：Austen, Jane\n提供元：Project Gutenberg\n作品番号：121\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/121\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 144646,
+      "title": "Memoirs of the Duchesse de Dino (Afterwards Duchesse de Talleyrand et de Sagan), 1836-1840",
+      "author": "Dino, Dorothée, duchesse de",
+      "area": 3,
+      "genre": "Dino, Dorothée, duchesse de, 1793-1862 / Europe -- Politics and government -- 1815-1848",
+      "desc": "Project Gutenbergの実在書籍（ID: 44646）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/44646",
+      "source": "Project Gutenberg",
+      "sourceId": 44646,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Memoirs of the Duchesse de Dino (Afterwards Duchesse de Talleyrand et de Sagan), 1836-1840\n著者：Dino, Dorothée, duchesse de\n提供元：Project Gutenberg\n作品番号：44646\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/44646\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 104200,
+      "title": "The Diary of Samuel Pepys — Complete",
+      "author": "Pepys, Samuel",
+      "area": 3,
+      "genre": "Cabinet officers -- Great Britain -- Diaries / Diarists -- Great Britain -- Diaries",
+      "desc": "Project Gutenbergの実在書籍（ID: 4200）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/4200",
+      "source": "Project Gutenberg",
+      "sourceId": 4200,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Diary of Samuel Pepys — Complete\n著者：Pepys, Samuel\n提供元：Project Gutenberg\n作品番号：4200\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/4200\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 100271,
+      "title": "Black Beauty : $b The autobiography of a horse",
+      "author": "Sewell, Anna",
+      "area": 3,
+      "genre": "Great Britain -- History -- 19th century -- Juvenile fiction / Historical fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 271）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/271",
+      "source": "Project Gutenberg",
+      "sourceId": 271,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Black Beauty : $b The autobiography of a horse\n著者：Sewell, Anna\n提供元：Project Gutenberg\n作品番号：271\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/271\n※国・地域により著作権の扱いが異なります。"
         }
       ]
     }
