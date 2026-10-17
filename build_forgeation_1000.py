@@ -178,7 +178,17 @@ def main():
         raise ValueError('Catalog books must be a list')
     seen = {(str(b.get('title', '')).casefold().strip(),
              str(b.get('author', '')).casefold().strip()) for b in books}
-    state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {}
+    # The workflow may commit only the catalog JSON, not the separate state file.
+    # Keep progress in the catalog itself so it survives each GitHub Actions run.
+    embedded = catalog.get('collectionProgress') or {}
+    disk_state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {}
+    state = dict(disk_state)
+    state.update(embedded)  # committed catalog is the authoritative cursor
+    if len(books) >= 653 and 'ol_page' not in state:
+        # Migration from the original fallback: pages 1-5 already collected.
+        state['ol_query_index'] = 0
+        state['ol_page'] = 6
+        print('Migrated Open Library cursor to page 6 (653-book catalog).', flush=True)
     url = state.get('next_url') or START_URL
     pages = 0
     failed_url = state.get('failed_url')
@@ -256,11 +266,12 @@ def main():
     catalog['books'] = books[:TARGET]
     catalog['description'] = f'実在書籍の書誌データ {len(catalog["books"])}件。本文の転載なし。'
     catalog['version'] = 2
-    save_json(CATALOG, catalog)
     fallback_state.update({'next_url': url if len(books) < TARGET else None,
                            'count': len(catalog['books']), 'target': TARGET,
                            'failed_url': failed_url, 'failed_runs': failed_runs,
                            'skipped_pages': skipped_pages})
+    catalog['collectionProgress'] = fallback_state
+    save_json(CATALOG, catalog)
     save_json(STATE, fallback_state)
     print(f'Saved {len(catalog["books"])}/{TARGET} books.', flush=True)
     if skipped_pages:
