@@ -1,71 +1,134 @@
 #!/usr/bin/env python3
-"""Build a verified 1000-title catalog from Project Gutenberg via Gutendex.
-Run in an environment with internet access: python build_forgeation_1000.py
+"""Incrementally build Forgeation's genuine-book metadata catalog from Gutendex.
+
+Run repeatedly using the GitHub Actions workflow until 1000 records are saved.
+Existing books, themes and 360-degree site files are preserved.
 """
-import json, urllib.request, urllib.parse, time, pathlib
-BASE=pathlib.Path(__file__).resolve().parent
-SOURCE=BASE/'forgeation-library-books.json'
-original=json.loads(SOURCE.read_text(encoding='utf-8'))
-existing=original['books']
-TARGET=1000
-seen={(str(x.get('title','')).casefold().strip(),str(x.get('author','')).casefold().strip()) for x in existing}
-books=list(existing)
-url='https://gutendex.com/books/?languages=ja%2Cen&sort=popular'
-headers={'User-Agent':'ForgeationLibraryCatalogBuilder/1.0 (metadata only)'}
+import json
+import pathlib
+import time
+import urllib.error
+import urllib.request
 
-def area_for(subjects,title):
- s=(' '.join(subjects)+' '+title).lower()
- if any(w in s for w in ('astronom','space','planet','physics','chemistry','science','biology')):return 1
- if any(w in s for w in ('history','war ','geograph','travel','politic','econom')):return 3
- if any(w in s for w in ('computer','mathematic','programming','engineering','technology')):return 4
- if any(w in s for w in ('philosoph','religion','psycholog','ethic')):return 5
- if any(w in s for w in ('children','juvenile','fairy','fable','picture book')):return 6
- if any(w in s for w in ('art ','music','theater','theatre','film','cinema')):return 7
- if any(w in s for w in ('medicine','medical','health','nursing','anatom')):return 8
- return 2
+BASE = pathlib.Path(__file__).resolve().parent
+CATALOG = BASE / 'forgeation-library-books.json'
+STATE = BASE / 'forgeation-library-progress.json'
+TARGET = 1000
+MAX_PAGES_PER_RUN = 12
+START_URL = 'https://gutendex.com/books/?languages=ja%2Cen&sort=popular'
+HEADERS = {'User-Agent': 'ForgeationLibraryCatalogBuilder/2.0 (metadata only)'}
 
-page=0
-while url and len(books)<TARGET:
- page+=1
- for attempt in range(4):
-  try:
-   with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=30) as r:
-    data=json.load(r)
-   break
-  except Exception as e:
-   if attempt==3:raise RuntimeError(f'Catalog fetch failed at page {page}: {e}')
-   time.sleep(2**attempt)
- for b in data.get('results',[]):
-  if len(books)>=TARGET:break
-  title=b.get('title','').strip(); authors=b.get('authors') or []
-  author=', '.join(a.get('name','') for a in authors).strip() or '著者情報なし'
-  key=(title.casefold(),author.casefold())
-  if not title or key in seen:continue
-  seen.add(key)
-  gid=b['id']; languages=b.get('languages',[])
-  gutenberg_url=f'https://www.gutenberg.org/ebooks/{gid}'
-  subject=b.get('subjects',[])
-  area=area_for(subject,title)
-  entry={
-   'id':100000+gid, 'title':title,'author':author,'area':area,
-   'genre':' / '.join(subject[:2]) if subject else 'Project Gutenberg',
-   'desc':f'Project Gutenbergで公開されている実在書籍（ID: {gid}）。この館内に本文は収録していません。',
-   'availability':'external_public_domain', 'fullTextIncluded':False,
-   'searchUrl':gutenberg_url, 'source':'Project Gutenberg',
-   'sourceId':gid,'languages':languages,
-   'chapters':[
-    {'title':'書誌情報（本文ではありません）','text':f'書名：{title}\n著者：{author}\n提供元：Project Gutenberg\n作品番号：{gid}\n言語：{", ".join(languages)}\n※館内には本文を収録していません。'},
-    {'title':'正規の書籍を読む','text':f'Project Gutenbergの作品ページで閲覧形式と利用条件を確認できます。\n{gutenberg_url}\n※国・地域により著作権の扱いが異なります。'}
-   ]
-  }
-  books.append(entry)
- url=data.get('next')
- print(f'Fetched page {page}, books: {len(books)}',flush=True)
- if page>100:break
-if len(books)<TARGET:raise RuntimeError(f'Only {len(books)} titles found. Existing JSON not overwritten.')
-original['books']=books[:TARGET]
-original['description']='実在書籍1000件の書誌データ（初期20冊＋Project Gutenbergで実在を確認した980冊）。本文の転載なし。'
-original['version']=2
-out=BASE/'forgeation-library-books-1000.json'
-out.write_text(json.dumps(original,ensure_ascii=False,indent=2),encoding='utf-8')
-print(f'Created {out}: {len(original["books"])} verified titles')
+
+def save_json(path, data):
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    temporary.replace(path)
+
+
+def area_for(subjects, title):
+    s = (' '.join(subjects) + ' ' + title).lower()
+    groups = [
+        (1, ('astronom', 'space', 'planet', 'physics', 'chemistry', 'science', 'biology')),
+        (3, ('history', 'war ', 'geograph', 'travel', 'politic', 'econom')),
+        (4, ('computer', 'mathematic', 'programming', 'engineering', 'technology')),
+        (5, ('philosoph', 'religion', 'psycholog', 'ethic')),
+        (6, ('children', 'juvenile', 'fairy', 'fable', 'picture book')),
+        (7, ('art ', 'music', 'theater', 'theatre', 'film', 'cinema')),
+        (8, ('medicine', 'medical', 'health', 'nursing', 'anatom')),
+    ]
+    for area, terms in groups:
+        if any(term in s for term in terms):
+            return area
+    return 2
+
+
+def fetch(url):
+    for attempt in range(4):
+        try:
+            request = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(request, timeout=35) as response:
+                return json.load(response)
+        except (OSError, ValueError, urllib.error.URLError) as error:
+            print(f'Fetch attempt {attempt + 1}/4 failed: {error}', flush=True)
+            if attempt == 3:
+                return None
+            time.sleep((2, 5, 10)[attempt])
+    return None
+
+
+def main():
+    catalog = json.loads(CATALOG.read_text(encoding='utf-8'))
+    books = catalog['books']
+    if not isinstance(books, list):
+        raise ValueError('Catalog books must be a list')
+    seen = {(str(b.get('title', '')).casefold().strip(),
+             str(b.get('author', '')).casefold().strip()) for b in books}
+    state = json.loads(STATE.read_text(encoding='utf-8')) if STATE.exists() else {}
+    url = state.get('next_url') or START_URL
+    pages = 0
+    print(f'Start: {len(books)}/{TARGET} books', flush=True)
+
+    while url and len(books) < TARGET and pages < MAX_PAGES_PER_RUN:
+        data = fetch(url)
+        if data is None:
+            print('Network timeout: saving collected books and cursor for next run.', flush=True)
+            break
+        if not isinstance(data.get('results'), list):
+            print('Unexpected response: preserving existing progress.', flush=True)
+            break
+        for item in data['results']:
+            if len(books) >= TARGET:
+                break
+            title = str(item.get('title') or '').strip()
+            authors = item.get('authors') or []
+            author = ', '.join(str(a.get('name') or '') for a in authors).strip() or '著者情報なし'
+            key = (title.casefold(), author.casefold())
+            if not title or key in seen or not isinstance(item.get('id'), int):
+                continue
+            seen.add(key)
+            gid = item['id']
+            subjects = item.get('subjects') or []
+            languages = item.get('languages') or []
+            gutenberg_url = f'https://www.gutenberg.org/ebooks/{gid}'
+            books.append({
+                'id': 100000 + gid,
+                'title': title,
+                'author': author,
+                'area': area_for(subjects, title),
+                'genre': ' / '.join(subjects[:2]) if subjects else 'Project Gutenberg',
+                'desc': f'Project Gutenbergの実在書籍（ID: {gid}）。館内に本文は収録していません。',
+                'availability': 'external_public_domain',
+                'fullTextIncluded': False,
+                'searchUrl': gutenberg_url,
+                'source': 'Project Gutenberg',
+                'sourceId': gid,
+                'languages': languages,
+                'chapters': [
+                    {'title': '書誌情報（本文ではありません）',
+                     'text': f'書名：{title}\n著者：{author}\n提供元：Project Gutenberg\n作品番号：{gid}\n言語：{", ".join(languages)}\n※館内には本文を収録していません。'},
+                    {'title': '正規の書籍を読む',
+                     'text': f'閲覧形式と利用条件は作品ページで確認してください。\n{gutenberg_url}\n※国・地域により著作権の扱いが異なります。'}
+                ]
+            })
+        pages += 1
+        url = data.get('next')
+        print(f'Fetched page this run {pages}; total books: {len(books)}', flush=True)
+
+    # Save BOTH catalog and cursor. GitHub Actions commits them together.
+    catalog['books'] = books[:TARGET]
+    catalog['description'] = f'実在書籍の書誌データ {len(catalog["books"])}件。本文の転載なし。'
+    catalog['version'] = 2
+    save_json(CATALOG, catalog)
+    save_json(STATE, {'next_url': url if len(books) < TARGET else None,
+                      'count': len(catalog['books']), 'target': TARGET})
+    print(f'Saved {len(catalog["books"])}/{TARGET} books.', flush=True)
+    if len(catalog['books']) == TARGET:
+        print('COMPLETE: 1000 real bibliographic records saved.', flush=True)
+    elif not url:
+        print('Source exhausted before 1000. Review language filters.', flush=True)
+    else:
+        print('PARTIAL: run this workflow again to continue.', flush=True)
+
+
+if __name__ == '__main__':
+    main()
