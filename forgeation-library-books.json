@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "description": "実在書籍の書誌データ 401件。本文の転載なし。",
+  "description": "実在書籍の書誌データ 404件。本文の転載なし。",
   "themes": [
     "総合案内・新着図書",
     "宇宙・天文学・科学",
@@ -10337,6 +10337,84 @@
         {
           "title": "正規の書籍を読む",
           "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/271\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 139970,
+      "title": "The Hill of Venus",
+      "author": "Gallizier, Nathan",
+      "area": 3,
+      "genre": "Italy -- History -- 13th century -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 39970）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/39970",
+      "source": "Project Gutenberg",
+      "sourceId": 39970,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Hill of Venus\n著者：Gallizier, Nathan\n提供元：Project Gutenberg\n作品番号：39970\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/39970\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 101686,
+      "title": "The Secret of the Night",
+      "author": "Leroux, Gaston",
+      "area": 2,
+      "genre": "Attempted assassination -- Fiction / Detective and mystery stories",
+      "desc": "Project Gutenbergの実在書籍（ID: 1686）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/1686",
+      "source": "Project Gutenberg",
+      "sourceId": 1686,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Secret of the Night\n著者：Leroux, Gaston\n提供元：Project Gutenberg\n作品番号：1686\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/1686\n※国・地域により著作権の扱いが異なります。"
+        }
+      ]
+    },
+    {
+      "id": 107326,
+      "title": "The Yeoman Adventurer",
+      "author": "Gough, George W.",
+      "area": 2,
+      "genre": "Adventure stories / Farmers -- Fiction",
+      "desc": "Project Gutenbergの実在書籍（ID: 7326）。館内に本文は収録していません。",
+      "availability": "external_public_domain",
+      "fullTextIncluded": false,
+      "searchUrl": "https://www.gutenberg.org/ebooks/7326",
+      "source": "Project Gutenberg",
+      "sourceId": 7326,
+      "languages": [
+        "en"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Yeoman Adventurer\n著者：Gough, George W.\n提供元：Project Gutenberg\n作品番号：7326\n言語：en\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "正規の書籍を読む",
+          "text": "閲覧形式と利用条件は作品ページで確認してください。\nhttps://www.gutenberg.org/ebooks/7326\n※国・地域により著作権の扱いが異なります。"
         }
       ]
     }
