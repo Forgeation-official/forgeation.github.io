@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "description": "実在書籍の書誌データ 902件。本文の転載なし。",
+  "description": "実在書籍の書誌データ 1000件。本文の転載なし。",
   "themes": [
     "総合案内・新着図書",
     "宇宙・天文学・科学",
@@ -27316,16 +27316,3081 @@
           "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL76984W"
         }
       ]
+    },
+    {
+      "id": "ol:OL18412W",
+      "title": "Dorothy and the Wizard in Oz",
+      "author": "L. Frank Baum",
+      "area": 1,
+      "genre": "Fairy tales / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL18412W",
+      "source": "Open Library",
+      "sourceId": "/works/OL18412W",
+      "languages": [
+        "eng",
+        "spa",
+        "pol"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Dorothy and the Wizard in Oz\n著者：L. Frank Baum\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL18412W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL59038W",
+      "title": "Never Let Me Go",
+      "author": "Kazuo Ishiguro",
+      "area": 1,
+      "genre": "Fiction / Organ donors",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL59038W",
+      "source": "Open Library",
+      "sourceId": "/works/OL59038W",
+      "languages": [
+        "glg",
+        "jpn",
+        "tur",
+        "ita",
+        "cat",
+        "rus",
+        "fre",
+        "und",
+        "eng",
+        "chi",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Never Let Me Go\n著者：Kazuo Ishiguro\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL59038W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL3773929W",
+      "title": "The Italian Billionaire's Pregnant Bride",
+      "author": "Lynne Graham",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Passion, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL3773929W",
+      "source": "Open Library",
+      "sourceId": "/works/OL3773929W",
+      "languages": [
+        "por",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Italian Billionaire's Pregnant Bride\n著者：Lynne Graham\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL3773929W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL167189W",
+      "title": "1st to Die",
+      "author": "James Patterson",
+      "area": 2,
+      "genre": "Fiction / Women detectives",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL167189W",
+      "source": "Open Library",
+      "sourceId": "/works/OL167189W",
+      "languages": [
+        "heb",
+        "eng",
+        "fre",
+        "ger",
+        "swe",
+        "chi",
+        "spa",
+        "dut",
+        "rus"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：1st to Die\n著者：James Patterson\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL167189W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL26952W",
+      "title": "The Wedding",
+      "author": "Julie Garwood",
+      "area": 3,
+      "genre": "Fiction, Romance, Historical / collectionID:Mbodice_ripper",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL26952W",
+      "source": "Open Library",
+      "sourceId": "/works/OL26952W",
+      "languages": [
+        "chi",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Wedding\n著者：Julie Garwood\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL26952W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL2718327W",
+      "title": "That was then, this is now",
+      "author": "S. E. Hinton",
+      "area": 6,
+      "genre": "Fiction / Social problems",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL2718327W",
+      "source": "Open Library",
+      "sourceId": "/works/OL2718327W",
+      "languages": [
+        "eng",
+        "und"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：That was then, this is now\n著者：S. E. Hinton\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL2718327W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL453907W",
+      "title": "Making Money",
+      "author": "Terry Pratchett",
+      "area": 1,
+      "genre": "Postal service / Discworld (Imaginary place)",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL453907W",
+      "source": "Open Library",
+      "sourceId": "/works/OL453907W",
+      "languages": [
+        "ger",
+        "pol",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Making Money\n著者：Terry Pratchett\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL453907W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL2163706W",
+      "title": "Works (Hitch Hiker's Guide to the Galaxy / Restaurant at the End of the Universe / Life, the Universe and Everything / So Long, and Thanks for All the Fish / Mostly Harmless / Young Zaphod Plays it Safe)",
+      "author": "Douglas Adams",
+      "area": 1,
+      "genre": "comic science fiction / Vogons",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL2163706W",
+      "source": "Open Library",
+      "sourceId": "/works/OL2163706W",
+      "languages": [
+        "fre",
+        "eng",
+        "ita",
+        "kor"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Works (Hitch Hiker's Guide to the Galaxy / Restaurant at the End of the Universe / Life, the Universe and Everything / So Long, and Thanks for All the Fish / Mostly Harmless / Young Zaphod Plays it Safe)\n著者：Douglas Adams\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL2163706W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL263259W",
+      "title": "Phantoms",
+      "author": "Dean Koontz",
+      "area": 2,
+      "genre": "Horror stories / Horror tales",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL263259W",
+      "source": "Open Library",
+      "sourceId": "/works/OL263259W",
+      "languages": [
+        "fre",
+        "spa",
+        "tur",
+        "rus",
+        "ger",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Phantoms\n著者：Dean Koontz\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL263259W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17718538W",
+      "title": "Queen of Shadows",
+      "author": "Sarah J. Maas",
+      "area": 5,
+      "genre": "Magic / YA",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17718538W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17718538W",
+      "languages": [
+        "ger",
+        "tur",
+        "por",
+        "pol",
+        "eng",
+        "chi",
+        "spa",
+        "swe",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Queen of Shadows\n著者：Sarah J. Maas\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17718538W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL19761909W",
+      "title": "My sister, the serial killer",
+      "author": "Oyinkan Braithwaite",
+      "area": 2,
+      "genre": "Sisters / Serial murderers",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL19761909W",
+      "source": "Open Library",
+      "sourceId": "/works/OL19761909W",
+      "languages": [
+        "rum",
+        "pol",
+        "por",
+        "ger",
+        "eng",
+        "tur",
+        "spa",
+        "ita"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：My sister, the serial killer\n著者：Oyinkan Braithwaite\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL19761909W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL52953W",
+      "title": "One Shot",
+      "author": "Lee Child",
+      "area": 1,
+      "genre": "Detective and mystery stories / Serial murders",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL52953W",
+      "source": "Open Library",
+      "sourceId": "/works/OL52953W",
+      "languages": [
+        "vie",
+        "pol",
+        "lit",
+        "rus",
+        "eng",
+        "fre",
+        "tur",
+        "spa",
+        "ita",
+        "heb",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：One Shot\n著者：Lee Child\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL52953W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1858668W",
+      "title": "Wide Sargasso Sea",
+      "author": "Jean Rhys",
+      "area": 5,
+      "genre": "stream of consciousness / Creoles",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1858668W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1858668W",
+      "languages": [
+        "eng",
+        "ger",
+        "fre",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Wide Sargasso Sea\n著者：Jean Rhys\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1858668W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL15401200W",
+      "title": "The Lost Hero",
+      "author": "Rick Riordan",
+      "area": 6,
+      "genre": "Serie:The_Heroes_of_Olympus / nyt:chapter_books=2010-11-06",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL15401200W",
+      "source": "Open Library",
+      "sourceId": "/works/OL15401200W",
+      "languages": [
+        "cat",
+        "dut",
+        "eng",
+        "heb",
+        "rus",
+        "fre",
+        "vie",
+        "pol",
+        "spa",
+        "por",
+        "chi",
+        "ger",
+        "tur"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Lost Hero\n著者：Rick Riordan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL15401200W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL46402W",
+      "title": "Pebble in the Sky",
+      "author": "Isaac Asimov",
+      "area": 1,
+      "genre": "Fiction in English / American Science fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL46402W",
+      "source": "Open Library",
+      "sourceId": "/works/OL46402W",
+      "languages": [
+        "ita",
+        "chi",
+        "por",
+        "ger",
+        "fre",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Pebble in the Sky\n著者：Isaac Asimov\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL46402W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL3388961W",
+      "title": "The Great God Pan",
+      "author": "Arthur Machen",
+      "area": 2,
+      "genre": "austin osman spare / arthur machen",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL3388961W",
+      "source": "Open Library",
+      "sourceId": "/works/OL3388961W",
+      "languages": [
+        "fre",
+        "eng",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Great God Pan\n著者：Arthur Machen\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL3388961W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL13716952W",
+      "title": "Fantastic Beasts and Where to Find Them",
+      "author": "J. K. Rowling",
+      "area": 6,
+      "genre": "Animales míticos / Animals, Mythical, in literature",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL13716952W",
+      "source": "Open Library",
+      "sourceId": "/works/OL13716952W",
+      "languages": [
+        "jpn",
+        "eng",
+        "rus",
+        "fre",
+        "spa",
+        "pol",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Fantastic Beasts and Where to Find Them\n著者：J. K. Rowling\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL13716952W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17625829W",
+      "title": "Empire of Storms",
+      "author": "Sarah J. Maas",
+      "area": 6,
+      "genre": "Magic / YA",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17625829W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17625829W",
+      "languages": [
+        "eng",
+        "pol",
+        "spa",
+        "por",
+        "ger",
+        "tur"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Empire of Storms\n著者：Sarah J. Maas\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17625829W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17268007W",
+      "title": "Annihilation",
+      "author": "Jeff VanderMeer",
+      "area": 1,
+      "genre": "Nebula Award Winner / award:nebula_award=novel",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17268007W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17268007W",
+      "languages": [
+        "rum",
+        "por",
+        "eng",
+        "fre",
+        "spa",
+        "ita"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Annihilation\n著者：Jeff VanderMeer\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17268007W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL3759162W",
+      "title": "Passionate Relationship",
+      "author": "Penny Jordan",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Revenge, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL3759162W",
+      "source": "Open Library",
+      "sourceId": "/works/OL3759162W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Passionate Relationship\n著者：Penny Jordan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL3759162W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL16810944W",
+      "title": "The School for Good and Evil",
+      "author": "Soman Chainani",
+      "area": 5,
+      "genre": "Magic / Juvenile fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL16810944W",
+      "source": "Open Library",
+      "sourceId": "/works/OL16810944W",
+      "languages": [
+        "dut",
+        "fre",
+        "eng",
+        "pol",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The School for Good and Evil\n著者：Soman Chainani\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL16810944W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17059943W",
+      "title": "The Blood of Olympus",
+      "author": "Rick Riordan",
+      "area": 6,
+      "genre": "Serie:The_Heroes_of_Olympus / Greek mythology",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17059943W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17059943W",
+      "languages": [
+        "dut",
+        "rus",
+        "ger",
+        "por",
+        "fre",
+        "ita",
+        "tur",
+        "chi",
+        "eng",
+        "pol",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Blood of Olympus\n著者：Rick Riordan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17059943W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17929039W",
+      "title": "The Seven Deaths of Evelyn Hardcastle",
+      "author": "Stuart Turton",
+      "area": 2,
+      "genre": "Fiction, suspense / Fiction, thrillers, general",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17929039W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17929039W",
+      "languages": [
+        "eng",
+        "ita",
+        "por"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Seven Deaths of Evelyn Hardcastle\n著者：Stuart Turton\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17929039W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL31923W",
+      "title": "Fried Green Tomatoes at the Whistle Stop Cafe",
+      "author": "Fannie Flagg",
+      "area": 2,
+      "genre": "Race relations / Reminiscing in old age",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL31923W",
+      "source": "Open Library",
+      "sourceId": "/works/OL31923W",
+      "languages": [
+        "jpn",
+        "ger",
+        "fre",
+        "rus",
+        "heb",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Fried Green Tomatoes at the Whistle Stop Cafe\n著者：Fannie Flagg\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL31923W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL617847W",
+      "title": "El túnel",
+      "author": "Ernesto Sabato",
+      "area": 5,
+      "genre": "Spanish fiction / Spanish language",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL617847W",
+      "source": "Open Library",
+      "sourceId": "/works/OL617847W",
+      "languages": [
+        "alb",
+        "ara",
+        "fin",
+        "fre",
+        "srp",
+        "mac",
+        "lav",
+        "dut",
+        "pol",
+        "gre",
+        "hrv",
+        "nor",
+        "est",
+        "eng",
+        "rum",
+        "spa",
+        "tur",
+        "por",
+        "per",
+        "ger",
+        "swe",
+        "arm",
+        "ita",
+        "baq",
+        "geo"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：El túnel\n著者：Ernesto Sabato\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL617847W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL38495W",
+      "title": "Quicksilver",
+      "author": "Neal Stephenson",
+      "area": 1,
+      "genre": "Scientists / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL38495W",
+      "source": "Open Library",
+      "sourceId": "/works/OL38495W",
+      "languages": [
+        "ger",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Quicksilver\n著者：Neal Stephenson\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL38495W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL72384W",
+      "title": "Fear Street - Halloween Party",
+      "author": "Robert Lawrence Stine",
+      "area": 6,
+      "genre": "Halloween / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL72384W",
+      "source": "Open Library",
+      "sourceId": "/works/OL72384W",
+      "languages": [
+        "eng",
+        "por",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Fear Street - Halloween Party\n著者：Robert Lawrence Stine\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL72384W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL46900W",
+      "title": "Airframe",
+      "author": "Michael Crichton",
+      "area": 1,
+      "genre": "air safety / media relations",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL46900W",
+      "source": "Open Library",
+      "sourceId": "/works/OL46900W",
+      "languages": [
+        "jpn",
+        "ita",
+        "chi",
+        "ger",
+        "fre",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Airframe\n著者：Michael Crichton\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL46900W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL72434W",
+      "title": "Say Cheese and Die!",
+      "author": "Robert Lawrence Stine",
+      "area": 6,
+      "genre": "Juvenile fiction / Horror tales",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL72434W",
+      "source": "Open Library",
+      "sourceId": "/works/OL72434W",
+      "languages": [
+        "chi",
+        "ger",
+        "fre",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Say Cheese and Die!\n著者：Robert Lawrence Stine\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL72434W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17203232W",
+      "title": "Dork Diaries 7",
+      "author": "Rachel Renée Russell",
+      "area": 6,
+      "genre": "Diary / Bands (Music)",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17203232W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17203232W",
+      "languages": [
+        "eng",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Dork Diaries 7\n著者：Rachel Renée Russell\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17203232W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL52946W",
+      "title": "Tripwire",
+      "author": "Lee Child",
+      "area": 2,
+      "genre": "Vietnamese Conflict, 1961-1975 / Private investigators",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL52946W",
+      "source": "Open Library",
+      "sourceId": "/works/OL52946W",
+      "languages": [
+        "spa",
+        "pol",
+        "gre",
+        "dut",
+        "fre",
+        "ita",
+        "rus",
+        "ger",
+        "heb",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Tripwire\n著者：Lee Child\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL52946W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL35223328W",
+      "title": "Married at first sight",
+      "author": "Gu Lingfei",
+      "area": 2,
+      "genre": "Romance / Fiction, romance, contemporary",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL35223328W",
+      "source": "Open Library",
+      "sourceId": "/works/OL35223328W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Married at first sight\n著者：Gu Lingfei\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL35223328W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL151798W",
+      "title": "Goodnight Moon",
+      "author": "Margaret Wise Brown",
+      "area": 3,
+      "genre": "Children's fiction / Picture books",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL151798W",
+      "source": "Open Library",
+      "sourceId": "/works/OL151798W",
+      "languages": [
+        "jpn",
+        "ita",
+        "tur",
+        "chi",
+        "ger",
+        "fre",
+        "vie",
+        "heb",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Goodnight Moon\n著者：Margaret Wise Brown\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL151798W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL50456W",
+      "title": "Women",
+      "author": "Charles Bukowski",
+      "area": 5,
+      "genre": "Fiction / Man-woman relationships",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL50456W",
+      "source": "Open Library",
+      "sourceId": "/works/OL50456W",
+      "languages": [
+        "eng",
+        "rus",
+        "fre"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Women\n著者：Charles Bukowski\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL50456W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL4092664W",
+      "title": "A Civil Contract",
+      "author": "Georgette Heyer",
+      "area": 3,
+      "genre": "Fiction, Romance, Historical, Regency / Arranged marriage, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL4092664W",
+      "source": "Open Library",
+      "sourceId": "/works/OL4092664W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：A Civil Contract\n著者：Georgette Heyer\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL4092664W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL2746372W",
+      "title": "The Mammoth Hunters",
+      "author": "Jean M. Auel, J.M. Auel",
+      "area": 2,
+      "genre": "Fiction / Prehistoric peoples",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL2746372W",
+      "source": "Open Library",
+      "sourceId": "/works/OL2746372W",
+      "languages": [
+        "dut",
+        "ita",
+        "swe",
+        "ger",
+        "fre",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Mammoth Hunters\n著者：Jean M. Auel, J.M. Auel\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL2746372W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL271163W",
+      "title": "The Forever War",
+      "author": "Joe Haldeman",
+      "area": 1,
+      "genre": "Aging / Hugo Award Winner",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL271163W",
+      "source": "Open Library",
+      "sourceId": "/works/OL271163W",
+      "languages": [
+        "ger",
+        "por",
+        "fre",
+        "eng",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Forever War\n著者：Joe Haldeman\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL271163W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL16520879W",
+      "title": "L'amica geniale",
+      "author": "Elena Ferrante",
+      "area": 3,
+      "genre": "Friendship / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL16520879W",
+      "source": "Open Library",
+      "sourceId": "/works/OL16520879W",
+      "languages": [
+        "fre",
+        "spa",
+        "pol",
+        "ita",
+        "ger",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：L'amica geniale\n著者：Elena Ferrante\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL16520879W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL3467511W",
+      "title": "The Forced Bride",
+      "author": "Sara Craven",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Italians, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL3467511W",
+      "source": "Open Library",
+      "sourceId": "/works/OL3467511W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Forced Bride\n著者：Sara Craven\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL3467511W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL483385W",
+      "title": "Stuart Little",
+      "author": "E. B. White",
+      "area": 3,
+      "genre": "Voyages and travels / Mice",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL483385W",
+      "source": "Open Library",
+      "sourceId": "/works/OL483385W",
+      "languages": [
+        "heb",
+        "rus",
+        "ger",
+        "fre",
+        "ita",
+        "chi",
+        "eng",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Stuart Little\n著者：E. B. White\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL483385W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL21747086W",
+      "title": "Semilla del Diablo",
+      "author": "Ira Levin",
+      "area": 2,
+      "genre": "Fiction, horror / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL21747086W",
+      "source": "Open Library",
+      "sourceId": "/works/OL21747086W",
+      "languages": [
+        "vie",
+        "eng",
+        "ger",
+        "fre",
+        "spa",
+        "heb",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Semilla del Diablo\n著者：Ira Levin\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL21747086W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL15980243W",
+      "title": "The Son of Neptune",
+      "author": "Rick Riordan",
+      "area": 6,
+      "genre": "Serie:The_Heroes_of_Olympus / Amnesiacs",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL15980243W",
+      "source": "Open Library",
+      "sourceId": "/works/OL15980243W",
+      "languages": [
+        "cat",
+        "eng",
+        "heb",
+        "fre",
+        "vie",
+        "pol",
+        "spa",
+        "por",
+        "chi"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Son of Neptune\n著者：Rick Riordan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL15980243W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL54031W",
+      "title": "A Connecticut Yankee in King Arthur's Court",
+      "author": "Mark Twain",
+      "area": 3,
+      "genre": "Time travel / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL54031W",
+      "source": "Open Library",
+      "sourceId": "/works/OL54031W",
+      "languages": [
+        "heb",
+        "dut",
+        "rus",
+        "ger",
+        "eng",
+        "pol",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：A Connecticut Yankee in King Arthur's Court\n著者：Mark Twain\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL54031W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1905255W",
+      "title": "La casa de los espíritus",
+      "author": "Isabel Allende",
+      "area": 3,
+      "genre": "Chilean literature / Translations into English",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1905255W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1905255W",
+      "languages": [
+        "por",
+        "fre",
+        "eng",
+        "ger",
+        "ita",
+        "vie",
+        "spa",
+        "dut",
+        "rus"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：La casa de los espíritus\n著者：Isabel Allende\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1905255W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL5805254W",
+      "title": "Marked",
+      "author": "P. C. Cast, Kristin Cast",
+      "area": 6,
+      "genre": "nyt:series_books=2009-05-30 / Zoey Redbird (Fictitious character)",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL5805254W",
+      "source": "Open Library",
+      "sourceId": "/works/OL5805254W",
+      "languages": [
+        "eng",
+        "und",
+        "spa",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Marked\n著者：P. C. Cast, Kristin Cast\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL5805254W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL26945W",
+      "title": "The Bride",
+      "author": "Julie Garwood",
+      "area": 2,
+      "genre": "collectionID:Mbodice_ripper, fiction / Fiction, Romance, Historical, Medieval",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL26945W",
+      "source": "Open Library",
+      "sourceId": "/works/OL26945W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Bride\n著者：Julie Garwood\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL26945W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL47292W",
+      "title": "Push",
+      "author": "Sapphire, Tayari Jones, Sapphire",
+      "area": 2,
+      "genre": "Child abuse / Pregnant schoolgirls",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL47292W",
+      "source": "Open Library",
+      "sourceId": "/works/OL47292W",
+      "languages": [
+        "spa",
+        "ger",
+        "eng",
+        "fre"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Push\n著者：Sapphire, Tayari Jones, Sapphire\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL47292W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL76524W",
+      "title": "The Thirty-Nine Steps",
+      "author": "John Buchan",
+      "area": 3,
+      "genre": "Hannay, richard (fictitious character), fiction / Great britain, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL76524W",
+      "source": "Open Library",
+      "sourceId": "/works/OL76524W",
+      "languages": [
+        "ita",
+        "ger",
+        "fre",
+        "und",
+        "pol",
+        "heb",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Thirty-Nine Steps\n著者：John Buchan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL76524W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL483391W",
+      "title": "Charlotte's Web",
+      "author": "E. B. White",
+      "area": 6,
+      "genre": "Farm life / Animals",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL483391W",
+      "source": "Open Library",
+      "sourceId": "/works/OL483391W",
+      "languages": [
+        "cat",
+        "vie",
+        "spa",
+        "tha",
+        "eng",
+        "kor",
+        "fre",
+        "por",
+        "chi",
+        "cmn",
+        "dut",
+        "ben",
+        "wel",
+        "heb",
+        "rum",
+        "lat",
+        "tur",
+        "ita",
+        "jpn",
+        "dan",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Charlotte's Web\n著者：E. B. White\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL483391W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL2172433W",
+      "title": "A Scanner Darkly",
+      "author": "Philip K. Dick",
+      "area": 1,
+      "genre": "Detective and mystery stories / Drug abuse",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL2172433W",
+      "source": "Open Library",
+      "sourceId": "/works/OL2172433W",
+      "languages": [
+        "ger",
+        "fre",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：A Scanner Darkly\n著者：Philip K. Dick\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL2172433W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL276386W",
+      "title": "The Turn of the Screw",
+      "author": "Henry James",
+      "area": 3,
+      "genre": "Governesses, fiction / Children, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL276386W",
+      "source": "Open Library",
+      "sourceId": "/works/OL276386W",
+      "languages": [
+        "heb",
+        "por",
+        "eng",
+        "fre",
+        "jpn",
+        "ger",
+        "ita",
+        "spa",
+        "chi"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Turn of the Screw\n著者：Henry James\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL276386W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL81615W",
+      "title": "Wizard and Glass",
+      "author": "Stephen King",
+      "area": 5,
+      "genre": "crystal balls / parallel universes",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL81615W",
+      "source": "Open Library",
+      "sourceId": "/works/OL81615W",
+      "languages": [
+        "spa",
+        "fre",
+        "ita",
+        "por",
+        "rus",
+        "ger",
+        "pol",
+        "chi",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Wizard and Glass\n著者：Stephen King\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL81615W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL453735W",
+      "title": "Guards! Guards!",
+      "author": "Terry Pratchett",
+      "area": 2,
+      "genre": "Fiction in Spanish / Discworld (Imaginary Place)",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL453735W",
+      "source": "Open Library",
+      "sourceId": "/works/OL453735W",
+      "languages": [
+        "dut",
+        "ita",
+        "chi",
+        "ger",
+        "fre",
+        "cze",
+        "rus",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Guards! Guards!\n著者：Terry Pratchett\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL453735W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL45089W",
+      "title": "Robinson Crusoe",
+      "author": "Daniel Defoe",
+      "area": 3,
+      "genre": "Crusoe, robinson (fictitious character), fiction / British and irish fiction (fictional works by one author)",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL45089W",
+      "source": "Open Library",
+      "sourceId": "/works/OL45089W",
+      "languages": [
+        "ger",
+        "heb",
+        "ita",
+        "und",
+        "wel",
+        "epo",
+        "chi",
+        "swe",
+        "yid",
+        "bre",
+        "lat",
+        "rum",
+        "pan",
+        "rus",
+        "fin",
+        "eng",
+        "por",
+        "arm",
+        "spa",
+        "gle",
+        "ara",
+        "tur",
+        "per",
+        "pol",
+        "fre",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Robinson Crusoe\n著者：Daniel Defoe\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL45089W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1253285W",
+      "title": "The Scarlet Pimpernel",
+      "author": "Emma Orczy",
+      "area": 3,
+      "genre": "Classic Literature / Adventure and adventurers",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1253285W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1253285W",
+      "languages": [
+        "chi",
+        "sun",
+        "fre",
+        "pol",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Scarlet Pimpernel\n著者：Emma Orczy\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1253285W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL151956W",
+      "title": "Runaway Ralph",
+      "author": "Beverly Cleary",
+      "area": 6,
+      "genre": "watchdogs / motorcycling",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL151956W",
+      "source": "Open Library",
+      "sourceId": "/works/OL151956W",
+      "languages": [
+        "spa",
+        "eng",
+        "und"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Runaway Ralph\n著者：Beverly Cleary\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL151956W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL8193387W",
+      "title": "Hard Times",
+      "author": "Charles Dickens",
+      "area": 1,
+      "genre": "Fiction / Social problems",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL8193387W",
+      "source": "Open Library",
+      "sourceId": "/works/OL8193387W",
+      "languages": [
+        "ita",
+        "dut",
+        "eng",
+        "bul",
+        "und",
+        "heb",
+        "fre",
+        "spa",
+        "pol",
+        "por",
+        "chi",
+        "ara",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Hard Times\n著者：Charles Dickens\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL8193387W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1932963W",
+      "title": "Amelia Bedelia",
+      "author": "Peggy Parish, Fritz Siebel, Barbara Siebel Thomas",
+      "area": 6,
+      "genre": "Humorous stories / Juvenile fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1932963W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1932963W",
+      "languages": [
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Amelia Bedelia\n著者：Peggy Parish, Fritz Siebel, Barbara Siebel Thomas\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1932963W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL471667W",
+      "title": "Appointment with Death",
+      "author": "Agatha Christie",
+      "area": 2,
+      "genre": "Belgians / Belgians in fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL471667W",
+      "source": "Open Library",
+      "sourceId": "/works/OL471667W",
+      "languages": [
+        "ita",
+        "chi",
+        "hin",
+        "ger",
+        "fre",
+        "pol",
+        "heb",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Appointment with Death\n著者：Agatha Christie\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL471667W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17062642W",
+      "title": "Ancillary Sword",
+      "author": "Ann Leckie",
+      "area": 1,
+      "genre": "Science Fiction / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17062642W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17062642W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Ancillary Sword\n著者：Ann Leckie\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17062642W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL81589W",
+      "title": "Lisey's Story",
+      "author": "Stephen King",
+      "area": 5,
+      "genre": "Family secrets / Widows in fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL81589W",
+      "source": "Open Library",
+      "sourceId": "/works/OL81589W",
+      "languages": [
+        "dut",
+        "eng",
+        "rus",
+        "fre",
+        "spa",
+        "chi",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Lisey's Story\n著者：Stephen King\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL81589W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL59740W",
+      "title": "Starship Troopers",
+      "author": "Robert A. Heinlein",
+      "area": 1,
+      "genre": "Fiction / Hugo Award Winner",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL59740W",
+      "source": "Open Library",
+      "sourceId": "/works/OL59740W",
+      "languages": [
+        "ita",
+        "por",
+        "ger",
+        "fre",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Starship Troopers\n著者：Robert A. Heinlein\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL59740W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL15014715W",
+      "title": "Pattern Recognition",
+      "author": "William Gibson",
+      "area": 1,
+      "genre": "Literature / Women private investigators in fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL15014715W",
+      "source": "Open Library",
+      "sourceId": "/works/OL15014715W",
+      "languages": [
+        "fre",
+        "por",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Pattern Recognition\n著者：William Gibson\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL15014715W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL16797312W",
+      "title": "The Third Wheel",
+      "author": "Jeff Kinney",
+      "area": 6,
+      "genre": "Humorous stories / Families",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL16797312W",
+      "source": "Open Library",
+      "sourceId": "/works/OL16797312W",
+      "languages": [
+        "jpn",
+        "tur",
+        "heb",
+        "baq",
+        "wel",
+        "por",
+        "cat",
+        "pol",
+        "eng",
+        "chi",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Third Wheel\n著者：Jeff Kinney\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL16797312W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL15518787W",
+      "title": "The Hunger Games Trilogy (Hunger Games / Catching Fire / Mockingjay)",
+      "author": "Suzanne Collins",
+      "area": 1,
+      "genre": "Romance / Drama",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL15518787W",
+      "source": "Open Library",
+      "sourceId": "/works/OL15518787W",
+      "languages": [
+        "cat",
+        "ger",
+        "ita",
+        "eng",
+        "pol",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Hunger Games Trilogy (Hunger Games / Catching Fire / Mockingjay)\n著者：Suzanne Collins\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL15518787W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL15296267W",
+      "title": "One Night...Nine-Month Scandal",
+      "author": "Sarah Morgan",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary, Modern / Fiction, Romance, Contemporary",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL15296267W",
+      "source": "Open Library",
+      "sourceId": "/works/OL15296267W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：One Night...Nine-Month Scandal\n著者：Sarah Morgan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL15296267W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL863808W",
+      "title": "Ivanhoe",
+      "author": "Sir Walter Scott",
+      "area": 3,
+      "genre": "Fiction / History",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL863808W",
+      "source": "Open Library",
+      "sourceId": "/works/OL863808W",
+      "languages": [
+        "und",
+        "vie",
+        "rus",
+        "eng",
+        "ger",
+        "fre",
+        "spa",
+        "gle",
+        "gla",
+        "dut"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Ivanhoe\n著者：Sir Walter Scott\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL863808W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL19351054W",
+      "title": "The Poppy War",
+      "author": "R. F. Kuang",
+      "area": 2,
+      "genre": "Fiction / Fantasy",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL19351054W",
+      "source": "Open Library",
+      "sourceId": "/works/OL19351054W",
+      "languages": [
+        "eng",
+        "ita",
+        "por"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Poppy War\n著者：R. F. Kuang\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL19351054W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL82548W",
+      "title": "Harry Potter and the Order of the Phoenix",
+      "author": "J. K. Rowling",
+      "area": 5,
+      "genre": "Children's Books/Ages 9-12 Fiction / Witches and warlocks",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL82548W",
+      "source": "Open Library",
+      "sourceId": "/works/OL82548W",
+      "languages": [
+        "rum",
+        "por",
+        "ukr",
+        "eng",
+        "bul",
+        "pol",
+        "spa",
+        "per",
+        "heb",
+        "ger",
+        "lit",
+        "vie",
+        "tur",
+        "chi",
+        "tha",
+        "hun",
+        "dan",
+        "rus",
+        "fre",
+        "ita",
+        "ben",
+        "geo",
+        "kor",
+        "swe",
+        "arm",
+        "cat",
+        "dut",
+        "jpn",
+        "hrv",
+        "hin",
+        "cze",
+        "ara"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Harry Potter and the Order of the Phoenix\n著者：J. K. Rowling\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL82548W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL3775418W",
+      "title": "Captive Loving",
+      "author": "Carole Mortimer",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Domestic abuse, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL3775418W",
+      "source": "Open Library",
+      "sourceId": "/works/OL3775418W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Captive Loving\n著者：Carole Mortimer\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL3775418W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL5714297W",
+      "title": "Midnight",
+      "author": "Erin Hunter",
+      "area": 6,
+      "genre": "Cats / Fantasy",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL5714297W",
+      "source": "Open Library",
+      "sourceId": "/works/OL5714297W",
+      "languages": [
+        "ita",
+        "tur",
+        "chi",
+        "ger",
+        "pol",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Midnight\n著者：Erin Hunter\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL5714297W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1388028W",
+      "title": "The Once and Future King",
+      "author": "T. H. White",
+      "area": 3,
+      "genre": "Adaptations / Arthur,",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1388028W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1388028W",
+      "languages": [
+        "spa",
+        "rus",
+        "heb",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Once and Future King\n著者：T. H. White\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1388028W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL134890W",
+      "title": "Petals on the Wind",
+      "author": "V.C. Andrews",
+      "area": 6,
+      "genre": "series:dollanganger / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL134890W",
+      "source": "Open Library",
+      "sourceId": "/works/OL134890W",
+      "languages": [
+        "ger",
+        "fre",
+        "pol",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Petals on the Wind\n著者：V.C. Andrews\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL134890W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL2163715W",
+      "title": "The Salmon of Doubt",
+      "author": "Douglas Adams",
+      "area": 1,
+      "genre": "Fiction / Science Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL2163715W",
+      "source": "Open Library",
+      "sourceId": "/works/OL2163715W",
+      "languages": [
+        "eng",
+        "fre",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Salmon of Doubt\n著者：Douglas Adams\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL2163715W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL50548W",
+      "title": "Beloved",
+      "author": "Toni Morrison",
+      "area": 3,
+      "genre": "African American History / Ohio",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL50548W",
+      "source": "Open Library",
+      "sourceId": "/works/OL50548W",
+      "languages": [
+        "ger",
+        "jpn",
+        "tur",
+        "heb",
+        "ita",
+        "kor",
+        "pol",
+        "fre",
+        "rus",
+        "eng",
+        "chi",
+        "spa",
+        "swe"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Beloved\n著者：Toni Morrison\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL50548W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17116911W",
+      "title": "Big Little Lies",
+      "author": "Liane Moriarty",
+      "area": 2,
+      "genre": "Suburbs / Murder",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17116911W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17116911W",
+      "languages": [
+        "rus",
+        "eng",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Big Little Lies\n著者：Liane Moriarty\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17116911W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17202418W",
+      "title": "Station Eleven",
+      "author": "Emily St. John Mandel",
+      "area": 1,
+      "genre": "Fiction / Literary",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17202418W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17202418W",
+      "languages": [
+        "fre",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Station Eleven\n著者：Emily St. John Mandel\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17202418W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1923013W",
+      "title": "Enchanters' End Game (The Belgariad)",
+      "author": "David Eddings, David Eddings",
+      "area": 6,
+      "genre": "American Fantasy fiction / Fantasy",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1923013W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1923013W",
+      "languages": [
+        "swe",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Enchanters' End Game (The Belgariad)\n著者：David Eddings, David Eddings\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1923013W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL2959250W",
+      "title": "A Marriage Betrayed",
+      "author": "Emma Darcy",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Twins, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL2959250W",
+      "source": "Open Library",
+      "sourceId": "/works/OL2959250W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：A Marriage Betrayed\n著者：Emma Darcy\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL2959250W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL19859295W",
+      "title": "This is How You Lose the Time War",
+      "author": "Amal El-Mohtar, Max Gladstone",
+      "area": 1,
+      "genre": "science fiction / time-traveling",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL19859295W",
+      "source": "Open Library",
+      "sourceId": "/works/OL19859295W",
+      "languages": [
+        "ger",
+        "eng",
+        "por"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：This is How You Lose the Time War\n著者：Amal El-Mohtar, Max Gladstone\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL19859295W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL1975714W",
+      "title": "A Fire upon the Deep",
+      "author": "Vernor Vinge",
+      "area": 1,
+      "genre": "Fiction / Hugo Award Winner",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL1975714W",
+      "source": "Open Library",
+      "sourceId": "/works/OL1975714W",
+      "languages": [
+        "fre",
+        "heb",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：A Fire upon the Deep\n著者：Vernor Vinge\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL1975714W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL872724W",
+      "title": "Das Glasperlenspiel",
+      "author": "Hermann Hesse",
+      "area": 1,
+      "genre": "Continental european fiction (fictional works by one author) / Psychological games",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL872724W",
+      "source": "Open Library",
+      "sourceId": "/works/OL872724W",
+      "languages": [
+        "eng",
+        "rus",
+        "fre",
+        "spa",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Das Glasperlenspiel\n著者：Hermann Hesse\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL872724W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL24166W",
+      "title": "Kidnapped",
+      "author": "Robert Louis Stevenson",
+      "area": 3,
+      "genre": "Juvenile fiction / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL24166W",
+      "source": "Open Library",
+      "sourceId": "/works/OL24166W",
+      "languages": [
+        "ita",
+        "eng",
+        "per",
+        "gle",
+        "spa",
+        "epo",
+        "chi"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Kidnapped\n著者：Robert Louis Stevenson\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL24166W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL7923819W",
+      "title": "The Day of the Jackal",
+      "author": "Frederick Forsyth",
+      "area": 2,
+      "genre": "Fiction / Literature",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL7923819W",
+      "source": "Open Library",
+      "sourceId": "/works/OL7923819W",
+      "languages": [
+        "jpn",
+        "ita",
+        "por",
+        "ger",
+        "rus",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Day of the Jackal\n著者：Frederick Forsyth\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL7923819W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL81598W",
+      "title": "Dreamcatcher",
+      "author": "Stephen King",
+      "area": 1,
+      "genre": "male friendship / life on other planets",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL81598W",
+      "source": "Open Library",
+      "sourceId": "/works/OL81598W",
+      "languages": [
+        "ger",
+        "fre",
+        "eng",
+        "rus",
+        "spa",
+        "und"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Dreamcatcher\n著者：Stephen King\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL81598W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL453777W",
+      "title": "Maskerade",
+      "author": "Terry Pratchett",
+      "area": 2,
+      "genre": "Discworld (Imaginary place) / Opera",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL453777W",
+      "source": "Open Library",
+      "sourceId": "/works/OL453777W",
+      "languages": [
+        "ger",
+        "fre",
+        "rus",
+        "pol",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Maskerade\n著者：Terry Pratchett\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL453777W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL3458001W",
+      "title": "The Girl with Green Eyes",
+      "author": "Betty Neels",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Fiction, romance, suspense",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL3458001W",
+      "source": "Open Library",
+      "sourceId": "/works/OL3458001W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Girl with Green Eyes\n著者：Betty Neels\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL3458001W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL4233169W",
+      "title": "The Ultimate Betrayal",
+      "author": "Michelle Reid",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Adultery, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL4233169W",
+      "source": "Open Library",
+      "sourceId": "/works/OL4233169W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Ultimate Betrayal\n著者：Michelle Reid\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL4233169W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL12791W",
+      "title": "My Ántonia",
+      "author": "Willa Cather",
+      "area": 3,
+      "genre": "Literature / Frontier and pioneer life",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL12791W",
+      "source": "Open Library",
+      "sourceId": "/works/OL12791W",
+      "languages": [
+        "urd",
+        "ger",
+        "heb",
+        "ita",
+        "rus",
+        "fre",
+        "fin",
+        "eng",
+        "chi",
+        "cze",
+        "spa"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：My Ántonia\n著者：Willa Cather\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL12791W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL17038327W",
+      "title": "The Girl with All the Gifts",
+      "author": "Mike Carey",
+      "area": 7,
+      "genre": "Zombies / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL17038327W",
+      "source": "Open Library",
+      "sourceId": "/works/OL17038327W",
+      "languages": [
+        "pol",
+        "eng",
+        "ger",
+        "fre",
+        "tur"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Girl with All the Gifts\n著者：Mike Carey\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL17038327W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL731663W",
+      "title": "The Fountainhead",
+      "author": "Ayn Rand",
+      "area": 3,
+      "genre": "Fiction / Architects",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL731663W",
+      "source": "Open Library",
+      "sourceId": "/works/OL731663W",
+      "languages": [
+        "vie",
+        "dut",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Fountainhead\n著者：Ayn Rand\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL731663W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL5734646W",
+      "title": "The Last Colony",
+      "author": "John Scalzi",
+      "area": 1,
+      "genre": "Space warfare / Life on other planets",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL5734646W",
+      "source": "Open Library",
+      "sourceId": "/works/OL5734646W",
+      "languages": [
+        "heb",
+        "por",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Last Colony\n著者：John Scalzi\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL5734646W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL450124W",
+      "title": "The Last Man",
+      "author": "Mary Shelley",
+      "area": 1,
+      "genre": "Fiction / Plague",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL450124W",
+      "source": "Open Library",
+      "sourceId": "/works/OL450124W",
+      "languages": [
+        "ita",
+        "ger",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The Last Man\n著者：Mary Shelley\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL450124W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL35628W",
+      "title": "Dawn",
+      "author": "Octavia E. Butler",
+      "area": 1,
+      "genre": "Genetic engineering / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL35628W",
+      "source": "Open Library",
+      "sourceId": "/works/OL35628W",
+      "languages": [
+        "eng",
+        "fre",
+        "ger"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Dawn\n著者：Octavia E. Butler\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL35628W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL453787W",
+      "title": "Lords and Ladies",
+      "author": "Terry Pratchett",
+      "area": 2,
+      "genre": "Fiction / Discworld (Imaginary place)",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL453787W",
+      "source": "Open Library",
+      "sourceId": "/works/OL453787W",
+      "languages": [
+        "dut",
+        "ger",
+        "fre",
+        "cze",
+        "rus",
+        "pol",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Lords and Ladies\n著者：Terry Pratchett\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL453787W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL52942W",
+      "title": "The enemy",
+      "author": "Lee Child",
+      "area": 2,
+      "genre": "Military police in fiction / Conspiracies in fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL52942W",
+      "source": "Open Library",
+      "sourceId": "/works/OL52942W",
+      "languages": [
+        "ita",
+        "tur",
+        "chi",
+        "pol",
+        "heb",
+        "spa",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：The enemy\n著者：Lee Child\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL52942W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL893502W",
+      "title": "Heretics of Dune",
+      "author": "Frank Herbert",
+      "area": 1,
+      "genre": "Science Fiction / Fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL893502W",
+      "source": "Open Library",
+      "sourceId": "/works/OL893502W",
+      "languages": [
+        "spa",
+        "pol",
+        "tur",
+        "fre",
+        "por",
+        "rus",
+        "ger",
+        "heb",
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Heretics of Dune\n著者：Frank Herbert\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL893502W"
+        }
+      ]
+    },
+    {
+      "id": "ol:OL11327982W",
+      "title": "Blackmail",
+      "author": "Penny Jordan",
+      "area": 2,
+      "genre": "Fiction, Romance, Contemporary / Love Stories, fiction",
+      "desc": "Open Libraryの書誌情報。館内に本文は収録していません。",
+      "availability": "external_bibliography",
+      "fullTextIncluded": false,
+      "searchUrl": "https://openlibrary.org/works/OL11327982W",
+      "source": "Open Library",
+      "sourceId": "/works/OL11327982W",
+      "languages": [
+        "eng"
+      ],
+      "chapters": [
+        {
+          "title": "書誌情報（本文ではありません）",
+          "text": "書名：Blackmail\n著者：Penny Jordan\n提供元：Open Library\n※館内には本文を収録していません。"
+        },
+        {
+          "title": "作品情報を見る",
+          "text": "書誌情報と利用可能な閲覧形式は作品ページで確認してください。\nhttps://openlibrary.org/works/OL11327982W"
+        }
+      ]
     }
   ],
   "collectionProgress": {
     "ol_query_index": 0,
-    "ol_page": 11,
-    "next_url": "https://gutendex.com/books/?languages=ja%2Cen&page=4&sort=popular",
-    "count": 902,
+    "ol_page": 13,
+    "next_url": null,
+    "count": 1000,
     "target": 1000,
-    "failed_url": "https://gutendex.com/books/?languages=ja%2Cen&page=4&sort=popular",
-    "failed_runs": 1,
-    "skipped_pages": []
+    "failed_url": null,
+    "failed_runs": 0,
+    "skipped_pages": [
+      "https://gutendex.com/books/?languages=ja%2Cen&page=4&sort=popular"
+    ]
   }
 }
