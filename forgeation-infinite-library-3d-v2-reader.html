@@ -138,11 +138,53 @@ const topBtn=document.createElement('button');topBtn.id='bookFindTop';topBtn.cla
 const bottomBtn=document.createElement('button');bottomBtn.id='bookFindBottom';bottomBtn.textContent='📚 本を探す';controls.insertBefore(bottomBtn,document.getElementById('photo'));
 const hotspot=document.createElement('button');hotspot.id='bookHotspot';hotspot.textContent='📚 このエリアの本棚を開く';hotspot.title='現在のエリアの本棚';document.body.append(hotspot);
 
-const panel=document.createElement('section');panel.id='libraryPanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label','図書館の本棚');panel.innerHTML=`<div class="libHead"><strong>FORGEATION · BOOKS</strong><button id="libClose" type="button">↩ 360°に戻る</button></div><div id="libBrowse"><h2>📚 本棚を探す</h2><p>10エリアの書架から本を選べます。本文のある作品は館内で読書できます。</p><input id="libSearch" type="search" placeholder="本のタイトル・キーワードで検索" aria-label="蔵書を検索"><div id="libThemes"></div><div id="libCount"></div><div id="libGrid"></div><p id="libNotice">実在する書籍の案内です。本文を収録していない作品は館内で読むことができません。日本語本文・翻訳は利用条件を確認した作品から順次対応します。</p></div><div id="libDetail" style="display:none;max-width:720px;margin:24px auto"><button id="detailBack" type="button">← 本棚へ戻る</button><h2 id="detailTitle"></h2><p id="detailAuthor"></p><p id="detailDesc"></p><div class="detailActions"><button id="detailRead" type="button">📖 本を読む</button><a id="detailExternal" target="_blank" rel="noopener noreferrer">🔗 正規の提供元で探す</a></div><p id="detailStatus"></p></div><div id="libReader"><button id="libBack">← 本棚へ戻る</button><h2 id="readerTitle"></h2><p id="readerDesc"></p><div class="readerSettings"><button id="fontSmaller" type="button" aria-label="文字を小さく">文字 −</button><span id="fontLabel">17px</span><button id="fontLarger" type="button" aria-label="文字を大きく">文字 ＋</button></div><article class="paper" id="readingPaper"><h3 id="chapterTitle"></h3><p id="chapterText"></p></article><p class="readerSwipeHint">← 左右にスワイプしてページをめくる →</p><div class="readerNav"><button id="prevChapter">← 前の章</button><span id="chapterNum"></span><button id="nextChapter">次の章 →</button></div></div>`;document.body.append(panel);
+const panel=document.createElement('section');panel.id='libraryPanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label','図書館の本棚');panel.innerHTML=`<div class="libHead"><strong>FORGEATION · BOOKS</strong><button id="libClose" type="button">↩ 360°に戻る</button></div><div id="libBrowse"><h2>📚 本棚を探す</h2><p>10エリアの書架から本を選べます。本文のある作品は館内で読書できます。</p><input id="libSearch" type="search" placeholder="書名・著者・ジャンルで検索（日本語／英語）" aria-label="蔵書を検索"><div id="libThemes"></div><div id="libCount"></div><div id="libGrid"></div><p id="libNotice">実在する書籍の案内です。本文を収録していない作品は館内で読むことができません。日本語本文・翻訳は利用条件を確認した作品から順次対応します。</p></div><div id="libDetail" style="display:none;max-width:720px;margin:24px auto"><button id="detailBack" type="button">← 本棚へ戻る</button><h2 id="detailTitle"></h2><p id="detailAuthor"></p><p id="detailDesc"></p><div class="detailActions"><button id="detailRead" type="button">📖 本を読む</button><a id="detailExternal" target="_blank" rel="noopener noreferrer">🔗 正規の提供元で探す</a></div><p id="detailStatus"></p></div><div id="libReader"><button id="libBack">← 本棚へ戻る</button><h2 id="readerTitle"></h2><p id="readerDesc"></p><div class="readerSettings"><button id="fontSmaller" type="button" aria-label="文字を小さく">文字 −</button><span id="fontLabel">17px</span><button id="fontLarger" type="button" aria-label="文字を大きく">文字 ＋</button></div><article class="paper" id="readingPaper"><h3 id="chapterTitle"></h3><p id="chapterText"></p></article><p class="readerSwipeHint">← 左右にスワイプしてページをめくる →</p><div class="readerNav"><button id="prevChapter">← 前の章</button><span id="chapterNum"></span><button id="nextChapter">次の章 →</button></div></div>`;document.body.append(panel);
 const $=id=>document.getElementById(id);let filter=-1,selected=null,chapter=0,previousFocus=null,readerFromShelf=false;
 function area(){const t=$('title').textContent;const n=names.findIndex(n=>t.includes(n));return n<0?0:n}
 function renderThemes(){const box=$('libThemes');box.replaceChildren();[-1,...names.map((_,i)=>i)].forEach(i=>{const b=document.createElement('button');b.textContent=i<0?'すべて':names[i];b.className=filter===i?'selected':'';b.setAttribute('aria-pressed',filter===i?'true':'false');b.onclick=()=>{filter=i;renderThemes();renderBooks()};box.append(b)})}
-function renderBooks(){const q=$('libSearch').value.trim().toLocaleLowerCase();const found=BOOKS.filter(b=>(filter<0||b.area===filter)&&(b.title+' '+b.desc+' '+names[b.area]+' '+THEMES[b.area]).toLocaleLowerCase().includes(q));$('libCount').textContent=`${found.length}冊表示 / 登録 ${BOOKS.length}冊`;const grid=$('libGrid');grid.replaceChildren();found.forEach(b=>{const btn=document.createElement('button');const cover=document.createElement('span');cover.className='cover';cover.textContent=b.title;const title=document.createElement('strong');title.textContent=b.title;const meta=document.createElement('small');meta.textContent=names[b.area]+' · 詳細を見る';btn.append(cover,title,meta);btn.onclick=()=>showDetail(b);grid.append(btn)});if(!found.length)grid.textContent='該当する本はありません。検索条件を変更してください。'}
+// 日本語の定着した書名のみを別名として表示。元の書誌データは変更しない。
+const JAPANESE_TITLES={
+'middlemarch':'ミドルマーチ','jane eyre':'ジェーン・エア','jane eyre: an autobiography':'ジェーン・エア',
+'The Great Gatsby':'グレート・ギャツビー','the picture of dorian gray':'ドリアン・グレイの肖像',
+'pride and prejudice':'高慢と偏見','sense and sensibility':'分別と多感','emma':'エマ',
+'wuthering heights':'嵐が丘','great expectations':'大いなる遺産','oliver twist':'オリヴァー・ツイスト',
+'a tale of two cities':'二都物語','david copperfield':'デイヴィッド・コパフィールド',
+'crime and punishment':'罪と罰','the brothers karamazov':'カラマーゾフの兄弟',
+'war and peace':'戦争と平和','anna karenina':'アンナ・カレーニナ',
+'the adventures of sherlock holmes':'シャーロック・ホームズの冒険',
+'frankenstein':'フランケンシュタイン','dracula':'ドラキュラ',
+'the time machine':'タイム・マシン','the war of the worlds':'宇宙戦争',
+'alice’s adventures in wonderland':'不思議の国のアリス',"alice's adventures in wonderland":'不思議の国のアリス',
+'through the looking-glass':'鏡の国のアリス','the secret garden':'秘密の花園',
+'little women':'若草物語','moby dick':'白鯨','moby-dick; or, the whale':'白鯨',
+'the odyssey':'オデュッセイア','the iliad':'イリアス','the divine comedy':'神曲',
+'les misérables':'レ・ミゼラブル','the count of monte cristo':'モンテ・クリスト伯',
+'the three musketeers':'三銃士','the metamorphosis':'変身',
+'the adventures of tom sawyer':'トム・ソーヤーの冒険',
+'adventures of huckleberry finn':'ハックルベリー・フィンの冒険',
+'around the world in eighty days':'八十日間世界一周',
+'twenty thousand leagues under the seas':'海底二万里',
+'journey to the center of the earth':'地底旅行',
+'treasure island':'宝島','the call of the wild':'野性の呼び声',
+'the wonderful wizard of oz':'オズの魔法使い',
+'peter pan':'ピーター・パン','the jungle book':'ジャングル・ブック'
+};
+const norm=v=>String(v??'').normalize('NFKC').toLocaleLowerCase().replace(/\s+/g,' ').trim();
+function japaneseTitle(book){const key=norm(book.title);return JAPANESE_TITLES[key]||book.titleJa||book.title_ja||book.japaneseTitle||''}
+function displayTitle(book){return japaneseTitle(book)||book.title}
+function allSearchBooks(){return [...BOOKS,{...demoStory,id:'forgeation-original-future-door',area:9,genre:'Forgeationオリジナル',desc:'未来の扉／未来への扉。Forgeationオリジナル作品。館内で本文を読めます。'}]}
+function renderBooks(){
+ const q=norm($('libSearch').value);
+ const found=allSearchBooks().filter(b=>{
+  if(filter>=0&&b.area!==filter)return false;
+  const terms=[b.title,japaneseTitle(b),b.author,b.genre,b.desc,b.description,b.subjects,b.keywords,b.language,names[b.area],THEMES[b.area],...(Array.isArray(b.authors)?b.authors.map(a=>typeof a==='string'?a:a.name):[])];
+  return !q||norm(terms.filter(Boolean).join(' ')).includes(q);
+ });
+ $('libCount').textContent=`${found.length}冊表示 / 書誌登録 ${BOOKS.length}冊 ＋ オリジナル1作品`;
+ const grid=$('libGrid');grid.replaceChildren();
+ found.forEach(b=>{const btn=document.createElement('button');const cover=document.createElement('span');cover.className='cover';cover.textContent=displayTitle(b);const title=document.createElement('strong');title.textContent=displayTitle(b);const meta=document.createElement('small');meta.textContent=(japaneseTitle(b)&&norm(japaneseTitle(b))!==norm(b.title)?b.title+' · ':'')+(b.author||'著者不明')+' · '+names[b.area];btn.append(cover,title,meta);btn.onclick=()=>showDetail(b);grid.append(btn)});
+ if(!found.length)grid.textContent='該当する本はありません。検索条件・エリアを変更してください。';
+}
  const shelf=document.createElement('section');shelf.id='realShelf';shelf.setAttribute('role','dialog');shelf.setAttribute('aria-modal','true');shelf.setAttribute('aria-label','実写風の本棚');shelf.innerHTML=`<div class="shelfPhoto" id="shelfPhoto"></div><div class="shelfVignette"></div><div class="shelfContent"><div class="shelfTop"><div class="shelfBrand">FORGEATION · INFINITE LIBRARY</div><button type="button" id="shelfReturn">↩ 360°に戻る</button></div><h2 id="shelfHeading"></h2><p class="shelfSub">本の背表紙に触れて、書籍情報を開く</p><div class="shelfTools"><button type="button" id="shelfAllBooks">🔎 全蔵書から探す</button><span id="shelfAreaCount"></span></div><div class="woodCase" id="shelfWood"></div><p class="shelfFoot">背景の書籍は演出画像です。選べる本は手前のタイトルのみ。登録されている実在書籍の書誌案内です。表紙・本文の複製ではありません。<br>館内で読めない作品は、正規の提供元でご確認ください。</p></div>`;document.body.append(shelf);
  function closeShelf(){shelf.classList.remove('open');setTimeout(()=>{if(!shelf.classList.contains('open'))shelf.style.display='none'},660);document.body.style.overflow='';hotspot.focus()}
  $('shelfReturn').onclick=closeShelf;
@@ -164,14 +206,14 @@ function renderBooks(){const q=$('libSearch').value.trim().toLocaleLowerCase();c
    $('shelfAreaCount').textContent=areaBooks.length+'冊の書誌情報';
    $('shelfAllBooks').onclick=()=>openLibrary(-1,true);
    if(!areaBooks.length){const e=document.createElement('p');e.className='shelfEmpty';e.textContent='このエリアの登録書籍はまだありません。';wood.append(e)}
-   else{for(let i=0;i<areaBooks.length;i+=8){const row=document.createElement('div');row.className='shelfRow';areaBooks.slice(i,i+8).forEach(b=>{const spine=document.createElement('button');spine.className='bookSpine';spine.type='button';spine.textContent=b.title;spine.title=b.title+' ／ '+(b.author||'著者情報なし');spine.setAttribute('aria-label',b.title+'の書誌情報を開く');spine.onclick=()=>{readerFromShelf=true;openLibrary(areaFilter,true);showDetail(b)};row.append(spine)});wood.append(row)}}
+   else{for(let i=0;i<areaBooks.length;i+=8){const row=document.createElement('div');row.className='shelfRow';areaBooks.slice(i,i+8).forEach(b=>{const spine=document.createElement('button');spine.className='bookSpine';spine.type='button';spine.textContent=displayTitle(b);spine.title=displayTitle(b)+' ／ '+(b.author||'著者情報なし');spine.setAttribute('aria-label',displayTitle(b)+'の書誌情報を開く');spine.onclick=()=>{readerFromShelf=true;openLibrary(areaFilter,true);showDetail(b)};row.append(spine)});wood.append(row)}}
    shelf.style.display='block';requestAnimationFrame(()=>shelf.classList.add('open'));document.body.style.overflow='hidden';$('shelfReturn').focus();
  }
 function openLibrary(areaFilter,fromShelf=false){if(!fromShelf)readerFromShelf=false;previousFocus=document.activeElement;filter=areaFilter;$('libSearch').value='';$('libReader').classList.remove('open');$('libDetail').style.display='none';$('libBrowse').style.display='block';renderThemes();renderBooks();panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';$('libClose').focus()}
 function closeLibrary(){panel.classList.remove('open');readerFromShelf=false;if(shelf.classList.contains('open'))closeShelf();document.body.style.overflow='';if(previousFocus&&previousFocus.isConnected)previousFocus.focus()}
 let readerFontSize=Number(localStorage.getItem('forgeationReaderFont')||17);
 function readable(b){return b.fullTextIncluded===true && Array.isArray(b.chapters) && b.chapters.some(c=>c.text&&c.text.trim())}
-function showDetail(b){selected=b;$('libBrowse').style.display='none';$('libReader').classList.remove('open');$('libDetail').style.display='block';$('detailTitle').textContent=b.title;$('detailAuthor').textContent='著者：'+(b.author||'不明');$('detailDesc').textContent=b.desc||'';const available=readable(b);$('detailRead').disabled=!available;$('detailRead').textContent=available?'📖 本を読む':'📖 本文は未収録';$('detailStatus').textContent=available?'館内で本文を読めます。スワイプと文字サイズ変更に対応しています。':'現在は書誌案内のみです。館内に本文は収録されていません。';const link=b.searchUrl||b.sourceUrl||'';$('detailExternal').style.display=link?'inline-flex':'none';if(link)$('detailExternal').href=link;panel.scrollTop=0}
+function showDetail(b){selected=b;$('libBrowse').style.display='none';$('libReader').classList.remove('open');$('libDetail').style.display='block';$('detailTitle').textContent=displayTitle(b);$('detailAuthor').textContent='著者：'+(b.author||'不明');$('detailDesc').textContent=b.desc||'';const available=readable(b);$('detailRead').disabled=!available;$('detailRead').textContent=available?'📖 本を読む':'📖 本文は未収録';$('detailStatus').textContent=available?'館内で本文を読めます。スワイプと文字サイズ変更に対応しています。':'現在は書誌案内のみです。館内に本文は収録されていません。';const link=b.searchUrl||b.sourceUrl||'';$('detailExternal').style.display=link?'inline-flex':'none';if(link)$('detailExternal').href=link;panel.scrollTop=0}
 function read(b,n){if(!readable(b)){showDetail(b);return}selected=b;chapter=n;$('libBrowse').style.display='none';$('libDetail').style.display='none';$('libReader').classList.add('open');$('readerTitle').textContent=b.title;$('readerDesc').textContent=b.author?'著者：'+b.author:'';$('chapterTitle').textContent=b.chapters[n].title;$('chapterText').textContent=b.chapters[n].text;$('chapterNum').textContent=`${n+1} / ${b.chapters.length}`;$('prevChapter').disabled=n===0;$('nextChapter').disabled=n===b.chapters.length-1;$('readingPaper').style.fontSize=readerFontSize+'px';$('fontLabel').textContent=readerFontSize+'px';panel.scrollTop=0}
 // 書籍本文を読みやすい分量でページ分割し、独立してめくれるようにする。
 let flipPage=0,flipPages=[],flipBusy=false;
