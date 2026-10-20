@@ -2050,6 +2050,14 @@ section{padding:68px 0}
 #collectionComingSoon #nogu-glasses-view {padding-bottom:115px!important}
 </style>
 <style id="nogu-cycling-20261018-style">#nogu-private-content .nogu-cycling-20261018{margin-top:34px;padding:24px 18px;border-top:3px solid #69c9f7;background:linear-gradient(150deg,#102d50,#145f98);color:white;border-radius:16px}#nogu-private-content .nogu-cycling-20261018 h3{font-size:clamp(23px,4vw,34px);color:white;line-height:1.4}#nogu-private-content .nogu-cycling-20261018 h4{color:white;margin-top:28px}#nogu-private-content .nogu-cycling-20261018 p{color:#eef8ff;line-height:1.85}#nogu-private-content .nogu-cycling-tag{display:inline-block;padding:6px 12px;background:#e9f7ff;color:#073c65;border-radius:50px;font-weight:800}#nogu-private-content .nogu-cycling-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}#nogu-private-content .nogu-cycling-grid figure{margin:0;overflow:hidden;border-radius:12px;background:#0c2341}#nogu-private-content .nogu-cycling-grid img{width:100%;height:180px;object-fit:cover;display:block}#nogu-private-content .nogu-cycling-grid figcaption{font-size:13px;padding:8px;color:white}#nogu-private-content .nogu-cycling-foot{text-align:center;font-weight:700}@media(max-width:500px){#nogu-private-content .nogu-cycling-grid img{height:120px}}</style>
+<style id="nogu-separate-blog-cycling">
+/* サイクリングと社長ブログは同じ容器でも画面を完全分離 */
+#collectionComingSoon:not(.nogu-blog-mode) #nogu-private-view {display:none!important}
+#collectionComingSoon.nogu-blog-mode .collection-preview,
+#collectionComingSoon.nogu-blog-mode .nogu-collection-buttons,
+#collectionComingSoon.nogu-blog-mode #nogu-public-view {display:none!important}
+#collectionComingSoon.nogu-blog-mode #nogu-private-view {display:block!important}
+</style>
 </head>
 <body>
 <!-- Ver3.23.5: Ver3.23.4原本を維持し、スポーツアカデミー課 F Motion 導線のみ差分統合 -->
@@ -4779,7 +4787,7 @@ form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try
 document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();</script>
-</body></html>\n"};const panel=document.getElementById('sports-experience'),frame=document.getElementById('sports-experience-frame'),close=document.getElementById('sports-experience-close');
+<script id="nogu-cycling-mode-reset">document.getElementById('noguCyclingEntry')?.addEventListener('click',()=>{document.getElementById('collectionComingSoon')?.classList.remove('nogu-blog-mode');});</script></body></html>\n"};const panel=document.getElementById('sports-experience'),frame=document.getElementById('sports-experience-frame'),close=document.getElementById('sports-experience-close');
 let previousFocus=null,previousHash='#sports-academy-detail',active='';
 function exit(){panel.hidden=true;document.body.classList.remove('sports-playing');frame.srcdoc='';active='';history.replaceState(null,'',location.pathname+location.search+'#sports-academy-detail');requestAnimationFrame(()=>document.getElementById('sports-academy-detail')?.scrollIntoView({block:'start',behavior:'instant'}));}
 function open(kind){if(!['football','golf','volley'].includes(kind))return;if(active===kind)return;if(panel.hidden){previousFocus=document.activeElement;previousHash='#sports-academy-detail';}active=kind;panel.hidden=false;document.body.classList.add('sports-playing');document.getElementById('sports-experience-title').textContent={football:'F Field Goal｜アメフト',golf:'F Green｜ゴルフ',volley:'F View from the Top｜バレーボール'}[kind];let source=pages[kind==='football'?'football':'golf-volley'];source=source.replace('
@@ -4886,10 +4894,10 @@ const m=location.hash.match(/^#experience-(football|golf|volley)$/);if(m)open(m[
   const submit=document.getElementById('nogu-unlock');
   let generation=0;
   function lock(){generation++;content.replaceChildren();input.value='';form.hidden=false;status.textContent='';submit.disabled=false;privateView.hidden=true;}
-  function showPrivate(){modal.classList.remove('nogu-glasses-mode');lock();publicView.hidden=true;glassesView.hidden=true;privateView.hidden=false;privateView.scrollIntoView({block:'start',behavior:'smooth'});input.focus({preventScroll:true});}
-  function showGlasses(){lock();modal.classList.add('nogu-glasses-mode');publicView.hidden=true;privateView.hidden=true;glassesView.hidden=false;glassesView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-glasses-title').focus({preventScroll:true});}
+  function showPrivate(){modal.classList.add('nogu-blog-mode');modal.classList.remove('nogu-glasses-mode');lock();publicView.hidden=true;glassesView.hidden=true;privateView.hidden=false;privateView.scrollIntoView({block:'start',behavior:'smooth'});input.focus({preventScroll:true});}
+  function showGlasses(){lock();modal.classList.remove('nogu-blog-mode');modal.classList.add('nogu-glasses-mode');publicView.hidden=true;privateView.hidden=true;glassesView.hidden=false;glassesView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-glasses-title').focus({preventScroll:true});}
   document.getElementById('nogu-private-open').onclick=showPrivate;
-  document.getElementById('nogu-public-open').onclick=()=>{modal.classList.remove('nogu-glasses-mode');lock();glassesView.hidden=true;publicView.hidden=false;publicView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-public-title').focus({preventScroll:true});};
+  document.getElementById('nogu-public-open').onclick=()=>{modal.classList.remove('nogu-blog-mode','nogu-glasses-mode');lock();glassesView.hidden=true;publicView.hidden=false;publicView.scrollIntoView({block:'start',behavior:'smooth'});document.getElementById('nogu-public-title').focus({preventScroll:true});};
   document.querySelector('[data-nogu-close="public"]').onclick=()=>{publicView.hidden=true;document.getElementById('nogu-public-open').focus();};
   document.querySelector('[data-nogu-close="glasses"]').onclick=()=>{modal.classList.remove('nogu-glasses-mode');glassesView.hidden=true;document.getElementById('noguGlassesEntry')?.focus();};
   document.querySelector('[data-nogu-close="private"]').onclick=()=>{lock();document.getElementById('nogu-private-open').focus();};
