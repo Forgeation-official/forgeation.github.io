@@ -2785,7 +2785,7 @@ print(lesson + "を始めよう！")</code>
 <p class="founder-credit">Forgeation・野口正治（ノグ）</p>
         <p>ノグの日常、挑戦、学び、そしてAIと楽しむ作品を集める特別な扉です。主夫、お弁当、メガネ、サイクリングなど、Forgeationをつくる等身大の物語を、これから少しずつ公開します。</p>
         <div class="collection-grid">
-          <a class="collection-item nogu-new-link" href="./nogu-kitchen.html">🍱 お弁当シリーズ <small>写真を見る →</small></a>
+          <a class="collection-item nogu-new-link" href="./nogu-kitchen.html" id="noguKitchenEntry">🍱 お弁当シリーズ <small>写真を見る →</small></a>
           <a class="collection-item nogu-new-link" href="./nogu-housework.html">🏠 主夫モード <small>日常の物語へ →</small></a>
           <button class="collection-item collection-action" id="noguGlassesEntry" type="button" aria-controls="collectionComingSoon">👓 メガネシリーズ <small>新しい記事を読む →</small></button>
           <button class="collection-item collection-action" id="noguCyclingEntry" type="button" aria-controls="collectionComingSoon">🚴 心を整える時間 <small>作品を見る →</small></button>
@@ -4760,6 +4760,25 @@ document.addEventListener('keydown',e=>{if(!box.classList.contains('open')){if((
 box.querySelector('.lb-close').addEventListener('click',close);box.querySelector('.lb-prev').addEventListener('click',()=>move(-1));box.querySelector('.lb-next').addEventListener('click',()=>move(1));box.addEventListener('click',e=>{if(e.target===box)close();});
 box.addEventListener('touchstart',e=>{if(e.touches.length===1)x0=e.touches[0].clientX;},{passive:true});box.addEventListener('touchend',e=>{if(x0===null||e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>55)move(dx<0?1:-1);},{passive:true});
 })();</script>
+
+<style id="collection-access-style">
+#collectionAccessGate{position:fixed;inset:0;z-index:2147483630;background:rgba(2,9,26,.94);display:none;place-items:center;padding:18px;color:white}
+#collectionAccessGate.open{display:grid}#collectionAccessGate .access-card{width:min(440px,96vw);padding:30px;border-radius:22px;background:linear-gradient(145deg,#071a3a,#104d91);border:1px solid #80dfff}
+#collectionAccessGate input{display:block;width:100%;font-size:18px;padding:14px;margin:16px 0;border-radius:10px;border:1px solid #a7cfe9}
+#collectionAccessGate button{padding:12px 18px;border-radius:12px;border:1px solid #a7cfe9;background:white;color:#071a3a;font-weight:bold;margin-right:8px}
+</style>
+<div id="collectionAccessGate" role="dialog" aria-modal="true" aria-labelledby="collectionAccessTitle"><div class="access-card"><h2 id="collectionAccessTitle">🔒 コレクション</h2><p>お弁当・メガネ共通のパスワードを入力してください。</p><form id="collectionAccessForm"><input id="collectionAccessPassword" type="password" autocomplete="off" required aria-label="パスワード"><button type="submit">開く</button><button type="button" id="collectionAccessCancel">戻る</button></form><p id="collectionAccessStatus" role="status"></p></div></div>
+<script id="collection-access-script">(()=>{
+const gate=document.getElementById('collectionAccessGate'),form=document.getElementById('collectionAccessForm'),input=document.getElementById('collectionAccessPassword'),status=document.getElementById('collectionAccessStatus');
+let target=null, unlocked=false;
+const decode=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
+function hide(){gate.classList.remove('open');input.value='';status.textContent='';}
+function proceed(){hide();unlocked=true;if(target==='kitchen')location.href='./nogu-kitchen.html';else if(target==='glasses'){document.getElementById('noguGlassesEntry')?.click();}}
+document.getElementById('collectionAccessCancel').onclick=hide;
+form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try{const r=await fetch('assets/nogu-collection-access.json',{cache:'no-store'});if(!r.ok)throw Error('missing');const d=await r.json();const raw=await crypto.subtle.importKey('raw',new TextEncoder().encode(input.value),'PBKDF2',false,['deriveKey']);const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:decode(d.salt),iterations:d.iterations,hash:'SHA-256'},raw,{name:'AES-GCM',length:256},false,['decrypt']);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(d.iv)},key,decode(d.ciphertext));if(new TextDecoder().decode(plain)==='Forgeation collection access 2026')proceed();else throw Error('wrong');}catch{status.textContent='パスワードが違うか、暗号化ファイルが見つかりません。';input.value='';}};
+document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
+})();</script>
 </body></html>\n"};const panel=document.getElementById('sports-experience'),frame=document.getElementById('sports-experience-frame'),close=document.getElementById('sports-experience-close');
 let previousFocus=null,previousHash='#sports-academy-detail',active='';
 function exit(){panel.hidden=true;document.body.classList.remove('sports-playing');frame.srcdoc='';active='';history.replaceState(null,'',location.pathname+location.search+'#sports-academy-detail');requestAnimationFrame(()=>document.getElementById('sports-academy-detail')?.scrollIntoView({block:'start',behavior:'instant'}));}
@@ -4785,6 +4804,25 @@ document.addEventListener('keydown',e=>{if(!box.classList.contains('open')){if((
 box.querySelector('.lb-close').addEventListener('click',close);box.querySelector('.lb-prev').addEventListener('click',()=>move(-1));box.querySelector('.lb-next').addEventListener('click',()=>move(1));box.addEventListener('click',e=>{if(e.target===box)close();});
 box.addEventListener('touchstart',e=>{if(e.touches.length===1)x0=e.touches[0].clientX;},{passive:true});box.addEventListener('touchend',e=>{if(x0===null||e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>55)move(dx<0?1:-1);},{passive:true});
 })();</script>
+
+<style id="collection-access-style">
+#collectionAccessGate{position:fixed;inset:0;z-index:2147483630;background:rgba(2,9,26,.94);display:none;place-items:center;padding:18px;color:white}
+#collectionAccessGate.open{display:grid}#collectionAccessGate .access-card{width:min(440px,96vw);padding:30px;border-radius:22px;background:linear-gradient(145deg,#071a3a,#104d91);border:1px solid #80dfff}
+#collectionAccessGate input{display:block;width:100%;font-size:18px;padding:14px;margin:16px 0;border-radius:10px;border:1px solid #a7cfe9}
+#collectionAccessGate button{padding:12px 18px;border-radius:12px;border:1px solid #a7cfe9;background:white;color:#071a3a;font-weight:bold;margin-right:8px}
+</style>
+<div id="collectionAccessGate" role="dialog" aria-modal="true" aria-labelledby="collectionAccessTitle"><div class="access-card"><h2 id="collectionAccessTitle">🔒 コレクション</h2><p>お弁当・メガネ共通のパスワードを入力してください。</p><form id="collectionAccessForm"><input id="collectionAccessPassword" type="password" autocomplete="off" required aria-label="パスワード"><button type="submit">開く</button><button type="button" id="collectionAccessCancel">戻る</button></form><p id="collectionAccessStatus" role="status"></p></div></div>
+<script id="collection-access-script">(()=>{
+const gate=document.getElementById('collectionAccessGate'),form=document.getElementById('collectionAccessForm'),input=document.getElementById('collectionAccessPassword'),status=document.getElementById('collectionAccessStatus');
+let target=null, unlocked=false;
+const decode=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
+function hide(){gate.classList.remove('open');input.value='';status.textContent='';}
+function proceed(){hide();unlocked=true;if(target==='kitchen')location.href='./nogu-kitchen.html';else if(target==='glasses'){document.getElementById('noguGlassesEntry')?.click();}}
+document.getElementById('collectionAccessCancel').onclick=hide;
+form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try{const r=await fetch('assets/nogu-collection-access.json',{cache:'no-store'});if(!r.ok)throw Error('missing');const d=await r.json();const raw=await crypto.subtle.importKey('raw',new TextEncoder().encode(input.value),'PBKDF2',false,['deriveKey']);const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:decode(d.salt),iterations:d.iterations,hash:'SHA-256'},raw,{name:'AES-GCM',length:256},false,['decrypt']);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(d.iv)},key,decode(d.ciphertext));if(new TextDecoder().decode(plain)==='Forgeation collection access 2026')proceed();else throw Error('wrong');}catch{status.textContent='パスワードが違うか、暗号化ファイルが見つかりません。';input.value='';}};
+document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
+})();</script>
 </body>', '<script>(function(){var targetId="'+(kind==='volley'?'volley-game':kind==='golf'?'golf':'')+'";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href||href.charAt(0)!=="#"||href==="#return-to-school")return;var target=document.getElementById(href.slice(1));if(target){e.preventDefault();target.scrollIntoView({block:"start",behavior:"smooth"})}});if(targetId){window.addEventListener("load",function(){var el=document.getElementById(targetId);if(el)el.scrollIntoView({block:"start"})})}})();<\/script>
 <style id="nogu-cycling-lightbox-style">
 #nogu-private-content .nogu-cycling-grid img{cursor:zoom-in}
@@ -4806,6 +4844,25 @@ document.addEventListener('click',e=>{const img=e.target.closest?.('#nogu-privat
 document.addEventListener('keydown',e=>{if(!box.classList.contains('open')){if((e.key==='Enter'||e.key===' ')&&e.target.matches?.('#nogu-private-content .nogu-cycling-grid img')){e.preventDefault();e.target.click();}return;}if(e.key==='Escape')close();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1);});
 box.querySelector('.lb-close').addEventListener('click',close);box.querySelector('.lb-prev').addEventListener('click',()=>move(-1));box.querySelector('.lb-next').addEventListener('click',()=>move(1));box.addEventListener('click',e=>{if(e.target===box)close();});
 box.addEventListener('touchstart',e=>{if(e.touches.length===1)x0=e.touches[0].clientX;},{passive:true});box.addEventListener('touchend',e=>{if(x0===null||e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>55)move(dx<0?1:-1);},{passive:true});
+})();</script>
+
+<style id="collection-access-style">
+#collectionAccessGate{position:fixed;inset:0;z-index:2147483630;background:rgba(2,9,26,.94);display:none;place-items:center;padding:18px;color:white}
+#collectionAccessGate.open{display:grid}#collectionAccessGate .access-card{width:min(440px,96vw);padding:30px;border-radius:22px;background:linear-gradient(145deg,#071a3a,#104d91);border:1px solid #80dfff}
+#collectionAccessGate input{display:block;width:100%;font-size:18px;padding:14px;margin:16px 0;border-radius:10px;border:1px solid #a7cfe9}
+#collectionAccessGate button{padding:12px 18px;border-radius:12px;border:1px solid #a7cfe9;background:white;color:#071a3a;font-weight:bold;margin-right:8px}
+</style>
+<div id="collectionAccessGate" role="dialog" aria-modal="true" aria-labelledby="collectionAccessTitle"><div class="access-card"><h2 id="collectionAccessTitle">🔒 コレクション</h2><p>お弁当・メガネ共通のパスワードを入力してください。</p><form id="collectionAccessForm"><input id="collectionAccessPassword" type="password" autocomplete="off" required aria-label="パスワード"><button type="submit">開く</button><button type="button" id="collectionAccessCancel">戻る</button></form><p id="collectionAccessStatus" role="status"></p></div></div>
+<script id="collection-access-script">(()=>{
+const gate=document.getElementById('collectionAccessGate'),form=document.getElementById('collectionAccessForm'),input=document.getElementById('collectionAccessPassword'),status=document.getElementById('collectionAccessStatus');
+let target=null, unlocked=false;
+const decode=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
+function hide(){gate.classList.remove('open');input.value='';status.textContent='';}
+function proceed(){hide();unlocked=true;if(target==='kitchen')location.href='./nogu-kitchen.html';else if(target==='glasses'){document.getElementById('noguGlassesEntry')?.click();}}
+document.getElementById('collectionAccessCancel').onclick=hide;
+form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try{const r=await fetch('assets/nogu-collection-access.json',{cache:'no-store'});if(!r.ok)throw Error('missing');const d=await r.json();const raw=await crypto.subtle.importKey('raw',new TextEncoder().encode(input.value),'PBKDF2',false,['deriveKey']);const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:decode(d.salt),iterations:d.iterations,hash:'SHA-256'},raw,{name:'AES-GCM',length:256},false,['decrypt']);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(d.iv)},key,decode(d.ciphertext));if(new TextDecoder().decode(plain)==='Forgeation collection access 2026')proceed();else throw Error('wrong');}catch{status.textContent='パスワードが違うか、暗号化ファイルが見つかりません。';input.value='';}};
+document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();</script>
 </body>');frame.srcdoc=source;history.replaceState(null,'',location.pathname+location.search+'#experience-'+kind);close.focus();}
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#experience-"]');if(a){e.preventDefault();open(a.getAttribute('href').slice(12));}});
@@ -4907,6 +4964,25 @@ document.addEventListener('click',e=>{const img=e.target.closest?.('#nogu-privat
 document.addEventListener('keydown',e=>{if(!box.classList.contains('open')){if((e.key==='Enter'||e.key===' ')&&e.target.matches?.('#nogu-private-content .nogu-cycling-grid img')){e.preventDefault();e.target.click();}return;}if(e.key==='Escape')close();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1);});
 box.querySelector('.lb-close').addEventListener('click',close);box.querySelector('.lb-prev').addEventListener('click',()=>move(-1));box.querySelector('.lb-next').addEventListener('click',()=>move(1));box.addEventListener('click',e=>{if(e.target===box)close();});
 box.addEventListener('touchstart',e=>{if(e.touches.length===1)x0=e.touches[0].clientX;},{passive:true});box.addEventListener('touchend',e=>{if(x0===null||e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>55)move(dx<0?1:-1);},{passive:true});
+})();</script>
+
+<style id="collection-access-style">
+#collectionAccessGate{position:fixed;inset:0;z-index:2147483630;background:rgba(2,9,26,.94);display:none;place-items:center;padding:18px;color:white}
+#collectionAccessGate.open{display:grid}#collectionAccessGate .access-card{width:min(440px,96vw);padding:30px;border-radius:22px;background:linear-gradient(145deg,#071a3a,#104d91);border:1px solid #80dfff}
+#collectionAccessGate input{display:block;width:100%;font-size:18px;padding:14px;margin:16px 0;border-radius:10px;border:1px solid #a7cfe9}
+#collectionAccessGate button{padding:12px 18px;border-radius:12px;border:1px solid #a7cfe9;background:white;color:#071a3a;font-weight:bold;margin-right:8px}
+</style>
+<div id="collectionAccessGate" role="dialog" aria-modal="true" aria-labelledby="collectionAccessTitle"><div class="access-card"><h2 id="collectionAccessTitle">🔒 コレクション</h2><p>お弁当・メガネ共通のパスワードを入力してください。</p><form id="collectionAccessForm"><input id="collectionAccessPassword" type="password" autocomplete="off" required aria-label="パスワード"><button type="submit">開く</button><button type="button" id="collectionAccessCancel">戻る</button></form><p id="collectionAccessStatus" role="status"></p></div></div>
+<script id="collection-access-script">(()=>{
+const gate=document.getElementById('collectionAccessGate'),form=document.getElementById('collectionAccessForm'),input=document.getElementById('collectionAccessPassword'),status=document.getElementById('collectionAccessStatus');
+let target=null, unlocked=false;
+const decode=x=>Uint8Array.from(atob(x),c=>c.charCodeAt(0));
+function hide(){gate.classList.remove('open');input.value='';status.textContent='';}
+function proceed(){hide();unlocked=true;if(target==='kitchen')location.href='./nogu-kitchen.html';else if(target==='glasses'){document.getElementById('noguGlassesEntry')?.click();}}
+document.getElementById('collectionAccessCancel').onclick=hide;
+form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try{const r=await fetch('assets/nogu-collection-access.json',{cache:'no-store'});if(!r.ok)throw Error('missing');const d=await r.json();const raw=await crypto.subtle.importKey('raw',new TextEncoder().encode(input.value),'PBKDF2',false,['deriveKey']);const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:decode(d.salt),iterations:d.iterations,hash:'SHA-256'},raw,{name:'AES-GCM',length:256},false,['decrypt']);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode(d.iv)},key,decode(d.ciphertext));if(new TextDecoder().decode(plain)==='Forgeation collection access 2026')proceed();else throw Error('wrong');}catch{status.textContent='パスワードが違うか、暗号化ファイルが見つかりません。';input.value='';}};
+document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();</script>
 </body>
 </html>
