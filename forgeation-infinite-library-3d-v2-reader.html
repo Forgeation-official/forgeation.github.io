@@ -175,16 +175,59 @@ const MORE_JAPANESE_TITLES={"romeo and juliet":"ロミオとジュリエット",
 
 // 2026-10-20: 画面で確認した未対応書名。邦題未確認の資料は説明的な仮訳。
 const SCREENSHOT_JAPANESE_TITLES={"metamorphosis":"変身","the enchanted april":"魔法の四月","the yellow wallpaper":"黄色い壁紙","twenty years after":"二十年後","the king in yellow":"黄衣の王","history of tom jones, a foundling":"捨て子トム・ジョーンズの物語","the expedition of humphry clinker":"ハンフリー・クリンカーの旅","the adventures of ferdinand count fathom":"フェルディナンド・ファゾム伯爵の冒険","the adventures of roderick random":"ロデリック・ランダムの冒険","the adventures of tom sawyer, complete":"トム・ソーヤーの冒険（全編）","the adventures of tom sawyer":"トム・ソーヤーの冒険","oliver twist, vol. 2 (of 3)":"オリヴァー・ツイスト（第2巻）","narrative of the life of frederick douglass, an american slave":"フレデリック・ダグラス自伝","the confessions of st. augustine":"聖アウグスティヌスの告白","the string of pearls; or, the barber of fleet street: a domestic romance.":"真珠の首飾り（フリート街の理髪師）","the string of pearls":"真珠の首飾り","grimm’s fairy tales":"グリム童話","grimms’ fairy tales":"グリム童話","grimm's fairy tales":"グリム童話","the legend of sleepy hollow":"スリーピー・ホロウの伝説","a doll’s house: a play":"人形の家","a doll's house: a play":"人形の家","a doll's house":"人形の家","second treatise of government":"統治二論（第二論）","twenty-five ghost stories":"二十五の幽霊物語","a case in camera":"密室事件","the dunwich horror":"ダンウィッチの怪","the call of cthulhu":"クトゥルフの呼び声","the souls of black folk":"黒人のたましい","autobiography of benjamin franklin":"ベンジャミン・フランクリン自伝","poirot investigates":"ポアロ登場","the murder on the links":"ゴルフ場殺人事件","the man in the brown suit":"茶色の服の男","the mysterious affair at styles":"スタイルズ荘の怪事件","the book of the thousand nights and a night":"千夜一夜物語","the air pirate":"空の海賊","barry locke, half-back":"バリー・ロック、ハーフバック","leviathan":"リヴァイアサン","the works of william shakespeare":"シェイクスピア全集","the black pearl":"黒真珠","the adventures of an ensign":"ある少尉の冒険","the green dolphin":"緑のイルカ","fawn in the wood":"森の子鹿","things near & far":"近くのもの、遠くのもの","sandhills sketches":"砂丘のスケッチ","miniatures of french history":"フランス史小品集","the bitter tea of general yen":"閻将軍の苦い茶","the catholic church and history":"カトリック教会と歴史","the yellow book: an illustrated quarterly":"イエロー・ブック（季刊文芸誌）","the king james version of the bible":"欽定訳聖書","field artillery training: 1914":"野戦砲兵訓練（1914年）","joan and co.":"ジョーンと仲間たち","the adventures of sherlock holmes: illustrated":"シャーロック・ホームズの冒険（挿絵入り）","the adventures of sherlock holmes":"シャーロック・ホームズの冒険","the lazy age":"怠惰な時代","the great rivers of the world":"世界の大河","the trouble at pinelands":"パインランズの事件","spoon river anthology":"スプーン・リバー詩集","the mysteries of london":"ロンドンの謎","the mystery of the yellow room":"黄色い部屋の謎","the yellow book":"イエロー・ブック","the works of edgar allan poe":"エドガー・アラン・ポー作品集","the mysterious island":"神秘の島","the black arrow":"黒い矢","the silent ballic":"静かなバリック","the papyrus records":"パピルス文書","democracy—false or true?":"民主主義は偽りか真実か"};
+// 追加の文学・歴史・思想の定着邦題（書誌データ本体は変更しない）。
+const EXTENDED_JAPANESE_TITLES={
+ 'the scarlet pimpernel':'紅はこべ','the woman in white':'白衣の女','the moonstone':'月長石',
+ 'the moon and sixpence':'月と六ペンス','of human bondage':'人間の絆','the razor’s edge':'剃刀の刃',
+ "the razor's edge":'剃刀の刃','the thirty-nine steps':'三十九階段','the 39 steps':'三十九階段',
+ 'the secret adversary':'秘密機関','the big four':'ビッグ4','the murder of roger ackroyd':'アクロイド殺し',
+ 'the innocence of father brown':'ブラウン神父の童心','the wisdom of father brown':'ブラウン神父の知恵',
+ 'the man who was thursday':'木曜日だった男','the napoleon of notting hill':'ノッティング・ヒルのナポレオン',
+ 'the ball and the cross':'球と十字架','the club of queer trades':'奇商クラブ',
+ 'the phantom of the opera':'オペラ座の怪人','the prisoner of zenda':'ゼンダ城の虜',
+ 'the four feathers':'四枚の羽根','the last of the mohicans':'モヒカン族の最後',
+ 'the pioneers':'開拓者たち','the prairie':'大草原','the deerslayer':'鹿狩り人',
+ 'the red badge of courage':'赤い武功章','maggie: a girl of the streets':'街の女マギー',
+ 'the awakening':'目覚め','the age of innocence':'無垢の時代','the house of mirth':'歓楽の家',
+ 'ethan frome':'イーサン・フローム','the custom of the country':'国の慣習',
+ 'my antonia':'私のアントーニア','o pioneers!':'おお開拓者たちよ！',
+ 'the song of the lark':'ひばりの歌','the professor’s house':'教授の家',
+ "the professor's house":'教授の家','the good soldier':'かくも悲しい話を…',
+ 'the thirty-nine steps':'三十九階段','the riddle of the sands':'砂洲の謎',
+ 'the war in the air':'空中戦争','the world set free':'解放された世界',
+ 'the story of the treasure seekers':'宝さがしの子どもたち','the wouldbegoods':'よい子同盟',
+ 'the snow queen':'雪の女王','the little mermaid':'人魚姫','the ugly duckling':'みにくいアヒルの子',
+ 'the emperor’s new clothes':'裸の王様',"the emperor's new clothes":'裸の王様',
+ 'the steadfast tin soldier':'しっかり者のすずの兵隊','the princess and the pea':'えんどう豆の上に寝たお姫さま',
+ 'a study in scarlet':'緋色の研究','the sign of four':'四つの署名',
+ 'the adventures of robin hood':'ロビン・フッドの冒険','the merry adventures of robin hood':'ロビン・フッドのゆかいな冒険',
+ 'the legend of sleepy hollow':'スリーピー・ホロウの伝説',
+ 'the autobiography of benjamin franklin':'ベンジャミン・フランクリン自伝',
+ 'the federalist papers':'ザ・フェデラリスト','the wealth of nations':'国富論',
+ 'an inquiry into the nature and causes of the wealth of nations':'国富論',
+ 'the social contract':'社会契約論','the spirit of laws':'法の精神',
+ 'a vindication of the rights of woman':'女性の権利の擁護','on liberty':'自由論',
+ 'utilitarianism':'功利主義論','the subjection of women':'女性の隷従',
+ 'the communist manifesto':'共産党宣言','manifesto of the communist party':'共産党宣言',
+ 'the genealogy of morals':'道徳の系譜','the birth of tragedy':'悲劇の誕生',
+ 'the problems of philosophy':'哲学の諸問題','the analysis of mind':'心の分析',
+ 'the varieties of religious experience':'宗教的経験の諸相',
+ 'the souls of black folk':'黒人のたましい','up from slavery':'奴隷より立ち上がりて',
+ 'narrative of the life of frederick douglass':'フレデリック・ダグラス自伝',
+ 'the autobiography of frederick douglass':'フレデリック・ダグラス自伝',
+ 'the book of tea':'茶の本','bushido: the soul of japan':'武士道','bushido, the soul of japan':'武士道',
+ 'the pillow book':'枕草子','the tale of genji':'源氏物語','the book of five rings':'五輪書'
+};
 const norm=v=>String(v??'').normalize('NFKC').toLocaleLowerCase().replace(/\s+/g,' ').trim();
 function japaneseTitle(book){
  const original=String(book.title||'');
- const key=norm(original).replace(/[‘’]/g,"'").replace(/\s*[—–]\s*/g,' - ');
+ const key=norm(original).replace(/[‘’]/g,"'").replace(/\s*[—–]\s*/g,' - ').replace(/[.?!]+$/g,'');
  const alias=book.titleJa||book.title_ja||book.japaneseTitle||'';
- const direct=SCREENSHOT_JAPANESE_TITLES[key]||MORE_JAPANESE_TITLES[key]||JAPANESE_TITLES[key]||alias;
+ const direct=alias||SCREENSHOT_JAPANESE_TITLES[key]||MORE_JAPANESE_TITLES[key]||JAPANESE_TITLES[key]||EXTENDED_JAPANESE_TITLES[key];
  if(direct)return direct;
  // Gutenberg等で付く副題・巻数は、原題を失わず主要作品名から照合。
  const prefix=key.split(/\s*[:;]\s*|\s+\(part\s+\d+|\s+\(volume\s+\d+/)[0].trim();
- if(prefix.length>6)return SCREENSHOT_JAPANESE_TITLES[prefix]||MORE_JAPANESE_TITLES[prefix]||JAPANESE_TITLES[prefix]||'';
+ if(prefix.length>6)return SCREENSHOT_JAPANESE_TITLES[prefix]||MORE_JAPANESE_TITLES[prefix]||JAPANESE_TITLES[prefix]||EXTENDED_JAPANESE_TITLES[prefix]||'';
  return '';
 }
 function displayTitle(book){return japaneseTitle(book)||book.title}
@@ -198,7 +241,8 @@ function renderBooks(){
   const terms=[b.title,japaneseTitle(b),b.author,b.genre,b.desc,b.description,b.subjects,b.keywords,b.language,names[b.area],THEMES[b.area],...(Array.isArray(b.authors)?b.authors.map(a=>typeof a==='string'?a:a.name):[])];
   return !q||norm(terms.filter(Boolean).join(' ')).includes(q);
  });
- $('libCount').textContent=`${found.length}冊表示 / 書誌登録 ${BOOKS.length}冊 ＋ オリジナル1作品`;
+ const translated=BOOKS.filter(b=>Boolean(japaneseTitle(b))).length;
+  $('libCount').textContent=`${found.length}冊表示 / 書誌登録 ${BOOKS.length}冊 ＋ オリジナル1作品 ／ 日本語書名対応 ${translated}冊・未対応 ${BOOKS.length-translated}冊`;
  const grid=$('libGrid');grid.replaceChildren();
  found.forEach(b=>{const btn=document.createElement('button');const cover=document.createElement('span');cover.className='cover';cover.textContent=displayTitle(b);const title=document.createElement('strong');title.textContent=displayTitle(b);const meta=document.createElement('small');meta.textContent=(japaneseTitle(b)&&norm(japaneseTitle(b))!==norm(b.title)?b.title+' · ':'')+(b.author||'著者不明')+' · '+names[b.area];btn.append(cover,title,meta);btn.onclick=()=>showDetail(b);grid.append(btn)});
  if(!found.length)grid.textContent='該当する本はありません。検索条件・エリアを変更してください。';
@@ -231,7 +275,8 @@ function openLibrary(areaFilter,fromShelf=false){if(!fromShelf)readerFromShelf=f
 function closeLibrary(){panel.classList.remove('open');readerFromShelf=false;if(shelf.classList.contains('open'))closeShelf();document.body.style.overflow='';if(previousFocus&&previousFocus.isConnected)previousFocus.focus()}
 let readerFontSize=Number(localStorage.getItem('forgeationReaderFont')||17);
 function readable(b){return b.fullTextIncluded===true && Array.isArray(b.chapters) && b.chapters.some(c=>c.text&&c.text.trim())}
-function showDetail(b){selected=b;$('libBrowse').style.display='none';$('libReader').classList.remove('open');$('libDetail').style.display='block';$('detailTitle').textContent=displayTitle(b);$('detailAuthor').textContent='著者：'+(b.author||'不明')+(japaneseTitle(b)&&norm(japaneseTitle(b))!==norm(b.title)?' ／ 原題：'+b.title:'');$('detailDesc').textContent=b.desc||'';const available=readable(b);$('detailRead').disabled=!available;$('detailRead').textContent=available?'📖 本を読む':'📖 本文は未収録';$('detailStatus').textContent=available?'館内で本文を読めます。スワイプと文字サイズ変更に対応しています。':'現在は書誌案内のみです。館内に本文は収録されていません。';const link=b.searchUrl||b.sourceUrl||'';$('detailExternal').style.display=link?'inline-flex':'none';if(link)$('detailExternal').href=link;panel.scrollTop=0}
+function showDetail(b){selected=b;$('libBrowse').style.display='none';$('libReader').classList.remove('open');$('libDetail').style.display='block';$('detailTitle').textContent=displayTitle(b);
+  $('detailTitle').title=b.title;$('detailAuthor').textContent='著者：'+(b.author||'不明')+(japaneseTitle(b)&&norm(japaneseTitle(b))!==norm(b.title)?' ／ 原題：'+b.title:'');$('detailDesc').textContent=b.desc||'';const available=readable(b);$('detailRead').disabled=!available;$('detailRead').textContent=available?'📖 本を読む':'📖 本文は未収録';$('detailStatus').textContent=available?'館内で本文を読めます。スワイプと文字サイズ変更に対応しています。':'現在は書誌案内のみです。館内に本文は収録されていません。';const link=b.searchUrl||b.sourceUrl||'';$('detailExternal').style.display=link?'inline-flex':'none';if(link)$('detailExternal').href=link;panel.scrollTop=0}
 function read(b,n){if(!readable(b)){showDetail(b);return}selected=b;chapter=n;$('libBrowse').style.display='none';$('libDetail').style.display='none';$('libReader').classList.add('open');$('readerTitle').textContent=displayTitle(b);$('readerDesc').textContent=b.author?'著者：'+b.author:'';$('chapterTitle').textContent=b.chapters[n].title;$('chapterText').textContent=b.chapters[n].text;$('chapterNum').textContent=`${n+1} / ${b.chapters.length}`;$('prevChapter').disabled=n===0;$('nextChapter').disabled=n===b.chapters.length-1;$('readingPaper').style.fontSize=readerFontSize+'px';$('fontLabel').textContent=readerFontSize+'px';panel.scrollTop=0}
 // 書籍本文を読みやすい分量でページ分割し、独立してめくれるようにする。
 let flipPage=0,flipPages=[],flipBusy=false;
