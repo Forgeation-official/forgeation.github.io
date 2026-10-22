@@ -171,12 +171,134 @@ def collect_openlibrary(books, seen, state):
     return added
 
 
+
+# Verified/common Japanese publication titles or established Japanese names.
+# Unknown works keep their original title: never fabricate an official Japanese title.
+JAPANESE_TITLES = {
+    'the wonderful wizard of oz': 'オズの魔法使い',
+    "grimms' fairy tales": 'グリム童話',
+    'the secret of chimneys': 'チムニーズ館の秘密',
+    'beowulf: an anglo-saxon epic poem': 'ベーオウルフ',
+    'beowulf': 'ベーオウルフ',
+    'the mysteries of udolpho': 'ユードルフォの謎',
+    'great expectations': '大いなる遺産',
+    'pride and prejudice': '高慢と偏見',
+    'alice’s adventures in wonderland': '不思議の国のアリス',
+    "alice's adventures in wonderland": '不思議の国のアリス',
+    'through the looking-glass': '鏡の国のアリス',
+    'the adventures of sherlock holmes': 'シャーロック・ホームズの冒険',
+    'the memoirs of sherlock holmes': 'シャーロック・ホームズの回想',
+    'the hound of the baskervilles': 'バスカヴィル家の犬',
+    'a study in scarlet': '緋色の研究',
+    'the sign of the four': '四つの署名',
+    'the war of the worlds': '宇宙戦争',
+    'the time machine': 'タイム・マシン',
+    'the invisible man': '透明人間',
+    'the island of doctor moreau': 'モロー博士の島',
+    'the picture of dorian gray': 'ドリアン・グレイの肖像',
+    'the importance of being earnest': '真面目が肝心',
+    'dracula': 'ドラキュラ',
+    'frankenstein; or, the modern prometheus': 'フランケンシュタイン',
+    'frankenstein': 'フランケンシュタイン',
+    'moby dick; or, the whale': '白鯨',
+    'moby dick': '白鯨',
+    'little women': '若草物語',
+    'the secret garden': '秘密の花園',
+    'a little princess': '小公女',
+    'anne of green gables': '赤毛のアン',
+    'the adventures of tom sawyer': 'トム・ソーヤーの冒険',
+    'adventures of huckleberry finn': 'ハックルベリー・フィンの冒険',
+    'the prince and the pauper': '王子と乞食',
+    'treasure island': '宝島',
+    'the strange case of dr. jekyll and mr. hyde': 'ジキル博士とハイド氏',
+    'strange case of dr jekyll and mr hyde': 'ジキル博士とハイド氏',
+    'the call of the wild': '野性の呼び声',
+    'white fang': '白い牙',
+    'the jungle book': 'ジャングル・ブック',
+    'the happy prince and other tales': '幸福な王子',
+    'the happy prince': '幸福な王子',
+    'the count of monte cristo': 'モンテ・クリスト伯',
+    'the three musketeers': '三銃士',
+    'les misérables': 'レ・ミゼラブル',
+    'the phantom of the opera': 'オペラ座の怪人',
+    'the scarlet letter': '緋文字',
+    'the great gatsby': 'グレート・ギャツビー',
+    'the metamorphosis': '変身',
+    'the trial': '審判',
+    'the castle': '城',
+    'the brothers karamazov': 'カラマーゾフの兄弟',
+    'crime and punishment': '罪と罰',
+    'the idiot': '白痴',
+    'war and peace': '戦争と平和',
+    'anna karenina': 'アンナ・カレーニナ',
+    'the death of ivan ilyich': 'イワン・イリイチの死',
+    'the art of war': '孫子',
+    'the republic': '国家',
+    'the prince': '君主論',
+    'the origin of species': '種の起源',
+    'a christmas carol': 'クリスマス・キャロル',
+    'oliver twist': 'オリバー・ツイスト',
+    'david copperfield': 'デイヴィッド・コパフィールド',
+    'a tale of two cities': '二都物語',
+    'the old man and the sea': '老人と海',
+    'the odyssey': 'オデュッセイア',
+    'the iliad': 'イリアス',
+    'the divine comedy': '神曲',
+    'the adventures of pinocchio': 'ピノッキオの冒険',
+    'peter pan': 'ピーター・パン',
+    'the wonderful adventures of nils': 'ニルスのふしぎな旅',
+    'the wind in the willows': 'たのしい川べ',
+    'the wizard of oz': 'オズの魔法使い',
+    'the yellow wallpaper': '黄色い壁紙',
+    'the turn of the screw': 'ねじの回転',
+    'the woman in white': '白衣の女',
+    'the moonstone': '月長石',
+    'the last of the mohicans': 'モヒカン族の最後',
+    'the legend of sleepy hollow': 'スリーピー・ホロウの伝説',
+    'the tale of peter rabbit': 'ピーターラビットのおはなし',
+    'the railway children': '鉄道きょうだい',
+    'the red badge of courage': '赤い武功章',
+    'the awakening': '目覚め',
+    'the house of the seven gables': '七破風の屋敷',
+    'the adventures of robin hood': 'ロビン・フッドの冒険',
+}
+
+
+def japanese_display(book):
+    """Retain source title, and add a reliable Japanese display field when known."""
+    original = str(book.get('titleOriginal') or book.get('title') or '').strip()
+    if not original:
+        return False
+    key = ' '.join(original.casefold().replace('’', "'").split())
+    japanese = JAPANESE_TITLES.get(key)
+    if not japanese:
+        # Match subtitle variants only for distinctive titles, never generic titles.
+        for candidate in ('beowulf:', 'frankenstein;', 'moby dick;',
+                          'the wonderful wizard of oz:', 'the mysteries of udolpho:'):
+            if key.startswith(candidate):
+                japanese = JAPANESE_TITLES.get(candidate[:-1])
+                break
+    if japanese:
+        book['titleOriginal'] = original
+        book['titleJa'] = japanese
+        book['titleJaStatus'] = 'established'
+        # Existing library renders `title` on the spine; preserve source in titleOriginal.
+        book['title'] = japanese
+        return True
+    if book.get('titleJaStatus') == 'established':
+        return False
+    # No invented translation: unknown originals remain visible until verified.
+    book['titleOriginal'] = original
+    book['titleJaStatus'] = 'unverified'
+    return False
+
+
 def main():
     catalog = json.loads(CATALOG.read_text(encoding='utf-8'))
     books = catalog['books']
     if not isinstance(books, list):
         raise ValueError('Catalog books must be a list')
-    seen = {(str(b.get('title', '')).casefold().strip(),
+    seen = {(str(b.get('titleOriginal') or b.get('title', '')).casefold().strip(),
              str(b.get('author', '')).casefold().strip()) for b in books}
     # The workflow may commit only the catalog JSON, not the separate state file.
     # Keep progress in the catalog itself so it survives each GitHub Actions run.
@@ -262,10 +384,15 @@ def main():
         added = collect_openlibrary(books, seen, fallback_state)
         print(f'Fallback added {added} bibliographic records.', flush=True)
 
+    # Localize existing AND newly fetched entries on every run.
+    localized = sum(bool(japanese_display(book)) for book in books)
+    print(f'Japanese spine titles: {localized}/{len(books)}; unknown originals retained.', flush=True)
+
     # Save BOTH catalog and cursor. GitHub Actions commits them together.
     catalog['books'] = books[:TARGET]
     catalog['description'] = f'実在書籍の書誌データ {len(catalog["books"])}件。本文の転載なし。'
-    catalog['version'] = 2
+    catalog['version'] = 3
+    catalog['titleDisplayPolicy'] = 'Japanese established titles where verified; original title otherwise'
     fallback_state.update({'next_url': url if len(books) < TARGET else None,
                            'count': len(catalog['books']), 'target': TARGET,
                            'failed_url': failed_url, 'failed_runs': failed_runs,
