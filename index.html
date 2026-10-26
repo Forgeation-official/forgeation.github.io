@@ -4793,6 +4793,27 @@ form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try
 document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();<\/script>
+
+<!-- Staff character enlarged-image viewer: additive only -->
+<style id="staff-character-zoom-style">
+.staff-inline-image img{cursor:zoom-in}
+#staff-character-zoom{position:fixed;inset:0;z-index:2147483646;background:rgba(2,9,23,.96);display:none;align-items:center;justify-content:center;padding:62px 12px 26px;box-sizing:border-box}
+#staff-character-zoom.active{display:flex}
+#staff-character-zoom .zoom-scroll{max-height:100%;width:100%;overflow:auto;text-align:center;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#staff-character-zoom img{display:block;max-width:100%;max-height:calc(100dvh - 100px);width:auto;height:auto;object-fit:contain;margin:auto;touch-action:pinch-zoom}
+#staff-character-zoom button{position:absolute;right:14px;top:12px;z-index:2;width:46px;height:46px;border-radius:50%;border:1px solid #a8c8e7;background:#123963;color:#fff;font-size:30px;cursor:pointer}
+</style>
+<div id="staff-character-zoom" role="dialog" aria-modal="true" aria-label="キャラクター画像の拡大表示" aria-hidden="true"><button type="button" aria-label="拡大表示を閉じる">×</button><div class="zoom-scroll"><img alt=""></div></div>
+<script id="staff-character-zoom-script">(()=>{
+ const box=document.getElementById('staff-character-zoom');
+ const enlarged=box.querySelector('img'); const closeButton=box.querySelector('button');
+ let priorFocus=null;
+ function close(){box.classList.remove('active');box.setAttribute('aria-hidden','true');enlarged.removeAttribute('src');document.body.style.overflow=box.dataset.oldOverflow||'';if(priorFocus)priorFocus.focus();}
+ document.addEventListener('click',e=>{const img=e.target.closest('.staff-room-partner .staff-inline-image img');if(!img)return;priorFocus=img;enlarged.src=img.currentSrc||img.src;enlarged.alt=img.alt+' 拡大画像';box.dataset.oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';box.classList.add('active');box.setAttribute('aria-hidden','false');closeButton.focus();});
+ closeButton.addEventListener('click',close);
+ box.addEventListener('click',e=>{if(e.target===box||e.target===enlarged)close();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('active'))close();});
+})();</script>
 </body></html>\n"};const panel=document.getElementById('sports-experience'),frame=document.getElementById('sports-experience-frame'),close=document.getElementById('sports-experience-close');
 let previousFocus=null,previousHash='#sports-academy-detail',active='';
 function exit(){panel.hidden=true;document.body.classList.remove('sports-playing');frame.srcdoc='';active='';history.replaceState(null,'',location.pathname+location.search+'#sports-academy-detail');requestAnimationFrame(()=>document.getElementById('sports-academy-detail')?.scrollIntoView({block:'start',behavior:'instant'}));}
