@@ -5019,5 +5019,43 @@ form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try
 document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();</script>
+<!-- Forgeation Staff Room: zoom viewer (main document, not embedded subpage) -->
+<style id="forge-staff-zoom-css">
+.staff-room-partner .staff-inline-image img{cursor:zoom-in}
+#forge-staff-zoom{position:fixed;inset:0;z-index:2147483647;display:none;flex-direction:column;align-items:stretch;background:rgba(1,9,26,.97);color:#fff;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);}
+#forge-staff-zoom.is-open{display:flex}
+#forge-staff-zoom .fsz-bar{flex:0 0 auto;min-height:62px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 16px;background:#061a38;border-bottom:1px solid #ffffff3b}
+#forge-staff-zoom .fsz-title{font-weight:800;font-size:16px}
+#forge-staff-zoom .fsz-actions{display:flex;gap:10px;align-items:center}
+#forge-staff-zoom button{min-width:44px;min-height:44px;padding:4px 10px;border:1px solid #a8c8e7;border-radius:12px;background:#163c6e;color:#fff;font-weight:900;font-size:22px;cursor:pointer}
+#forge-staff-zoom .fsz-scroll{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+#forge-staff-zoom .fsz-img{display:block;width:100%;height:auto;max-width:none;margin:auto;transform-origin:top left;cursor:zoom-in;user-select:none;-webkit-user-select:none}
+#forge-staff-zoom .fsz-scroll.zoomed .fsz-img{width:200%;cursor:zoom-out}
+#forge-staff-zoom .fsz-help{flex:0 0 auto;padding:8px 12px;text-align:center;color:#cde4ff;font-size:12px;background:#061a38}
+</style>
+<div id="forge-staff-zoom" role="dialog" aria-modal="true" aria-label="職員室の画像拡大" aria-hidden="true">
+  <div class="fsz-bar"><span class="fsz-title">画像を拡大</span><div class="fsz-actions"><button type="button" class="fsz-size" aria-label="さらに拡大・縮小">＋</button><button type="button" class="fsz-close" aria-label="閉じる">×</button></div></div>
+  <div class="fsz-scroll"><img class="fsz-img" alt=""></div>
+  <div class="fsz-help">画像をタップ、または＋で拡大・縮小できます</div>
+</div>
+<script id="forge-staff-zoom-js">
+(()=>{
+ const overlay=document.getElementById('forge-staff-zoom');
+ const scroll=overlay.querySelector('.fsz-scroll');
+ const big=overlay.querySelector('.fsz-img');
+ const label=overlay.querySelector('.fsz-title');
+ const size=overlay.querySelector('.fsz-size');
+ let focusBefore=null, savedOverflow='';
+ function setZoom(on){scroll.classList.toggle('zoomed',on);size.textContent=on?'－':'＋';size.setAttribute('aria-label',on?'縮小':'さらに拡大');if(!on){scroll.scrollLeft=0;scroll.scrollTop=0;}}
+ function close(){if(!overlay.classList.contains('is-open'))return;overlay.classList.remove('is-open');overlay.setAttribute('aria-hidden','true');big.removeAttribute('src');document.body.style.overflow=savedOverflow;setZoom(false);if(focusBefore?.focus)focusBefore.focus({preventScroll:true});}
+ function open(img){focusBefore=img;savedOverflow=document.body.style.overflow;label.textContent=(img.alt||'キャラクター')+' の画像';big.src=img.currentSrc||img.src;big.alt=(img.alt||'キャラクター')+' の拡大画像';setZoom(false);overlay.classList.add('is-open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';overlay.querySelector('.fsz-close').focus({preventScroll:true});}
+ document.addEventListener('click',event=>{const img=event.target.closest?.('#staffRoomPartners .staff-inline-image img');if(!img || overlay.contains(img))return;event.preventDefault();open(img);});
+ document.addEventListener('keydown',event=>{if(!overlay.classList.contains('is-open')){if((event.key==='Enter'||event.key===' ')&&event.target.matches?.('#staffRoomPartners .staff-inline-image img')){event.preventDefault();open(event.target);}return;}if(event.key==='Escape'){event.preventDefault();close();}});
+ big.addEventListener('click',()=>setZoom(!scroll.classList.contains('zoomed')));
+ size.addEventListener('click',()=>setZoom(!scroll.classList.contains('zoomed')));
+ overlay.querySelector('.fsz-close').addEventListener('click',close);
+ overlay.addEventListener('click',event=>{if(event.target===overlay)close();});
+})();
+</script>
 </body>
 </html>
