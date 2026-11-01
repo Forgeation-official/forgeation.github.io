@@ -3887,6 +3887,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("pagehide", saveScrollPosition);
 
   function restoreScrollPosition() {
+    if (new URLSearchParams(location.search).get("from") === "front" && location.hash) return;
     let savedPath=null; try{savedPath=window.sessionStorage.getItem(PATH_KEY)}catch(_){}
     let savedY=0; try{savedY=Number(window.sessionStorage.getItem(STORAGE_KEY))}catch(_){}
 
@@ -4814,6 +4815,22 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.cont
  box.addEventListener('click',e=>{if(e.target===box||e.target===enlarged)close();});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('active'))close();});
 })();</script>
+<script id="front-destination-fix">
+(function(){
+ if(new URLSearchParams(location.search).get('from')!=='front') return;
+ function arrive(){
+  var target=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if(!target) return;
+  var opening=document.getElementById('opening');
+  if(opening){opening.style.display='none';opening.classList.add('is-hidden');opening.setAttribute('aria-hidden','true');opening.style.pointerEvents='none';}
+  for(var p=target;p;p=p.parentElement){if(p.tagName==='DETAILS')p.open=true;}
+  target.style.scrollMarginTop='100px';
+  target.scrollIntoView({block:'start',behavior:'instant'});
+ }
+ window.addEventListener('load',function(){arrive();setTimeout(arrive,350);});
+ window.addEventListener('pageshow',arrive);
+})();
+</script>
 </body></html>\n"};const panel=document.getElementById('sports-experience'),frame=document.getElementById('sports-experience-frame'),close=document.getElementById('sports-experience-close');
 let previousFocus=null,previousHash='#sports-academy-detail',active='';
 function exit(){panel.hidden=true;document.body.classList.remove('sports-playing');frame.srcdoc='';active='';history.replaceState(null,'',location.pathname+location.search+'#sports-academy-detail');requestAnimationFrame(()=>document.getElementById('sports-academy-detail')?.scrollIntoView({block:'start',behavior:'instant'}));}
@@ -4858,6 +4875,22 @@ form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try
 document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();</script>
+<script id="front-destination-fix">
+(function(){
+ if(new URLSearchParams(location.search).get('from')!=='front') return;
+ function arrive(){
+  var target=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if(!target) return;
+  var opening=document.getElementById('opening');
+  if(opening){opening.style.display='none';opening.classList.add('is-hidden');opening.setAttribute('aria-hidden','true');opening.style.pointerEvents='none';}
+  for(var p=target;p;p=p.parentElement){if(p.tagName==='DETAILS')p.open=true;}
+  target.style.scrollMarginTop='100px';
+  target.scrollIntoView({block:'start',behavior:'instant'});
+ }
+ window.addEventListener('load',function(){arrive();setTimeout(arrive,350);});
+ window.addEventListener('pageshow',arrive);
+})();
+</script>
 </body>', '<script>(function(){var targetId="'+(kind==='volley'?'volley-game':kind==='golf'?'golf':'')+'";document.addEventListener("click",function(e){var a=e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href");if(!href||href.charAt(0)!=="#"||href==="#return-to-school")return;var target=document.getElementById(href.slice(1));if(target){e.preventDefault();target.scrollIntoView({block:"start",behavior:"smooth"})}});if(targetId){window.addEventListener("load",function(){var el=document.getElementById(targetId);if(el)el.scrollIntoView({block:"start"})})}})();<\/script>
 <style id="nogu-cycling-lightbox-style">
 #nogu-private-content .nogu-cycling-grid img{cursor:zoom-in}
@@ -4899,6 +4932,22 @@ form.onsubmit=async e=>{e.preventDefault();status.textContent='確認中…';try
 document.addEventListener('click',e=>{const k=e.target.closest('#noguKitchenEntry'),g=e.target.closest('#noguGlassesEntry');if(!k&&!g)return;if(unlocked)return;e.preventDefault();e.stopImmediatePropagation();target=k?'kitchen':'glasses';gate.classList.add('open');input.focus();},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.contains('open'))hide()});
 })();</script>
+<script id="front-destination-fix">
+(function(){
+ if(new URLSearchParams(location.search).get('from')!=='front') return;
+ function arrive(){
+  var target=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if(!target) return;
+  var opening=document.getElementById('opening');
+  if(opening){opening.style.display='none';opening.classList.add('is-hidden');opening.setAttribute('aria-hidden','true');opening.style.pointerEvents='none';}
+  for(var p=target;p;p=p.parentElement){if(p.tagName==='DETAILS')p.open=true;}
+  target.style.scrollMarginTop='100px';
+  target.scrollIntoView({block:'start',behavior:'instant'});
+ }
+ window.addEventListener('load',function(){arrive();setTimeout(arrive,350);});
+ window.addEventListener('pageshow',arrive);
+})();
+</script>
 </body>');frame.srcdoc=source;history.replaceState(null,'',location.pathname+location.search+'#experience-'+kind);close.focus();}
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#experience-"]');if(a){e.preventDefault();open(a.getAttribute('href').slice(12));}});
 close.onclick=exit;document.addEventListener('keydown',e=>{if(panel.hidden)return;if(e.key==='Escape'){e.preventDefault();exit();}if(e.key==='Tab'&&e.shiftKey&&document.activeElement===close){e.preventDefault();frame.focus();}});
@@ -5055,6 +5104,22 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&gate.classList.cont
  size.addEventListener('click',()=>setZoom(!scroll.classList.contains('zoomed')));
  overlay.querySelector('.fsz-close').addEventListener('click',close);
  overlay.addEventListener('click',event=>{if(event.target===overlay)close();});
+})();
+</script>
+<script id="front-destination-fix">
+(function(){
+ if(new URLSearchParams(location.search).get('from')!=='front') return;
+ function arrive(){
+  var target=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if(!target) return;
+  var opening=document.getElementById('opening');
+  if(opening){opening.style.display='none';opening.classList.add('is-hidden');opening.setAttribute('aria-hidden','true');opening.style.pointerEvents='none';}
+  for(var p=target;p;p=p.parentElement){if(p.tagName==='DETAILS')p.open=true;}
+  target.style.scrollMarginTop='100px';
+  target.scrollIntoView({block:'start',behavior:'instant'});
+ }
+ window.addEventListener('load',function(){arrive();setTimeout(arrive,350);});
+ window.addEventListener('pageshow',arrive);
 })();
 </script>
 </body>
