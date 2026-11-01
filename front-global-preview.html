@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Welcome to Forgeation School. AI受付社員ジッピーが校内をご案内します。">
+<title>Welcome to Forgeation School｜1階フロント</title>
+<style>
+:root{
+  --navy:#061a3a;
+  --blue:#0a57d5;
+  --cyan:#35d5ff;
+  --gold:#f5ca61;
+  --white:#fff;
+  --line:rgba(255,255,255,.20);
+  --glass:rgba(255,255,255,.11);
+  --ink:#0b2346;
+  --green:#28d267;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 18% 10%,rgba(53,213,255,.20),transparent 28%),
+    radial-gradient(circle at 84% 72%,rgba(10,87,213,.28),transparent 32%),
+    linear-gradient(145deg,#020611,#061a3a 58%,#0a3270);
+  min-height:100vh;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.page{
+  width:min(1180px,94vw);
+  margin:auto;
+  padding:28px 0 60px;
+}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 0 26px;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{
+  width:58px;height:58px;border-radius:17px;
+  display:grid;place-items:center;
+  font-size:39px;font-weight:900;font-style:italic;
+  background:linear-gradient(145deg,#22d0ff,#0a57d5 62%,#ff7b45);
+  box-shadow:0 18px 42px rgba(0,0,0,.30);
+}
+.brand strong{display:block;font-size:1.35rem}
+.brand small{display:block;color:#a9e7ff;letter-spacing:.15em;font-weight:800}
+.home{
+  padding:11px 17px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(255,255,255,.08);font-weight:900
+}
+.hero{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+  align-items:stretch;
+}
+.welcome,.guide,.quick,.notice{
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:var(--glass);
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+  backdrop-filter:blur(14px);
+}
+.welcome{padding:clamp(28px,5vw,58px)}
+.kicker{color:#9fe9ff;font-weight:900;letter-spacing:.16em}
+.welcome h1{
+  margin:12px 0 16px;
+  font-size:clamp(2.25rem,6vw,4.8rem);
+  line-height:1.08;
+}
+.welcome p{color:#d7ebff;line-height:1.9;font-size:1.05rem}
+.front-badge{
+  display:inline-flex;align-items:center;gap:9px;margin-top:14px;
+  padding:9px 14px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(255,255,255,.08);font-weight:900
+}
+.guide{
+  padding:28px;
+  background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.07));
+}
+.guide h2,.quick h2,.notice h2{margin:0 0 18px}
+.status-list{display:grid;gap:13px}
+.status{
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:12px;align-items:center;
+  padding:15px 16px;border:1px solid rgba(255,255,255,.14);
+  border-radius:17px;background:rgba(1,14,38,.34)
+}
+.light{
+  width:13px;height:13px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 18px rgba(40,210,103,.8)
+}
+.status strong{display:block}
+.status small{color:#c9e3ff}
+.tag{font-size:.76rem;padding:6px 9px;border-radius:999px;background:rgba(40,210,103,.16);color:#9ff5bf;font-weight:900}
+.section{margin-top:24px}
+.quick{padding:28px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{
+  min-height:155px;padding:20px;border:1px solid rgba(255,255,255,.16);
+  border-radius:20px;background:rgba(255,255,255,.08);
+  transition:.2s ease;display:flex;flex-direction:column
+}
+.card:hover{transform:translateY(-4px);background:rgba(255,255,255,.14)}
+.card .icon{font-size:2rem}
+.card h3{margin:12px 0 7px}
+.card p{margin:0;color:#cfe4ff;line-height:1.6;flex:1}
+.card span{margin-top:15px;color:#9fe9ff;font-weight:900}
+.notice{padding:26px}
+.notice-box{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px
+}
+.notice-item{
+  padding:16px;border-radius:17px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14)
+}
+.notice-item strong{display:block;margin-bottom:6px}
+.notice-item small{color:#cfe4ff;line-height:1.55}
+.footer{
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  margin-top:28px;padding:22px 4px;color:#bcdcff;font-size:.88rem
+}
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);
+  opacity:0;pointer-events:none;
+  padding:12px 16px;border-radius:999px;background:#fff;color:var(--ink);
+  font-weight:900;box-shadow:0 18px 48px rgba(0,0,0,.35);
+  transition:.25s ease;z-index:50
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* 現在ホームページ閲覧中：この表示だけを追加 */
+.live-presence{
+  margin:0 0 14px;
+  padding:15px 16px;
+  border:1px solid rgba(53,213,255,.45);
+  border-radius:16px;
+  background:linear-gradient(90deg,rgba(53,213,255,.15),rgba(40,210,103,.10));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.live-presence-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+.live-dot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#28d267;
+  box-shadow:0 0 14px rgba(40,210,103,.85);
+  flex:0 0 auto;
+}
+.live-presence-count{
+  font-size:1.45rem;
+  font-weight:950;
+  color:#fff;
+  white-space:nowrap;
+}
+.live-presence-count strong{
+  font-size:2rem;
+  color:#9fffd0;
+}
+
+/* 1F未来掲示板：DB実数アプリ利用ランキング */
+.electric-board{
+  padding:22px;border-radius:20px;
+  background:linear-gradient(160deg,rgba(1,10,26,.92),rgba(5,33,72,.88));
+  border:1px solid rgba(53,213,255,.28);
+  box-shadow:inset 0 0 32px rgba(53,213,255,.05);
+}
+.electric-board-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px}
+.electric-board-kicker{color:#77e7ff;font-size:.76rem;font-weight:950;letter-spacing:.16em}
+.electric-board-title{margin:5px 0 0;font-size:clamp(1.25rem,3vw,1.75rem)}
+.electric-board-lead{margin:6px 0 0;color:#bcdcff;line-height:1.65;font-size:.9rem}
+.electric-board-date{flex:0 0 auto;color:#9fe9ff;font-size:.78rem;font-weight:900}
+.app-ranking-list{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.app-ranking-item{display:grid;grid-template-columns:50px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 14px;border:1px solid rgba(255,255,255,.11);border-radius:14px;background:rgba(255,255,255,.065)}
+.app-ranking-rank{display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:rgba(53,213,255,.13);color:#bff5ff;font-weight:950}
+.app-ranking-item:nth-child(1) .app-ranking-rank{background:rgba(245,202,97,.22);color:#ffe59b;box-shadow:0 0 20px rgba(245,202,97,.12)}
+.app-ranking-item:nth-child(2) .app-ranking-rank{background:rgba(225,233,242,.16);color:#f1f5f9}
+.app-ranking-item:nth-child(3) .app-ranking-rank{background:rgba(206,135,82,.18);color:#ffc99f}
+.app-ranking-name{min-width:0;font-weight:900;color:#fff}
+.app-ranking-count{white-space:nowrap;color:#9fffd0;font-weight:950;font-size:1.06rem}
+.app-ranking-empty{padding:18px;text-align:center;color:#bcdcff;border-radius:14px;background:rgba(255,255,255,.06)}
+.electric-board-note{margin:14px 0 0;color:#9fbddc;font-size:.78rem;line-height:1.6}
+@media(max-width:620px){
+  .electric-board{padding:18px 12px}
+  .electric-board-head{display:block}
+  .electric-board-date{margin-top:8px}
+  .app-ranking-item{grid-template-columns:42px minmax(0,1fr) auto;gap:8px;padding:10px}
+  .app-ranking-rank{width:33px;height:33px}
+  .app-ranking-count{font-size:.94rem}
+}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .quick-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .page{width:min(94vw,640px);padding-top:14px}
+  .header{align-items:flex-start}
+  .logo{width:51px;height:51px;font-size:34px}
+  .brand strong{font-size:1.1rem}
+  .home{font-size:.84rem;padding:9px 12px}
+  .welcome,.guide,.quick,.notice{border-radius:22px}
+  .welcome{padding:28px 22px}
+  .guide,.quick,.notice{padding:22px 18px}
+  .quick-grid,.notice-box{grid-template-columns:1fr}
+  .status{grid-template-columns:auto 1fr}
+  .tag{grid-column:2}
+}
+</style>
+<style id="fg-language-style">
+#fg-language{position:fixed;right:12px;top:12px;z-index:2147483647;display:flex;gap:4px;padding:5px;background:#06152beF;border:1px solid #69d7ff;border-radius:24px;box-shadow:0 4px 20px #0005}#fg-language button{font:600 14px system-ui;min-height:38px;padding:6px 13px;border:0;border-radius:20px;cursor:pointer;color:#e6f6ff;background:transparent}#fg-language button[aria-pressed=true]{background:#85e7ff;color:#06152b}#fg-language button:focus-visible{outline:3px solid #ffdc70}
+html[data-fg-lang=en] .fg-jp-only{display:block;color:#ace7ff;font-size:12px;margin-top:8px}html[data-fg-lang=ja] .fg-jp-only{display:none}
+body.fg-home-en{overflow:auto!important}body.fg-home-en>*:not(#fg-language):not(#fg-en-home):not(script):not(style){display:none!important}#fg-en-home{display:none}body.fg-home-en>#fg-en-home{display:block!important;position:fixed;inset:0;overflow:auto;z-index:2147483646}#fg-en-home{color:#edf6ff;background:radial-gradient(ellipse at top right,#164885,#061429 60%);font:17px/1.7 system-ui,sans-serif;min-height:100vh;padding:100px 24px 48px}#fg-en-home *{box-sizing:border-box}#fg-en-home .fg-wrap{max-width:1100px;margin:auto}#fg-en-home h1{font-size:clamp(38px,7vw,78px);line-height:1.12;letter-spacing:-.035em;margin:26px 0}#fg-en-home h2{font-size:30px;line-height:1.25;margin:0 0 18px}#fg-en-home h3{font-size:21px;margin:0 0 10px}#fg-en-home p{color:#cadff3;margin:12px 0 24px}#fg-en-home section{padding:48px 0;scroll-margin-top:80px}#fg-en-home .fg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}#fg-en-home .fg-card{padding:25px;background:#153456a6;border:1px solid #5b8fb566;border-radius:20px}#fg-en-home a{color:#99e9ff;text-decoration:underline;text-underline-offset:5px}#fg-en-home .fg-cta{display:inline-block;background:#8ae4ff;color:#07162e;font-weight:750;padding:12px 20px;border-radius:30px;text-decoration:none;margin:8px 8px 8px 0}#fg-en-home .fg-kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#8ae4ff}#fg-en-home nav{display:flex;gap:20px;flex-wrap:wrap}#fg-en-home .fg-note{font-size:14px;color:#afc6dc}#fg-en-home .fg-mark{font-size:32px;font-weight:800}#fg-en-home #fg-declaration{border-bottom:1px solid #7bdfff44}html[data-fg-lang=en] .wrap{padding-top:80px!important}@media(max-width:480px){#fg-en-home{padding-left:18px;padding-right:18px}#fg-en-home .fg-grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="page">
+  <header class="header">
+    <a class="brand" href="index-global-preview.html">
+      <span class="logo">F</span>
+      <span><strong>Forgeation</strong><small>FUTURE MANAGEMENT</small></span>
+    </a>
+    <a class="home" href="index-global-preview.html"><span data-fg-key="front-1">🏠 ホームへ戻る</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="welcome">
+        <div class="kicker">1F FRONT / SCHOOL RECEPTION</div>
+        <h1>Welcome to<br>Forgeation School.</h1>
+        <p><span data-fg-key="front-2">
+          ようこそ、Forgeation Schoolへ。</span><br><span data-fg-key="front-3">
+          AI受付社員「ジッピー」が、ご用件に合わせて
+          最適な教室・AI社員・担当窓口をご案内します。
+        </span></p>
+        <div class="front-badge"><span data-fg-key="front-4">🤖 AI受付社員ジッピー｜受付対応中</span></div>
+      </div>
+
+      <aside class="guide">
+        <h2><span data-fg-key="front-5">📍 本日の校内案内</span></h2>
+        <div class="live-presence" aria-live="polite">
+          <div class="live-presence-label">
+            <span class="live-dot"></span>
+            <span><span data-fg-key="front-6">現在の来校者</span></span>
+          </div>
+          <div class="live-presence-count"><strong id="schoolLiveCount">--</strong><span data-fg-key="front-7"> 人</span></div>
+        </div>
+        <div class="status-list">
+          <div class="status"><span class="light"></span><div><strong><span data-fg-key="front-8">AI受付社員</span></strong><small><span data-fg-key="front-9">待ち時間：なし</span></small></div><span class="tag"><span data-fg-key="front-10">受付中</span></span></div>
+          <div class="status"><span class="light"></span><div><strong><span data-fg-key="front-11">F Soccer 利用者数</span></strong><small><span data-fg-key="front-12">現在利用中：</span><b id="fSoccerLiveCount">--</b><span data-fg-key="front-13"> 人</span></small></div><span class="tag">LIVE</span></div>
+          <div class="status"><span class="light"></span><div><strong><span data-fg-key="front-14">AIアカデミー課</span></strong><small><span data-fg-key="front-15">AI基礎・生成AI・開発・安全</span></small></div><span class="tag"><span data-fg-key="front-16">開講中</span></span></div>
+          <div class="status"><span class="light"></span><div><strong>Forgeation Bakery</strong><small><span data-fg-key="front-17">未来の学食・店舗構想</span></small></div><span class="tag"><span data-fg-key="front-18">公開中</span></span></div>
+          <div class="status"><span class="light"></span><div><strong><span data-fg-key="front-19">来訪者受付</span></strong><small><span data-fg-key="front-20">校内マップ・各教室をご案内</span></small></div><span class="tag"><span data-fg-key="front-21">受付中</span></span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section quick">
+      <h2><span data-fg-key="front-22">ご用件をお選びください</span></h2>
+      <div class="quick-grid">
+        <a class="card track-link" data-destination="academies" href="#front-academies">
+          <div class="icon">🎓</div><h3><span data-fg-key="front-23">アカデミーで学ぶ</span></h3>
+          <p><span data-fg-key="front-24">AI、スポーツ、看護・医療、介護・福祉、建設、教育の教室へ。</span></p><span><span data-fg-key="front-25">教室を探す →</span></span>
+        </a>
+        <a class="card track-link" data-destination="ai-employees" href="#front-employees">
+          <div class="icon">🤖</div><h3><span data-fg-key="front-26">AI社員を体験する</span></h3>
+          <p><span data-fg-key="front-27">受付、広報、システム、看護、建設などのAI社員を体験できます。</span></p><span><span data-fg-key="front-28">AI社員フロアへ →</span></span>
+        </a>
+        <a class="card track-link" data-destination="f-soccer" href="https://forgeation-official.github.io/forgeation.github.io/F_Soccer_beta_Ver3_Challenge搭載版.html">
+          <div class="icon">⚽</div><h3><span data-fg-key="front-29">専属AIコーチ</span></h3>
+          <p><span data-fg-key="front-30">F Soccerで、練習・振り返り・目標設定・F Challengeを体験します。</span></p><span><span data-fg-key="front-31">コーチに会う →</span></span>
+        <small class="fg-jp-only" lang="en">Experience available in Japanese</small></a>
+        <a class="card track-link" data-destination="school-map" href="index-global-preview.html?from=front#forgeation-school">
+          <div class="icon">🏫</div><h3><span data-fg-key="front-32">校内マップを見る</span></h3>
+          <p><span data-fg-key="front-33">Forgeation校舎の各フロアと教室を確認できます。</span></p><span><span data-fg-key="front-34">校舎を探検 →</span></span>
+        </a>
+        <a class="card track-link" data-destination="company" href="index-global-preview.html?from=front#forgeation-portals">
+          <div class="icon">💼</div><h3><span data-fg-key="front-35">法人・企業のご相談</span></h3>
+          <p><span data-fg-key="front-36">AI導入、DX、研修、連携・パートナーシップをご案内します。</span></p><span><span data-fg-key="front-37">企業案内へ →</span></span>
+        </a>
+        <a class="card track-link" data-destination="contact" href="index-global-preview.html?from=front#contact">
+          <div class="icon">📩</div><h3><span data-fg-key="front-38">お問い合わせ</span></h3>
+          <p><span data-fg-key="front-39">取材、協業、採用、サービスに関するご相談はこちらです。</span></p><span><span data-fg-key="front-40">相談窓口へ →</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section notice" id="future-board">
+      <h2><span data-fg-key="front-41">📢 未来掲示板</span></h2>
+      <div class="electric-board" aria-labelledby="frontAppRankingTitle">
+        <div class="electric-board-head">
+          <div>
+            <div class="electric-board-kicker">1F / SCHOOL ELECTRIC BOARD</div>
+            <h3 class="electric-board-title" id="frontAppRankingTitle"><span data-fg-key="front-42">🏆 本日のアプリ利用ランキング</span></h3>
+            <p class="electric-board-lead"><span data-fg-key="front-43">校舎まで来てくれた方だけに公開。DBに記録された本日の利用実数を、リアルタイムで順位表示します。</span></p>
+          </div>
+          <div class="electric-board-date" id="frontAppRankingDate"><span data-fg-key="front-44">DBから読込中…</span></div>
+        </div>
+        <ol class="app-ranking-list" id="frontAppRankingList" aria-live="polite">
+          <li class="app-ranking-empty"><span data-fg-key="front-45">本日のランキングを読み込んでいます…</span></li>
+        </ol>
+        <p class="electric-board-note"><span data-fg-key="front-46">※ このランキングはホームページ表側には表示せず、校舎内1F「未来掲示板」で公開しています。</span></p>
+      </div>
+    </section>
+<section class="section quick" id="front-academies"><h2><span data-fg-key="front-47">学びたいアカデミーをお選びください</span></h2><div class="quick-grid"><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-academy-web.html"><h3>AI</h3><span><span data-fg-key="front-48">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/robotics-academy-web.html"><h3><span data-fg-key="front-49">AI・ロボティクス</span></h3><span><span data-fg-key="front-50">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/sports-academy-web.html"><h3><span data-fg-key="front-51">スポーツ</span></h3><span><span data-fg-key="front-52">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="index-global-preview.html?from=front#soccer-academy-detail"><h3><span data-fg-key="front-53">サッカー</span></h3><span><span data-fg-key="front-54">体験ページへ →</span></span></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/nursing-academy-web.html"><h3><span data-fg-key="front-55">看護・医療</span></h3><span><span data-fg-key="front-56">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/care-academy-web.html"><h3><span data-fg-key="front-57">介護・福祉</span></h3><span><span data-fg-key="front-58">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/construction-academy-web.html"><h3><span data-fg-key="front-59">建設</span></h3><span><span data-fg-key="front-60">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/education-academy-web.html"><h3><span data-fg-key="front-61">教育</span></h3><span><span data-fg-key="front-62">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a></div></section><section class="section quick" id="front-employees"><h2><span data-fg-key="front-63">体験したいAI社員をお選びください</span></h2><div class="quick-grid"><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-public-relations-demo.html"><h3><span data-fg-key="front-64">AI広報社員</span></h3><span><span data-fg-key="front-65">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-system-employee-demo.html"><h3><span data-fg-key="front-66">AIシステム社員</span></h3><span><span data-fg-key="front-67">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-learning-support-demo.html"><h3><span data-fg-key="front-68">AI学習支援社員</span></h3><span><span data-fg-key="front-69">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-nursing-employee-demo.html"><h3><span data-fg-key="front-70">AI看護社員</span></h3><span><span data-fg-key="front-71">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-construction-employee-demo.html"><h3><span data-fg-key="front-72">AI建設社員</span></h3><span><span data-fg-key="front-73">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-robotics-employee-demo.html"><h3><span data-fg-key="front-74">AIロボティクス社員</span></h3><span><span data-fg-key="front-75">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-sports-academy-employee-demo.html"><h3><span data-fg-key="front-76">AIスポーツアカデミー社員</span></h3><span><span data-fg-key="front-77">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a><a class="card track-link" href="https://forgeation-official.github.io/forgeation.github.io/ai-care-facility-employee-demo.html"><h3><span data-fg-key="front-78">AI介護施設社員</span></h3><span><span data-fg-key="front-79">体験ページへ →</span></span><small class="fg-jp-only" lang="en">Experience available in Japanese</small></a></div></section>  </main>
+
+  <footer class="footer">
+    <strong>Forgeation — Design the Future. Forge the Future.</strong>
+    <span>© 2026 Forgeation</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast"><span data-fg-key="front-80">ご案内ページへ移動します。</span></div>
+
+<script>
+const API_BASE = "https://forgeation-api.eru12121221.workers.dev";
+
+function getVisitorId(){
+  let visitorId = localStorage.getItem("forgeation_visitor_id");
+  if(!visitorId){
+    visitorId = (crypto.randomUUID?.() ||
+      "visitor-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+    localStorage.setItem("forgeation_visitor_id", visitorId);
+  }
+  return visitorId;
+}
+
+async function recordVisit(page){
+  // 本番「学校の賑わい」導線：実来訪だけをWorker /visitへ記録
+  // visitorIdは端末ごとに固定し、同一来訪者を識別できるようにする。
+  const payload={
+    visitorId:getVisitorId(),
+    page:String(page || "forgeation-school-front")
+  };
+
+  try{
+    const response = await fetch(API_BASE + "/visit",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      credentials:"omit",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(payload),
+      keepalive:true
+    });
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    return await response.json();
+  }catch(error){
+    console.warn("来訪記録に失敗しました。",error);
+    return null;
+  }
+}
+
+// 1階フロントへの来訪を本番DBへ記録
+recordVisit("forgeation-school-front");
+
+// ========================================
+// 学校フロントのリアルタイム来校者
+// POST /presence で30秒ごとにheartbeat
+// GET /presence で現在人数を取得
+// ========================================
+const SCHOOL_PRESENCE_PAGE = "forgeation-school-front";
+const F_SOCCER_PRESENCE_PAGE = "f-soccer";
+
+async function sendPresence(page, action="heartbeat"){
+  const payload={
+    visitorId:getVisitorId(),
+    page:String(page),
+    action:String(action)
+  };
+
+  try{
+    const response=await fetch(API_BASE + "/presence",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-store",
+      credentials:"omit",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload),
+      keepalive:true
+    });
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+    return await response.json();
+  }catch(error){
+    console.warn("在校状況の更新に失敗しました。",error);
+    return null;
+  }
+}
+
+async function loadPresenceCount(page, elementId){
+  const countEl=document.getElementById(elementId);
+  if(!countEl) return;
+
+  try{
+    const response=await fetch(
+      API_BASE + "/presence?page=" + encodeURIComponent(page),
+      {method:"GET",mode:"cors",cache:"no-store",credentials:"omit"}
+    );
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data=await response.json();
+    countEl.textContent=String(Number(data.activeVisitors || 0));
+  }catch(error){
+    console.warn("現在利用人数の取得に失敗しました。",error);
+    countEl.textContent="--";
+  }
+}
+
+async function refreshLiveCounts(){
+  await Promise.all([
+    loadPresenceCount(SCHOOL_PRESENCE_PAGE,"schoolLiveCount"),
+    loadPresenceCount(F_SOCCER_PRESENCE_PAGE,"fSoccerLiveCount")
+  ]);
+}
+
+// 受付ページを開いた端末を「現在の来校者」として登録
+sendPresence(SCHOOL_PRESENCE_PAGE);
+refreshLiveCounts();
+
+// Worker側の想定に合わせ、30秒ごとにheartbeatを更新
+setInterval(()=>sendPresence(SCHOOL_PRESENCE_PAGE),30000);
+setInterval(refreshLiveCounts,15000);
+
+// ページ離脱時は可能な限り即時にpresenceを削除
+function leaveSchoolPresence(){
+  const payload=JSON.stringify({
+    visitorId:getVisitorId(),
+    page:SCHOOL_PRESENCE_PAGE,
+    action:"leave"
+  });
+
+  fetch(API_BASE + "/presence",{
+    method:"POST",
+    mode:"cors",
+    cache:"no-store",
+    credentials:"omit",
+    headers:{"Content-Type":"application/json"},
+    body:payload,
+    keepalive:true
+  }).catch(()=>{});
+}
+
+window.addEventListener("pagehide",leaveSchoolPresence,{once:true});
+
+// ========================================
+// 1F未来掲示板：本日のアプリ利用ランキング
+// Worker GET /app-usage のDB実数を15秒ごとに更新
+// ========================================
+const FRONT_APP_NAMES = {
+  fSoccerBeta: "F Soccer β",
+  fSoccerProduction: "F Soccer 本番",
+  fChallenge: "F Challenge",
+  fDrone: "F Drone",
+  fMotion: "F Motion",
+  fGoggle: "F Goggle",
+  fNightingale: "F Nightingale",
+  fMind: "F Mind",
+  fPython: "F Python",
+  fTeacher: "F Teacher"
+};
+
+async function loadFrontAppRanking(){
+  const list=document.getElementById("frontAppRankingList");
+  const dateEl=document.getElementById("frontAppRankingDate");
+  if(!list) return;
+
+  try{
+    const response=await fetch(API_BASE + "/app-usage",{
+      method:"GET",mode:"cors",cache:"no-store",credentials:"omit"
+    });
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error || "HTTP " + response.status);
+
+    const appUsers=data.appUsers || {};
+    const ranking=Object.entries(FRONT_APP_NAMES)
+      .map(([key,name],order)=>({name,count:Number(appUsers[key] || 0),order}))
+      .sort((a,b)=>b.count-a.count || a.order-b.order);
+
+    list.innerHTML=ranking.map((item,index)=>
+      '<li class="app-ranking-item">'+
+        '<span class="app-ranking-rank">'+(index+1)+'</span>'+ 
+        '<span class="app-ranking-name">'+(window.forgeationLanguage?.get()==='en' && item.name==='F Soccer 本番'?'F Soccer Production':item.name)+'</span>'+ 
+        '<span class="app-ranking-count">'+item.count.toLocaleString("ja-JP")+(window.forgeationLanguage?.text(' 人',' users') || ' 人')+'</span>'+ 
+      '</li>'
+    ).join("");
+
+    if(dateEl){
+      dateEl.textContent=(data.date ? data.date.replaceAll("-","/") : "本日") + (window.forgeationLanguage?.text("｜DB実数"," | Recorded usage") || "｜DB実数");
+    }
+  }catch(error){
+    console.warn("1F未来掲示板ランキング取得に失敗しました。",error);
+    list.innerHTML='<li class="app-ranking-empty">'+(window.forgeationLanguage?.text('DBとの接続を確認しています。','Checking the database connection…') || 'DBとの接続を確認しています。')+'</li>';
+    if(dateEl) dateEl.textContent=window.forgeationLanguage?.text("DB接続確認中","Checking connection…") || "DB接続確認中";
+  }
+}
+
+loadFrontAppRanking();
+setInterval(loadFrontAppRanking,15000);
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible") loadFrontAppRanking();
+});
+
+// 各案内先のクリックも記録
+document.querySelectorAll(".track-link").forEach(link=>{
+  link.addEventListener("click",()=>{
+    const destination = link.dataset.destination || "unknown";
+    recordVisit("front-to-" + destination);
+    const toast=document.getElementById("toast");
+    toast.textContent=window.forgeationLanguage?.text("ジッピーがご案内します。","Zippy will guide you.") || "ジッピーがご案内します。";
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),1200);
+  });
+});
+</script>
+<nav id="fg-language" aria-label="Language / 言語"><button type="button" lang="ja" data-fg-lang="ja">日本語</button><button type="button" lang="en" data-fg-lang="en">English</button></nav><script>(()=>{'use strict';const isHome=false;const dictionary={"front-1": {"ja": "🏠 ホームへ戻る", "en": "🏠 Back to home"}, "front-2": {"ja": "\n          ようこそ、Forgeation Schoolへ。", "en": "Welcome to Forgeation School."}, "front-3": {"ja": "\n          AI受付社員「ジッピー」が、ご用件に合わせて\n          最適な教室・AI社員・担当窓口をご案内します。\n        ", "en": "Zippy, your AI receptionist, helps you find the right academy, AI employee, or contact for your needs."}, "front-4": {"ja": "🤖 AI受付社員ジッピー｜受付対応中", "en": "🤖 AI Receptionist Zippy | Ready to help"}, "front-5": {"ja": "📍 本日の校内案内", "en": "📍 Campus information today"}, "front-6": {"ja": "現在の来校者", "en": "Visitors online"}, "front-7": {"ja": " 人", "en": " visitors"}, "front-8": {"ja": "AI受付社員", "en": "AI Receptionist"}, "front-9": {"ja": "待ち時間：なし", "en": "No waiting time"}, "front-10": {"ja": "受付中", "en": "Open"}, "front-11": {"ja": "F Soccer 利用者数", "en": "F Soccer users"}, "front-12": {"ja": "現在利用中：", "en": "Currently online:"}, "front-13": {"ja": " 人", "en": " users"}, "front-14": {"ja": "AIアカデミー課", "en": "AI Academy"}, "front-15": {"ja": "AI基礎・生成AI・開発・安全", "en": "AI fundamentals, generative AI, development, and safety"}, "front-16": {"ja": "開講中", "en": "Open for learning"}, "front-17": {"ja": "未来の学食・店舗構想", "en": "Our vision for future dining and shops"}, "front-18": {"ja": "公開中", "en": "Explore now"}, "front-19": {"ja": "来訪者受付", "en": "Visitor reception"}, "front-20": {"ja": "校内マップ・各教室をご案内", "en": "Find your way around our campus and classrooms"}, "front-21": {"ja": "受付中", "en": "Open"}, "front-22": {"ja": "ご用件をお選びください", "en": "How can we help you?"}, "front-23": {"ja": "アカデミーで学ぶ", "en": "Learn at an academy"}, "front-24": {"ja": "AI、スポーツ、看護・医療、介護・福祉、建設、教育の教室へ。", "en": "Explore AI, sports, nursing and healthcare, care and welfare, construction, and education."}, "front-25": {"ja": "教室を探す →", "en": "Find a classroom →"}, "front-26": {"ja": "AI社員を体験する", "en": "Try an AI employee"}, "front-27": {"ja": "受付、広報、システム、看護、建設などのAI社員を体験できます。", "en": "Explore AI support for reception, public relations, systems, nursing, construction, and more."}, "front-28": {"ja": "AI社員フロアへ →", "en": "Explore AI employees →"}, "front-29": {"ja": "専属AIコーチ", "en": "Your personal AI coach"}, "front-30": {"ja": "F Soccerで、練習・振り返り・目標設定・F Challengeを体験します。", "en": "Try practice planning, reflection, goal setting, and F Challenge with F Soccer."}, "front-31": {"ja": "コーチに会う →", "en": "Meet your coach →"}, "front-32": {"ja": "校内マップを見る", "en": "Explore the campus map"}, "front-33": {"ja": "Forgeation校舎の各フロアと教室を確認できます。", "en": "Find the floors and classrooms of Forgeation School."}, "front-34": {"ja": "校舎を探検 →", "en": "Explore the campus →"}, "front-35": {"ja": "法人・企業のご相談", "en": "Business inquiries"}, "front-36": {"ja": "AI導入、DX、研修、連携・パートナーシップをご案内します。", "en": "Explore AI adoption, digital transformation, training, and partnerships."}, "front-37": {"ja": "企業案内へ →", "en": "Business information →"}, "front-38": {"ja": "お問い合わせ", "en": "Contact us"}, "front-39": {"ja": "取材、協業、採用、サービスに関するご相談はこちらです。", "en": "Get in touch about media, collaboration, recruitment, or our services."}, "front-40": {"ja": "相談窓口へ →", "en": "Contact options →"}, "front-41": {"ja": "📢 未来掲示板", "en": "📢 Future noticeboard"}, "front-42": {"ja": "🏆 本日のアプリ利用ランキング", "en": "🏆 Today's app usage ranking"}, "front-43": {"ja": "校舎まで来てくれた方だけに公開。DBに記録された本日の利用実数を、リアルタイムで順位表示します。", "en": "Today's recorded app usage, ranked using live database figures, is available here on campus."}, "front-44": {"ja": "DBから読込中…", "en": "Loading data…"}, "front-45": {"ja": "本日のランキングを読み込んでいます…", "en": "Loading today's ranking…"}, "front-46": {"ja": "※ このランキングはホームページ表側には表示せず、校舎内1F「未来掲示板」で公開しています。", "en": "This ranking is shown on the 1F Future Noticeboard, rather than on the public homepage."}, "front-47": {"ja": "学びたいアカデミーをお選びください", "en": "Choose an academy"}, "front-48": {"ja": "体験ページへ →", "en": "Try it →"}, "front-49": {"ja": "AI・ロボティクス", "en": "AI & Robotics"}, "front-50": {"ja": "体験ページへ →", "en": "Try it →"}, "front-51": {"ja": "スポーツ", "en": "Sports"}, "front-52": {"ja": "体験ページへ →", "en": "Try it →"}, "front-53": {"ja": "サッカー", "en": "Soccer"}, "front-54": {"ja": "体験ページへ →", "en": "Try it →"}, "front-55": {"ja": "看護・医療", "en": "Nursing & Healthcare"}, "front-56": {"ja": "体験ページへ →", "en": "Try it →"}, "front-57": {"ja": "介護・福祉", "en": "Care & Welfare"}, "front-58": {"ja": "体験ページへ →", "en": "Try it →"}, "front-59": {"ja": "建設", "en": "Construction"}, "front-60": {"ja": "体験ページへ →", "en": "Try it →"}, "front-61": {"ja": "教育", "en": "Education"}, "front-62": {"ja": "体験ページへ →", "en": "Try it →"}, "front-63": {"ja": "体験したいAI社員をお選びください", "en": "Choose an AI employee"}, "front-64": {"ja": "AI広報社員", "en": "AI Public Relations Employee"}, "front-65": {"ja": "体験ページへ →", "en": "Try it →"}, "front-66": {"ja": "AIシステム社員", "en": "AI Systems Employee"}, "front-67": {"ja": "体験ページへ →", "en": "Try it →"}, "front-68": {"ja": "AI学習支援社員", "en": "AI Learning Support Employee"}, "front-69": {"ja": "体験ページへ →", "en": "Try it →"}, "front-70": {"ja": "AI看護社員", "en": "AI Nursing Employee"}, "front-71": {"ja": "体験ページへ →", "en": "Try it →"}, "front-72": {"ja": "AI建設社員", "en": "AI Construction Employee"}, "front-73": {"ja": "体験ページへ →", "en": "Try it →"}, "front-74": {"ja": "AIロボティクス社員", "en": "AI Robotics Employee"}, "front-75": {"ja": "体験ページへ →", "en": "Try it →"}, "front-76": {"ja": "AIスポーツアカデミー社員", "en": "AI Sports Academy Employee"}, "front-77": {"ja": "体験ページへ →", "en": "Try it →"}, "front-78": {"ja": "AI介護施設社員", "en": "AI Care Facility Employee"}, "front-79": {"ja": "体験ページへ →", "en": "Try it →"}, "front-80": {"ja": "ご案内ページへ移動します。", "en": "Opening your destination…"}};let language='ja',jaScroll=0,enScroll=0;const originalTitle=document.title;
+function initial(){const q=new URL(location.href).searchParams.get('lang');if(q==='ja'||q==='en')return q;try{return localStorage.getItem('forgeation-language')==='en'?'en':'ja'}catch{return 'ja'}}
+function destination(){const map={'#contact':'fg-contact','#forgeation-portals':'fg-business','#forgeation-school':'fg-campus','#soccer-academy-detail':'fg-academies'};const id=map[location.hash]||location.hash.slice(1);const el=document.getElementById(id);if(el&&el.closest('#fg-en-home'))el.scrollIntoView({block:'start'})}
+function apply(lang,manual=false){if(manual){if(language==='ja')jaScroll=scrollY;else enScroll=scrollY}language=lang;document.documentElement.lang=lang;document.documentElement.dataset.fgLang=lang;document.body.classList.toggle('fg-home-en',isHome&&lang==='en');document.title=lang==='en'?(isHome?'Forgeation | Learn, Create, Grow':'Forgeation | Reception'):originalTitle;
+document.querySelectorAll('[data-fg-key]').forEach(el=>{const pair=dictionary[el.dataset.fgKey];if(pair)el.textContent=pair[lang]});
+document.querySelectorAll('#fg-language button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.fgLang===lang)));
+try{localStorage.setItem('forgeation-language',lang)}catch{}
+const u=new URL(location.href);u.searchParams.set('lang',lang);try{history.replaceState(history.state,'',u)}catch{}
+document.querySelectorAll('a[href]').forEach(a=>{if(a.closest('#fg-en-home')||!isHome){let u;try{u=new URL(a.getAttribute('href'),location.href)}catch{return}if(u.origin!==location.origin)return;const path=decodeURIComponent(u.pathname).split('/').pop();if(path==='index-global-preview.html'||path==="forgeation-school-front_来訪者受付_全体対応版.html"){u.searchParams.set('lang',lang);a.href=u.href}}});
+if(manual)requestAnimationFrame(()=>scrollTo({top:lang==='ja'?jaScroll:enScroll,behavior:'instant'}));else if(isHome&&lang==='en')requestAnimationFrame(destination);
+}
+window.forgeationLanguage={get:()=>language,text:(ja,en)=>language==='en'?en:ja};document.querySelectorAll('#fg-language button').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.fgLang,true)));
+apply(initial());window.addEventListener('pageshow',()=>apply(initial()));window.addEventListener('hashchange',()=>{if(isHome&&language==='en')destination()});
+})();</script></body>
+</html>
