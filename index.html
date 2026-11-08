@@ -4971,5 +4971,19 @@ library.querySelectorAll('details').forEach(item=>item.addEventListener('toggle'
  if(!item.open){item.querySelectorAll('audio,video').forEach(a=>a.pause());if(item.querySelector('#fml-theme-toggle')&&theme)theme.pause();}
  if(item.open&&item.classList.contains('track')){Array.from(item.parentElement.children).forEach(other=>{if(other!==item&&other.matches('details.track'))other.open=false;});}
 }));
-})();</script></body>
+})();</script><script id="forgeation-academy-close">
+for (const id of ['music-academy-panel', 'decoration-academy-panel']) {
+  const panel = document.getElementById(id);
+  if (!panel) continue;
+  const button = panel.querySelector('button[data-academy-close]');
+  const heading = panel.querySelector(':scope > summary');
+  if (!button || !heading) continue;
+  button.addEventListener('click', () => {
+    panel.open = false;
+    heading.focus({preventScroll: true});
+    heading.scrollIntoView({block: 'center', behavior: 'instant'});
+  });
+}
+</script>
+</body>
 </html>
