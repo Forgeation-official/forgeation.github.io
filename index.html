@@ -2268,7 +2268,7 @@ section{padding:68px 0}
     let start=0,until=0,nodAt=-10000,raf=0,ready=false,speaking=false,run=0,utterance=null,watchdog=0;
     let lines=[];
     function greeting(){const hour=new Date().getHours();return hour>=5&&hour<11?'おはようございます':hour>=11&&hour<18?'こんにちは':'こんばんは';}
-    function updateGreeting(){lines=[greeting()+'。Forgeation Schoolへようこそ！','AIアシスタントのチッピーです。今日も、共に学び、共に未来を切り拓きましょう。'];caption.textContent=lines.join(' ');}
+    function updateGreeting(){lines=[greeting()+'。Forgeation Schoolへようこそ。'];caption.textContent=lines.join(' ');}
     const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
     const supported=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
     const caption=root.querySelector('[data-caption]');
