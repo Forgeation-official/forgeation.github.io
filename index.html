@@ -2274,9 +2274,20 @@ section{padding:68px 0}
 #fg-chippy-welcome .chippy-suggestions{display:flex;flex-wrap:wrap;gap:6px}
 #fg-chippy-welcome .chippy-chat small{display:block;font-size:12px;line-height:1.6;color:#c5dfef;margin:8px 0}
 #fg-chippy-welcome .chippy-chat a{display:inline-block;color:#fff;text-decoration:underline;padding:8px}
-</style><div id="fg-chippy-welcome" data-version="20261113-nanami-voice1" aria-label="チッピーのお出迎え"><h3>チッピーがお出迎え</h3><label style="display:block;margin:8px 0;font-size:14px">言語 / Language <select data-language aria-label="言語 / Language" style="font-size:16px;padding:7px;border-radius:8px;color:#123453;background:white"><option value="ja">日本語</option><option value="en">English</option></select></label>
+
+/* Weekday lighting and wall decoration are separate from the avatar. */
+#fg-chippy-welcome .chippy-scene{background:var(--room-light);border:2px solid var(--room-shade)}
+#fg-chippy-welcome .chippy-scene:after{background:linear-gradient(90deg,var(--room-shade),transparent 38%,transparent 66%,var(--room-light));opacity:.45}
+#fg-chippy-welcome[data-period="morning"] .chippy-room{filter:sepia(.12) saturate(.85) brightness(1.08)}
+#fg-chippy-welcome[data-period="day"] .chippy-room{filter:saturate(.9) brightness(1.03)}
+#fg-chippy-welcome[data-period="night"] .chippy-room{filter:brightness(.82) saturate(.9)}
+#fg-chippy-welcome[data-period="night"] .chippy-scene:after{background:linear-gradient(90deg,var(--room-shade),#16263e18 45%,var(--room-light));opacity:.32}
+#fg-chippy-welcome .chippy-room-theme{position:absolute;right:10px;top:12px;z-index:1;writing-mode:vertical-rl;letter-spacing:.15em;font-size:11px;font-weight:700;padding:12px 7px;border-radius:3px;background:var(--room-light);color:#263b50;border-top:4px solid var(--chippy-accent);box-shadow:0 3px 9px #183b5420}
+#fg-chippy-welcome .chippy-room-shelf{background:var(--room-light);border:1px solid var(--room-shade);border-bottom:5px solid var(--chippy-accent);border-radius:12px 12px 2px 2px;padding:7px 6px;box-shadow:0 5px 10px #203c5520}
+</style><div id="fg-chippy-welcome" data-version="20261113-weekday-fix2" aria-label="チッピーのお出迎え"><h3>チッピーがお出迎え</h3><label style="display:block;margin:8px 0;font-size:14px">言語 / Language <select data-language aria-label="言語 / Language" style="font-size:16px;padding:7px;border-radius:8px;color:#123453;background:white"><option value="ja">日本語</option><option value="en">English</option></select></label>
   <div class="chippy-scene">
     <img class="chippy-room" data-room alt="時間に合わせて光が変わる職員室">
+    <div class="chippy-room-theme" data-room-theme></div>
     <div class="chippy-weekday-board" data-weekday-board></div>
     <div class="chippy-room-shelf" data-room-item aria-hidden="true"></div>
   <canvas width="720" height="1080" role="img" aria-label="校舎で挨拶するチッピー" style="display:block;width:100%;max-width:360px;height:auto;margin:0 auto"></canvas>
@@ -2346,22 +2357,41 @@ section{padding:68px 0}
       root.dataset.period=currentPeriod;
       root.dataset.weekday=String(currentWeekday);
       root.style.setProperty('--chippy-accent',decor.accent);
+      const themes=[['#dfe9f3','#b9ccdf','世界を広げる','Explore'],['#d9edff','#9bc8ef','新しい一週間','New beginnings'],['#d5f2e4','#89c9ad','緑と発見','Green discoveries'],['#ece1f8','#c2a5df','くつろぎの時間','Take a breath'],['#d7eff8','#8dbbd8','探究の時間','Explore ideas'],['#ffecd5','#e1b17b','今週の実り','Celebrate'],['#dcf4f4','#85cbd0','創作の時間','Create']];
+      const theme=themes[currentWeekday];
+      root.style.setProperty('--room-light',theme[0]);root.style.setProperty('--room-shade',theme[1]);
+      root.querySelector('[data-room-theme]').textContent=language==='en'?theme[3]:theme[2];
       root.querySelector('[data-weekday-board]').textContent=language==='en'?enBoards[currentWeekday]:decor.label;
       root.querySelector('[data-room-item]').textContent=decor.item;
       const nextRoom=currentPeriod==='night'?roomImages.night:roomImages.day;
       const room=root.querySelector('[data-room]');
       if(room.getAttribute('src')!==nextRoom)room.setAttribute('src',nextRoom);
     }
-    function paintWeekdayOutfit(){
-      // Color only the inner suit and trousers. Preserve face, hair, coat and tablet.
-      const fabric=weekdayDecor[currentWeekday].fabric;
-      if(fabric==='none')return;
-      f.save();
-      f.beginPath();
-      f.moveTo(446,760);f.lineTo(488,785);f.lineTo(546,745);f.lineTo(612,792);f.lineTo(613,900);f.lineTo(443,900);f.closePath();
-      f.moveTo(454,1041);f.lineTo(606,1041);f.lineTo(621,1110);f.lineTo(653,1270);f.lineTo(639,1395);f.quadraticCurveTo(585,1418,542,1394);f.lineTo(535,1180);f.lineTo(510,1395);f.quadraticCurveTo(454,1414,408,1387);f.lineTo(395,1282);f.lineTo(438,1105);f.closePath();
-      f.clip();f.filter=fabric;f.drawImage(im,0,0,1024,1536);f.restore();
+    // Prepare a clothing-only bitmap once per avatar/day. Canvas filter is not
+    // used: it is unavailable in some iPhone Safari versions.
+    const outfitCache=new WeakMap();
+    const outfitColors=[[117,129,147],[47,76,139],[36,133,110],[126,80,155],[58,123,174],[160,98,54],[48,155,177]];
+    function outfitBitmap(image,day){
+      const old=outfitCache.get(image);
+      if(old&&old.day===day)return old.canvas;
+      const c=document.createElement('canvas');c.width=1024;c.height=1536;
+      const g=c.getContext('2d',{willReadFrequently:true});
+      g.drawImage(image,0,0,1024,1536);
+      const pixels=g.getImageData(0,0,1024,1536),a=pixels.data;
+      const rgb=outfitColors[day];
+      for(let y=710;y<1430;y++)for(let x=390;x<660;x++){
+        // The tablet and hands are excluded. Low-saturation whites stay white.
+        if(y>=900&&y<1040)continue;
+        if(y<900&&(x<480||x>615))continue;
+        const i=(y*1024+x)*4,r=a[i],green=a[i+1],b=a[i+2];
+        if(a[i+3]<16||b<r*1.18||b<green*1.08||(b-Math.min(r,green))/Math.max(b,1)<.24)continue;
+        const shade=Math.min(1.7,Math.max(.12,(.2126*r+.7152*green+.0722*b)/65));
+        a[i]=Math.min(255,rgb[0]*shade);a[i+1]=Math.min(255,rgb[1]*shade);a[i+2]=Math.min(255,rgb[2]*shade);
+      }
+      g.putImageData(pixels,0,0);
+      outfitCache.set(image,{day,canvas:c});return c;
     }
+    function paintWeekdayOutfit(){f.drawImage(outfitBitmap(im,currentWeekday),0,0);}
     const schedules={
       morning:{greeting:'おはようございます',line:'今日も、新しい発見を一緒に楽しみましょう！',label:'朝のチッピー'},
       day:{greeting:'こんにちは',line:'気になる教室は見つかりましたか？ 一緒に学んでいきましょう！',label:'昼のチッピー'},
@@ -2376,9 +2406,11 @@ section{padding:68px 0}
       '金曜日。今週の小さな頑張りも、褒めてあげましょう。',
       '土曜日。いつもと違う教室も、のぞいてみてくださいね。'
     ];
+    function schoolDate(date){return new Date(date.toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));}
     function periodFor(date){const hour=date.getHours();return hour>=5&&hour<11?'morning':hour>=11&&hour<18?'day':'night';}
     let currentPeriod='morning';
     function updateGreeting(date=new Date()){
+      date=schoolDate(date);
       currentPeriod=periodFor(date);
       updateRoom(date);
       const schedule=(language==='en'?enSchedules:schedules)[currentPeriod];
