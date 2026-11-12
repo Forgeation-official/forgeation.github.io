@@ -2274,7 +2274,7 @@ section{padding:68px 0}
 #fg-chippy-welcome .chippy-suggestions{display:flex;flex-wrap:wrap;gap:6px}
 #fg-chippy-welcome .chippy-chat small{display:block;font-size:12px;line-height:1.6;color:#c5dfef;margin:8px 0}
 #fg-chippy-welcome .chippy-chat a{display:inline-block;color:#fff;text-decoration:underline;padding:8px}
-</style><div id="fg-chippy-welcome" data-version="20261112-conversation" aria-label="チッピーのお出迎え"><h3>チッピーがお出迎え</h3><label style="display:block;margin:8px 0;font-size:14px">言語 / Language <select data-language aria-label="言語 / Language" style="font-size:16px;padding:7px;border-radius:8px;color:#123453;background:white"><option value="ja">日本語</option><option value="en">English</option></select></label>
+</style><div id="fg-chippy-welcome" data-version="20261112-conversation-fix1" aria-label="チッピーのお出迎え"><h3>チッピーがお出迎え</h3><label style="display:block;margin:8px 0;font-size:14px">言語 / Language <select data-language aria-label="言語 / Language" style="font-size:16px;padding:7px;border-radius:8px;color:#123453;background:white"><option value="ja">日本語</option><option value="en">English</option></select></label>
   <div class="chippy-scene">
     <img class="chippy-room" data-room alt="時間に合わせて光が変わる職員室">
     <div class="chippy-weekday-board" data-weekday-board></div>
@@ -2286,7 +2286,8 @@ section{padding:68px 0}
     <button type="button" class="btn" data-stop>止める</button>
   </div>
   <div class="text-small text-center" aria-live="polite" data-status>準備中</div>
-  <div class="text-center" data-caption style="margin-top:12px;min-height:3em">Forgeation Schoolへようこそ！<details class="chippy-chat" data-chat>
+  <div class="text-center" data-caption style="margin-top:12px;min-height:3em">Forgeation Schoolへようこそ！</div>
+<details class="chippy-chat" data-chat>
 <summary data-chat-title>チッピーとお話しする</summary>
 <small data-chat-note>AIの返答には誤りが含まれる場合があります。個人情報は入力しないでください。自由な質問はAIサービスへ送信します。会話履歴はこの画面内だけで保持します。</small>
 <div class="chippy-suggestions"><button type="button" data-question="color">好きな色は？</button><button type="button" data-question="birthday">誕生日は？</button><button type="button" data-question="robotics">ロボットを学びたい</button></div>
@@ -2295,7 +2296,7 @@ section{padding:68px 0}
 <small data-chat-status role="status"></small>
 <label><input type="checkbox" data-chat-voice checked> <span data-voice-label>声でも答える</span></label>
 <button type="button" data-chat-clear style="float:right">会話を消す</button>
-</details></div>
+</details>
   <script>
   (() => {
     const root=document.getElementById('fg-chippy-welcome');
