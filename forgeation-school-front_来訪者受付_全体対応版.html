@@ -270,6 +270,10 @@ button{font:inherit}
     <section class="section quick">
       <h2>ご用件をお選びください</h2>
       <div class="quick-grid">
+        <a class="card track-link" data-destination="company-brochure" href="./Forgeation_Web_Brochure.html" id="brochure-entry" style="border:2px solid #9fe9ff;background:rgba(40,140,190,.2)">
+          <div class="icon">📖</div><h3>会社パンフレットを読む</h3>
+          <p>Forgeationの理念、校舎、サービスと作品をご紹介します。</p><span>Webパンフレット・PDF</span>
+        </a>
         <a class="card track-link" data-destination="academies" href="#front-academies">
           <div class="icon">🎓</div><h3>アカデミーで学ぶ</h3>
           <p>AI、スポーツ、看護・医療、介護・福祉、建設、教育の教室へ。</p><span>教室を探す →</span>
@@ -304,9 +308,9 @@ button{font:inherit}
           <div>
             <div class="electric-board-kicker">1F / SCHOOL ELECTRIC BOARD</div>
             <h3 class="electric-board-title" id="frontAppRankingTitle">🏆 本日のアプリ利用ランキング</h3>
-            <p class="electric-board-lead">校舎まで来てくれた方だけに公開。DBに記録された本日の利用実数を、リアルタイムで順位表示します。</p>
+            <p class="electric-board-lead">校舎まで来てくれた方だけに公開。本日のアプリ利用人数を、ランキングでご紹介します。</p>
           </div>
-          <div class="electric-board-date" id="frontAppRankingDate">DBから読込中…</div>
+          <div class="electric-board-date" id="frontAppRankingDate">読み込み中…</div>
         </div>
         <ol class="app-ranking-list" id="frontAppRankingList" aria-live="polite">
           <li class="app-ranking-empty">本日のランキングを読み込んでいます…</li>
@@ -509,12 +513,12 @@ async function loadFrontAppRanking(){
     ).join("");
 
     if(dateEl){
-      dateEl.textContent=(data.date ? data.date.replaceAll("-","/") : "本日") + "｜DB実数";
+      dateEl.textContent=(data.date ? data.date.replaceAll("-","/") : "本日") + "｜利用人数";
     }
   }catch(error){
     console.warn("1F未来掲示板ランキング取得に失敗しました。",error);
-    list.innerHTML='<li class="app-ranking-empty">DBとの接続を確認しています。</li>';
-    if(dateEl) dateEl.textContent="DB接続確認中";
+    list.innerHTML='<li class="app-ranking-empty">現在ランキングを取得できません。しばらくしてから再度ご覧ください。</li>';
+    if(dateEl) dateEl.textContent="ランキング取得エラー";
   }
 }
 
