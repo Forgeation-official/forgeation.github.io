@@ -5528,5 +5528,30 @@ document.addEventListener('phoenix-preview',e=>{const v=e.detail;if(v&&['morning
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initPhoenixInline,{once:true});else initPhoenixInline();
 </script>
-</body>
+<script id="forgeation-library-entry-audio">(()=>{'use strict';
+const site='https://f-phoenixing-episode-zero.eru12121221.chatgpt.site';
+let panel,frame,audio,muted=false,track='',focusBefore,overflowBefore;
+function state(){if(frame)frame.contentWindow.postMessage({type:'forgeation-bgm-state',muted,playing:!!audio&&!audio.paused},site);}
+function play(name){if(!panel)return;if(!audio){audio=document.createElement('audio');audio.id='forgeationEntranceAudio';audio.loop=true;audio.preload='auto';audio.setAttribute('playsinline','');audio.volume=.32;document.body.append(audio);}
+if(name!==track){track=name;audio.src=site+'/assets/'+name;}
+if(!muted)audio.play().then(state).catch(state);else state();}
+function close(){if(!panel)return;audio?.pause();panel.remove();panel=null;frame=null;document.body.style.overflow=overflowBefore;focusBefore?.focus({preventScroll:true});}
+function open(event,link){event.preventDefault();event.stopImmediatePropagation();if(panel)return;focusBefore=link;window.closeForgeationRoom?.(false);overflowBefore=document.body.style.overflow;muted=false;track='';
+panel=document.createElement('div');panel.id='forgeationLibraryVisit';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','インフィニティ図書館');panel.setAttribute('aria-modal','true');panel.style.cssText='position:fixed;inset:0;z-index:2147483000;background:#071320;';
+frame=document.createElement('iframe');frame.title='Forgeation インフィニティ図書館';frame.style.cssText='width:100%;height:100%;border:0;display:block;background:#071320';frame.allow='fullscreen';frame.src=site+'/library?bgm=parent';panel.append(frame);document.body.append(panel);document.body.style.overflow='hidden';
+// Synchronously start sound within the existing entrance click, before loading the room.
+play('library-kukan.mp3');history.pushState({forgeationLibraryVisit:true},'');frame.focus();}
+document.addEventListener('click',event=>{const a=event.target.closest('a[href]');if(!a||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;let u;try{u=new URL(a.href,location.href);}catch{return;}
+if(u.origin===location.origin&&u.pathname.endsWith('/forgeation-infinite-library-3d-v2-reader.html'))open(event,a);},true);
+window.addEventListener('message',event=>{if(!frame||event.source!==frame.contentWindow||event.origin!==site)return;const d=event.data;if(!d||typeof d!=='object')return;
+if(d.type==='forgeation-library-track'&&['library-kukan.mp3','library-seijaku.mp3','cinema-fun.mp3'].includes(d.track))play(d.track);
+if(d.type==='forgeation-library-mute'){muted=!muted;if(muted){audio?.pause();state();}else play(track);}
+if(d.type==='forgeation-library-close'){history.back();}
+if(d.type==='forgeation-library-leave'&&typeof d.href==='string'){let u;try{u=new URL(d.href);}catch{return;}if([site,'https://forgeation-official.github.io'].includes(u.origin)){audio?.pause();location.assign(u.href);}}
+});
+window.addEventListener('popstate',close);window.addEventListener('pagehide',()=>audio?.pause());
+window.addEventListener('keydown',e=>{if(panel&&e.key==='Escape')history.back();});
+document.addEventListener('visibilitychange',()=>{if(!panel||!audio)return;if(document.hidden)audio.pause();else play(track);});
+})();
+</script></body>
 </html>
