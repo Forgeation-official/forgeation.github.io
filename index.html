@@ -5544,7 +5544,7 @@ play('library-kukan.mp3');history.pushState({forgeationLibraryVisit:true},'');fr
 document.addEventListener('click',event=>{const a=event.target.closest('a[href]');if(!a||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;let u;try{u=new URL(a.href,location.href);}catch{return;}
 if(u.origin===location.origin&&u.pathname.endsWith('/forgeation-infinite-library-3d-v2-reader.html'))open(event,a);},true);
 window.addEventListener('message',event=>{if(!frame||event.source!==frame.contentWindow||event.origin!==site)return;const d=event.data;if(!d||typeof d!=='object')return;
-if(d.type==='forgeation-library-track'&&['library-kukan.mp3','library-seijaku.mp3','cinema-fun.mp3','library-tobira.mp3','library-akari.mp3','library-nanairo.mp3'].includes(d.track))play(d.track);
+if(d.type==='forgeation-library-track'&&['library-kukan.mp3','library-meguri.mp3','library-seijaku.mp3','cinema-fun.mp3','library-tobira.mp3','library-akari.mp3','library-nanairo.mp3'].includes(d.track))play(d.track);
 if(d.type==='forgeation-library-mute'){muted=!muted;if(muted){audio?.pause();state();}else play(track);}
 if(d.type==='forgeation-library-close'){history.back();}
 if(d.type==='forgeation-library-leave'&&typeof d.href==='string'){let u;try{u=new URL(d.href);}catch{return;}if([site,'https://forgeation-official.github.io'].includes(u.origin)){audio?.pause();location.assign(u.href);}}
